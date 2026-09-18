@@ -1,2736 +1,3068 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07111f">
-<meta name="description" content="Teachers Students Friendship — Knowledge, Cooperation & Friendship">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#172554">
+<meta name="description" content="Teachers Students Friendship - শিক্ষক ও শিক্ষার্থীর জ্ঞান, সহযোগিতা ও বন্ধুত্বের প্ল্যাটফর্ম">
 <title>Teachers Students Friendship</title>
 
 <style>
-:root{
-  --bg:#f5f8fc;
-  --card:#ffffff;
-  --text:#122033;
-  --muted:#66758a;
-  --primary:#2563eb;
-  --primary2:#4f46e5;
-  --accent:#06b6d4;
-  --border:#e5eaf1;
-  --dark:#07111f;
-  --shadow:0 18px 50px rgba(15,23,42,.09);
-  --radius:22px;
-}
-
 *{box-sizing:border-box;margin:0;padding:0}
 
+:root{
+ --primary:#172554;
+ --blue:#2563eb;
+ --sky:#0ea5e9;
+ --green:#16a34a;
+ --gold:#f59e0b;
+ --bg:#f5f7fb;
+ --text:#172033;
+ --muted:#64748b;
+ --white:#fff;
+ --border:#e5e7eb;
+ --shadow:0 12px 35px rgba(15,23,42,.08);
+}
+
+html{scroll-behavior:smooth}
+
 body{
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",
-  "Noto Sans Bengali",Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.6;
+ font-family:system-ui,-apple-system,"Noto Sans Bengali","Noto Sans",sans-serif;
+ background:var(--bg);
+ color:var(--text);
+ line-height:1.6;
 }
 
 button,input,textarea,select{font:inherit}
-
-button{
-  border:0;
-  cursor:pointer;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
+button,a{cursor:pointer}
+button{border:0}
+a{text-decoration:none}
 
 .container{
-  width:min(1180px,92%);
-  margin:auto;
+ width:min(1200px,calc(100% - 28px));
+ margin:auto;
 }
 
-.topbar{
-  background:#050c16;
-  color:#dbeafe;
-  font-size:13px;
-  padding:8px 0;
-}
-
-.topbar .container{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  flex-wrap:wrap;
-}
-
+/* NAV */
 header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(255,255,255,.93);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
+ position:sticky;
+ top:0;
+ z-index:1000;
+ background:rgba(255,255,255,.94);
+ backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--border);
 }
 
 .nav{
-  min-height:78px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
+ min-height:72px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:15px;
 }
 
 .brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-weight:900;
+ display:flex;
+ align-items:center;
+ gap:11px;
+ min-width:0;
 }
 
 .logo{
-  width:48px;
-  height:48px;
-  border-radius:15px;
-  background:linear-gradient(135deg,#2563eb,#06b6d4,#4f46e5);
-  display:grid;
-  place-items:center;
-  color:white;
-  box-shadow:0 10px 25px rgba(37,99,235,.28);
-  font-weight:1000;
-  letter-spacing:-2px;
-  position:relative;
-}
-
-.logo:after{
-  content:"";
-  position:absolute;
-  width:25px;
-  height:2px;
-  background:white;
-  bottom:10px;
-  transform:rotate(-10deg);
-  opacity:.8;
+ width:49px;
+ height:49px;
+ flex:none;
+ display:grid;
+ place-items:center;
+ border-radius:16px;
+ color:#fff;
+ font-weight:950;
+ font-size:14px;
+ letter-spacing:-1px;
+ background:linear-gradient(135deg,#111827,#2563eb,#0ea5e9);
+ box-shadow:0 9px 25px rgba(37,99,235,.25);
 }
 
 .brand-title{
-  font-size:17px;
-  line-height:1.15;
+ font-weight:850;
+ font-size:16px;
+ white-space:nowrap;
 }
 
 .brand-sub{
-  font-size:11px;
-  color:var(--muted);
-  font-weight:600;
+ color:var(--muted);
+ font-size:12px;
+ white-space:nowrap;
 }
 
-.navlinks{
-  display:flex;
-  align-items:center;
-  gap:7px;
+.teacher-btn{
+ padding:11px 15px;
+ border-radius:13px;
+ background:var(--primary);
+ color:#fff;
+ font-weight:800;
+ box-shadow:0 7px 20px rgba(23,37,84,.18);
 }
 
-.navlinks a,.navlinks button{
-  padding:10px 12px;
-  border-radius:12px;
-  background:transparent;
-  color:var(--text);
-  font-weight:700;
-}
-
-.navlinks a:hover,.navlinks button:hover{
-  background:#eef4ff;
-  color:var(--primary);
-}
-
-.menu{
-  display:none;
-  background:#eef4ff;
-  padding:10px 13px;
-  border-radius:12px;
-}
-
+/* HERO */
 .hero{
-  padding:80px 0 65px;
-  background:
-    radial-gradient(circle at 10% 10%,rgba(37,99,235,.16),transparent 32%),
-    radial-gradient(circle at 90% 20%,rgba(6,182,212,.14),transparent 28%),
-    linear-gradient(180deg,#fff,#f5f8fc);
+ margin:25px 0 0;
+ padding:48px 30px;
+ border-radius:30px;
+ color:#fff;
+ position:relative;
+ overflow:hidden;
+ background:
+ radial-gradient(circle at 85% 20%,rgba(96,165,250,.3),transparent 28%),
+ radial-gradient(circle at 20% 100%,rgba(14,165,233,.22),transparent 30%),
+ linear-gradient(135deg,#0f172a,#172554 45%,#2563eb);
+ box-shadow:0 25px 60px rgba(23,37,84,.22);
 }
 
-.hero-grid{
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:40px;
-  align-items:center;
+.hero:after{
+ content:"MAS";
+ position:absolute;
+ right:-25px;
+ bottom:-55px;
+ font-size:180px;
+ font-weight:1000;
+ color:#ffffff08;
+ pointer-events:none;
 }
 
 .badge{
-  display:inline-flex;
-  gap:8px;
-  padding:8px 13px;
-  border-radius:999px;
-  background:#eaf2ff;
-  color:#1d4ed8;
-  font-weight:800;
-  font-size:13px;
-  margin-bottom:18px;
+ display:inline-flex;
+ padding:6px 11px;
+ border-radius:999px;
+ background:#ffffff18;
+ border:1px solid #ffffff2b;
+ font-size:12px;
+ font-weight:800;
 }
 
 .hero h1{
-  font-size:clamp(40px,6vw,70px);
-  line-height:1.02;
-  letter-spacing:-3px;
-  margin-bottom:22px;
-}
-
-.hero h1 span{
-  background:linear-gradient(90deg,#2563eb,#4f46e5,#06b6d4);
-  -webkit-background-clip:text;
-  color:transparent;
+ margin-top:12px;
+ max-width:760px;
+ font-size:clamp(31px,5vw,57px);
+ line-height:1.12;
+ letter-spacing:-1px;
+ position:relative;
+ z-index:1;
 }
 
 .hero p{
-  max-width:700px;
-  color:var(--muted);
-  font-size:18px;
+ max-width:700px;
+ margin:15px 0 22px;
+ color:#dbeafe;
+ position:relative;
+ z-index:1;
 }
 
 .actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-top:28px;
+ display:flex;
+ flex-wrap:wrap;
+ gap:10px;
+ position:relative;
+ z-index:2;
 }
 
 .btn{
-  padding:13px 18px;
-  border-radius:14px;
-  font-weight:850;
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  transition:.2s;
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ gap:7px;
+ padding:11px 16px;
+ border-radius:13px;
+ font-weight:800;
+ transition:.18s;
 }
 
-.btn:hover{
-  transform:translateY(-2px);
+.btn:hover{transform:translateY(-2px)}
+
+.btn-primary{
+ background:#fff;
+ color:var(--primary);
 }
 
-.primary{
-  color:white;
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  box-shadow:0 12px 28px rgba(37,99,235,.23);
+.btn-blue{
+ background:var(--blue);
+ color:#fff;
 }
 
-.secondary{
-  background:white;
-  border:1px solid var(--border);
+.btn-dark{
+ background:var(--primary);
+ color:#fff;
 }
 
-.dark{
-  background:#0f172a;
-  color:white;
+.btn-light{
+ background:#f1f5f9;
+ color:#172033;
 }
 
-.hero-card{
-  background:#07111f;
-  color:white;
-  border-radius:32px;
-  padding:30px;
-  box-shadow:0 30px 80px rgba(2,8,23,.25);
+.btn-danger{
+ background:#fee2e2;
+ color:#991b1b;
 }
 
-.hero-card .mini-logo{
-  width:70px;
-  height:70px;
-  display:grid;
-  place-items:center;
-  border-radius:22px;
-  background:linear-gradient(135deg,#2563eb,#06b6d4);
-  font-size:23px;
-  font-weight:1000;
-  margin-bottom:25px;
-}
-
-.hero-card h2{
-  font-size:29px;
-  margin-bottom:10px;
-}
-
-.hero-card p{
-  color:#b8c4d6;
-  font-size:15px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-top:25px;
-}
-
-.stat{
-  background:rgba(255,255,255,.07);
-  padding:15px;
-  border-radius:17px;
-}
-
-.stat strong{
-  display:block;
-  font-size:22px;
-}
-
-.stat span{
-  color:#9fb0c8;
-  font-size:12px;
-}
-
-section{
-  padding:65px 0;
+/* SECTIONS */
+.section{
+ padding-top:32px;
 }
 
 .section-head{
-  margin-bottom:25px;
+ margin-bottom:16px;
 }
 
 .section-head h2{
-  font-size:clamp(26px,4vw,38px);
-  letter-spacing:-1px;
+ font-size:25px;
 }
 
 .section-head p{
-  color:var(--muted);
-  margin-top:5px;
+ color:var(--muted);
+ font-size:14px;
 }
 
+/* SEARCH */
+.search-box{
+ display:flex;
+ gap:9px;
+ padding:9px;
+ background:#fff;
+ border:1px solid var(--border);
+ border-radius:17px;
+ box-shadow:var(--shadow);
+}
+
+.search-box input{
+ flex:1;
+ min-width:0;
+ border:0;
+ outline:0;
+ padding:9px;
+ background:transparent;
+}
+
+.search-box button{
+ padding:10px 17px;
+ border-radius:12px;
+ color:#fff;
+ background:var(--blue);
+ font-weight:800;
+}
+
+/* GRID */
 .grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-  gap:17px;
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:15px;
 }
 
-.feature{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:23px;
-  box-shadow:var(--shadow);
-  transition:.2s;
+.card{
+ background:#fff;
+ border:1px solid var(--border);
+ border-radius:21px;
+ padding:20px;
+ box-shadow:var(--shadow);
+ transition:.2s;
 }
 
-.feature:hover{
-  transform:translateY(-4px);
+.card:hover{
+ transform:translateY(-3px);
+ box-shadow:0 18px 40px rgba(15,23,42,.12);
 }
 
-.icon{
-  width:48px;
-  height:48px;
-  display:grid;
-  place-items:center;
-  background:#eef4ff;
-  border-radius:15px;
-  font-size:23px;
-  margin-bottom:14px;
+.card-icon{
+ font-size:31px;
+ margin-bottom:8px;
 }
 
-.feature h3{
-  margin-bottom:6px;
+.card h3{
+ margin-bottom:5px;
+ font-size:19px;
 }
 
-.feature p{
-  color:var(--muted);
-  font-size:14px;
+.card p{
+ color:var(--muted);
+ font-size:14px;
 }
 
-.feature .btn{
-  margin-top:15px;
-  width:100%;
+.card .btn{
+ margin-top:14px;
 }
 
-.panel{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:24px;
-  box-shadow:var(--shadow);
+/* SPECIAL COURSE */
+.course{
+ padding:24px;
+ border-radius:24px;
+ color:#fff;
+ background:linear-gradient(135deg,#312e81,#2563eb);
+ box-shadow:0 20px 45px rgba(37,99,235,.2);
 }
 
-.resource{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  align-items:center;
+.course small{color:#dbeafe}
+.course h2{margin:6px 0}
+
+/* ENGLISH */
+.english-wrap{
+ padding:24px;
+ border-radius:27px;
+ background:
+ radial-gradient(circle at top right,#60a5fa20,transparent 30%),
+ #fff;
+ border:1px solid var(--border);
+ box-shadow:var(--shadow);
 }
 
-.resource + .resource{
-  margin-top:12px;
+.english-grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:15px;
 }
 
-.resource-info h3{
-  font-size:16px;
+.english-card{
+ padding:20px;
+ border:1px solid var(--border);
+ border-radius:20px;
+ background:#fff;
 }
 
-.resource-info p{
-  color:var(--muted);
-  font-size:13px;
+.english-icon{
+ font-size:32px;
+ margin-bottom:8px;
 }
 
+.english-card p{
+ color:var(--muted);
+ font-size:14px;
+ margin-bottom:13px;
+}
+
+.app-tag{
+ display:inline-block;
+ padding:5px 9px;
+ border-radius:999px;
+ background:#eff6ff;
+ color:#1d4ed8;
+ font-size:11px;
+ font-weight:800;
+}
+
+/* NOTICE */
 .notice{
-  padding:17px;
-  border:1px solid var(--border);
-  border-radius:16px;
-  background:#fbfdff;
+ padding:17px;
+ background:#fff;
+ border:1px solid var(--border);
+ border-left:4px solid var(--blue);
+ border-radius:14px;
+ margin-bottom:10px;
 }
 
-.notice + .notice{
-  margin-top:12px;
+.notice p{color:var(--muted);font-size:14px}
+
+/* TEACHER */
+.teacher-box{
+ padding:26px;
+ border-radius:25px;
+ color:#fff;
+ background:linear-gradient(135deg,#111827,#334155);
 }
 
-.exam{
-  padding:20px;
-  border:1px solid var(--border);
-  border-radius:18px;
-  background:#fff;
-}
+.teacher-box p{color:#cbd5e1}
 
-.exam + .exam{
-  margin-top:12px;
-}
-
-.exam-meta{
-  color:var(--muted);
-  font-size:13px;
-  margin:5px 0 14px;
-}
-
-.searchbox{
-  display:flex;
-  gap:10px;
-  margin-bottom:20px;
-}
-
-.input,textarea,select{
-  width:100%;
-  padding:13px 15px;
-  border:1px solid var(--border);
-  border-radius:13px;
-  outline:none;
-  background:white;
-}
-
-.input:focus,textarea:focus,select:focus{
-  border-color:#93c5fd;
-  box-shadow:0 0 0 4px #dbeafe;
-}
-
-footer{
-  background:#050c16;
-  color:#cbd5e1;
-  padding:45px 0;
-}
-
-.footer-grid{
-  display:grid;
-  grid-template-columns:1.4fr 1fr 1fr;
-  gap:30px;
-}
-
-footer h3{
-  color:white;
-  margin-bottom:10px;
-}
-
-footer p,footer a{
-  color:#94a3b8;
-  font-size:14px;
-}
-
+/* MODAL */
 .modal{
-  position:fixed;
-  inset:0;
-  background:rgba(2,8,23,.65);
-  display:none;
-  place-items:center;
-  padding:20px;
-  z-index:3000;
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:5000;
+ padding:14px;
+ background:rgba(2,6,23,.72);
+ backdrop-filter:blur(5px);
+ overflow:auto;
 }
 
 .modal.show{
-  display:grid;
+ display:flex;
+ align-items:center;
+ justify-content:center;
 }
 
-.modal-card{
-  width:min(650px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:white;
-  border-radius:25px;
-  padding:25px;
-  box-shadow:0 35px 100px rgba(0,0,0,.3);
+.modal-box{
+ width:min(900px,100%);
+ max-height:94vh;
+ overflow:auto;
+ background:#fff;
+ border-radius:25px;
+ padding:24px;
+ box-shadow:0 30px 90px rgba(0,0,0,.3);
 }
 
 .modal-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:12px;
+ margin-bottom:18px;
 }
 
 .close{
-  background:#f1f5f9;
-  width:40px;
-  height:40px;
-  border-radius:12px;
+ width:39px;
+ height:39px;
+ border-radius:50%;
+ background:#f1f5f9;
+ color:#334155;
+ font-weight:900;
 }
 
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:13px;
+/* FORM */
+.form{
+ display:grid;
+ gap:11px;
 }
 
-.full{
-  grid-column:1/-1;
+.form input,
+.form textarea,
+.form select{
+ width:100%;
+ padding:12px 13px;
+ border:1px solid #dbe1ea;
+ border-radius:12px;
+ outline:0;
+ background:#fff;
 }
 
-.hidden{
-  display:none!important;
+.form textarea{
+ min-height:110px;
+ resize:vertical;
 }
 
-.dashboard{
-  display:none;
-  padding:50px 0;
+.form input:focus,
+.form textarea:focus,
+.form select:focus{
+ border-color:#60a5fa;
+ box-shadow:0 0 0 3px #2563eb18;
 }
 
-.dashboard.show{
-  display:block;
+/* ADMIN */
+.admin-tabs{
+ display:flex;
+ flex-wrap:wrap;
+ gap:7px;
+ margin-bottom:17px;
 }
 
-.dashboard-grid{
-  display:grid;
-  grid-template-columns:240px 1fr;
-  gap:20px;
+.admin-tabs button{
+ padding:9px 12px;
+ border-radius:11px;
+ background:#eef2ff;
+ color:#1e3a8a;
+ font-weight:750;
 }
 
-.side{
-  background:#07111f;
-  color:white;
-  border-radius:22px;
-  padding:18px;
-  height:max-content;
-  position:sticky;
-  top:100px;
-}
-
-.side button{
-  width:100%;
-  text-align:left;
-  background:transparent;
-  color:#cbd5e1;
-  padding:12px;
-  border-radius:12px;
-  margin:2px 0;
-}
-
-.side button:hover,.side button.active{
-  background:rgba(255,255,255,.09);
-  color:white;
-}
-
-.admin-content{
-  min-width:0;
-}
-
-.admin-section{
-  display:none;
-}
-
-.admin-section.active{
-  display:block;
-}
+.admin-panel{display:none}
+.admin-panel.active{display:block}
 
 .admin-card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:22px;
-  margin-bottom:17px;
-  box-shadow:var(--shadow);
+ background:#f8fafc;
+ border:1px solid var(--border);
+ padding:17px;
+ border-radius:17px;
+ margin-bottom:12px;
 }
 
-.toast{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  background:#07111f;
-  color:white;
-  padding:14px 18px;
-  border-radius:15px;
-  display:none;
-  z-index:5000;
+/* EXAM */
+.timer{
+ position:sticky;
+ top:0;
+ z-index:5;
+ padding:12px;
+ text-align:center;
+ background:#172554;
+ color:#fff;
+ border-radius:14px;
+ margin-bottom:12px;
+ font-weight:900;
 }
 
-.toast.show{
-  display:block;
+.question{
+ padding:18px;
+ background:#fff;
+ border:1px solid var(--border);
+ border-radius:17px;
+ margin-bottom:12px;
 }
 
-@media(max-width:850px){
-  .navlinks{
-    display:none;
-    position:absolute;
-    top:78px;
-    left:0;
-    right:0;
-    background:white;
-    padding:15px;
-    border-bottom:1px solid var(--border);
-    flex-direction:column;
-  }
-
-  .navlinks.show{
-    display:flex;
-  }
-
-  .navlinks a,.navlinks button{
-    width:100%;
-    text-align:left;
-  }
-
-  .menu{
-    display:block;
-  }
-
-  .hero-grid{
-    grid-template-columns:1fr;
-  }
-
-  .dashboard-grid{
-    grid-template-columns:1fr;
-  }
-
-  .side{
-    position:static;
-  }
-
-  .footer-grid{
-    grid-template-columns:1fr;
-  }
+.option{
+ display:block;
+ padding:11px;
+ margin-top:8px;
+ border:1px solid #e5e7eb;
+ border-radius:11px;
+ cursor:pointer;
 }
 
-@media(max-width:600px){
-  .hero{
-    padding:55px 0;
-  }
+.option:hover{background:#f8fafc}
 
-  .hero h1{
-    letter-spacing:-2px;
-  }
+/* RESULT */
+.result{
+ text-align:center;
+ padding:25px;
+ border-radius:20px;
+ background:#eff6ff;
+}
 
-  .stats{
-    grid-template-columns:1fr;
-  }
+.score{
+ font-size:48px;
+ font-weight:950;
+ color:#1d4ed8;
+}
 
-  .form-grid{
-    grid-template-columns:1fr;
-  }
+/* FOOTER */
+footer{
+ margin-top:50px;
+ padding:35px 15px;
+ text-align:center;
+ color:#cbd5e1;
+ background:#0f172a;
+}
 
-  .full{
-    grid-column:auto;
-  }
+footer strong{color:#fff}
 
-  .searchbox{
-    flex-direction:column;
-  }
+/* EMPTY */
+.empty{
+ text-align:center;
+ padding:30px;
+ color:var(--muted);
+ background:#fff;
+ border-radius:18px;
+ border:1px dashed #cbd5e1;
+}
 
-  .resource{
-    align-items:flex-start;
-    flex-direction:column;
-  }
+/* MOBILE */
+@media(max-width:650px){
+ .container{width:min(100% - 20px,1200px)}
+ .nav{min-height:65px}
+ .brand-title{font-size:14px}
+ .brand-sub{font-size:10px}
+ .logo{width:43px;height:43px;border-radius:13px}
+ .teacher-btn{font-size:12px;padding:9px 10px}
+ .hero{padding:35px 20px;border-radius:23px}
+ .hero h1{font-size:33px}
+ .search-box{flex-direction:column}
+ .search-box button{width:100%}
+ .modal-box{padding:18px;border-radius:20px}
+}
+
+@media(max-width:430px){
+ .brand-sub{display:none}
+ .hero h1{font-size:29px}
+ .btn{width:100%}
+ .actions{display:grid}
 }
 </style>
 </head>
 
 <body>
 
-<div class="topbar">
-  <div class="container">
-    <span>📚 Learn • Practice • Grow</span>
-    <span>👑 Super Admin: Maksud Tahsin</span>
-  </div>
-</div>
-
 <header>
-  <div class="container nav">
+ <nav class="nav container">
 
-    <a href="#home" class="brand">
-      <div class="logo">MAS</div>
-      <div>
-        <div class="brand-title">Teachers Students Friendship</div>
-        <div class="brand-sub">Knowledge • Cooperation • Friendship</div>
-      </div>
-    </a>
+  <div class="brand">
+   <div class="logo">MAS</div>
 
-    <button class="menu" id="menuBtn">☰</button>
-
-    <nav class="navlinks" id="navLinks">
-      <a href="#home">Home</a>
-      <a href="#resources">Materials</a>
-      <a href="#classes">Classes</a>
-      <a href="#exams">Exams</a>
-      <a href="#results">Results</a>
-      <a href="#ai">AI Help</a>
-      <a href="#teacher">Ask Teacher</a>
-      <button id="teacherLoginBtn">👨‍🏫 Only Teacher</button>
-    </nav>
-
+   <div>
+    <div class="brand-title">
+     Teachers Students Friendship
+    </div>
+    <div class="brand-sub">
+     শিক্ষক ও শিক্ষার্থীর জ্ঞান, সহযোগিতা ও বন্ধুত্ব
+    </div>
+   </div>
   </div>
+
+  <button class="teacher-btn" onclick="openTeacherLogin()">
+   👨‍🏫 Only Teacher
+  </button>
+
+ </nav>
 </header>
 
-<main id="home">
+
+<main class="container">
+
+<!-- HERO -->
 
 <section class="hero">
-  <div class="container hero-grid">
 
-    <div>
-      <div class="badge">✨ A Friendly Digital Learning Platform</div>
+ <span class="badge">
+  🎓 Student Learning Platform
+ </span>
 
-      <h1>
-        Learn Better.<br>
-        <span>Grow Together.</span>
-      </h1>
+ <h1>
+  শিখি, অনুশীলন করি,<br>
+  নিজেকে এগিয়ে নিই।
+ </h1>
 
-      <p>
-        Teachers, students and guardians — learning, classes,
-        exams, results, questions and AI help in one simple place.
-      </p>
+ <p>
+  Teachers Students Friendship হলো শিক্ষক ও শিক্ষার্থীর
+  জ্ঞান, সহযোগিতা, অনুশীলন এবং যোগাযোগের একটি
+  সহজ ও আধুনিক প্ল্যাটফর্ম।
+ </p>
 
-      <div class="actions">
-        <a href="#exams" class="btn primary">📝 Take an Exam</a>
-        <a href="#resources" class="btn secondary">📚 Study Materials</a>
-        <a href="#teacher" class="btn secondary">💬 Ask Teacher</a>
-      </div>
-    </div>
+ <div class="actions">
 
-    <div class="hero-card">
-      <div class="mini-logo">MAS</div>
+  <button class="btn btn-primary" onclick="focusSearch()">
+   🔎 Practice & Search
+  </button>
 
-      <h2>Teachers Students Friendship</h2>
+  <button class="btn btn-primary" onclick="openAI()">
+   🤖 Ask AI
+  </button>
 
-      <p>
-        A simple learning community powered by modern technology,
-        real-time publishing and student-friendly tools.
-      </p>
+  <button class="btn btn-primary" onclick="openExams()">
+   📝 Online Exam
+  </button>
 
-      <div class="stats">
-        <div class="stat">
-          <strong id="statResources">0</strong>
-          <span>Materials</span>
-        </div>
-        <div class="stat">
-          <strong id="statExams">0</strong>
-          <span>Exams</span>
-        </div>
-        <div class="stat">
-          <strong id="statNotices">0</strong>
-          <span>Notices</span>
-        </div>
-      </div>
-    </div>
+ </div>
 
-  </div>
 </section>
 
-<section>
-  <div class="container">
-    <div class="section-head">
-      <h2>Everything Students Need</h2>
-      <p>এক জায়গা থেকে পড়াশোনার প্রয়োজনীয় সবকিছু।</p>
-    </div>
 
-    <div class="grid">
+<!-- QUICK FEATURES -->
 
-      <div class="feature">
-        <div class="icon">📚</div>
-        <h3>Study Materials</h3>
-        <p>Notes, PDF, Word, PPT, images and useful resources.</p>
-        <a href="#resources" class="btn secondary">Open</a>
-      </div>
+<section class="section">
 
-      <div class="feature">
-        <div class="icon">🎥</div>
-        <h3>Online Classes</h3>
-        <p>Published class and meeting links in one place.</p>
-        <a href="#classes" class="btn secondary">View Classes</a>
-      </div>
+ <div class="section-head">
+  <h2>✨ Student Zone</h2>
+  <p>শিক্ষার্থীদের প্রয়োজনীয় সবকিছু সহজে খুঁজে নিন</p>
+ </div>
 
-      <div class="feature">
-        <div class="icon">📝</div>
-        <h3>Online Exams</h3>
-        <p>MCQ exams with timer and automatic checking.</p>
-        <a href="#exams" class="btn secondary">Take Exam</a>
-      </div>
+ <div class="grid">
 
-      <div class="feature">
-        <div class="icon">📊</div>
-        <h3>Results</h3>
-        <p>Find published results without student login.</p>
-        <a href="#results" class="btn secondary">Find Result</a>
-      </div>
-
-      <div class="feature">
-        <div class="icon">💬</div>
-        <h3>Ask Teacher</h3>
-        <p>Ask open educational questions to the teacher.</p>
-        <a href="#teacher" class="btn secondary">Ask</a>
-      </div>
-
-      <div class="feature">
-        <div class="icon">🤖</div>
-        <h3>AI Study Help</h3>
-        <p>Open ChatGPT or Gemini for study assistance.</p>
-        <a href="#ai" class="btn secondary">Open AI</a>
-      </div>
-
-      <div class="feature">
-        <div class="icon">⭐</div>
-        <h3>Special Students</h3>
-        <p>Shared-access area for your special student community.</p>
-        <button class="btn secondary" onclick="openSpecial()">Enter</button>
-      </div>
-
-      <div class="feature">
-        <div class="icon">👨‍👩‍👦</div>
-        <h3>Guardian Corner</h3>
-        <p>Easy access to contact information and published results.</p>
-        <a href="#guardian" class="btn secondary">Open</a>
-      </div>
-
-    </div>
+  <div class="card">
+   <div class="card-icon">🎓</div>
+   <h3>Special Course</h3>
+   <p>বিশেষ কোর্সের নাম, ফি ও যোগাযোগের ব্যবস্থা।</p>
+   <button class="btn btn-dark" onclick="openCourse()">দেখুন</button>
   </div>
+
+
+  <div class="card">
+   <div class="card-icon">🇬🇧</div>
+   <h3>Special Learning English</h3>
+   <p>Vocabulary, Grammar, Listening, Speaking এবং Apps।</p>
+   <button class="btn btn-dark" onclick="openEnglish()">শুরু করুন</button>
+  </div>
+
+
+  <div class="card">
+   <div class="card-icon">📚</div>
+   <h3>Study Resources</h3>
+   <p>PDF, Word, Image ও অন্যান্য শিক্ষামূলক resources।</p>
+   <button class="btn btn-dark" onclick="openResources()">দেখুন</button>
+  </div>
+
+
+  <div class="card">
+   <div class="card-icon">📝</div>
+   <h3>Online Exam</h3>
+   <p>MCQ পরীক্ষা, timer, automatic marks ও result।</p>
+   <button class="btn btn-dark" onclick="openExams()">পরীক্ষা দিন</button>
+  </div>
+
+
+  <div class="card">
+   <div class="card-icon">🏆</div>
+   <h3>Results & Points</h3>
+   <p>পরীক্ষার ফলাফল, points এবং rating system।</p>
+   <button class="btn btn-dark" onclick="openResults()">ফলাফল</button>
+  </div>
+
+
+  <div class="card">
+   <div class="card-icon">🎥</div>
+   <h3>Online Class</h3>
+   <p>অনলাইন ক্লাস ও meeting link।</p>
+   <button class="btn btn-dark" onclick="openClasses()">ক্লাস</button>
+  </div>
+
+
+  <div class="card">
+   <div class="card-icon">📢</div>
+   <h3>Notice Board</h3>
+   <p>গুরুত্বপূর্ণ ঘোষণা ও নতুন প্রকাশনা।</p>
+   <button class="btn btn-dark" onclick="openNotices()">নোটিশ</button>
+  </div>
+
+
+  <div class="card">
+   <div class="card-icon">💬</div>
+   <h3>Ask Teacher</h3>
+   <p>শিক্ষকের কাছে প্রশ্ন বা সমস্যার কথা জানান।</p>
+   <button class="btn btn-dark" onclick="askTeacher()">যোগাযোগ</button>
+  </div>
+
+ </div>
 </section>
 
-<section id="resources">
-  <div class="container">
-    <div class="section-head">
-      <h2>📚 Study Materials</h2>
-      <p>Teacher publish করলেই এখানে automatically দেখা যাবে।</p>
-    </div>
 
-    <div class="panel">
-      <div class="searchbox">
-        <input id="resourceSearch" class="input"
-               placeholder="Search materials, subject, class...">
-      </div>
+<!-- SEARCH -->
 
-      <div id="resourceList">
-        <p style="color:#66758a">Loading materials...</p>
-      </div>
-    </div>
-  </div>
+<section class="section" id="searchSection">
+
+ <div class="section-head">
+  <h2>🔎 Practice & Search</h2>
+  <p>Website-এর শিক্ষামূলক বিষয় খুঁজে নিন</p>
+ </div>
+
+ <div class="search-box">
+
+  <input
+   id="searchInput"
+   type="search"
+   placeholder="যেমন: English, Math, Exam, PDF..."
+   onkeydown="if(event.key==='Enter')searchSite()">
+
+  <button onclick="searchSite()">Search</button>
+
+ </div>
+
+ <div id="searchResults" style="margin-top:15px"></div>
+
 </section>
 
-<section id="classes">
-  <div class="container">
-    <div class="section-head">
-      <h2>🎥 Online Classes</h2>
-      <p>Upcoming and published classes.</p>
-    </div>
 
-    <div class="panel" id="classList">
-      <p style="color:#66758a">Loading classes...</p>
-    </div>
+<!-- SPECIAL COURSE -->
+
+<section class="section">
+
+ <div class="course">
+
+  <small>🎓 SPECIAL COURSE</small>
+
+  <h2 id="homeCourseName">
+   Special Course
+  </h2>
+
+  <p id="homeCourseFee">
+   কোর্সের ফি জানতে যোগাযোগ করুন।
+  </p>
+
+  <div class="actions" style="margin-top:15px">
+
+   <button class="btn btn-primary" onclick="openCourse()">
+    বিস্তারিত
+   </button>
+
+   <button class="btn btn-primary" onclick="askTeacher()">
+    💬 WhatsApp
+   </button>
+
   </div>
+
+ </div>
+
 </section>
 
-<section id="exams">
-  <div class="container">
-    <div class="section-head">
-      <h2>📝 Online Exams</h2>
-      <p>Login ছাড়াই নাম ও প্রতিষ্ঠান লিখে পরীক্ষা দেওয়া যাবে।</p>
-    </div>
 
-    <div class="panel" id="examList">
-      <p style="color:#66758a">Loading exams...</p>
-    </div>
+<!-- ENGLISH -->
+
+<section class="section">
+
+ <div class="english-wrap">
+
+  <div class="section-head">
+   <h2>🇬🇧 Special Learning English</h2>
+   <p>
+    English শেখার জন্য Apps + Vocabulary + Daily English +
+    Grammar + Listening + Speaking
+   </p>
   </div>
+
+  <div class="english-grid">
+
+   <!-- EXACT APP 1 -->
+
+   <div class="english-card">
+    <div class="english-icon">🟢</div>
+    <span class="app-tag">LEARNING APP</span>
+    <h3>Duolingo</h3>
+
+    <p>
+     সহজ ও মজারভাবে English practice করার জন্য
+     Duolingo ব্যবহার করুন।
+    </p>
+
+    <a
+     class="btn btn-dark"
+     target="_blank"
+     rel="noopener noreferrer"
+     href="https://play.google.com/store/apps/details?id=com.duolingo">
+     📱 Open Duolingo
+    </a>
+   </div>
+
+
+   <!-- EXACT APP 2 -->
+
+   <div class="english-card">
+    <div class="english-icon">📚</div>
+    <span class="app-tag">LEARNING APP</span>
+    <h3>VocabO – Learning English</h3>
+
+    <p>
+     English vocabulary ও learning practice-এর
+     জন্য VocabO ব্যবহার করুন।
+    </p>
+
+    <a
+     class="btn btn-dark"
+     target="_blank"
+     rel="noopener noreferrer"
+     href="https://play.google.com/store/search?q=VocabO%20Learning%20English&c=apps">
+     📱 Open VocabO
+    </a>
+   </div>
+
+
+   <div class="english-card">
+    <div class="english-icon">📖</div>
+    <h3>Vocabulary</h3>
+
+    <p>
+     Teacher প্রকাশিত word, বাংলা অর্থ,
+     example sentence ও pronunciation।
+    </p>
+
+    <button class="btn btn-dark" onclick="openVocabulary()">
+     📖 Learn
+    </button>
+   </div>
+
+
+   <div class="english-card">
+    <div class="english-icon">🎧</div>
+    <h3>Listening Practice</h3>
+
+    <p>
+     British Council-এর English listening practice।
+    </p>
+
+    <a
+     class="btn btn-dark"
+     target="_blank"
+     rel="noopener noreferrer"
+     href="https://learnenglish.britishcouncil.org/skills/listening">
+     🎧 Practice
+    </a>
+   </div>
+
+
+   <div class="english-card">
+    <div class="english-icon">🗣️</div>
+    <h3>Speaking Practice</h3>
+
+    <p>
+     English speaking skill উন্নত করার practice।
+    </p>
+
+    <a
+     class="btn btn-dark"
+     target="_blank"
+     rel="noopener noreferrer"
+     href="https://learnenglish.britishcouncil.org/skills/speaking">
+     🗣️ Practice
+    </a>
+   </div>
+
+
+   <div class="english-card">
+    <div class="english-icon">☀️</div>
+    <h3>Daily English</h3>
+
+    <p>
+     প্রতিদিন Teacher প্রকাশিত English content।
+    </p>
+
+    <button class="btn btn-dark" onclick="openDaily()">
+     ☀️ Open
+    </button>
+   </div>
+
+
+   <div class="english-card">
+    <div class="english-icon">✍️</div>
+    <h3>Grammar & Practice</h3>
+
+    <p>
+     Grammar rules, examples এবং practice।
+    </p>
+
+    <button class="btn btn-dark" onclick="openGrammar()">
+     ✍️ Practice
+    </button>
+   </div>
+
+  </div>
+
+ </div>
+
 </section>
 
-<section id="results">
-  <div class="container">
-    <div class="section-head">
-      <h2>📊 Public Results</h2>
-      <p>নিজের প্রকাশিত result সহজে খুঁজে নাও।</p>
-    </div>
 
-    <div class="panel">
-      <div class="searchbox">
-        <input id="resultSearch" class="input"
-               placeholder="Search by student name, ID or exam">
-        <button class="btn primary" onclick="searchResults()">Search</button>
-      </div>
+<!-- NOTICE PREVIEW -->
 
-      <div id="resultList">
-        <p style="color:#66758a">Search for a result.</p>
-      </div>
-    </div>
-  </div>
+<section class="section">
+
+ <div class="section-head">
+  <h2>📢 Latest Notice</h2>
+ </div>
+
+ <div id="noticePreview"></div>
+
 </section>
 
-<section id="ai">
-  <div class="container">
-    <div class="section-head">
-      <h2>🤖 AI Study Help</h2>
-      <p>পড়াশোনার প্রশ্নে AI-এর সাহায্য নিতে পারো।</p>
-    </div>
 
-    <div class="grid">
+<!-- TEACHER -->
 
-      <div class="feature">
-        <div class="icon">🤖</div>
-        <h3>Ask ChatGPT</h3>
-        <p>Explain a lesson, solve a concept or practise questions.</p>
-        <a class="btn primary"
-           href="https://chatgpt.com/"
-           target="_blank"
-           rel="noopener">Open ChatGPT</a>
-      </div>
+<section class="section">
 
-      <div class="feature">
-        <div class="icon">✨</div>
-        <h3>Ask Gemini</h3>
-        <p>Use Gemini for study assistance.</p>
-        <a class="btn primary"
-           href="https://gemini.google.com/"
-           target="_blank"
-           rel="noopener">Open Gemini</a>
-      </div>
+ <div class="teacher-box">
 
-    </div>
+  <h2>👨‍🏫 Maksud Tahsin</h2>
+
+  <p>
+   Teachers Students Friendship-এর শিক্ষক/পরিচালনা।
+  </p>
+
+  <div class="actions" style="margin-top:16px">
+
+   <button class="btn btn-primary" onclick="askTeacher()">
+    💬 WhatsApp
+   </button>
+
+   <button class="btn btn-primary" onclick="callTeacher()">
+    📞 Call
+   </button>
+
+   <button class="btn btn-primary" onclick="emailTeacher()">
+    ✉️ Email
+   </button>
+
   </div>
-</section>
 
-<section id="teacher">
-  <div class="container">
-    <div class="section-head">
-      <h2>💬 Ask Teacher</h2>
-      <p>যেকোনো শিক্ষামূলক প্রশ্ন করতে পারো।</p>
-    </div>
+ </div>
 
-    <div class="panel">
-      <div class="form-grid">
-
-        <div>
-          <label>Name</label>
-          <input id="questionName" class="input"
-                 placeholder="Your name">
-        </div>
-
-        <div>
-          <label>Class / Institution</label>
-          <input id="questionFrom" class="input"
-                 placeholder="Class / Institution">
-        </div>
-
-        <div class="full">
-          <label>Your Question</label>
-          <textarea id="questionText" rows="5"
-                    placeholder="Write your educational question..."></textarea>
-        </div>
-
-      </div>
-
-      <div class="actions">
-        <button class="btn primary" onclick="submitQuestion()">
-          📩 Send Question
-        </button>
-
-        <a class="btn secondary"
-           href="https://wa.me/8801979840081"
-           target="_blank"
-           rel="noopener">
-          📱 Ask via WhatsApp
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="guardian">
-  <div class="container">
-    <div class="section-head">
-      <h2>👨‍👩‍👦 Guardian Corner</h2>
-      <p>Guardian-দের জন্য সহজ যোগাযোগ ব্যবস্থা।</p>
-    </div>
-
-    <div class="grid">
-
-      <div class="feature">
-        <div class="icon">📱</div>
-        <h3>WhatsApp</h3>
-        <p>Directly contact the teacher.</p>
-        <a class="btn primary"
-           href="https://wa.me/8801979840081"
-           target="_blank"
-           rel="noopener">
-          WhatsApp
-        </a>
-      </div>
-
-      <div class="feature">
-        <div class="icon">☎️</div>
-        <h3>Phone</h3>
-        <p>01979840081</p>
-        <a class="btn secondary" href="tel:01979840081">
-          Call
-        </a>
-      </div>
-
-      <div class="feature">
-        <div class="icon">✉️</div>
-        <h3>Email</h3>
-        <p>maksudhasan0@gmail.com</p>
-        <a class="btn secondary"
-           href="mailto:maksudhasan0@gmail.com">
-          Email
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="notices">
-  <div class="container">
-    <div class="section-head">
-      <h2>📢 Latest Notices</h2>
-    </div>
-
-    <div class="panel" id="noticeList">
-      <p style="color:#66758a">Loading notices...</p>
-    </div>
-  </div>
 </section>
 
 </main>
 
-<section class="dashboard" id="teacherDashboard">
-
-  <div class="container dashboard-grid">
-
-    <aside class="side">
-
-      <h3 style="margin-bottom:15px">👑 Only Teacher</h3>
-
-      <button class="active" data-admin="overview">
-        🏠 Overview
-      </button>
-
-      <button data-admin="resources">
-        📚 Upload Materials
-      </button>
-
-      <button data-admin="notices">
-        📢 Notices
-      </button>
-
-      <button data-admin="classesAdmin">
-        🎥 Online Classes
-      </button>
-
-      <button data-admin="examsAdmin">
-        📝 Create Exam
-      </button>
-
-      <button data-admin="resultsAdmin">
-        📊 Results
-      </button>
-
-      <button data-admin="questionsAdmin">
-        💬 Student Questions
-      </button>
-
-      <button data-admin="specialAdmin">
-        ⭐ Special Students
-      </button>
-
-      <button data-admin="guardiansAdmin">
-        👨‍👩‍👦 Guardians
-      </button>
-
-      <button onclick="logoutTeacher()">
-        🚪 Logout
-      </button>
-
-    </aside>
-
-    <div class="admin-content">
-
-      <div class="admin-section active" data-section="overview">
-        <div class="admin-card">
-          <h2>👑 Welcome, Maksud Tahsin</h2>
-          <p style="color:#66758a;margin-top:8px">
-            This is your Only Teacher / Super Admin control center.
-          </p>
-
-          <div class="grid" style="margin-top:20px">
-
-            <div class="feature">
-              <div class="icon">📚</div>
-              <h3>Materials</h3>
-              <strong id="adminResourceCount">0</strong>
-            </div>
-
-            <div class="feature">
-              <div class="icon">📝</div>
-              <h3>Exams</h3>
-              <strong id="adminExamCount">0</strong>
-            </div>
-
-            <div class="feature">
-              <div class="icon">📢</div>
-              <h3>Notices</h3>
-              <strong id="adminNoticeCount">0</strong>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <div class="admin-section" data-section="resources">
-        <div class="admin-card">
-          <h2>📤 Upload Study Material</h2>
-
-          <div class="form-grid" style="margin-top:18px">
-
-            <div>
-              <label>Title</label>
-              <input id="rTitle" class="input">
-            </div>
-
-            <div>
-              <label>Subject</label>
-              <input id="rSubject" class="input">
-            </div>
-
-            <div>
-              <label>Class</label>
-              <input id="rClass" class="input">
-            </div>
-
-            <div>
-              <label>Chapter</label>
-              <input id="rChapter" class="input">
-            </div>
-
-            <div class="full">
-              <label>Description</label>
-              <textarea id="rDescription" rows="3"></textarea>
-            </div>
-
-            <div class="full">
-              <label>File</label>
-              <input id="rFile" type="file" class="input">
-            </div>
-
-          </div>
-
-          <button class="btn primary"
-                  style="margin-top:16px"
-                  onclick="uploadResource()">
-            🚀 Upload & Publish
-          </button>
-
-          <p id="uploadStatus"
-             style="margin-top:12px;color:#66758a"></p>
-        </div>
-      </div>
-
-      <div class="admin-section" data-section="noticesAdmin">
-        <div class="admin-card">
-          <h2>📢 Publish Important Message</h2>
-
-          <input id="noticeTitle"
-                 class="input"
-                 style="margin-top:18px"
-                 placeholder="Notice title">
-
-          <textarea id="noticeBody"
-                    rows="5"
-                    style="margin-top:12px"
-                    placeholder="Write important message..."></textarea>
-
-          <button class="btn primary"
-                  style="margin-top:12px"
-                  onclick="publishNotice()">
-            Publish Notice
-          </button>
-        </div>
-      </div>
-
-      <div class="admin-section" data-section="classesAdmin">
-        <div class="admin-card">
-          <h2>🎥 Publish Online Class</h2>
-
-          <div class="form-grid" style="margin-top:18px">
-
-            <input id="classTitle"
-                   class="input"
-                   placeholder="Class title">
-
-            <input id="classSubject"
-                   class="input"
-                   placeholder="Subject">
-
-            <input id="classDate"
-                   class="input"
-                   type="datetime-local">
-
-            <input id="classLink"
-                   class="input"
-                   placeholder="Meet / Zoom / YouTube link">
-
-          </div>
-
-          <button class="btn primary"
-                  style="margin-top:12px"
-                  onclick="publishClass()">
-            Publish Class
-          </button>
-        </div>
-      </div>
-
-      <div class="admin-section" data-section="examsAdmin">
-        <div class="admin-card">
-
-          <h2>📝 Create MCQ Exam</h2>
-
-          <div class="form-grid" style="margin-top:18px">
-
-            <input id="examTitle"
-                   class="input"
-                   placeholder="Exam title">
-
-            <input id="examSubject"
-                   class="input"
-                   placeholder="Subject">
-
-            <input id="examClass"
-                   class="input"
-                   placeholder="Class">
-
-            <input id="examMinutes"
-                   class="input"
-                   type="number"
-                   placeholder="Time in minutes">
-
-          </div>
-
-          <textarea id="examJSON"
-                    rows="12"
-                    style="margin-top:14px"
-                    placeholder='One JSON object per line:
-
-{"question":"2 + 2 = ?","options":["3","4","5","6"],"answer":1}
-
-answer = correct option index (0,1,2,3)'></textarea>
-
-          <button class="btn primary"
-                  style="margin-top:12px"
-                  onclick="createExam()">
-            🚀 Publish Exam
-          </button>
-
-        </div>
-      </div>
-
-      <div class="admin-section" data-section="resultsAdmin">
-        <div class="admin-card">
-
-          <h2>📊 Publish Result</h2>
-
-          <div class="form-grid" style="margin-top:18px">
-
-            <input id="resultName"
-                   class="input"
-                   placeholder="Student name">
-
-            <input id="resultStudentId"
-                   class="input"
-                   placeholder="Student ID (optional)">
-
-            <input id="resultExam"
-                   class="input"
-                   placeholder="Exam name">
-
-            <input id="resultInstitution"
-                   class="input"
-                   placeholder="Institution">
-
-            <input id="resultScore"
-                   class="input"
-                   placeholder="Score">
-
-            <input id="resultPoints"
-                   class="input"
-                   placeholder="Points">
-
-          </div>
-
-          <button class="btn primary"
-                  style="margin-top:12px"
-                  onclick="publishResult()">
-            Publish Result
-          </button>
-
-        </div>
-      </div>
-
-      <div class="admin-section" data-section="questionsAdmin">
-        <div class="admin-card">
-
-          <h2>💬 Student Questions</h2>
-
-          <div id="adminQuestions">
-            Loading...
-          </div>
-
-        </div>
-      </div>
-
-      <div class="admin-section" data-section="specialAdmin">
-        <div class="admin-card">
-
-          <h2>⭐ Special Students</h2>
-
-          <p style="color:#66758a;margin:7px 0 18px">
-            Special Students share one common access password.
-            WhatsApp numbers are stored separately for communication.
-          </p>
-
-          <div class="form-grid">
-
-            <input id="specialName"
-                   class="input"
-                   placeholder="Student name">
-
-            <input id="specialWhatsApp"
-                   class="input"
-                   placeholder="WhatsApp number">
-
-            <input id="specialClass"
-                   class="input"
-                   placeholder="Class / Institution">
-
-          </div>
-
-          <button class="btn primary"
-                  style="margin-top:12px"
-                  onclick="addSpecialStudent()">
-            + Add Special Student
-          </button>
-
-          <div id="specialList"
-               style="margin-top:20px"></div>
-
-        </div>
-      </div>
-
-      <div class="admin-section" data-section="guardiansAdmin">
-        <div class="admin-card">
-
-          <h2>👨‍👩‍👦 WhatsApp Guardians</h2>
-
-          <p style="color:#66758a">
-            Guardian-এর সম্মতি নিয়ে WhatsApp notification-এর জন্য contact সংরক্ষণ করো।
-          </p>
-
-          <div class="form-grid" style="margin-top:18px">
-
-            <input id="guardianName"
-                   class="input"
-                   placeholder="Guardian name">
-
-            <input id="guardianWhatsApp"
-                   class="input"
-                   placeholder="WhatsApp number">
-
-            <input id="guardianStudent"
-                   class="input"
-                   placeholder="Student name / ID">
-
-          </div>
-
-          <button class="btn primary"
-                  style="margin-top:12px"
-                  onclick="addGuardian()">
-            + Add Guardian
-          </button>
-
-          <div id="guardianList"
-               style="margin-top:20px"></div>
-
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <footer>
-  <div class="container footer-grid">
 
-    <div>
-      <h3>Teachers Students Friendship</h3>
-      <p>
-        Knowledge • Cooperation • Friendship
-      </p>
-      <p style="margin-top:10px">
-        Super Admin: Maksud Tahsin
-      </p>
-    </div>
+ <strong>Teachers Students Friendship</strong>
 
-    <div>
-      <h3>Contact</h3>
-      <p>WhatsApp: 01979840081</p>
-      <p>Phone: 0167949727</p>
-      <p>Email: maksudhasan0@gmail.com</p>
-    </div>
+ <br>
 
-    <div>
-      <h3>Quick Access</h3>
-      <p><a href="#resources">Study Materials</a></p>
-      <p><a href="#exams">Online Exams</a></p>
-      <p><a href="#results">Results</a></p>
-      <p><a href="#teacher">Ask Teacher</a></p>
-    </div>
+ শিক্ষক ও শিক্ষার্থীর জ্ঞান, সহযোগিতা ও বন্ধুত্ব
 
-  </div>
+ <br><br>
+
+ 👨‍🏫 Maksud Tahsin
+
+ <br><br>
+
+ WhatsApp: 01979840081
+
+ <br>
+
+ © <span id="year"></span> All Rights Reserved
+
 </footer>
 
-<div class="modal" id="loginModal">
 
-  <div class="modal-card">
+<!-- MODAL -->
 
-    <div class="modal-head">
-      <h2>👨‍🏫 Only Teacher</h2>
-      <button class="close" onclick="closeLogin()">✕</button>
-    </div>
+<div class="modal" id="modal">
 
-    <p style="color:#66758a;margin-bottom:18px">
-      Secure teacher / Super Admin login.
-    </p>
+ <div class="modal-box">
 
-    <input id="loginEmail"
-           class="input"
-           type="email"
-           placeholder="Email">
+  <div class="modal-head">
 
-    <input id="loginPassword"
-           class="input"
-           type="password"
-           style="margin-top:12px"
-           placeholder="Password">
+   <h2 id="modalTitle">Title</h2>
 
-    <button class="btn primary"
-            style="width:100%;margin-top:15px"
-            onclick="loginTeacher()">
-      🔐 Login
-    </button>
-
-    <p id="loginError"
-       style="color:#dc2626;margin-top:10px"></p>
+   <button class="close" onclick="closeModal()">✕</button>
 
   </div>
 
+  <div id="modalBody"></div>
+
+ </div>
+
 </div>
 
-<div class="modal" id="specialModal">
 
-  <div class="modal-card">
+<script>
 
-    <div class="modal-head">
-      <h2>⭐ Special Students</h2>
-      <button class="close" onclick="closeSpecial()">✕</button>
-    </div>
+/* =========================================================
+   TEACHERS STUDENTS FRIENDSHIP
+   SINGLE FILE VERSION
+========================================================= */
 
-    <p style="color:#66758a;margin-bottom:15px">
-      Special Student community access.
-    </p>
 
-    <input id="specialPassword"
-           class="input"
-           type="password"
-           placeholder="Common Special Student Password">
+/* =========================
+   DEFAULT DATA
+========================= */
 
-    <button class="btn primary"
-            style="width:100%;margin-top:14px"
-            onclick="loginSpecial()">
-      Enter
-    </button>
+const DEFAULT_DATA = {
 
-    <p id="specialError"
-       style="color:#dc2626;margin-top:10px"></p>
+ course:{
+  name:"Special Course",
+  fee:"কোর্সের ফি জানতে WhatsApp-এ যোগাযোগ করুন।"
+ },
+
+ notices:[
+  {
+   title:"Welcome",
+   text:"Teachers Students Friendship-এ সবাইকে স্বাগতম।"
+  }
+ ],
+
+ resources:[],
+
+ vocabulary:[
+  {
+   word:"Beautiful",
+   meaning:"সুন্দর",
+   example:"This is a beautiful place."
+  }
+ ],
+
+ daily:[
+  "Practice English every day."
+ ],
+
+ grammar:[
+  "Teacher-এর প্রকাশিত Grammar & Practice এখানে দেখা যাবে।"
+ ],
+
+ exams:[
+  {
+   id:"demo-exam",
+   title:"Demo MCQ Exam",
+   duration:5,
+   questions:[
+    {
+     q:"বাংলাদেশের রাজধানী কোনটি?",
+     options:["চট্টগ্রাম","ঢাকা","রাজশাহী","খুলনা"],
+     answer:1
+    },
+    {
+     q:"2 + 2 = কত?",
+     options:["3","4","5","6"],
+     answer:1
+    },
+    {
+     q:"English-এ 'বই' কোনটি?",
+     options:["Pen","Book","Table","Chair"],
+     answer:1
+    }
+   ]
+  }
+ ],
+
+ results:[],
+
+ onlineClass:{
+  title:"Online Class",
+  link:"",
+  description:"Teacher ক্লাসের লিংক প্রকাশ করলে এখানে দেখা যাবে।"
+ }
+
+};
+
+
+let data=loadData();
+
+let currentExam=null;
+let examTimer=null;
+let examSeconds=0;
+
+
+/* =========================
+   LOCAL STORAGE
+========================= */
+
+function loadData(){
+
+ try{
+
+  const saved=localStorage.getItem(
+   "TSF_COMPLETE_DATA"
+  );
+
+  if(saved){
+
+   const parsed=JSON.parse(saved);
+
+   return {
+    ...DEFAULT_DATA,
+    ...parsed
+   };
+
+  }
+
+ }catch(e){}
+
+ return JSON.parse(
+  JSON.stringify(DEFAULT_DATA)
+ );
+}
+
+
+function saveData(){
+
+ localStorage.setItem(
+  "TSF_COMPLETE_DATA",
+  JSON.stringify(data)
+ );
+
+ refreshHome();
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function openModal(title,body){
+
+ document.getElementById("modalTitle")
+ .textContent=title;
+
+ document.getElementById("modalBody")
+ .innerHTML=body;
+
+ document.getElementById("modal")
+ .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+ document.getElementById("modal")
+ .classList.remove("show");
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function focusSearch(){
+
+ const box=document.getElementById(
+  "searchSection"
+ );
+
+ box.scrollIntoView({
+  behavior:"smooth"
+ });
+
+ setTimeout(()=>{
+  document.getElementById("searchInput").focus();
+ },500);
+
+}
+
+
+function searchSite(){
+
+ const q=document.getElementById(
+  "searchInput"
+ ).value.toLowerCase().trim();
+
+ if(!q){
+
+  document.getElementById(
+   "searchResults"
+  ).innerHTML="";
+
+  return;
+ }
+
+
+ const items=[
+
+  {
+   title:"🎓 Special Course",
+   text:data.course.name+" "+data.course.fee,
+   action:"openCourse()"
+  },
+
+  {
+   title:"📚 Study Resources",
+   text:data.resources.map(
+    x=>x.title
+   ).join(" ")
+  },
+
+  {
+   title:"🇬🇧 Vocabulary",
+   text:data.vocabulary.map(
+    x=>x.word+" "+x.meaning+" "+x.example
+   ).join(" ")
+  },
+
+  {
+   title:"☀️ Daily English",
+   text:data.daily.join(" ")
+  },
+
+  {
+   title:"✍️ Grammar & Practice",
+   text:data.grammar.join(" ")
+  },
+
+  {
+   title:"📝 Online Exam",
+   text:data.exams.map(
+    x=>x.title
+   ).join(" ")
+  },
+
+  {
+   title:"📢 Notice",
+   text:data.notices.map(
+    x=>x.title+" "+x.text
+   ).join(" ")
+  }
+
+ ];
+
+
+ const found=items.filter(item=>
+  (item.title+" "+item.text)
+  .toLowerCase()
+  .includes(q)
+ );
+
+
+ document.getElementById(
+  "searchResults"
+ ).innerHTML=found.length
+
+ ?`
+ <div class="grid">
+ ${found.map(x=>`
+  <div class="card">
+   <div class="card-icon">🔎</div>
+   <h3>${x.title}</h3>
+   <p>${x.text}</p>
+   ${x.action?
+   `<button class="btn btn-dark"
+    onclick="${x.action}">
+    Open
+   </button>`:""}
+  </div>
+ `).join("")}
+ </div>
+ `
+
+ :`
+ <div class="empty">
+  <h3>কিছু পাওয়া যায়নি</h3>
+  <p>অন্য keyword দিয়ে আবার চেষ্টা করুন।</p>
+ </div>
+ `;
+
+}
+
+
+/* =========================
+   COURSE
+========================= */
+
+function openCourse(){
+
+ openModal(
+  "🎓 Special Course",
+
+ `
+ <div class="course">
+
+  <small>SPECIAL COURSE</small>
+
+  <h2>${escapeHTML(data.course.name)}</h2>
+
+  <h3>💰 ${escapeHTML(data.course.fee)}</h3>
+
+  <div class="actions" style="margin-top:17px">
+
+   <button class="btn btn-primary"
+    onclick="askTeacher()">
+    💬 Send message in WhatsApp
+   </button>
+
+   <button class="btn btn-primary"
+    onclick="callTeacher()">
+    📞 Teacher's Call
+   </button>
+
+   <button class="btn btn-primary"
+    onclick="emailTeacher()">
+    ✉️ Email
+   </button>
 
   </div>
 
-</div>
+ </div>
+ `
+ );
 
-<div class="toast" id="toast"></div>
-
-<script type="module">
-
-/* ==========================================================
-   FIREBASE CONFIG
-   Replace these values with YOUR Firebase Web App config.
-   ========================================================== */
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  query,
-  orderBy,
-  limit,
-  onSnapshot,
-  serverTimestamp,
-  where,
-  getDocs
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js";
-
-
-const firebaseConfig = {
-
-  apiKey: "YOUR_API_KEY",
-
-  authDomain:
-    "YOUR_PROJECT.firebaseapp.com",
-
-  projectId:
-    "YOUR_PROJECT_ID",
-
-  storageBucket:
-    "YOUR_PROJECT.firebasestorage.app",
-
-  messagingSenderId:
-    "YOUR_MESSAGING_SENDER_ID",
-
-  appId:
-    "YOUR_APP_ID"
-
-};
-
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-const db = getFirestore(app);
-
-const storage = getStorage(app);
-
-
-/* ==========================================================
-   BASIC UI
-   ========================================================== */
-
-const $ = id => document.getElementById(id);
-
-function toast(message){
-
-  $("toast").textContent = message;
-
-  $("toast").classList.add("show");
-
-  setTimeout(() => {
-    $("toast").classList.remove("show");
-  },3000);
 }
 
-window.toast = toast;
+
+/* =========================
+   ENGLISH
+========================= */
+
+function openEnglish(){
+
+ openModal(
+  "🇬🇧 Special Learning English",
+
+ `
+ <div class="english-grid">
+
+  <div class="english-card">
+   <div class="english-icon">🟢</div>
+   <h3>Duolingo</h3>
+   <p>English learning app.</p>
+
+   <a class="btn btn-dark"
+    target="_blank"
+    href="https://play.google.com/store/apps/details?id=com.duolingo">
+    📱 Open
+   </a>
+  </div>
 
 
-/* ==========================================================
-   MOBILE MENU
-   ========================================================== */
+  <div class="english-card">
+   <div class="english-icon">📚</div>
+   <h3>VocabO – Learning English</h3>
+   <p>Vocabulary ও English learning practice.</p>
 
-$("menuBtn").onclick = () => {
-
-  $("navLinks").classList.toggle("show");
-
-};
-
-
-/* ==========================================================
-   LOGIN
-   ========================================================== */
-
-$("teacherLoginBtn").onclick = () => {
-
-  $("loginModal").classList.add("show");
-
-};
-
-window.closeLogin = () => {
-
-  $("loginModal").classList.remove("show");
-
-};
-
-window.loginTeacher = async () => {
-
-  const email =
-    $("loginEmail").value.trim();
-
-  const password =
-    $("loginPassword").value;
-
-  if(!email || !password){
-
-    $("loginError").textContent =
-      "Email and password are required.";
-
-    return;
-  }
-
-  try{
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-    closeLogin();
-
-    toast("Login successful.");
-
-  }catch(error){
-
-    $("loginError").textContent =
-      "Login failed. Check your email/password.";
-
-    console.error(error);
-
-  }
-
-};
+   <a class="btn btn-dark"
+    target="_blank"
+    href="https://play.google.com/store/search?q=VocabO%20Learning%20English&c=apps">
+    📱 Open
+   </a>
+  </div>
 
 
-window.logoutTeacher = async () => {
-
-  await signOut(auth);
-
-  $("teacherDashboard").classList.remove("show");
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-  toast("Logged out.");
-
-};
+  <div class="english-card">
+   <div class="english-icon">📖</div>
+   <h3>Vocabulary</h3>
+   <button class="btn btn-dark"
+    onclick="openVocabulary()">
+    Learn
+   </button>
+  </div>
 
 
-/* ==========================================================
-   AUTH STATE
-   ========================================================== */
+  <div class="english-card">
+   <div class="english-icon">🎧</div>
+   <h3>Listening</h3>
 
-onAuthStateChanged(auth,user => {
-
-  if(user){
-
-    $("teacherDashboard").classList.add("show");
-
-  }else{
-
-    $("teacherDashboard").classList.remove("show");
-
-  }
-
-});
+   <a class="btn btn-dark"
+    target="_blank"
+    href="https://learnenglish.britishcouncil.org/skills/listening">
+    Practice
+   </a>
+  </div>
 
 
-/* ==========================================================
-   ADMIN NAVIGATION
-   ========================================================== */
+  <div class="english-card">
+   <div class="english-icon">🗣️</div>
+   <h3>Speaking</h3>
 
-document.querySelectorAll("[data-admin]")
-.forEach(button => {
-
-  button.addEventListener("click",() => {
-
-    document
-      .querySelectorAll("[data-admin]")
-      .forEach(b => b.classList.remove("active"));
-
-    button.classList.add("active");
-
-    const target =
-      button.dataset.admin;
-
-    document
-      .querySelectorAll(".admin-section")
-      .forEach(section => {
-
-        section.classList.remove("active");
-
-        if(section.dataset.section === target){
-
-          section.classList.add("active");
-
-        }
-
-      });
-
-  });
-
-});
+   <a class="btn btn-dark"
+    target="_blank"
+    href="https://learnenglish.britishcouncil.org/skills/speaking">
+    Practice
+   </a>
+  </div>
 
 
-/* ==========================================================
-   RESOURCES — REAL TIME
-   ========================================================== */
+  <div class="english-card">
+   <div class="english-icon">☀️</div>
+   <h3>Daily English</h3>
 
-const resourceQuery =
-  query(
-    collection(db,"resources"),
-    orderBy("createdAt","desc"),
-    limit(100)
+   <button class="btn btn-dark"
+    onclick="openDaily()">
+    Learn
+   </button>
+  </div>
+
+
+  <div class="english-card">
+   <div class="english-icon">✍️</div>
+   <h3>Grammar & Practice</h3>
+
+   <button class="btn btn-dark"
+    onclick="openGrammar()">
+    Practice
+   </button>
+  </div>
+
+ </div>
+ `
+ );
+
+}
+
+
+function openVocabulary(){
+
+ openModal(
+  "📖 Vocabulary",
+
+ `
+ ${data.vocabulary.map(x=>`
+  <div class="notice">
+   <h3>${escapeHTML(x.word)}</h3>
+   <p>
+    <strong>বাংলা অর্থ:</strong>
+    ${escapeHTML(x.meaning)}
+   </p>
+   <p>
+    <strong>Example:</strong>
+    ${escapeHTML(x.example)}
+   </p>
+  </div>
+ `).join("")}
+ `
+ );
+
+}
+
+
+function openDaily(){
+
+ openModal(
+  "☀️ Daily English",
+
+ `
+ ${data.daily.map(x=>`
+  <div class="notice">
+   <p>${escapeHTML(x)}</p>
+  </div>
+ `).join("")}
+ `
+ );
+
+}
+
+
+function openGrammar(){
+
+ openModal(
+  "✍️ Grammar & Practice",
+
+ `
+ ${data.grammar.map(x=>`
+  <div class="notice">
+   <p>${escapeHTML(x)}</p>
+  </div>
+ `).join("")}
+ `
+ );
+
+}
+
+
+/* =========================
+   RESOURCES
+========================= */
+
+function openResources(){
+
+ if(!data.resources.length){
+
+  openModal(
+   "📚 Study Resources",
+   `<div class="empty">
+    Teacher এখনো কোনো resource publish করেননি।
+   </div>`
   );
 
-onSnapshot(resourceQuery,snapshot => {
-
-  const resources =
-    snapshot.docs.map(doc => ({
-      id:doc.id,
-      ...doc.data()
-    }));
-
-  $("statResources").textContent =
-    resources.length;
-
-  $("adminResourceCount").textContent =
-    resources.length;
-
-  renderResources(resources);
-
-});
+  return;
+ }
 
 
-function renderResources(resources){
+ openModal(
+  "📚 Study Resources",
 
-  const search =
-    $("resourceSearch").value
-      .toLowerCase();
+ `
+ ${data.resources.map((x,i)=>`
+  <div class="notice">
 
-  const filtered =
-    resources.filter(r =>
-      `${r.title || ""}
-       ${r.subject || ""}
-       ${r.className || ""}
-       ${r.chapter || ""}`
-      .toLowerCase()
-      .includes(search)
-    );
+   <h3>${escapeHTML(x.title)}</h3>
 
-  if(!filtered.length){
+   <p>
+    ${escapeHTML(x.description||"")}
+   </p>
 
-    $("resourceList").innerHTML =
-      `<p style="color:#66758a">
-        No materials found.
-       </p>`;
+   ${
+    x.url
+    ?
+    `<a class="btn btn-dark"
+      target="_blank"
+      href="${escapeAttribute(x.url)}">
+      ⬇️ Open / Download
+     </a>`
+    :""
+   }
 
-    return;
-  }
-
-  $("resourceList").innerHTML =
-    filtered.map(r => `
-
-      <div class="resource">
-
-        <div class="resource-info">
-
-          <h3>${escapeHtml(r.title || "Untitled")}</h3>
-
-          <p>
-            ${escapeHtml(r.subject || "")}
-            •
-            ${escapeHtml(r.className || "")}
-            ${r.chapter ? " • " + escapeHtml(r.chapter) : ""}
-          </p>
-
-        </div>
-
-        <a
-          class="btn primary"
-          href="${safeUrl(r.fileUrl)}"
-          target="_blank"
-          rel="noopener">
-          📥 Open / Download
-        </a>
-
-      </div>
-
-    `).join("");
+  </div>
+ `).join("")}
+ `
+ );
 
 }
 
-$("resourceSearch").addEventListener(
-  "input",
-  () => {
 
-    // Real-time listener data is already in DOM.
-    // Re-querying is intentionally avoided here.
+/* =========================
+   NOTICE
+========================= */
 
-  }
-);
+function openNotices(){
 
+ openModal(
+  "📢 Notice Board",
 
-/* ==========================================================
-   NOTICES — REAL TIME
-   ========================================================== */
+ `
+ ${data.notices.map(x=>`
+  <div class="notice">
 
-const noticeQuery =
-  query(
-    collection(db,"notices"),
-    orderBy("createdAt","desc"),
-    limit(30)
-  );
+   <h3>${escapeHTML(x.title)}</h3>
 
-onSnapshot(noticeQuery,snapshot => {
+   <p>${escapeHTML(x.text)}</p>
 
-  const notices =
-    snapshot.docs.map(doc => doc.data());
+  </div>
+ `).join("")}
+ `
+ );
 
-  $("statNotices").textContent =
-    notices.length;
-
-  $("adminNoticeCount").textContent =
-    notices.length;
-
-  if(!notices.length){
-
-    $("noticeList").innerHTML =
-      `<p style="color:#66758a">
-        No notices yet.
-       </p>`;
-
-    return;
-  }
-
-  $("noticeList").innerHTML =
-    notices.map(n => `
-
-      <div class="notice">
-
-        <h3>${escapeHtml(n.title || "")}</h3>
-
-        <p style="margin-top:6px">
-          ${escapeHtml(n.body || "")}
-        </p>
-
-      </div>
-
-    `).join("");
-
-});
+}
 
 
-/* ==========================================================
-   CLASSES — REAL TIME
-   ========================================================== */
+function refreshHome(){
 
-const classQuery =
-  query(
-    collection(db,"classes"),
-    orderBy("createdAt","desc"),
-    limit(50)
-  );
+ document.getElementById(
+  "homeCourseName"
+ ).textContent=data.course.name;
 
-onSnapshot(classQuery,snapshot => {
-
-  const classes =
-    snapshot.docs.map(doc => doc.data());
-
-  if(!classes.length){
-
-    $("classList").innerHTML =
-      `<p style="color:#66758a">
-        No classes published yet.
-       </p>`;
-
-    return;
-  }
-
-  $("classList").innerHTML =
-    classes.map(c => `
-
-      <div class="exam">
-
-        <h3>🎥 ${escapeHtml(c.title || "")}</h3>
-
-        <div class="exam-meta">
-          ${escapeHtml(c.subject || "")}
-          •
-          ${escapeHtml(c.date || "")}
-        </div>
-
-        <a
-          class="btn primary"
-          href="${safeUrl(c.link)}"
-          target="_blank"
-          rel="noopener">
-          Join Class
-        </a>
-
-      </div>
-
-    `).join("");
-
-});
+ document.getElementById(
+  "homeCourseFee"
+ ).textContent=data.course.fee;
 
 
-/* ==========================================================
-   EXAMS — REAL TIME
-   ========================================================== */
+ const box=document.getElementById(
+  "noticePreview"
+ );
 
-const examQuery =
-  query(
-    collection(db,"mcqExams"),
-    orderBy("createdAt","desc"),
-    limit(50)
-  );
+ if(!data.notices.length){
 
-onSnapshot(examQuery,snapshot => {
+  box.innerHTML=`
+   <div class="empty">
+    কোনো notice নেই।
+   </div>
+  `;
 
-  const exams =
-    snapshot.docs.map(doc => ({
-      id:doc.id,
-      ...doc.data()
-    }));
+ }else{
 
-  $("statExams").textContent =
-    exams.length;
+  box.innerHTML=data.notices
+   .slice(0,3)
+   .map(x=>`
+    <div class="notice">
+     <h3>${escapeHTML(x.title)}</h3>
+     <p>${escapeHTML(x.text)}</p>
+    </div>
+   `).join("");
 
-  $("adminExamCount").textContent =
-    exams.length;
+ }
 
-  if(!exams.length){
+}
 
-    $("examList").innerHTML =
-      `<p style="color:#66758a">
-        No exams published yet.
-       </p>`;
 
-    return;
+/* =========================
+   ONLINE CLASS
+========================= */
+
+function openClasses(){
+
+ const c=data.onlineClass;
+
+ openModal(
+  "🎥 Online Class",
+
+ `
+ <div class="card">
+
+  <h3>${escapeHTML(c.title)}</h3>
+
+  <p>${escapeHTML(c.description)}</p>
+
+  ${
+   c.link
+   ?
+   `<a class="btn btn-dark"
+    target="_blank"
+    href="${escapeAttribute(c.link)}">
+    🎥 Join Class
+   </a>`
+   :
+   `<div class="empty" style="margin-top:15px">
+    Teacher এখনো ক্লাসের link প্রকাশ করেননি।
+   </div>`
   }
 
-  $("examList").innerHTML =
-    exams.map(e => `
+ </div>
+ `
+ );
 
-      <div class="exam">
-
-        <h3>📝 ${escapeHtml(e.title || "")}</h3>
-
-        <div class="exam-meta">
-
-          ${escapeHtml(e.subject || "")}
-          •
-          ${escapeHtml(e.className || "")}
-          •
-          ${Number(e.duration || 0)} minutes
-          •
-          ${Array.isArray(e.questions)
-            ? e.questions.length
-            : 0} questions
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="btn primary"
-            onclick="startExam('${e.id}')">
-            Start Exam
-          </button>
-
-          ${
-            e.questionFileUrl
-            ?
-            `<a
-              class="btn secondary"
-              href="${safeUrl(e.questionFileUrl)}"
-              target="_blank"
-              rel="noopener">
-              📥 Download Questions
-             </a>`
-            : ""
-          }
-
-        </div>
-
-      </div>
-
-    `).join("");
-
-});
+}
 
 
-/* ==========================================================
-   RESULT SEARCH
-   ========================================================== */
+/* =========================
+   RESULTS
+========================= */
 
-window.searchResults = async () => {
+function openResults(){
 
-  const text =
-    $("resultSearch").value.trim();
+ openModal(
+  "🏆 Results & Points",
 
-  if(!text){
+ `
+ <div class="form">
 
-    $("resultList").innerHTML =
-      `<p>Please enter a name, ID or exam.</p>`;
+  <input
+   id="resultSearch"
+   placeholder="আপনার নাম লিখুন">
 
-    return;
-  }
+  <button class="btn btn-dark"
+   onclick="findResult()">
+   🔎 Search Result
+  </button>
 
-  try{
+  <div id="resultBox"></div>
 
-    const snapshot =
-      await getDocs(
-        query(
-          collection(db,"results"),
-          limit(200)
-        )
-      );
+ </div>
+ `
+ );
 
-    const q =
-      text.toLowerCase();
+}
 
-    const results =
-      snapshot.docs
-        .map(d => d.data())
-        .filter(r =>
-          `${r.studentName || ""}
-           ${r.studentId || ""}
-           ${r.exam || ""}
-           ${r.institution || ""}`
-          .toLowerCase()
-          .includes(q)
-        );
 
-    if(!results.length){
+function findResult(){
 
-      $("resultList").innerHTML =
-        `<p>No published result found.</p>`;
+ const name=document.getElementById(
+  "resultSearch"
+ ).value.trim().toLowerCase();
 
-      return;
+ const results=data.results.filter(x=>
+  x.name.toLowerCase()===name
+ );
+
+ const box=document.getElementById(
+  "resultBox"
+ );
+
+ if(!results.length){
+
+  box.innerHTML=`
+   <div class="empty">
+    এই নামে কোনো result পাওয়া যায়নি।
+   </div>
+  `;
+
+  return;
+ }
+
+ box.innerHTML=results.map(x=>`
+
+  <div class="result" style="margin-top:12px">
+
+   <h2>${escapeHTML(x.name)}</h2>
+
+   <p>${escapeHTML(x.from)}</p>
+
+   <div class="score">
+    ${x.score}/${x.total}
+   </div>
+
+   <h3>
+    ${x.percent}%
+   </h3>
+
+   <p>
+    ⭐ Points: ${x.points}
+   </p>
+
+  </div>
+
+ `).join("");
+
+}
+
+
+/* =========================
+   EXAM CENTER
+========================= */
+
+function openExams(){
+
+ openModal(
+  "📝 Online Exam Center",
+
+ `
+ <div class="grid">
+
+ ${data.exams.map(x=>`
+
+  <div class="card">
+
+   <span class="app-tag">
+    ${x.duration} MIN
+   </span>
+
+   <h3>${escapeHTML(x.title)}</h3>
+
+   <p>
+    ${x.questions.length}টি MCQ প্রশ্ন
+   </p>
+
+   <button class="btn btn-dark"
+    onclick="startExam('${escapeAttribute(x.id)}')">
+    📝 Start Exam
+   </button>
+
+  </div>
+
+ `).join("")}
+
+ </div>
+ `
+ );
+
+}
+
+
+function startExam(id){
+
+ currentExam=data.exams.find(
+  x=>x.id===id
+ );
+
+ if(!currentExam)return;
+
+ let html=`
+
+ <div class="form">
+
+  <input
+   id="studentName"
+   placeholder="আপনার নাম">
+
+  <input
+   id="studentFrom"
+   placeholder="কোথা থেকে পরীক্ষা দিচ্ছেন?">
+
+  <div id="timerBox" class="timer">
+   ⏱️ সময়:
+   <strong id="examTimer">--:--</strong>
+  </div>
+
+  <form id="examForm">
+
+ `;
+
+
+ currentExam.questions.forEach((q,i)=>{
+
+  html+=`
+
+   <div class="question">
+
+    <h3>
+     ${i+1}. ${escapeHTML(q.q)}
+    </h3>
+
+    ${
+     q.options.map((o,j)=>`
+
+      <label class="option">
+
+       <input
+        type="radio"
+        name="question_${i}"
+        value="${j}">
+
+       ${escapeHTML(o)}
+
+      </label>
+
+     `).join("")
     }
 
-    $("resultList").innerHTML =
-      results.map(r => `
+   </div>
 
-        <div class="notice">
+  `;
 
-          <h3>${escapeHtml(r.studentName || "")}</h3>
+ });
 
-          <p>
-            Exam:
-            ${escapeHtml(r.exam || "")}
-          </p>
 
-          <p>
-            Institution:
-            ${escapeHtml(r.institution || "")}
-          </p>
+ html+=`
 
-          <p>
-            Score:
-            <strong>${escapeHtml(String(r.score || ""))}</strong>
-          </p>
+   <button
+    type="button"
+    class="btn btn-dark"
+    onclick="submitExam()">
 
-          <p>
-            Points:
-            <strong>${escapeHtml(String(r.points || ""))}</strong>
-          </p>
+    ✅ Submit Exam
 
-        </div>
+   </button>
 
-      `).join("");
+  </form>
 
-  }catch(error){
+ </div>
 
-    console.error(error);
+ `;
 
-    toast("Could not search results.");
+
+ openModal(
+  currentExam.title,
+  html
+ );
+
+
+ examSeconds=currentExam.duration*60;
+
+ updateTimer();
+
+ examTimer=setInterval(()=>{
+
+  examSeconds--;
+
+  updateTimer();
+
+  if(examSeconds<=0){
+
+   clearInterval(examTimer);
+
+   submitExam();
 
   }
 
-};
+ },1000);
+
+}
 
 
-/* ==========================================================
-   UPLOAD RESOURCE
-   ========================================================== */
+function updateTimer(){
 
-window.uploadResource = async () => {
+ const el=document.getElementById(
+  "examTimer"
+ );
 
-  const user = auth.currentUser;
+ if(!el)return;
 
-  if(!user){
+ const m=Math.floor(
+  examSeconds/60
+ );
 
-    toast("Teacher login required.");
+ const s=examSeconds%60;
 
-    return;
-  }
+ el.textContent=
+  String(m).padStart(2,"0")
+  +":"
+  +String(s).padStart(2,"0");
 
-  const file =
-    $("rFile").files[0];
+}
 
-  if(!file){
 
-    toast("Select a file.");
+function submitExam(){
 
-    return;
-  }
+ if(!currentExam)return;
 
-  const title =
-    $("rTitle").value.trim();
+ clearInterval(examTimer);
 
-  if(!title){
+ const name=document.getElementById(
+  "studentName"
+ )?.value.trim();
 
-    toast("Enter a title.");
+ const from=document.getElementById(
+  "studentFrom"
+ )?.value.trim();
 
-    return;
-  }
+ if(!name||!from){
 
-  const path =
-    `resources/${user.uid}/${Date.now()}-${safeFileName(file.name)}`;
-
-  const storageRef =
-    ref(storage,path);
-
-  const task =
-    uploadBytesResumable(storageRef,file);
-
-  $("uploadStatus").textContent =
-    "Uploading... 0%";
-
-  task.on(
-    "state_changed",
-
-    snapshot => {
-
-      const percent =
-        Math.round(
-          snapshot.bytesTransferred /
-          snapshot.totalBytes * 100
-        );
-
-      $("uploadStatus").textContent =
-        `Uploading... ${percent}%`;
-
-    },
-
-    error => {
-
-      console.error(error);
-
-      $("uploadStatus").textContent =
-        "Upload failed.";
-
-    },
-
-    async () => {
-
-      const fileUrl =
-        await getDownloadURL(task.snapshot.ref);
-
-      await addDoc(
-        collection(db,"resources"),
-        {
-          title,
-          subject:$("rSubject").value.trim(),
-          className:$("rClass").value.trim(),
-          chapter:$("rChapter").value.trim(),
-          description:$("rDescription").value.trim(),
-          fileUrl,
-          fileName:file.name,
-          createdBy:user.uid,
-          createdAt:serverTimestamp()
-        }
-      );
-
-      $("uploadStatus").textContent =
-        "Published successfully.";
-
-      toast("Material published.");
-
-    }
+  alert(
+   "নাম এবং কোথা থেকে পরীক্ষা দিচ্ছেন—দুটিই লিখুন।"
   );
 
-};
+  return;
+
+ }
 
 
-/* ==========================================================
+ let score=0;
+
+ currentExam.questions.forEach((q,i)=>{
+
+  const selected=document.querySelector(
+   `input[name="question_${i}"]:checked`
+  );
+
+  if(
+   selected &&
+   Number(selected.value)===q.answer
+  ){
+   score++;
+  }
+
+ });
+
+
+ const total=currentExam.questions.length;
+
+ const percent=Math.round(
+  score/total*100
+ );
+
+ const points=score*10;
+
+
+ data.results.unshift({
+
+  name,
+  from,
+  exam:currentExam.title,
+  score,
+  total,
+  percent,
+  points,
+  date:new Date().toLocaleString("bn-BD")
+
+ });
+
+ saveData();
+
+
+ openModal(
+  "🏆 Exam Result",
+
+ `
+ <div class="result">
+
+  <h2>${escapeHTML(name)}</h2>
+
+  <p>${escapeHTML(from)}</p>
+
+  <div class="score">
+   ${score}/${total}
+  </div>
+
+  <h3>${percent}%</h3>
+
+  <p style="margin-top:8px">
+   ⭐ Points: <strong>${points}</strong>
+  </p>
+
+  <p style="margin-top:8px;color:#64748b">
+   ফলাফল সংরক্ষণ করা হয়েছে।
+  </p>
+
+ </div>
+ `
+ );
+
+ currentExam=null;
+
+}
+
+
+/* =========================
+   AI
+========================= */
+
+function openAI(){
+
+ openModal(
+  "🤖 Ask AI",
+
+ `
+ <div class="grid">
+
+  <div class="card">
+
+   <div class="card-icon">🤖</div>
+
+   <h3>ChatGPT</h3>
+
+   <p>
+    পড়াশোনা, explanation ও practice-এর জন্য।
+   </p>
+
+   <a
+    class="btn btn-dark"
+    target="_blank"
+    href="https://chatgpt.com/">
+    Open ChatGPT
+   </a>
+
+  </div>
+
+
+  <div class="card">
+
+   <div class="card-icon">✨</div>
+
+   <h3>Gemini</h3>
+
+   <p>
+    AI learning assistance।
+   </p>
+
+   <a
+    class="btn btn-dark"
+    target="_blank"
+    href="https://gemini.google.com/">
+    Open Gemini
+   </a>
+
+  </div>
+
+ </div>
+
+ <div class="notice" style="margin-top:15px">
+  <strong>Teacher Note:</strong>
+  AI-generated questions public student side থেকে
+  তৈরি করা হবে না। Teacher বাইরে AI ব্যবহার করে
+  question তৈরি করে Control Center থেকে publish করবেন।
+ </div>
+ `
+ );
+
+}
+
+
+/* =========================
+   TEACHER LOGIN
+========================= */
+
+function openTeacherLogin(){
+
+ openModal(
+  "👨‍🏫 Only Teacher",
+
+ `
+ <div class="form">
+
+  <input
+   id="teacherEmail"
+   type="email"
+   placeholder="Teacher / Super Admin Email">
+
+  <input
+   id="teacherPassword"
+   type="password"
+   placeholder="Password">
+
+  <button
+   class="btn btn-dark"
+   onclick="teacherLogin()">
+   🔐 Login
+  </button>
+
+  <div class="notice">
+
+   <strong>Production Security</strong>
+
+   <p>
+    এই single-file version-এ login demo হিসেবে কাজ করে।
+    আসল website-এ Firebase Authentication দিয়ে
+    Super Admin ও Teacher authentication করতে হবে।
+   </p>
+
+  </div>
+
+ </div>
+ `
+ );
+
+}
+
+
+function teacherLogin(){
+
+ const email=document.getElementById(
+  "teacherEmail"
+ ).value.trim();
+
+ const password=document.getElementById(
+  "teacherPassword"
+ ).value;
+
+ if(!email||!password){
+
+  alert("Email এবং password দিন।");
+
+  return;
+ }
+
+ /*
+  Single-file version:
+  Admin panel open.
+  Production:
+  Firebase Authentication verify করবে।
+ */
+
+ openControlCenter();
+
+}
+
+
+/* =========================
+   CONTROL CENTER
+========================= */
+
+function openControlCenter(){
+
+ openModal(
+  "👑 Teacher Control Center",
+
+ `
+
+ <div class="admin-tabs">
+
+  <button onclick="adminTab('upload')">
+   📂 Upload
+  </button>
+
+  <button onclick="adminTab('course')">
+   🎓 Course
+  </button>
+
+  <button onclick="adminTab('question')">
+   🤖 AI Question
+  </button>
+
+  <button onclick="adminTab('english')">
+   🇬🇧 English
+  </button>
+
+  <button onclick="adminTab('exam')">
+   📝 Exam
+  </button>
+
+  <button onclick="adminTab('notice')">
+   📢 Notice
+  </button>
+
+  <button onclick="adminTab('class')">
+   🎥 Class
+  </button>
+
+  <button onclick="adminTab('teacher')">
+   👨‍🏫 Teacher
+  </button>
+
+  <button onclick="adminTab('student')">
+   🎓 Special Student
+  </button>
+
+ </div>
+
+
+ <!-- UPLOAD -->
+
+ <div id="admin-upload"
+  class="admin-panel active">
+
+  <div class="admin-card">
+
+   <h3>📂 File Upload Center</h3>
+
+   <br>
+
+   <div class="form">
+
+    <select id="uploadType">
+
+     <option>PDF File</option>
+     <option>Word File</option>
+     <option>Image</option>
+     <option>Online Class</option>
+     <option>Other Upload</option>
+
+    </select>
+
+    <input
+     id="uploadTitle"
+     placeholder="Content Title">
+
+    <input
+     id="uploadFile"
+     type="file">
+
+    <textarea
+     id="uploadDescription"
+     placeholder="Description"></textarea>
+
+    <input
+     id="uploadURL"
+     placeholder="File / Class URL (যদি থাকে)">
+
+    <button
+     class="btn btn-dark"
+     onclick="publishResource()">
+     📤 Publish
+    </button>
+
+   </div>
+
+  </div>
+
+ </div>
+
+
+ <!-- COURSE -->
+
+ <div id="admin-course"
+  class="admin-panel">
+
+  <div class="admin-card">
+
+   <h3>🎓 Special Course</h3>
+
+   <br>
+
+   <div class="form">
+
+    <input
+     id="adminCourseName"
+     placeholder="Course Name">
+
+    <input
+     id="adminCourseFee"
+     placeholder="Course Fee">
+
+    <button
+     class="btn btn-dark"
+     onclick="publishCourse()">
+     🎓 Publish Course
+    </button>
+
+   </div>
+
+  </div>
+
+ </div>
+
+
+ <!-- AI QUESTION -->
+
+ <div id="admin-question"
+  class="admin-panel">
+
+  <div class="admin-card">
+
+   <h3>🤖 AI Question Paste</h3>
+
+   <p style="color:#64748b">
+    ChatGPT/Gemini থেকে তৈরি প্রশ্ন এখানে paste করুন।
+   </p>
+
+   <br>
+
+   <div class="form">
+
+    <input
+     id="aiExamTitle"
+     placeholder="Exam Name">
+
+    <input
+     id="aiExamTime"
+     type="number"
+     placeholder="Time in minutes">
+
+    <textarea
+     id="aiQuestionText"
+     placeholder="প্রশ্নগুলো এখানে paste করুন..."></textarea>
+
+    <button
+     class="btn btn-dark"
+     onclick="publishAIQuestion()">
+     🤖 Preview & Publish
+    </button>
+
+   </div>
+
+  </div>
+
+ </div>
+
+
+ <!-- ENGLISH -->
+
+ <div id="admin-english"
+  class="admin-panel">
+
+  <div class="admin-card">
+
+   <h3>🇬🇧 Special Learning English</h3>
+
+   <br>
+
+   <div class="form">
+
+    <input
+     id="vocabWord"
+     placeholder="Vocabulary Word">
+
+    <input
+     id="vocabMeaning"
+     placeholder="বাংলা অর্থ">
+
+    <input
+     id="vocabExample"
+     placeholder="Example Sentence">
+
+    <button
+     class="btn btn-dark"
+     onclick="publishVocabulary()">
+     📖 Publish Vocabulary
+    </button>
+
+    <textarea
+     id="dailyEnglish"
+     placeholder="Daily English"></textarea>
+
+    <button
+     class="btn btn-dark"
+     onclick="publishDaily()">
+     ☀️ Publish Daily English
+    </button>
+
+    <textarea
+     id="grammarText"
+     placeholder="Grammar & Practice"></textarea>
+
+    <button
+     class="btn btn-dark"
+     onclick="publishGrammar()">
+     ✍️ Publish Grammar
+    </button>
+
+   </div>
+
+  </div>
+
+ </div>
+
+
+ <!-- EXAM -->
+
+ <div id="admin-exam"
+  class="admin-panel">
+
+  <div class="admin-card">
+
+   <h3>📝 Create MCQ Exam</h3>
+
+   <p style="color:#64748b">
+    সহজে MCQ exam তৈরি করুন।
+   </p>
+
+   <br>
+
+   <div class="form">
+
+    <input
+     id="examTitle"
+     placeholder="Exam Title">
+
+    <input
+     id="examTime"
+     type="number"
+     value="10"
+     placeholder="Time in minutes">
+
+    <textarea
+     id="examJSON"
+     placeholder='Advanced format:
+[
+ {"q":"2+2=?",
+  "options":["3","4","5","6"],
+  "answer":1}
+]'></textarea>
+
+    <button
+     class="btn btn-dark"
+     onclick="createExam()">
+     📝 Create Exam
+    </button>
+
+   </div>
+
+  </div>
+
+ </div>
+
+
+ <!-- NOTICE -->
+
+ <div id="admin-notice"
+  class="admin-panel">
+
+  <div class="admin-card">
+
+   <h3>📢 Publish Notice</h3>
+
+   <br>
+
+   <div class="form">
+
+    <input
+     id="noticeTitle"
+     placeholder="Notice Title">
+
+    <textarea
+     id="noticeText"
+     placeholder="Notice Details"></textarea>
+
+    <button
+     class="btn btn-dark"
+     onclick="publishNotice()">
+     📢 Publish Notice
+    </button>
+
+   </div>
+
+  </div>
+
+ </div>
+
+
+ <!-- CLASS -->
+
+ <div id="admin-class"
+  class="admin-panel">
+
+  <div class="admin-card">
+
+   <h3>🎥 Online Class</h3>
+
+   <br>
+
+   <div class="form">
+
+    <input
+     id="classTitle"
+     placeholder="Class Title">
+
+    <input
+     id="classLink"
+     placeholder="Meeting / Video Link">
+
+    <textarea
+     id="classDescription"
+     placeholder="Class Description"></textarea>
+
+    <button
+     class="btn btn-dark"
+     onclick="publishClass()">
+     🎥 Publish Class
+    </button>
+
+   </div>
+
+  </div>
+
+ </div>
+
+
+ <!-- TEACHER -->
+
+ <div id="admin-teacher"
+  class="admin-panel">
+
+  <div class="admin-card">
+
+   <h3>👨‍🏫 Add Teacher</h3>
+
+   <br>
+
+   <div class="form">
+
+    <input
+     placeholder="Teacher Name">
+
+    <input
+     placeholder="Teacher WhatsApp Number">
+
+    <input
+     type="email"
+     placeholder="Teacher Email">
+
+    <button
+     class="btn btn-dark"
+     onclick="alert('Production version-এ Firebase Cloud Function দিয়ে verification code পাঠানো হবে।')">
+     🔐 Send Verification Code
+    </button>
+
+   </div>
+
+  </div>
+
+ </div>
+
+
+ <!-- SPECIAL STUDENT -->
+
+ <div id="admin-student"
+  class="admin-panel">
+
+  <div class="admin-card">
+
+   <h3>🎓 Special Students</h3>
+
+   <br>
+
+   <div class="form">
+
+    <input
+     placeholder="Student Name">
+
+    <input
+     placeholder="WhatsApp Number">
+
+    <button
+     class="btn btn-dark"
+     onclick="alert('Special Student যুক্ত করার backend system Firebase-এ থাকবে।')">
+     ➕ Add Student
+    </button>
+
+   </div>
+
+   <br>
+
+   <div class="notice">
+
+    Special Student group-এর জন্য
+    common-password architecture রাখা হবে।
+
+   </div>
+
+  </div>
+
+ </div>
+
+ `
+ );
+
+}
+
+
+/* =========================
+   ADMIN TAB
+========================= */
+
+function adminTab(id){
+
+ document.querySelectorAll(
+  ".admin-panel"
+ ).forEach(x=>
+  x.classList.remove("active")
+ );
+
+ const panel=document.getElementById(
+  "admin-"+id
+ );
+
+ if(panel)panel.classList.add("active");
+
+}
+
+
+/* =========================
+   PUBLISH RESOURCE
+========================= */
+
+function publishResource(){
+
+ const title=document.getElementById(
+  "uploadTitle"
+ ).value.trim();
+
+ const description=document.getElementById(
+  "uploadDescription"
+ ).value.trim();
+
+ const url=document.getElementById(
+  "uploadURL"
+ ).value.trim();
+
+ const type=document.getElementById(
+  "uploadType"
+ ).value;
+
+ const file=document.getElementById(
+  "uploadFile"
+ ).files[0];
+
+
+ if(!title){
+
+  alert("Content title দিন.");
+
+  return;
+ }
+
+
+ data.resources.unshift({
+
+  title,
+  description,
+  type,
+  url:file
+   ? URL.createObjectURL(file)
+   :url
+
+ });
+
+
+ saveData();
+
+ alert("Resource publish হয়েছে।");
+
+}
+
+
+/* =========================
+   PUBLISH COURSE
+========================= */
+
+function publishCourse(){
+
+ const name=document.getElementById(
+  "adminCourseName"
+ )?.value.trim();
+
+ const fee=document.getElementById(
+  "adminCourseFee"
+ )?.value.trim();
+
+ if(!name){
+
+  alert("Course name দিন।");
+
+  return;
+ }
+
+
+ data.course={
+  name,
+  fee:fee||"যোগাযোগ করুন"
+ };
+
+
+ saveData();
+
+ alert("Special Course publish হয়েছে।");
+
+ openCourse();
+
+}
+
+
+/* =========================
    PUBLISH NOTICE
-   ========================================================== */
+========================= */
 
-window.publishNotice = async () => {
+function publishNotice(){
 
-  const user = auth.currentUser;
+ const title=document.getElementById(
+  "noticeTitle"
+ ).value.trim();
 
-  if(!user){
+ const text=document.getElementById(
+  "noticeText"
+ ).value.trim();
 
-    toast("Teacher login required.");
+ if(!title||!text){
 
-    return;
-  }
+  alert("Title এবং notice লিখুন।");
 
-  const title =
-    $("noticeTitle").value.trim();
+  return;
+ }
 
-  const body =
-    $("noticeBody").value.trim();
 
-  if(!title || !body){
+ data.notices.unshift({
+  title,
+  text
+ });
 
-    toast("Title and message are required.");
+ saveData();
 
-    return;
-  }
+ alert("Notice publish হয়েছে।");
 
-  await addDoc(
-    collection(db,"notices"),
-    {
-      title,
-      body,
-      createdBy:user.uid,
-      createdAt:serverTimestamp()
-    }
+}
+
+
+/* =========================
+   PUBLISH VOCABULARY
+========================= */
+
+function publishVocabulary(){
+
+ const word=document.getElementById(
+  "vocabWord"
+ ).value.trim();
+
+ const meaning=document.getElementById(
+  "vocabMeaning"
+ ).value.trim();
+
+ const example=document.getElementById(
+  "vocabExample"
+ ).value.trim();
+
+ if(!word||!meaning){
+
+  alert("Word ও বাংলা অর্থ দিন।");
+
+  return;
+ }
+
+
+ data.vocabulary.unshift({
+  word,
+  meaning,
+  example
+ });
+
+
+ saveData();
+
+ alert("Vocabulary publish হয়েছে।");
+
+}
+
+
+/* =========================
+   DAILY ENGLISH
+========================= */
+
+function publishDaily(){
+
+ const text=document.getElementById(
+  "dailyEnglish"
+ ).value.trim();
+
+ if(!text){
+
+  alert("Daily English লিখুন।");
+
+  return;
+ }
+
+ data.daily.unshift(text);
+
+ saveData();
+
+ alert("Daily English publish হয়েছে।");
+
+}
+
+
+/* =========================
+   GRAMMAR
+========================= */
+
+function publishGrammar(){
+
+ const text=document.getElementById(
+  "grammarText"
+ ).value.trim();
+
+ if(!text){
+
+  alert("Grammar content লিখুন।");
+
+  return;
+ }
+
+ data.grammar.unshift(text);
+
+ saveData();
+
+ alert("Grammar publish হয়েছে।");
+
+}
+
+
+/* =========================
+   ONLINE CLASS
+========================= */
+
+function publishClass(){
+
+ const title=document.getElementById(
+  "classTitle"
+ ).value.trim();
+
+ const link=document.getElementById(
+  "classLink"
+ ).value.trim();
+
+ const description=document.getElementById(
+  "classDescription"
+ ).value.trim();
+
+ if(!title){
+
+  alert("Class title দিন।");
+
+  return;
+ }
+
+ data.onlineClass={
+  title,
+  link,
+  description
+ };
+
+ saveData();
+
+ alert("Online Class publish হয়েছে।");
+
+}
+
+
+/* =========================
+   CREATE EXAM
+========================= */
+
+function createExam(){
+
+ const title=document.getElementById(
+  "examTitle"
+ ).value.trim();
+
+ const duration=Number(
+  document.getElementById(
+   "examTime"
+  ).value
+ )||10;
+
+ const raw=document.getElementById(
+  "examJSON"
+ ).value.trim();
+
+ if(!title||!raw){
+
+  alert(
+   "Exam title ও MCQ JSON দিন।"
   );
 
-  $("noticeTitle").value = "";
-
-  $("noticeBody").value = "";
-
-  toast("Notice published.");
-
-};
+  return;
+ }
 
 
-/* ==========================================================
-   PUBLISH CLASS
-   ========================================================== */
+ try{
 
-window.publishClass = async () => {
+  const questions=JSON.parse(raw);
 
-  const user = auth.currentUser;
+  if(!Array.isArray(questions)||
+     !questions.length){
 
-  if(!user){
+   throw new Error();
 
-    toast("Teacher login required.");
-
-    return;
   }
 
-  const title =
-    $("classTitle").value.trim();
 
-  const link =
-    $("classLink").value.trim();
+  data.exams.unshift({
 
-  if(!title || !link){
+   id:"exam-"+Date.now(),
 
-    toast("Title and class link are required.");
+   title,
 
-    return;
-  }
+   duration,
 
-  await addDoc(
-    collection(db,"classes"),
-    {
-      title,
-      subject:$("classSubject").value.trim(),
-      date:$("classDate").value,
-      link,
-      createdBy:user.uid,
-      createdAt:serverTimestamp()
-    }
+   questions
+
+  });
+
+
+  saveData();
+
+  alert("MCQ Exam তৈরি হয়েছে।");
+
+ }catch(e){
+
+  alert(
+   "MCQ format ঠিক নয়। Example format ব্যবহার করুন।"
   );
 
-  toast("Online class published.");
+ }
 
-};
-
-
-/* ==========================================================
-   CREATE MCQ EXAM
-   ========================================================== */
-
-window.createExam = async () => {
-
-  const user = auth.currentUser;
-
-  if(!user){
-
-    toast("Teacher login required.");
-
-    return;
-  }
-
-  const title =
-    $("examTitle").value.trim();
-
-  const raw =
-    $("examJSON").value.trim();
-
-  if(!title || !raw){
-
-    toast("Exam title and questions are required.");
-
-    return;
-  }
-
-  try{
-
-    const questions =
-      raw.split("\n")
-      .map(line => line.trim())
-      .filter(Boolean)
-      .map(line => JSON.parse(line));
-
-    for(const q of questions){
-
-      if(
-        !q.question ||
-        !Array.isArray(q.options) ||
-        q.options.length < 2 ||
-        typeof q.answer !== "number"
-      ){
-
-        throw new Error(
-          "Invalid question format."
-        );
-
-      }
-
-    }
-
-    await addDoc(
-      collection(db,"mcqExams"),
-      {
-        title,
-        subject:$("examSubject").value.trim(),
-        className:$("examClass").value.trim(),
-        duration:Number($("examMinutes").value || 30),
-        questions,
-        createdBy:user.uid,
-        createdAt:serverTimestamp()
-      }
-    );
-
-    toast("Exam published.");
-
-    $("examJSON").value = "";
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      "Question format is invalid."
-    );
-
-  }
-
-};
+}
 
 
-/* ==========================================================
-   PUBLISH RESULT
-   ========================================================== */
+/* =========================
+   AI QUESTION PASTE
+========================= */
 
-window.publishResult = async () => {
+function publishAIQuestion(){
 
-  const user = auth.currentUser;
+ const title=document.getElementById(
+  "aiExamTitle"
+ ).value.trim();
 
-  if(!user){
+ const duration=Number(
+  document.getElementById(
+   "aiExamTime"
+  ).value
+ )||10;
 
-    toast("Teacher login required.");
+ const raw=document.getElementById(
+  "aiQuestionText"
+ ).value.trim();
 
-    return;
-  }
 
-  const studentName =
-    $("resultName").value.trim();
+ if(!title||!raw){
 
-  const exam =
-    $("resultExam").value.trim();
-
-  if(!studentName || !exam){
-
-    toast("Student name and exam are required.");
-
-    return;
-  }
-
-  await addDoc(
-    collection(db,"results"),
-    {
-      studentName,
-      studentId:$("resultStudentId").value.trim(),
-      exam,
-      institution:$("resultInstitution").value.trim(),
-      score:$("resultScore").value.trim(),
-      points:$("resultPoints").value.trim(),
-      createdBy:user.uid,
-      createdAt:serverTimestamp()
-    }
+  alert(
+   "Exam name এবং question দিন।"
   );
 
-  toast("Result published.");
+  return;
+ }
 
-};
+
+ /*
+  AI paste-এর জন্য JSON format support।
+ */
+
+ try{
+
+  const questions=JSON.parse(raw);
+
+  if(!Array.isArray(questions))
+   throw new Error();
 
 
-/* ==========================================================
-   ASK TEACHER
-   ========================================================== */
+  data.exams.unshift({
 
-window.submitQuestion = async () => {
+   id:"ai-exam-"+Date.now(),
 
-  const name =
-    $("questionName").value.trim();
+   title,
 
-  const from =
-    $("questionFrom").value.trim();
+   duration,
 
-  const question =
-    $("questionText").value.trim();
+   questions
 
-  if(!name || !question){
+  });
 
-    toast("Name and question are required.");
 
-    return;
-  }
+  saveData();
 
-  await addDoc(
-    collection(db,"studentQuestions"),
-    {
-      name,
-      from,
-      question,
-      status:"new",
-      createdAt:serverTimestamp()
-    }
+  alert(
+   "AI Question → Exam হিসেবে publish হয়েছে।"
   );
 
-  $("questionName").value = "";
+ }catch(e){
 
-  $("questionFrom").value = "";
-
-  $("questionText").value = "";
-
-  toast("Question sent to teacher.");
-
-};
-
-
-/* ==========================================================
-   ADMIN QUESTION LIST
-   ========================================================== */
-
-const questionQuery =
-  query(
-    collection(db,"studentQuestions"),
-    orderBy("createdAt","desc"),
-    limit(100)
+  alert(
+   "AI question-এর format JSON হতে হবে।"
   );
 
-onSnapshot(questionQuery,snapshot => {
+ }
 
-  if(!snapshot.docs.length){
+}
 
-    $("adminQuestions").innerHTML =
-      `<p style="color:#66758a">
-        No questions yet.
-       </p>`;
 
-    return;
-  }
+/* =========================
+   CONTACT
+========================= */
 
-  $("adminQuestions").innerHTML =
-    snapshot.docs.map(doc => {
+function askTeacher(){
 
-      const q = doc.data();
+ window.open(
+  "https://wa.me/8801979840081",
+  "_blank"
+ );
 
-      return `
+}
 
-        <div class="notice">
 
-          <strong>
-            ${escapeHtml(q.name || "")}
-          </strong>
+function callTeacher(){
 
-          <p>
-            ${escapeHtml(q.from || "")}
-          </p>
+ window.location.href=
+  "tel:01979840081";
 
-          <p style="margin-top:8px">
-            ${escapeHtml(q.question || "")}
-          </p>
+}
 
-        </div>
 
-      `;
+function emailTeacher(){
 
-    }).join("");
+ window.location.href=
+  "mailto:maksudhasan0@gmail.com";
 
-});
+}
 
 
-/* ==========================================================
-   SPECIAL STUDENTS
-   ========================================================== */
-
-window.addSpecialStudent = async () => {
-
-  const user = auth.currentUser;
-
-  if(!user){
-
-    toast("Teacher login required.");
-
-    return;
-  }
-
-  const name =
-    $("specialName").value.trim();
-
-  const whatsapp =
-    $("specialWhatsApp").value.trim();
-
-  if(!name || !whatsapp){
-
-    toast("Name and WhatsApp are required.");
-
-    return;
-  }
-
-  await addDoc(
-    collection(db,"specialStudents"),
-    {
-      name,
-      whatsapp,
-      className:$("specialClass").value.trim(),
-      active:true,
-      createdAt:serverTimestamp()
-    }
-  );
-
-  $("specialName").value = "";
-
-  $("specialWhatsApp").value = "";
-
-  $("specialClass").value = "";
-
-  toast("Special Student added.");
-
-};
-
-
-/* ==========================================================
-   GUARDIANS
-   ========================================================== */
-
-window.addGuardian = async () => {
-
-  const user = auth.currentUser;
-
-  if(!user){
-
-    toast("Teacher login required.");
-
-    return;
-  }
-
-  const name =
-    $("guardianName").value.trim();
-
-  const whatsapp =
-    $("guardianWhatsApp").value.trim();
-
-  if(!name || !whatsapp){
-
-    toast("Guardian name and WhatsApp are required.");
-
-    return;
-  }
-
-  await addDoc(
-    collection(db,"guardians"),
-    {
-      name,
-      whatsapp,
-      student:$("guardianStudent").value.trim(),
-      whatsappOptIn:true,
-      createdAt:serverTimestamp()
-    }
-  );
-
-  $("guardianName").value = "";
-
-  $("guardianWhatsApp").value = "";
-
-  $("guardianStudent").value = "";
-
-  toast("Guardian saved.");
-
-};
-
-
-/* ==========================================================
-   SPECIAL STUDENT COMMON ACCESS
-   ==========================================================
-
-   IMPORTANT:
-   The common password MUST NOT be trusted as real security
-   when stored directly in frontend code.
-
-   The production version should verify it through a
-   Firebase Cloud Function / controlled backend.
-   ========================================================== */
-
-window.openSpecial = () => {
-
-  $("specialModal").classList.add("show");
-
-};
-
-window.closeSpecial = () => {
-
-  $("specialModal").classList.remove("show");
-
-};
-
-window.loginSpecial = () => {
-
-  /*
-    Temporary UI placeholder.
-
-    DO NOT put the production shared password
-    directly here.
-
-    Production:
-    Special Student password verification should happen
-    server-side through a callable Cloud Function.
-  */
-
-  $("specialError").textContent =
-    "Special Student secure verification will be handled by the backend.";
-
-};
-
-
-/* ==========================================================
-   EXAM START PLACEHOLDER
-   ========================================================== */
-
-window.startExam = id => {
-
-  /*
-    Production version:
-    Open exam.html?id=...
-    Student enters:
-      - Name
-      - Where from / Institution
-
-    Then:
-      - Timer
-      - MCQ
-      - Automatic marking
-      - Score
-      - Points
-      - Rating
-      - Result
-
-    Student does NOT need an account.
-  */
-
-  window.location.href =
-    `exam.html?id=${encodeURIComponent(id)}`;
-
-};
-
-
-/* ==========================================================
+/* =========================
    SECURITY HELPERS
-   ========================================================== */
+========================= */
 
-function escapeHtml(value){
+function escapeHTML(value){
 
-  return String(value ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
-
-function safeUrl(value){
-
-  try{
-
-    const url =
-      new URL(value,location.href);
-
-    if(
-      url.protocol === "https:" ||
-      url.protocol === "http:"
-    ){
-
-      return url.href;
-
-    }
-
-  }catch(e){}
-
-  return "#";
+ return String(value??"")
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
 
 }
 
-function safeFileName(name){
 
-  return name
-    .replace(/[^a-zA-Z0-9._-]/g,"_")
-    .slice(0,150);
+function escapeAttribute(value){
+
+ return String(value??"")
+  .replaceAll('"',"&quot;")
+  .replaceAll("<","%3C")
+  .replaceAll(">","%3E");
 
 }
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+document.getElementById(
+ "year"
+).textContent=new Date().getFullYear();
+
+refreshHome();
 
 </script>
 
