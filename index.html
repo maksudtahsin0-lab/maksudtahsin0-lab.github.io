@@ -30,7 +30,15 @@
 
 html{scroll-behavior:smooth}
 
-body{
+body{<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("M-A-S service worker registered"))
+      .catch(err => console.error("Service worker registration failed:", err));
+  });
+}
+</script>
  font-family:system-ui,-apple-system,"Noto Sans Bengali","Noto Sans",sans-serif;
  background:var(--bg);
  color:var(--text);
