@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Teacher's Student – A Good Friendship</title>
+<meta name="theme-color" content="#14213D">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<link id="manifestLink" rel="manifest" href="">
+<link id="touchIcon" rel="apple-touch-icon" href="">
+<link id="favicon" rel="icon" href="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@500;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213D; --navy-2:#1B2C4F;
+    --paper:#FAF7F0; --paper-2:#F1ECDF;
+    --gold:#C99A3B; --gold-l:#E3BE73;
+    --teal:#2F7C6B;
+    --ink:#232320; --line:#E3DCC8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Sans Bengali','Noto Sans',sans-serif;
+    background:
+      radial-gradient(1100px 500px at 100% -10%, #FFF7E8 0%, transparent 60%),
+      radial-gradient(900px 500px at -10% 30%, #EFF6F1 0%, transparent 55%),
+      var(--paper);
+    color:var(--ink); line-height:1.7; overflow-x:hidden;
+    padding-bottom:0;
+  }
+  h1,h2,h3{font-family:'Noto Serif Bengali','Noto Serif',serif;font-weight:700;color:var(--navy);}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;}
+  ::selection{background:var(--gold-l);color:var(--navy);}
+
+  /* Top nav (desktop) */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(250,247,240,0.9); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{max-width:1020px;margin:0 auto;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;}
+  .logo{font-family:'Noto Serif Bengali',serif;font-size:1.2rem;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:10px;}
+  .logo-badge{width:34px;height:34px;border-radius:50%;background:var(--navy);color:var(--gold-l);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;}
+  .navlinks{display:flex;gap:26px;font-size:0.94rem;align-items:center;}
+  .navlinks a{position:relative;padding-bottom:4px;}
+  .navlinks a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--gold);transition:width .25s ease;}
+  .navlinks a:hover::after,.navlinks a.active::after{width:100%;}
+  .install-btn{
+    display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--teal);color:#fff;
+    border-radius:20px;font-size:0.85rem;border:none;cursor:pointer;font-family:inherit;
+  }
+  .menu-btn{display:none;background:none;border:none;font-size:1.6rem;color:var(--navy);cursor:pointer;}
+
+  @media(max-width:760px){
+    .navlinks{
+      position:fixed;top:64px;right:0;left:0;background:var(--paper);
+      flex-direction:column;align-items:flex-start;gap:0;border-bottom:1px solid var(--line);
+      max-height:0;overflow:hidden;transition:max-height .3s ease;
+    }
+    .navlinks.open{max-height:400px;}
+    .navlinks a{padding:14px 24px;border-top:1px solid var(--line);width:100%;}
+    .install-btn{margin:14px 24px;}
+    .menu-btn{display:block;}
+  }
+
+  section{padding:100px 24px 80px;max-width:920px;margin:0 auto;scroll-margin-top:70px;}
+
+  /* Hero */
+  #home{min-height:92vh;display:flex;flex-direction:column;justify-content:center;max-width:920px;position:relative;}
+  .eyebrow{color:var(--gold);font-size:0.95rem;margin-bottom:14px;opacity:0;animation:fadeUp .7s .1s ease forwards;}
+  #home h1{font-size:clamp(2.5rem,7.5vw,4.2rem);line-height:1.18;max-width:12ch;position:relative;opacity:0;animation:fadeUp .7s .25s ease forwards;}
+  .underline-mark{position:relative;white-space:nowrap;}
+  .underline-mark svg{position:absolute;left:0;bottom:-6px;width:100%;height:14px;}
+  .underline-mark path{stroke:var(--gold);stroke-width:5;fill:none;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:400;animation:draw 1s .9s ease forwards;}
+  #home p.lede{margin-top:22px;max-width:54ch;font-size:1.1rem;color:#4B4B47;opacity:0;animation:fadeUp .7s .4s ease forwards;}
+  .cta-row{margin-top:36px;display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .55s ease forwards;}
+  .btn{display:inline-block;padding:13px 26px;border-radius:6px;font-size:0.95rem;border:1.5px solid var(--navy);transition:background .2s,color .2s,transform .2s;}
+  .btn.primary{background:var(--navy);color:var(--paper);}
+  .btn.primary:hover{background:var(--gold);border-color:var(--gold);color:var(--navy);transform:translateY(-2px);}
+  .btn.ghost:hover{background:var(--navy);color:var(--paper);transform:translateY(-2px);}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+
+  .hero-mark{position:absolute;right:0;top:50%;transform:translateY(-50%);width:230px;height:230px;border:1.5px solid var(--gold);border-radius:50%;opacity:0.4;}
+  .hero-mark::before{content:"";position:absolute;inset:24px;border:1px solid var(--teal);border-radius:50%;opacity:0.6;}
+  @media(max-width:840px){.hero-mark{display:none;}}
+
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:36px;}
+  .sec-head h2{font-size:1.9rem;}
+  .sec-head .num{color:var(--gold);font-size:1rem;font-family:'Noto Serif Bengali',serif;}
+  .sec-head::after{content:"";flex:1;height:1px;background:var(--line);}
+
+  #about .about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:start;}
+  @media(max-width:680px){#about .about-grid{grid-template-columns:1fr;}}
+  .about-card{background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:26px;}
+  .about-card dl{display:grid;grid-template-columns:auto 1fr;gap:10px 14px;font-size:0.93rem;}
+  .about-card dt{color:var(--gold);}
+  #about p{color:#4B4B47;margin-bottom:16px;}
+
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+  .skill-cell{background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:24px;transition:transform .2s,box-shadow .2s;}
+  .skill-cell:hover{transform:translateY(-4px);box-shadow:0 12px 24px -12px rgba(20,33,61,0.25);}
+  .skill-cell .icon{width:38px;height:38px;border-radius:9px;background:var(--navy);color:var(--gold-l);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+  .skill-cell h3{font-size:1.05rem;margin-bottom:12px;}
+  .bar-row{display:flex;justify-content:space-between;font-size:0.85rem;margin-bottom:6px;color:#4B4B47;}
+  .bar-track{height:6px;border-radius:4px;background:var(--paper);margin-bottom:16px;overflow:hidden;}
+  .bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--teal));border-radius:4px;width:0;transition:width 1.2s ease;}
+
+  .proj-list{display:flex;flex-direction:column;}
+  .proj-item{display:grid;grid-template-columns:70px 1fr auto;gap:20px;align-items:start;padding:26px 20px;border-top:1px solid var(--line);border-radius:8px;transition:background .2s;}
+  .proj-item:hover{background:var(--paper-2);}
+  .proj-list .proj-item:last-child{border-bottom:1px solid var(--line);}
+  .proj-item .idx{font-family:'Noto Serif Bengali',serif;color:var(--gold);font-size:1.3rem;}
+  .proj-item h3{font-size:1.2rem;margin-bottom:6px;}
+  .proj-item p{color:#4B4B47;font-size:0.95rem;max-width:50ch;}
+  .proj-item .tags{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;}
+  .tag{font-size:0.78rem;border:1px solid var(--line);padding:3px 10px;color:#4B4B47;border-radius:20px;}
+  .proj-item .link{align-self:center;font-size:0.9rem;border-bottom:1px solid var(--gold);white-space:nowrap;}
+  @media(max-width:600px){.proj-item{grid-template-columns:40px 1fr;padding:22px 14px;}.proj-item .link{grid-column:2;margin-top:8px;}}
+
+  /* Ask */
+  .qa-form{display:grid;grid-template-columns:1fr 2fr auto;gap:10px;margin-bottom:18px;}
+  .qa-form input{padding:12px 14px;border:1px solid var(--line);background:var(--paper-2);border-radius:8px;font-family:inherit;font-size:0.92rem;color:var(--ink);}
+  .qa-form button{padding:12px 22px;background:var(--navy);color:var(--paper);border:none;border-radius:8px;font-family:inherit;font-size:0.92rem;cursor:pointer;white-space:nowrap;transition:background .2s;}
+  .qa-form button:hover{background:var(--gold);color:var(--navy);}
+  @media(max-width:680px){.qa-form{grid-template-columns:1fr;}}
+  .qa-note{font-size:0.85rem;color:#8A8578;}
+
+  /* Notes */
+  .notes-list{display:flex;flex-direction:column;gap:10px;}
+  .note-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 20px;border:1px solid var(--line);border-radius:10px;background:var(--paper-2);font-size:0.95rem;transition:transform .2s,box-shadow .2s;}
+  .note-row:hover{transform:translateY(-2px);box-shadow:0 10px 20px -12px rgba(20,33,61,0.25);}
+  .note-row .note-title{color:var(--navy);font-weight:600;}
+  .note-file{font-size:0.82rem;color:var(--teal);white-space:nowrap;}
+  .notes-cta{margin-top:22px;font-size:0.9rem;color:#4B4B47;}
+
+  #contact{padding-bottom:140px;}
+  .contact-box{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:var(--paper);padding:50px 40px;border-radius:16px;display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+  @media(max-width:680px){.contact-box{grid-template-columns:1fr;padding:36px 24px;}}
+  .contact-box h2{color:var(--paper);font-size:1.8rem;margin-bottom:14px;}
+  .contact-box p{color:#C9CEDA;margin-bottom:20px;font-size:0.95rem;}
+  .contact-links a{display:block;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.15);font-size:0.95rem;}
+  .contact-links a:hover{color:var(--gold);}
+  form.msgform{display:flex;flex-direction:column;gap:12px;}
+  form.msgform input,form.msgform textarea{background:transparent;border:1px solid rgba(255,255,255,0.3);border-radius:8px;color:var(--paper);padding:12px;font-family:inherit;font-size:0.92rem;}
+  form.msgform input::placeholder,form.msgform textarea::placeholder{color:#9AA2B5;}
+  form.msgform textarea{resize:vertical;min-height:90px;}
+  form.msgform button{margin-top:6px;padding:12px;background:var(--gold);color:var(--navy);border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;font-size:0.95rem;}
+  form.msgform button:hover{background:var(--gold-l);}
+
+  footer{text-align:center;padding:28px 24px 100px;font-size:0.85rem;color:#8A8578;}
+
+  /* Bottom app dock (mobile) */
+  .dock{
+    display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;
+    background:rgba(250,247,240,0.96);backdrop-filter:blur(10px);
+    border-top:1px solid var(--line);
+    padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+    justify-content:space-around;align-items:center;
+  }
+  .dock a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:0.68rem;color:#8A8578;padding:4px 6px;border-radius:10px;}
+  .dock a svg{width:21px;height:21px;stroke:#8A8578;fill:none;stroke-width:1.8;}
+  .dock a.active{color:var(--navy);}
+  .dock a.active svg{stroke:var(--gold);}
+  @media(max-width:760px){.dock{display:flex;} footer{padding-bottom:120px;}}
+
+  :focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important;}#home *{opacity:1!important;}}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><span class="logo-badge" id="logoBadge">T</span>Teacher's Student – A Good Friendship</div>
+    <button class="menu-btn" id="menuBtn" aria-label="মেনু খুলুন">☰</button>
+    <div class="navlinks" id="navLinks">
+      <a href="#home">হোম</a>
+      <a href="#about">পরিচিতি</a>
+      <a href="#skills">দক্ষতা</a>
+      <a href="#projects">প্রজেক্ট</a>
+      <a href="#ask">প্রশ্ন করুন</a>
+      <a href="#notes">নোট ও ফাইল</a>
+      <a href="#contact">যোগাযোগ</a>
+      <button class="install-btn" id="installBtn" style="display:none;">📲 হোমস্ক্রিনে যোগ করুন</button>
+    </div>
+  </nav>
+</header>
+
+<section id="home">
+  <div class="hero-mark"></div>
+  <p class="eyebrow">শিক্ষক · শিক্ষার্থীদের পথপ্রদর্শক</p>
+  <h1>শেখানোই আমার <span class="underline-mark">নেশা<svg viewBox="0 0 140 14" preserveAspectRatio="none"><path d="M2,9 C40,2 100,2 138,9"/></svg></span>, বাকিটা পরিশ্রম।</h1>
+  <p class="lede">আমি একজন শিক্ষক, শিক্ষার্থীদের সহজ ভাষায় জটিল বিষয় বোঝাতে ও তাদের প্রশ্নের সরাসরি উত্তর দিতে ভালোবাসি। নিচে আমার পরিচিতি, নোট ও যোগাযোগের সব মাধ্যম দেওয়া আছে।</p>
+  <div class="cta-row">
+    <a href="#notes" class="btn primary">নোট দেখুন</a>
+    <a href="#ask" class="btn ghost">প্রশ্ন করুন</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="sec-head"><span class="num">০১</span><h2>পরিচিতি</h2></div>
+  <div class="about-grid">
+    <div class="about-card">
+      <dl>
+        <dt>প্রতিষ্ঠান</dt><dd>আপনার স্কুল/কলেজ</dd>
+        <dt>বিষয়</dt><dd>আপনার পাঠদানের বিষয়</dd>
+        <dt>অবস্থান</dt><dd>আপনার শহর, বাংলাদেশ</dd>
+        <dt>ইমেইল</dt><dd>you@email.com</dd>
+      </dl>
+    </div>
+    <div>
+      <p>আমি বহু বছর ধরে শিক্ষার্থীদের সাথে কাজ করছি এবং বিশ্বাস করি প্রতিটি শিক্ষার্থীর প্রশ্ন গুরুত্বপূর্ণ। ক্লাসের বাইরেও সহজে যোগাযোগ রাখা এবং প্রয়োজনীয় নোট হাতের কাছে পাওয়া শেখাকে সহজ করে তোলে।</p>
+      <p>এই পেজে আপনি আমার সাথে সরাসরি যোগাযোগ করতে পারবেন এবং প্রয়োজনীয় ক্লাস নোট ডাউনলোড করতে পারবেন।</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="sec-head"><span class="num">০২</span><h2>দক্ষতা</h2></div>
+  <div class="skills-grid">
+    <div class="skill-cell">
+      <div class="icon">📘</div>
+      <h3>পাঠদান</h3>
+      <div class="bar-row"><span>পাঠ পরিকল্পনা</span><span>৯০%</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="90"></div></div>
+      <div class="bar-row"><span>উপস্থাপনা</span><span>৮৫%</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="85"></div></div>
+    </div>
+    <div class="skill-cell">
+      <div class="icon">✍️</div>
+      <h3>মূল্যায়ন</h3>
+      <div class="bar-row"><span>প্রশ্নপত্র প্রণয়ন</span><span>৮৮%</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="88"></div></div>
+      <div class="bar-row"><span>খাতা মূল্যায়ন</span><span>৮০%</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="80"></div></div>
+    </div>
+    <div class="skill-cell">
+      <div class="icon">🤝</div>
+      <h3>যোগাযোগ</h3>
+      <div class="bar-row"><span>শিক্ষার্থী মেন্টরিং</span><span>৯৫%</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="95"></div></div>
+      <div class="bar-row"><span>অভিভাবক যোগাযোগ</span><span>৮২%</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="82"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="sec-head"><span class="num">০৩</span><h2>প্রজেক্ট ও উদ্যোগ</h2></div>
+  <div class="proj-list">
+    <div class="proj-item">
+      <span class="idx">০১</span>
+      <div>
+        <h3>উদ্যোগের নাম এক</h3>
+        <p>এখানে আপনার শ্রেণিকক্ষের বাইরের কোনো উদ্যোগ বা প্রকল্পের বিবরণ লিখুন।</p>
+        <div class="tags"><span class="tag">ক্লাব</span><span class="tag">কর্মশালা</span></div>
+      </div>
+      <a href="#" class="link">দেখুন →</a>
+    </div>
+    <div class="proj-item">
+      <span class="idx">০২</span>
+      <div>
+        <h3>উদ্যোগের নাম দুই</h3>
+        <p>এখানে আপনার আরেকটি কাজের সংক্ষিপ্ত বিবরণ লিখুন।</p>
+        <div class="tags"><span class="tag">গবেষণা</span></div>
+      </div>
+      <a href="#" class="link">দেখুন →</a>
+    </div>
+  </div>
+</section>
+
+<section id="ask">
+  <div class="sec-head"><span class="num">০৪</span><h2>শিক্ষকের কাছে প্রশ্ন করুন</h2></div>
+  <p style="color:#4B4B47;margin-bottom:22px;max-width:60ch;">কোনো বিষয় বুঝতে সমস্যা হচ্ছে? নিচে লিখুন — সাবমিট করলে সরাসরি আমার ইমেইলে প্রশ্নটি চলে যাবে এবং আমি ব্যক্তিগতভাবে উত্তর দেব।</p>
+  <form class="qa-form" id="qaForm">
+    <input type="text" id="qname" placeholder="তোমার নাম" required>
+    <input type="text" id="qtext" placeholder="প্রশ্ন লিখুন..." required>
+    <button type="submit">পাঠাও</button>
+  </form>
+  <p class="qa-note">বাটনে চাপলে তোমার ইমেইল অ্যাপ খুলবে, প্রশ্নটি আগে থেকেই লেখা থাকবে — শুধু পাঠিয়ে দিলেই হবে।</p>
+</section>
+
+<section id="notes">
+  <div class="sec-head"><span class="num">০৫</span><h2>নোট ও ফাইল</h2></div>
+  <p style="color:#4B4B47;margin-bottom:22px;max-width:60ch;">ক্লাসের নোট, পিডিএফ ও ওয়ার্ড ফাইল এখানে পাওয়া যাবে। নামের উপর ক্লিক করে ডাউনলোড করা যাবে।</p>
+  <div class="notes-list" id="notesList"></div>
+  <p class="notes-cta">নতুন ফাইল যোগ করতে চান? Google Drive বা Dropbox-এ আপলোড করে সেই লিংকটি এই পেজের কোডে <code>notesData</code> তালিকায় যোগ করলেই এখানে দেখা যাবে।</p>
+</section>
+
+<section id="contact">
+  <div class="sec-head"><span class="num">০৬</span><h2>যোগাযোগ</h2></div>
+  <div class="contact-box">
+    <div>
+      <h2>কথা বলা যাক</h2>
+      <p>কোনো প্রশ্ন, সুযোগ বা শুধু পরিচয় করিয়ে দিতে চাইলে নিচের ঠিকানায় যোগাযোগ করুন।</p>
+      <div class="contact-links">
+        <a href="mailto:you@email.com">you@email.com</a>
+        <a href="tel:+8800000000000">+৮৮ ০১XXX-XXXXXX</a>
+        <a href="#">Facebook পেজ</a>
+      </div>
+    </div>
+    <form class="msgform" id="cform">
+      <input type="text" id="cname" placeholder="আপনার নাম" required>
+      <input type="email" id="cemail" placeholder="আপনার ইমেইল" required>
+      <textarea id="cmsg" placeholder="বার্তা লিখুন..." required></textarea>
+      <button type="submit">বার্তা পাঠান</button>
+    </form>
+  </div>
+</section>
+
+<footer>© <span id="yr"></span> আপনার নাম — সকল অধিকার সংরক্ষিত।</footer>
+
+<nav class="dock" id="dock">
+  <a href="#home" data-sec="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>হোম</a>
+  <a href="#about" data-sec="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 5-6 8-6s7 2 8 6"/></svg>পরিচিতি</a>
+  <a href="#ask" data-sec="ask"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>প্রশ্ন</a>
+  <a href="#notes" data-sec="notes"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>নোট</a>
+  <a href="#contact" data-sec="contact"><svg viewBox="0 0 24 24"><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>যোগাযোগ</a>
+</nav>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>navLinks.classList.remove('open')));
+
+  /* skill bar fill on scroll into view */
+  const bars = document.querySelectorAll('.bar-fill');
+  const barObs = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){ en.target.style.width = en.target.dataset.w + '%'; barObs.unobserve(en.target); }
+    });
+  }, {threshold:0.4});
+  bars.forEach(b=>barObs.observe(b));
+
+  /* dock active state */
+  const dockLinks = document.querySelectorAll('.dock a');
+  const dockSections = ['home','about','ask','notes','contact'].map(id=>document.getElementById(id));
+  const dockObs = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        dockLinks.forEach(a=>a.classList.toggle('active', a.dataset.sec === en.target.id));
+      }
+    });
+  }, {threshold:0.5});
+  dockSections.forEach(s=>s && dockObs.observe(s));
+
+  /* ask form -> mailto */
+  document.getElementById('qaForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('qname').value.trim();
+    const q = document.getElementById('qtext').value.trim();
+    const subject = encodeURIComponent('প্রশ্ন: ' + name);
+    const body = encodeURIComponent(name + ' লিখেছে:\n\n' + q);
+    window.location.href = 'mailto:you@email.com?subject=' + subject + '&body=' + body;
+  });
+
+  /* contact form -> mailto */
+  document.getElementById('cform').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('cname').value.trim();
+    const email = document.getElementById('cemail').value.trim();
+    const msg = document.getElementById('cmsg').value.trim();
+    const subject = encodeURIComponent('যোগাযোগ: ' + name);
+    const body = encodeURIComponent(msg + '\n\n— ' + name + ' (' + email + ')');
+    window.location.href = 'mailto:you@email.com?subject=' + subject + '&body=' + body;
+  });
+
+  /* editable notes list — add {title, filename, url} objects here */
+  const notesData = [
+    {title:'অধ্যায় ১ - সংক্ষিপ্ত নোট', filename:'chapter1.pdf', url:'#'},
+    {title:'অনুশীলনী প্রশ্নমালা', filename:'exercise.docx', url:'#'}
+  ];
+  const notesList = document.getElementById('notesList');
+  notesData.forEach(n=>{
+    const row = document.createElement('a');
+    row.href = n.url; row.target = '_blank'; row.rel = 'noopener'; row.className = 'note-row';
+    row.innerHTML = '<span class="note-title">'+n.title+'</span><span class="note-file">'+n.filename+' ↓</span>';
+    notesList.appendChild(row);
+  });
+
+  /* app icon, generated once, used for favicon / touch-icon / manifest */
+  function makeIcon(){
+    const c = document.createElement('canvas'); c.width = 192; c.height = 192;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#14213D'; ctx.beginPath(); ctx.arc(96,96,96,0,7); ctx.fill();
+    ctx.fillStyle = '#E3BE73'; ctx.font = 'bold 104px "Noto Serif Bengali", serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = 'bold 104px "Noto Serif Bengali", sans-serif';
+    ctx.fillText('T', 96, 106);
+    return c.toDataURL('image/png');
+  }
+  window.addEventListener('load', function(){
+    try{
+      const iconUrl = makeIcon();
+      document.getElementById('touchIcon').setAttribute('href', iconUrl);
+      document.getElementById('favicon').setAttribute('href', iconUrl);
+      const manifest = {
+        name: "Teacher's Student – A Good Friendship",
+        short_name: 'Friendship',
+        start_url: location.href,
+        display: 'standalone',
+        background_color: '#FAF7F0',
+        theme_color: '#14213D',
+        icons: [{src: iconUrl, sizes:'192x192', type:'image/png'}]
+      };
+      const blob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
+      document.getElementById('manifestLink').setAttribute('href', URL.createObjectURL(blob));
+    }catch(e){}
+  });
+
+  /* Add-to-home-screen prompt (Android/Chrome) */
+  let deferredPrompt = null;
+  const installBtn = document.getElementById('installBtn');
+  window.addEventListener('beforeinstallprompt', (e)=>{
+    e.preventDefault(); deferredPrompt = e; installBtn.style.display = 'flex';
+  });
+  installBtn.addEventListener('click', async ()=>{
+    if(!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null; installBtn.style.display = 'none';
+  });
+</script>
+
+</body>
+</html>
