@@ -2,779 +2,738 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Chat Students Are Good Friendship | Maksud Tahsin</title>
+<title>Teachers Students Friendship</title>
 
 <meta name="description"
-content="Chat Students Are Good Friendship — an educational platform by Maksud Tahsin for students, study resources, questions, notices and exam preparation.">
+content="Teachers Students Friendship — Learn, Practice, Grow">
 
 <style>
-:root{
-    --primary:#6257e8;
-    --secondary:#00b7c7;
-    --dark:#10162a;
-    --text:#182033;
-    --muted:#697386;
-    --bg:#f5f7fc;
-    --card:#ffffff;
-    --border:#e7eaf2;
-    --success:#19b86b;
-    --shadow:0 18px 55px rgba(30,35,80,.10);
-}
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
-html{
-    scroll-behavior:smooth;
+:root{
+--primary:#2563eb;
+--primary2:#7c3aed;
+--success:#10b981;
+--danger:#ef4444;
+--warning:#f59e0b;
+--dark:#0f172a;
+--text:#111827;
+--muted:#64748b;
+--bg:#f6f8fc;
+--card:#fff;
+--border:#e5e7eb;
+--shadow:0 15px 40px rgba(15,23,42,.08);
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    line-height:1.6;
+font-family:Arial,Helvetica,sans-serif;
+background:var(--bg);
+color:var(--text);
+line-height:1.6;
 }
 
-a{
-    text-decoration:none;
-    color:inherit;
+body.dark{
+--bg:#020617;
+--card:#0f172a;
+--text:#f8fafc;
+--muted:#94a3b8;
+--border:#1e293b;
+--shadow:0 15px 40px rgba(0,0,0,.35);
+}
+
+button,input,textarea,select{
+font:inherit;
 }
 
 button{
-    font-family:inherit;
+cursor:pointer;
+}
+
+a{
+text-decoration:none;
+color:inherit;
 }
 
 .container{
-    width:min(1180px,92%);
-    margin:auto;
+width:min(1200px,94%);
+margin:auto;
 }
-
-/* ================= NAVBAR ================= */
 
 header{
-    position:sticky;
-    top:0;
-    z-index:999;
-    background:rgba(255,255,255,.94);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid var(--border);
+position:sticky;
+top:0;
+z-index:1000;
+background:rgba(255,255,255,.9);
+backdrop-filter:blur(15px);
+border-bottom:1px solid var(--border);
 }
 
-.navbar{
-    height:76px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+.dark header{
+background:rgba(2,6,23,.9);
 }
 
-.brand{
-    display:flex;
-    align-items:center;
-    gap:11px;
+.nav{
+min-height:72px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
 }
 
 .logo{
-    width:48px;
-    height:48px;
-    border-radius:15px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#fff;
-    font-size:15px;
-    font-weight:900;
-    background:linear-gradient(135deg,var(--primary),var(--secondary));
-    box-shadow:0 9px 25px rgba(98,87,232,.25);
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:900;
 }
 
-.brand-text{
-    font-weight:800;
-    font-size:15px;
+.logoIcon{
+width:45px;
+height:45px;
+display:grid;
+place-items:center;
+border-radius:14px;
+background:linear-gradient(135deg,var(--primary),var(--primary2));
+color:white;
 }
 
-.brand-text span{
-    display:block;
-    color:var(--primary);
-    font-size:12px;
+.navLinks{
+display:flex;
+align-items:center;
+gap:5px;
 }
 
-.nav-links{
-    display:flex;
-    gap:24px;
-    list-style:none;
+.navLinks button,
+.navLinks a{
+border:0;
+background:transparent;
+padding:9px 12px;
+border-radius:10px;
+font-weight:700;
+color:var(--muted);
 }
 
-.nav-links a{
-    font-size:14px;
-    font-weight:700;
-    color:#354057;
+.navLinks button:hover,
+.navLinks a:hover{
+background:#eff6ff;
+color:var(--primary);
 }
 
-.nav-links a:hover{
-    color:var(--primary);
+.mobileMenu{
+display:none;
+border:0;
+background:var(--card);
+color:var(--text);
+font-size:22px;
 }
-
-.menu{
-    display:none;
-    font-size:27px;
-    cursor:pointer;
-}
-
-/* ================= HERO ================= */
 
 .hero{
-    padding:90px 0 75px;
-    display:grid;
-    grid-template-columns:1.15fr .85fr;
-    gap:55px;
-    align-items:center;
+padding:80px 0;
+background:
+radial-gradient(circle at 10% 20%,rgba(37,99,235,.12),transparent 30%),
+radial-gradient(circle at 90% 30%,rgba(124,58,237,.12),transparent 30%);
+}
+
+.heroGrid{
+display:grid;
+grid-template-columns:1.15fr .85fr;
+gap:50px;
+align-items:center;
 }
 
 .badge{
-    display:inline-block;
-    padding:8px 15px;
-    border-radius:30px;
-    background:#eceaff;
-    color:var(--primary);
-    font-size:13px;
-    font-weight:800;
-    margin-bottom:18px;
+display:inline-block;
+padding:7px 13px;
+border-radius:999px;
+background:#eff6ff;
+color:var(--primary);
+font-size:12px;
+font-weight:800;
+margin-bottom:18px;
 }
 
 .hero h1{
-    font-size:clamp(40px,6vw,68px);
-    line-height:1.03;
-    letter-spacing:-2px;
-    margin-bottom:22px;
+font-size:clamp(40px,6vw,70px);
+line-height:1.05;
+letter-spacing:-3px;
+margin-bottom:20px;
 }
 
-.hero h1 span{
-    color:var(--primary);
+.gradient{
+background:linear-gradient(90deg,var(--primary),var(--primary2));
+-webkit-background-clip:text;
+color:transparent;
 }
 
-.hero-description{
-    color:var(--muted);
-    font-size:17px;
-    max-width:680px;
+.hero p{
+color:var(--muted);
+font-size:17px;
+max-width:650px;
+margin-bottom:25px;
 }
 
-.actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:13px;
-    margin-top:30px;
+.buttons{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
 }
 
 .btn{
-    border:0;
-    cursor:pointer;
-    padding:14px 20px;
-    border-radius:14px;
-    font-weight:800;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    transition:.25s;
-}
-
-.btn:hover{
-    transform:translateY(-3px);
+border:0;
+padding:12px 18px;
+border-radius:12px;
+font-weight:800;
 }
 
 .primary{
-    color:#fff;
-    background:linear-gradient(135deg,var(--primary),#7a70f3);
-    box-shadow:0 12px 28px rgba(98,87,232,.25);
+background:var(--primary);
+color:white;
 }
 
 .secondary{
-    background:#fff;
-    color:#30394e;
-    border:1px solid var(--border);
+background:var(--card);
+color:var(--text);
+border:1px solid var(--border);
 }
 
-/* HERO PROFILE */
-
-.profile-card{
-    position:relative;
-    overflow:hidden;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:30px;
-    padding:34px;
-    box-shadow:var(--shadow);
+.success{
+background:var(--success);
+color:white;
 }
 
-.profile-card::before{
-    content:"";
-    position:absolute;
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    background:#eceaff;
-    right:-70px;
-    top:-70px;
+.danger{
+background:var(--danger);
+color:white;
 }
 
-.avatar{
-    width:105px;
-    height:105px;
-    border-radius:30px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#fff;
-    font-size:28px;
-    font-weight:900;
-    background:linear-gradient(135deg,var(--primary),var(--secondary));
-    margin-bottom:20px;
+.darkBtn{
+background:var(--dark);
+color:white;
 }
 
-.profile-card h2{
-    font-size:27px;
+.heroCard{
+background:linear-gradient(145deg,#0f172a,#172554);
+color:white;
+padding:30px;
+border-radius:30px;
+box-shadow:0 30px 80px rgba(15,23,42,.25);
 }
 
-.profile-role{
-    color:var(--primary);
-    font-weight:800;
-    margin-top:4px;
+.heroCard h2{
+font-size:32px;
+margin:25px 0 8px;
 }
 
-.profile-card p{
-    color:var(--muted);
-    margin-top:13px;
+.heroStats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:25px;
 }
 
-.profile-tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:20px;
+.heroStat{
+background:rgba(255,255,255,.08);
+padding:15px;
+border-radius:14px;
 }
-
-.tag{
-    background:#f0f2f8;
-    padding:7px 11px;
-    border-radius:9px;
-    font-size:12px;
-    font-weight:700;
-}
-
-/* ================= SECTIONS ================= */
 
 section{
-    padding:82px 0;
+padding:75px 0;
 }
 
-.section-head{
-    text-align:center;
-    margin-bottom:42px;
+.heading{
+text-align:center;
+max-width:700px;
+margin:0 auto 35px;
 }
 
-.section-head h2{
-    font-size:37px;
-    margin-bottom:8px;
+.heading h2{
+font-size:clamp(28px,4vw,42px);
+margin:8px 0;
 }
 
-.section-head p{
-    color:var(--muted);
+.heading p{
+color:var(--muted);
 }
 
-/* ================= FEATURE CARDS ================= */
+.search{
+max-width:700px;
+margin:0 auto 30px;
+display:flex;
+gap:8px;
+}
 
-.feature-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
+.search input{
+flex:1;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:12px;
+border:1px solid var(--border);
+border-radius:10px;
+background:var(--card);
+color:var(--text);
+outline:none;
+}
+
+textarea{
+min-height:100px;
+resize:vertical;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:18px;
 }
 
 .card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:22px;
-    padding:27px;
-    box-shadow:0 7px 25px rgba(30,35,70,.04);
-    transition:.25s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-    box-shadow:var(--shadow);
-}
-
-.card-icon{
-    font-size:31px;
-    margin-bottom:14px;
+background:var(--card);
+border:1px solid var(--border);
+border-radius:20px;
+padding:22px;
+box-shadow:var(--shadow);
 }
 
 .card h3{
-    margin-bottom:8px;
+margin-bottom:7px;
 }
 
 .card p{
-    color:var(--muted);
-    font-size:14px;
+color:var(--muted);
+font-size:13px;
 }
 
-/* ================= ASK SECTION ================= */
-
-.ask-section{
-    background:var(--dark);
-    color:white;
+.icon{
+width:50px;
+height:50px;
+display:grid;
+place-items:center;
+background:#eff6ff;
+border-radius:14px;
+font-size:22px;
+margin-bottom:15px;
 }
 
-.ask-content{
-    max-width:850px;
-    margin:auto;
-    text-align:center;
+.resource{
+display:flex;
+flex-direction:column;
+gap:10px;
 }
 
-.ask-content p{
-    color:#b6bfd2;
+.resourceTop{
+padding:20px;
+background:linear-gradient(135deg,#eff6ff,#f5f3ff);
+border-radius:15px;
 }
 
-.whatsapp{
-    background:#1bc96e;
-    color:white;
-    margin-top:25px;
-}
-
-.photo-tip{
-    color:#9da8be;
-    font-size:13px;
-    margin-top:14px;
-}
-
-/* ================= VIDEO CALL ================= */
-
-.video-box{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:25px;
-    align-items:center;
-}
-
-.video-info{
-    background:linear-gradient(135deg,#6156e8,#00aebd);
-    color:white;
-    border-radius:27px;
-    padding:40px;
-}
-
-.video-info p{
-    color:#e2e8ff;
-    margin-top:12px;
-}
-
-.video-card{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:27px;
-    padding:35px;
-    box-shadow:var(--shadow);
-}
-
-.video-card p{
-    color:var(--muted);
-    margin:10px 0 20px;
-}
-
-/* ================= MATERIALS ================= */
-
-.material-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:17px;
-}
-
-.material{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:24px;
-    text-align:center;
-}
-
-.material-icon{
-    font-size:39px;
-    margin-bottom:12px;
-}
-
-.material p{
-    color:var(--muted);
-    font-size:13px;
-    margin:5px 0 17px;
-}
-
-.small-btn{
-    padding:10px 14px;
-    border-radius:11px;
-    background:#f0efff;
-    color:var(--primary);
-    font-weight:800;
-    font-size:12px;
-}
-
-/* ================= NOTICE ================= */
-
-.notice-board{
-    max-width:850px;
-    margin:auto;
+.meta{
+font-size:12px;
+color:var(--muted);
 }
 
 .notice{
-    display:flex;
-    gap:15px;
-    background:white;
-    border:1px solid var(--border);
-    padding:20px;
-    border-radius:17px;
-    margin-bottom:13px;
+display:flex;
+gap:15px;
+padding:18px;
+background:var(--card);
+border:1px solid var(--border);
+border-radius:15px;
+margin-bottom:12px;
 }
 
-.notice-icon{
-    font-size:25px;
+.noticeDate{
+min-width:65px;
+height:55px;
+display:grid;
+place-items:center;
+background:#eff6ff;
+color:var(--primary);
+border-radius:10px;
+font-size:11px;
+font-weight:900;
 }
 
-.notice h3{
-    font-size:16px;
+.exam{
+cursor:pointer;
+transition:.2s;
 }
 
-.notice p{
-    color:var(--muted);
-    font-size:13px;
+.exam:hover{
+transform:translateY(-4px);
 }
 
-/* ================= EXAM ================= */
-
-.exam-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:22px;
+.examScreen{
+display:none;
+position:fixed;
+inset:0;
+z-index:2000;
+overflow:auto;
+background:var(--bg);
+padding:25px 0;
 }
 
-.exam-card{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:22px;
-    padding:28px;
+.examHeader{
+position:sticky;
+top:0;
+z-index:5;
+background:var(--card);
+border-bottom:1px solid var(--border);
+padding:15px;
+margin-bottom:20px;
 }
 
-.exam-card h3{
-    margin-bottom:10px;
+.timer{
+font-size:20px;
+font-weight:900;
+color:var(--danger);
 }
 
-.exam-card p{
-    color:var(--muted);
+.question{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:16px;
+padding:20px;
+margin-bottom:15px;
 }
 
-/* ================= CONTACT ================= */
-
-.contact-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
+.option{
+display:block;
+padding:11px;
+border:1px solid var(--border);
+border-radius:10px;
+margin-top:8px;
+cursor:pointer;
 }
 
-.contact-card{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:21px;
-    padding:25px;
+.option:hover{
+background:#eff6ff;
 }
 
-.contact-card h3{
-    margin-bottom:8px;
+.resultBox{
+text-align:center;
+padding:35px;
+background:var(--card);
+border-radius:25px;
+box-shadow:var(--shadow);
 }
 
-.contact-card p{
-    color:var(--muted);
-    word-break:break-word;
+.bigNumber{
+font-size:55px;
+font-weight:900;
+color:var(--primary);
 }
 
-/* ================= OPERATOR ================= */
-
-.operator-section{
-    background:#eceeff;
+.rating{
+font-size:25px;
+margin:10px;
 }
 
-.operator-box{
-    background:white;
-    border-radius:27px;
-    padding:32px;
-    max-width:1000px;
-    margin:auto;
-    box-shadow:var(--shadow);
+.adminPanel{
+display:none;
+position:fixed;
+inset:0;
+z-index:3000;
+overflow:auto;
+background:var(--bg);
 }
 
-.operator-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    margin-bottom:25px;
+.adminHeader{
+background:var(--dark);
+color:white;
+padding:18px;
+position:sticky;
+top:0;
+z-index:10;
 }
 
-.operator-badge{
-    background:#161d33;
-    color:#fff;
-    padding:8px 13px;
-    border-radius:10px;
-    font-size:11px;
-    font-weight:900;
+.adminNav{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin:20px 0;
 }
 
-.admin-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:14px;
+.adminNav button{
+border:0;
+padding:10px 14px;
+border-radius:9px;
+background:var(--card);
+color:var(--text);
+font-weight:700;
 }
 
-.admin-action{
-    padding:18px;
-    border:1px solid var(--border);
-    border-radius:15px;
-    background:#fafaff;
-    cursor:pointer;
-    font-weight:800;
+.adminPage{
+display:none;
 }
 
-.admin-action:hover{
-    border-color:#c9c5ff;
-    background:#f2f1ff;
+.adminPage.active{
+display:block;
 }
 
-.security-note{
-    margin-top:22px;
-    padding:15px;
-    border-radius:13px;
-    background:#fff7df;
-    color:#755d17;
-    font-size:13px;
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
 }
 
-/* ================= FOOTER ================= */
-
-footer{
-    background:#0b1020;
-    color:white;
-    padding:50px 0 25px;
+.stat{
+background:var(--card);
+border:1px solid var(--border);
+padding:20px;
+border-radius:18px;
 }
 
-.footer-grid{
-    display:grid;
-    grid-template-columns:1.2fr .8fr;
-    gap:50px;
+.stat strong{
+font-size:30px;
+display:block;
+color:var(--primary);
 }
 
-.footer-brand h2{
-    margin-bottom:8px;
+.loginModal{
+display:none;
+position:fixed;
+inset:0;
+z-index:4000;
+background:rgba(0,0,0,.65);
+place-items:center;
+padding:20px;
 }
 
-.footer-brand p,
-.footer-contact p{
-    color:#aeb8cb;
-    margin-top:7px;
+.loginCard{
+width:min(430px,100%);
+background:var(--card);
+padding:30px;
+border-radius:22px;
 }
 
-.footer-bottom{
-    border-top:1px solid #242b40;
-    margin-top:35px;
-    padding-top:20px;
-    text-align:center;
-    color:#8792a8;
-    font-size:13px;
+.footer{
+background:#020617;
+color:white;
+padding:50px 0 25px;
 }
 
-/* ================= RESPONSIVE ================= */
+.footerGrid{
+display:grid;
+grid-template-columns:1.5fr repeat(3,1fr);
+gap:30px;
+}
+
+.footer p,
+.footer a{
+color:#94a3b8;
+font-size:13px;
+display:block;
+margin:7px 0;
+}
+
+.footerBottom{
+border-top:1px solid #1e293b;
+margin-top:30px;
+padding-top:20px;
+color:#64748b;
+font-size:12px;
+text-align:center;
+}
+
+.hidden{
+display:none!important;
+}
+
+.empty{
+padding:30px;
+text-align:center;
+color:var(--muted);
+}
 
 @media(max-width:900px){
 
-    .nav-links{
-        display:none;
-        position:absolute;
-        top:76px;
-        left:0;
-        width:100%;
-        background:white;
-        flex-direction:column;
-        padding:20px;
-        border-bottom:1px solid var(--border);
-    }
+.heroGrid{
+grid-template-columns:1fr;
+}
 
-    .nav-links.active{
-        display:flex;
-    }
+.navLinks{
+display:none;
+}
 
-    .menu{
-        display:block;
-    }
+.mobileMenu{
+display:block;
+}
 
-    .hero{
-        grid-template-columns:1fr;
-        padding-top:55px;
-    }
+.footerGrid{
+grid-template-columns:repeat(2,1fr);
+}
 
-    .feature-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .material-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .video-box{
-        grid-template-columns:1fr;
-    }
-
-    .contact-grid{
-        grid-template-columns:1fr;
-    }
-
-    .admin-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr;
-    }
 }
 
 @media(max-width:600px){
 
-    .hero h1{
-        letter-spacing:-1px;
-    }
+.hero{
+padding:55px 0;
+}
 
-    section{
-        padding:65px 0;
-    }
+.hero h1{
+font-size:40px;
+letter-spacing:-1.5px;
+}
 
-    .section-head h2{
-        font-size:30px;
-    }
+.heroStats{
+grid-template-columns:1fr;
+}
 
-    .feature-grid,
-    .material-grid,
-    .exam-grid,
-    .admin-grid{
-        grid-template-columns:1fr;
-    }
+.search{
+flex-direction:column;
+}
 
-    .profile-card,
-    .video-info,
-    .video-card,
-    .operator-box{
-        padding:25px;
-    }
+.footerGrid{
+grid-template-columns:1fr;
+}
 
-    .actions{
-        flex-direction:column;
-    }
+section{
+padding:55px 0;
+}
 
-    .actions .btn{
-        width:100%;
-    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= NAVIGATION ================= -->
-
 <header>
-<div class="container navbar">
 
-<a class="brand" href="#home">
-    <div class="logo">MAS</div>
-    <div class="brand-text">
-        Chat Students
-        <span>Good Friendship</span>
-    </div>
+<div class="container nav">
+
+<a href="#home" class="logo">
+
+<div class="logoIcon">MAS</div>
+
+<div>
+<div>Teachers Students Friendship</div>
+<small style="color:#64748b">
+Knowledge • Cooperation • Friendship
+</small>
+</div>
+
 </a>
 
-<ul class="nav-links" id="navLinks">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#ask">Ask</a></li>
-    <li><a href="#materials">Materials</a></li>
-    <li><a href="#notice">Notice</a></li>
-    <li><a href="#contact">Contact</a></li>
-</ul>
+<div class="navLinks">
 
-<div class="menu" onclick="toggleMenu()">☰</div>
+<a href="#home">Home</a>
+<a href="#resources">Resources</a>
+<a href="#notices">Notices</a>
+<a href="#exams">Exams</a>
+<a href="#results">Results</a>
+<a href="#contact">Contact</a>
+
+<button onclick="openLogin()">
+🔐 Login
+</button>
+
+<button onclick="toggleDark()">
+🌙
+</button>
 
 </div>
+
+<button class="mobileMenu"
+onclick="mobileNav()">
+☰
+</button>
+
+</div>
+
 </header>
 
 
-<!-- ================= HERO ================= -->
+<main>
 
-<section id="home">
+<section class="hero" id="home">
 
-<div class="container hero">
+<div class="container heroGrid">
 
 <div>
 
-<div class="badge">📚 Learn • Ask • Understand • Grow</div>
+<div class="badge">
+● MODERN LEARNING PLATFORM
+</div>
 
 <h1>
-Your Question.<br>
-My Guidance.<br>
-<span>Your Progress.</span>
+Learn.
+<span class="gradient">Practice.</span>
+Grow.
 </h1>
 
-<p class="hero-description">
-Welcome to <b>Chat Students Are Good Friendship</b> —
-a friendly educational platform created to help students ask questions,
-understand difficult topics, prepare for examinations and access useful
-learning resources.
+<p>
+শিক্ষক ও শিক্ষার্থীর জ্ঞান, সহযোগিতা ও বন্ধুত্বের
+একটি আধুনিক শিক্ষা প্ল্যাটফর্ম।
+নোট, পরীক্ষা, ফলাফল, পয়েন্ট ও রেটিং—
+সবকিছু এক জায়গায়।
 </p>
 
-<div class="actions">
+<div class="buttons">
 
-<a class="btn primary"
-href="https://wa.me/8801979840081?text=Assalamu%20Alaikum%20Sir%2C%20I%20have%20a%20question."
-target="_blank">
-💬 Ask on WhatsApp
-</a>
-
-<a class="btn secondary" href="#materials">
+<a href="#resources"
+class="btn primary">
 📚 Study Materials
 </a>
 
-</div>
+<a href="#exams"
+class="btn secondary">
+📝 Online Exam
+</a>
+
+<a
+href="https://wa.me/8801979840081"
+target="_blank"
+class="btn success">
+💬 Ask Teacher
+</a>
 
 </div>
 
-
-<div class="profile-card">
-
-<div class="avatar">MT</div>
-
-<h2>Maksud Tahsin</h2>
-
-<div class="profile-role">
-Teacher • Mentor • Student Guide
 </div>
+
+
+<div class="heroCard">
+
+<div>
+<span>👑 SUPER ADMIN</span>
+
+<h2>
+Teachers Students Friendship
+</h2>
 
 <p>
-My goal is to create a friendly learning environment where students
-can ask questions without hesitation and receive useful academic guidance.
+Managed by <b>Maksud Tahsin</b>
 </p>
+</div>
 
-<div class="profile-tags">
-<span class="tag">Education</span>
-<span class="tag">Exam Preparation</span>
-<span class="tag">Student Support</span>
-<span class="tag">Guidance</span>
+<div class="heroStats">
+
+<div class="heroStat">
+<strong>📚</strong>
+<small>Resources</small>
+</div>
+
+<div class="heroStat">
+<strong>📝</strong>
+<small>Exams</small>
+</div>
+
+<div class="heroStat">
+<strong>🏆</strong>
+<small>Points</small>
+</div>
+
 </div>
 
 </div>
@@ -783,105 +742,76 @@ can ask questions without hesitation and receive useful academic guidance.
 
 </section>
 
-
-<!-- ================= ABOUT ================= -->
-
-<section id="about">
-
-<div class="container">
-
-<div class="section-head">
-<h2>👨‍🏫 About Me</h2>
-<p>A simple and friendly place for students to learn.</p>
-</div>
-
-<div class="card">
-
-<h3>Hello, I'm Maksud Tahsin 👋</h3>
-
-<p style="margin-top:12px;">
-I created this platform to make learning easier and more accessible
-for students. If you don't understand a lesson, homework problem,
-exam question or any educational topic, you can ask for guidance.
-</p>
-
-<p style="margin-top:12px;">
-Students can also access notes, PDFs, documents, exam questions,
-suggestions and important notices from this platform.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= FEATURES ================= -->
 
 <section>
 
 <div class="container">
 
-<div class="section-head">
-<h2>✨ What Students Can Do</h2>
-<p>Everything students need in one simple place.</p>
+<div class="heading">
+
+<span style="color:#2563eb;font-weight:900">
+FEATURES
+</span>
+
+<h2>
+শিক্ষার্থীর জন্য যা যা দরকার
+</h2>
+
+<p>
+একটি জায়গায় পড়াশোনা, অনুশীলন ও অগ্রগতি।
+</p>
+
 </div>
 
-<div class="feature-grid">
+
+<div class="grid">
 
 <div class="card">
-<div class="card-icon">💬</div>
-<h3>Ask Questions</h3>
-<p>Ask educational questions directly and get guidance.</p>
-</div>
-
-<div class="card">
-<div class="card-icon">📸</div>
-<h3>Question by Photo</h3>
-<p>Send a photo of a difficult question through WhatsApp.</p>
-</div>
-
-<div class="card">
-<div class="card-icon">📹</div>
-<h3>Video Call</h3>
-<p>Join a teacher video session when a live explanation is needed.</p>
-</div>
-
-<div class="card">
-<div class="card-icon">📚</div>
+<div class="icon">📚</div>
 <h3>Study Materials</h3>
-<p>Access teacher-provided notes, PDFs and documents.</p>
+<p>নোট, PDF এবং অন্যান্য শিক্ষা উপকরণ।</p>
 </div>
 
 <div class="card">
-<div class="card-icon">📝</div>
-<h3>Exam Questions</h3>
-<p>Find practice questions for examination preparation.</p>
+<div class="icon">📝</div>
+<h3>Online MCQ Exam</h3>
+<p>সময় নির্ধারিত অনলাইন পরীক্ষা।</p>
 </div>
 
 <div class="card">
-<div class="card-icon">🎯</div>
-<h3>Exam Suggestions</h3>
-<p>View important topics and teacher-provided suggestions.</p>
+<div class="icon">⏱️</div>
+<h3>Exam Timer</h3>
+<p>পরীক্ষার সময় স্বয়ংক্রিয়ভাবে গণনা হবে।</p>
 </div>
 
 <div class="card">
-<div class="card-icon">📢</div>
+<div class="icon">⭐</div>
+<h3>Rating System</h3>
+<p>ফলাফলের ভিত্তিতে Rating পাওয়া যাবে।</p>
+</div>
+
+<div class="card">
+<div class="icon">🏆</div>
+<h3>Point System</h3>
+<p>পরীক্ষার মাধ্যমে Points সংগ্রহ করা যাবে।</p>
+</div>
+
+<div class="card">
+<div class="icon">📊</div>
+<h3>Result History</h3>
+<p>পরীক্ষার ফলাফল ও ইতিহাস দেখা যাবে।</p>
+</div>
+
+<div class="card">
+<div class="icon">📢</div>
 <h3>Notice Board</h3>
-<p>Students can see important announcements and notices.</p>
+<p>গুরুত্বপূর্ণ নোটিশ এক জায়গায়।</p>
 </div>
 
 <div class="card">
-<div class="card-icon">👨‍👩‍👦</div>
-<h3>Parent Communication</h3>
-<p>Important educational information can be communicated with parents.</p>
-</div>
-
-<div class="card">
-<div class="card-icon">🖨️</div>
-<h3>Download & Print</h3>
-<p>Available learning materials can be downloaded or printed.</p>
+<div class="icon">🎥</div>
+<h3>Video Classes</h3>
+<p>অনলাইন ক্লাস ও ভিডিও লিংক।</p>
 </div>
 
 </div>
@@ -891,257 +821,140 @@ suggestions and important notices from this platform.
 </section>
 
 
-<!-- ================= ASK ================= -->
-
-<section id="ask" class="ask-section">
-
-<div class="container ask-content">
-
-<div class="section-head">
-<h2>💬 Ask Maksud Tahsin</h2>
-
-<p>
-Didn't understand something? Don't worry.
-Send your question directly.
-</p>
-
-<a class="btn whatsapp"
-href="https://wa.me/8801979840081?text=Assalamu%20Alaikum%20Sir%2C%20I%20need%20help%20with%20a%20question."
-target="_blank">
-
-📱 Chat on WhatsApp
-
-</a>
-
-<div class="photo-tip">
-📸 You can attach a photo of your question in WhatsApp.
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= VIDEO CALL ================= -->
-
-<section id="video">
+<section id="resources">
 
 <div class="container">
 
-<div class="section-head">
-<h2>📹 Live Video Learning</h2>
-<p>Join a scheduled video session when direct explanation is needed.</p>
-</div>
+<div class="heading">
 
-<div class="video-box">
+<span style="color:#2563eb;font-weight:900">
+STUDY LIBRARY
+</span>
 
-<div class="video-info">
-
-<h2>Learn Face-to-Face</h2>
+<h2>
+Study Resources
+</h2>
 
 <p>
-For difficult lessons or special academic discussions,
-students can join a video session using the meeting link provided
-by the teacher.
+প্রয়োজনীয় পড়াশোনার উপকরণ খুঁজে নাও।
 </p>
 
 </div>
 
-<div class="video-card">
+<div class="search">
 
-<h3>🎥 Join Video Call</h3>
-
-<p>
-The teacher will publish the official meeting link here
-when a live class or consultation is scheduled.
-</p>
-
-<!-- Replace # with your actual meeting link later -->
-
-<a class="btn primary"
-href="#"
-onclick="videoNotice(event)">
-📹 Join Video Call
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= MATERIALS ================= -->
-
-<section id="materials">
-
-<div class="container">
-
-<div class="section-head">
-
-<h2>📚 Study Materials</h2>
-
-<p>
-Teacher-provided resources for learning and examination preparation.
-</p>
-
-</div>
-
-<div class="material-grid">
-
-<div class="material">
-<div class="material-icon">📕</div>
-<h3>PDF Notes</h3>
-<p>Downloadable PDF study notes.</p>
-<a class="small-btn" href="#" onclick="notAvailable(event)">Download</a>
-</div>
-
-<div class="material">
-<div class="material-icon">📘</div>
-<h3>Word Documents</h3>
-<p>Teacher-provided documents.</p>
-<a class="small-btn" href="#" onclick="notAvailable(event)">Download</a>
-</div>
-
-<div class="material">
-<div class="material-icon">📝</div>
-<h3>Exam Questions</h3>
-<p>Practice questions for exams.</p>
-<a class="small-btn" href="#exam">View Questions</a>
-</div>
-
-<div class="material">
-<div class="material-icon">🎯</div>
-<h3>Suggestions</h3>
-<p>Important preparation topics.</p>
-<a class="small-btn" href="#exam">View Suggestions</a>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= NOTICE ================= -->
-
-<section id="notice">
-
-<div class="container">
-
-<div class="section-head">
-
-<h2>📢 Notice Board</h2>
-
-<p>Important announcements from the teacher.</p>
-
-</div>
-
-<div class="notice-board">
-
-<div class="notice">
-
-<div class="notice-icon">🔔</div>
-
-<div>
-<h3>Welcome Students</h3>
-<p>
-Welcome to Chat Students Are Good Friendship.
-New study resources and notices will appear here.
-</p>
-</div>
-
-</div>
-
-<div class="notice">
-
-<div class="notice-icon">📚</div>
-
-<div>
-<h3>Study Materials</h3>
-<p>
-Check this section regularly for new notes, PDFs and exam resources.
-</p>
-</div>
-
-</div>
-
-<div class="notice">
-
-<div class="notice-icon">📢</div>
-
-<div>
-<h3>Important Announcement</h3>
-<p>
-Teacher-published announcements will be displayed here.
-</p>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= EXAM ================= -->
-
-<section id="exam">
-
-<div class="container">
-
-<div class="section-head">
-
-<h2>📝 Exam Preparation</h2>
-
-<p>Questions and suggestions published by the teacher.</p>
-
-</div>
-
-<div class="exam-grid">
-
-<div class="exam-card">
-
-<h3>📄 Practice Questions</h3>
-
-<p>
-Teacher-selected questions can be added here according to
-class, subject, chapter and examination.
-</p>
-
-<br>
+<input
+id="resourceSearch"
+placeholder="Search notes, subject, class..."
+oninput="renderResources()">
 
 <button class="btn primary"
-onclick="notAvailable(event)">
-View Questions
+onclick="renderResources()">
+Search
 </button>
 
 </div>
 
+<div id="resourceGrid"
+class="grid">
+</div>
 
-<div class="exam-card">
+</div>
 
-<h3>🎯 Exam Suggestions</h3>
+</section>
+
+
+<section id="notices">
+
+<div class="container">
+
+<div class="heading">
+
+<span style="color:#2563eb;font-weight:900">
+LATEST UPDATE
+</span>
+
+<h2>
+Notice Board
+</h2>
+
+</div>
+
+<div id="noticeList">
+</div>
+
+</div>
+
+</section>
+
+
+<section id="exams">
+
+<div class="container">
+
+<div class="heading">
+
+<span style="color:#2563eb;font-weight:900">
+ONLINE EXAMINATION
+</span>
+
+<h2>
+Practice • Test • Improve
+</h2>
 
 <p>
-Important topics and suggestions can be published here before
-school or board examinations.
+পরীক্ষা দাও, Marks দেখো, Rating ও Points অর্জন করো।
 </p>
 
-<br>
+</div>
 
-<button class="btn primary"
-onclick="notAvailable(event)">
-View Suggestions
+<div id="examList"
+class="grid">
+</div>
+
+</div>
+
+</section>
+
+
+<section id="results">
+
+<div class="container">
+
+<div class="heading">
+
+<span style="color:#2563eb;font-weight:900">
+RESULT
+</span>
+
+<h2>
+Find Your Result
+</h2>
+
+<p>
+Student ID দিয়ে নিজের ফলাফল খুঁজে দেখো।
+</p>
+
+</div>
+
+<div class="card"
+style="max-width:600px;margin:auto">
+
+<input
+id="resultSearch"
+placeholder="Student ID / Roll">
+
+<button
+class="btn primary"
+style="margin-top:10px"
+onclick="searchResult()">
+
+🔎 Search Result
+
 </button>
 
+<div id="resultOutput"
+style="margin-top:20px">
 </div>
 
 </div>
@@ -1151,88 +964,82 @@ View Suggestions
 </section>
 
 
-<!-- ================= CONTACT ================= -->
+<section>
+
+<div class="container">
+
+<div class="heading">
+
+<span style="color:#2563eb;font-weight:900">
+LEADERBOARD
+</span>
+
+<h2>
+🏆 Student Points
+</h2>
+
+<p>
+পরীক্ষার Points অনুযায়ী শিক্ষার্থীদের অগ্রগতি।
+</p>
+
+</div>
+
+<div id="leaderboard"
+class="grid">
+</div>
+
+</div>
+
+</section>
+
 
 <section id="contact">
 
 <div class="container">
 
-<div class="section-head">
+<div class="card"
+style="text-align:center">
 
-<h2>📞 Contact Maksud Tahsin</h2>
+<h2>
+💬 Need Help?
+</h2>
 
-<p>Students and parents can contact the teacher.</p>
+<p style="margin:10px 0 20px">
 
-</div>
+কোনো প্রশ্ন বুঝতে সমস্যা হলে
+শিক্ষকের সঙ্গে যোগাযোগ করো।
 
-<div class="contact-grid">
-
-<div class="contact-card">
-
-<h3>📱 WhatsApp</h3>
-<p>01979840081</p>
-
-<br>
-
-<a class="btn primary"
-href="https://wa.me/8801979840081"
-target="_blank">
-Message
-</a>
-
-</div>
-
-
-<div class="contact-card">
-
-<h3>📞 Phone</h3>
-<p>0167949727</p>
-
-<br>
-
-<a class="btn secondary"
-href="tel:0167949727">
-Call
-</a>
-
-</div>
-
-
-<div class="contact-card">
-
-<h3>📧 Email</h3>
-<p>maksudhasan0@gmail.com</p>
-
-<br>
-
-<a class="btn secondary"
-href="mailto:maksudhasan0@gmail.com">
-Email
-</a>
-
-</div>
-
-</div>
-
-<br>
-
-<div class="card">
-
-<h3>📘 Facebook Page</h3>
-
-<p>
-Maksud Hasan
 </p>
 
-<br>
+<div class="buttons"
+style="justify-content:center">
 
-<!-- Put your real Facebook Page URL in href -->
+<a
+href="https://wa.me/8801979840081"
+target="_blank"
+class="btn success">
 
-<a class="btn primary"
-href="#"
-onclick="facebookNotice(event)">
-Visit Facebook Page
+WhatsApp Teacher
+
 </a>
+
+<a
+href="tel:0167949727"
+class="btn primary">
+
+Call Teacher
+
+</a>
+
+<a
+href="mailto:maksudhasan0@gmail.com"
+class="btn secondary">
+
+Email
+
+</a>
+
+</div>
 
 </div>
 
@@ -1240,135 +1047,81 @@ Visit Facebook Page
 
 </section>
 
+</main>
 
-<!-- ================= OPERATOR ================= -->
 
-<section class="operator-section" id="operator">
+<footer class="footer">
 
 <div class="container">
 
-<div class="section-head">
-
-<h2>🔐 Operator Control</h2>
-
-<p>
-Only the website operator should control published content.
-</p>
-
-</div>
-
-<div class="operator-box">
-
-<div class="operator-header">
+<div class="footerGrid">
 
 <div>
 
-<h3>👨‍💻 Maksud Tahsin — Operator</h3>
-
-<p style="color:#697386;">
-Manage notices, study materials, questions and suggestions.
-</p>
-
-</div>
-
-<div class="operator-badge">
-PRIVATE CONTROL
-</div>
-
-</div>
-
-
-<div class="admin-grid">
-
-<button class="admin-action"
-onclick="operatorNotice('Upload PDF')">
-📕 Upload PDF
-</button>
-
-<button class="admin-action"
-onclick="operatorNotice('Upload Word Document')">
-📘 Upload Word
-</button>
-
-<button class="admin-action"
-onclick="operatorNotice('Upload Image')">
-🖼️ Upload Image
-</button>
-
-<button class="admin-action"
-onclick="operatorNotice('Publish Notice')">
-📢 Publish Notice
-</button>
-
-<button class="admin-action"
-onclick="operatorNotice('Publish Exam Questions')">
-📝 Exam Questions
-</button>
-
-<button class="admin-action"
-onclick="operatorNotice('Publish Suggestion')">
-🎯 Publish Suggestion
-</button>
-
-</div>
-
-
-<div class="security-note">
-
-🔒 <b>Access control:</b>
-Students are intended to have read/download/print access only.
-Publishing, editing, deleting and management controls are reserved
-for the operator.
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-<div class="container">
-
-<div class="footer-grid">
-
-<div class="footer-brand">
-
-<h2>MAS</h2>
+<h2>
+Teachers Students Friendship
+</h2>
 
 <p>
-Chat Students Are Good Friendship
+জ্ঞান • সহযোগিতা • বন্ধুত্ব
 </p>
 
 <p>
-Learn • Ask • Understand • Grow
+Managed by <b>Maksud Tahsin</b>
 </p>
 
 </div>
 
+<div>
 
-<div class="footer-contact">
+<h3>Platform</h3>
+
+<a href="#resources">Resources</a>
+<a href="#exams">Online Exam</a>
+<a href="#results">Results</a>
+<a href="#notices">Notices</a>
+
+</div>
+
+<div>
 
 <h3>Contact</h3>
 
-<p>Teacher: Maksud Tahsin</p>
-<p>WhatsApp: 01979840081</p>
-<p>Phone: 0167949727</p>
-<p>Email: maksudhasan0@gmail.com</p>
+<a href="https://wa.me/8801979840081">
+WhatsApp: 01979840081
+</a>
+
+<a href="tel:0167949727">
+0167949727
+</a>
+
+<a href="mailto:maksudhasan0@gmail.com">
+maksudhasan0@gmail.com
+</a>
+
+</div>
+
+<div>
+
+<h3>Administration</h3>
+
+<a href="#" onclick="openLogin()">
+Teacher Login
+</a>
+
+<a href="#" onclick="openLogin()">
+Super Admin
+</a>
 
 </div>
 
 </div>
 
+<div class="footerBottom">
 
-<div class="footer-bottom">
-
-© 2026 Chat Students Are Good Friendship • Maksud Tahsin
+© 2026 Teachers Students Friendship
+•
+Created & Managed by Maksud Tahsin
 
 </div>
 
@@ -1377,69 +1130,1646 @@ Learn • Ask • Understand • Grow
 </footer>
 
 
+<!-- LOGIN -->
+
+<div id="loginModal"
+class="loginModal">
+
+<div class="loginCard">
+
+<h2>
+🔐 Login
+</h2>
+
+<p style="color:#64748b;margin:5px 0 20px">
+Teacher / Super Admin
+</p>
+
+<input
+id="loginEmail"
+placeholder="Email">
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Password">
+
+<button
+class="btn primary"
+style="width:100%"
+onclick="login()">
+
+Login
+
+</button>
+
+<button
+class="btn secondary"
+style="width:100%;margin-top:8px"
+onclick="closeLogin()">
+
+Cancel
+
+</button>
+
+<div id="loginMessage"
+style="margin-top:10px;color:#ef4444">
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ADMIN -->
+
+<div id="adminPanel"
+class="adminPanel">
+
+<div class="adminHeader">
+
+<div class="container">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px">
+
+<div>
+👑 <b>SUPER ADMIN</b>
+<br>
+<small>Maksud Tahsin</small>
+</div>
+
+<div>
+
+<button
+class="btn secondary"
+onclick="closeAdmin()">
+
+Website
+
+</button>
+
+<button
+class="btn danger"
+onclick="logout()">
+
+Logout
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="container">
+
+<div class="adminNav">
+
+<button onclick="adminPage('dashboard')">
+📊 Dashboard
+</button>
+
+<button onclick="adminPage('resources')">
+📚 Resources
+</button>
+
+<button onclick="adminPage('notices')">
+📢 Notices
+</button>
+
+<button onclick="adminPage('exams')">
+📝 Exams
+</button>
+
+<button onclick="adminPage('results')">
+🏆 Results
+</button>
+
+<button onclick="adminPage('settings')">
+⚙️ Settings
+</button>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div id="page-dashboard"
+class="adminPage active">
+
+<h2>Dashboard</h2>
+
+<div class="stats"
+style="margin-top:20px">
+
+<div class="stat">
+Resources
+<strong id="statResources">0</strong>
+</div>
+
+<div class="stat">
+Notices
+<strong id="statNotices">0</strong>
+</div>
+
+<div class="stat">
+Exams
+<strong id="statExams">0</strong>
+</div>
+
+<div class="stat">
+Students
+<strong id="statStudents">0</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- RESOURCES -->
+
+<div id="page-resources"
+class="adminPage">
+
+<div class="card">
+
+<h2>
+➕ Add Study Resource
+</h2>
+
+<input id="rTitle"
+placeholder="Title">
+
+<input id="rSubject"
+placeholder="Subject">
+
+<input id="rClass"
+placeholder="Class">
+
+<input id="rChapter"
+placeholder="Chapter">
+
+<input id="rUrl"
+placeholder="File URL / Google Drive URL">
+
+<button
+class="btn primary"
+onclick="addResource()">
+
+Publish Resource
+
+</button>
+
+</div>
+
+<div id="adminResources"
+style="margin-top:20px">
+</div>
+
+</div>
+
+
+<!-- NOTICES -->
+
+<div id="page-notices"
+class="adminPage">
+
+<div class="card">
+
+<h2>
+📢 Publish Notice
+</h2>
+
+<input
+id="nTitle"
+placeholder="Notice title">
+
+<textarea
+id="nText"
+placeholder="Notice details"></textarea>
+
+<button
+class="btn primary"
+onclick="addNotice()">
+
+Publish Notice
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- EXAMS -->
+
+<div id="page-exams"
+class="adminPage">
+
+<div class="card">
+
+<h2>
+📝 Create MCQ Exam
+</h2>
+
+<input
+id="eTitle"
+placeholder="Exam title">
+
+<input
+id="eSubject"
+placeholder="Subject">
+
+<input
+id="eClass"
+placeholder="Class">
+
+<input
+id="eDuration"
+type="number"
+placeholder="Duration in minutes">
+
+<input
+id="eNegative"
+type="number"
+step=".25"
+value="0"
+placeholder="Negative mark">
+
+<textarea
+id="eQuestions"
+placeholder='প্রতি লাইনে একটি প্রশ্ন:
+
+{"question":"2+2=?","options":["2","3","4","5"],"answer":2,"mark":1}
+
+answer = correct option-এর index'></textarea>
+
+<button
+class="btn primary"
+onclick="addExam()">
+
+Publish Exam
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- RESULTS -->
+
+<div id="page-results"
+class="adminPage">
+
+<div class="card">
+
+<h2>
+🏆 Published Results
+</h2>
+
+<div id="adminResults">
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SETTINGS -->
+
+<div id="page-settings"
+class="adminPage">
+
+<div class="card">
+
+<h2>
+⚙️ Website Settings
+</h2>
+
+<p style="color:#64748b">
+এই version-এর data এই browser-এ সংরক্ষিত থাকবে।
+</p>
+
+<br>
+
+<button
+class="btn danger"
+onclick="resetData()">
+
+Reset Demo Data
+
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- EXAM SCREEN -->
+
+<div id="examScreen"
+class="examScreen">
+
+<div class="container">
+
+<div class="examHeader">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center">
+
+<strong id="examTitleScreen">
+Exam
+</strong>
+
+<span
+id="examTimer"
+class="timer">
+00:00
+</span>
+
+</div>
+
+</div>
+
+<div id="examQuestions">
+</div>
+
+<button
+class="btn primary"
+onclick="submitExam()">
+
+Submit Exam
+
+</button>
+
+</div>
+
+</div>
+
+
 <script>
 
-/* MOBILE MENU */
+/* ======================================================
+   STORAGE
+====================================================== */
 
-function toggleMenu(){
+const KEY="TSF_PLATFORM_V1";
 
-    document
-    .getElementById("navLinks")
-    .classList.toggle("active");
+
+let db=JSON.parse(
+localStorage.getItem(KEY) || "null"
+);
+
+
+if(!db){
+
+db={
+
+resources:[
+{
+id:1,
+title:"Class 8 Mathematics Notes",
+subject:"Mathematics",
+className:"Class 8",
+chapter:"Algebra",
+url:"#"
+},
+{
+id:2,
+title:"English Grammar — Tense",
+subject:"English",
+className:"Class 6–10",
+chapter:"Tense",
+url:"#"
+},
+{
+id:3,
+title:"Science — Chemical Reaction",
+subject:"Science",
+className:"Class 8",
+chapter:"Chemical Reaction",
+url:"#"
+}
+],
+
+notices:[
+{
+id:1,
+title:"Welcome to Teachers Students Friendship",
+text:"শিক্ষা, সহযোগিতা ও বন্ধুত্বের মাধ্যমে এগিয়ে যাও।",
+date:new Date().toLocaleDateString()
+}
+],
+
+exams:[],
+
+results:[],
+
+students:[]
+
+};
+
+save();
 
 }
 
 
-/* VIDEO CALL */
+function save(){
 
-function videoNotice(event){
-
-    event.preventDefault();
-
-    alert(
-        "The teacher has not published a video meeting link yet."
-    );
+localStorage.setItem(
+KEY,
+JSON.stringify(db)
+);
 
 }
 
 
-/* MATERIAL MESSAGE */
+/* ======================================================
+   BASIC
+====================================================== */
 
-function notAvailable(event){
+function escapeHTML(value){
 
-    event.preventDefault();
-
-    alert(
-        "This resource will be available after the teacher publishes it."
-    );
-
-}
-
-
-/* OPERATOR DEMO */
-
-function operatorNotice(action){
-
-    alert(
-        action +
-        " is an Operator-only function.\n\n" +
-        "A secure backend/admin system is required to make this function fully operational."
-    );
+return String(value ?? "")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
 }
 
 
-/* FACEBOOK */
+/* ======================================================
+   RESOURCES
+====================================================== */
 
-function facebookNotice(event){
+function renderResources(){
 
-    event.preventDefault();
+const q=
+(document.getElementById("resourceSearch")?.value || "")
+.toLowerCase();
 
-    alert(
-        "Please add your real Facebook Page URL to this button."
-    );
+const list=
+db.resources.filter(r=>
+
+`${r.title} ${r.subject} ${r.className} ${r.chapter}`
+.toLowerCase()
+.includes(q)
+
+);
+
+const box=
+document.getElementById("resourceGrid");
+
+if(!list.length){
+
+box.innerHTML=
+`<div class="empty">
+কোনো resource পাওয়া যায়নি।
+</div>`;
+
+return;
 
 }
+
+box.innerHTML=list.map(r=>`
+
+<div class="card resource">
+
+<div class="resourceTop">
+
+<div class="icon">📄</div>
+
+<b>${escapeHTML(r.subject)}</b>
+
+</div>
+
+<h3>${escapeHTML(r.title)}</h3>
+
+<p>${escapeHTML(r.chapter)}</p>
+
+<div class="meta">
+
+${escapeHTML(r.className)}
+
+</div>
+
+<a
+href="${escapeHTML(r.url)}"
+target="_blank"
+class="btn primary"
+style="text-align:center;margin-top:10px">
+
+Open / Download
+
+</a>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* ======================================================
+   NOTICES
+====================================================== */
+
+function renderNotices(){
+
+const box=
+document.getElementById("noticeList");
+
+if(!db.notices.length){
+
+box.innerHTML=
+`<div class="empty">
+কোনো notice নেই।
+</div>`;
+
+return;
+
+}
+
+box.innerHTML=db.notices.map(n=>`
+
+<div class="notice">
+
+<div class="noticeDate">
+${escapeHTML(n.date)}
+</div>
+
+<div>
+
+<h3>
+${escapeHTML(n.title)}
+</h3>
+
+<p style="color:#64748b">
+${escapeHTML(n.text)}
+</p>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* ======================================================
+   EXAMS
+====================================================== */
+
+function renderExams(){
+
+const box=
+document.getElementById("examList");
+
+if(!db.exams.length){
+
+box.innerHTML=
+`<div class="empty">
+এখনও কোনো পরীক্ষা প্রকাশিত হয়নি।
+</div>`;
+
+return;
+
+}
+
+box.innerHTML=db.exams.map((e,i)=>`
+
+<div class="card exam"
+onclick="startExam(${i})">
+
+<div class="icon">
+📝
+</div>
+
+<h3>
+${escapeHTML(e.title)}
+</h3>
+
+<p>
+${escapeHTML(e.subject)}
+•
+${escapeHTML(e.className)}
+</p>
+
+<div class="meta" style="margin-top:10px">
+
+⏱️ ${e.duration} minutes
+
+•
+❓ ${e.questions.length} Questions
+
+•
+🏆 ${e.totalMarks} Marks
+
+</div>
+
+<br>
+
+<button
+class="btn primary">
+
+Start Exam →
+
+</button>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* ======================================================
+   EXAM ENGINE
+====================================================== */
+
+let currentExam=null;
+let timer=null;
+let remaining=0;
+
+
+function startExam(index){
+
+currentExam=db.exams[index];
+
+document.getElementById("examScreen")
+.style.display="block";
+
+document.getElementById("examTitleScreen")
+.textContent=currentExam.title;
+
+
+const box=
+document.getElementById("examQuestions");
+
+
+box.innerHTML=currentExam.questions.map((q,i)=>`
+
+<div class="question">
+
+<h3>
+${i+1}. ${escapeHTML(q.question)}
+</h3>
+
+${q.options.map((o,j)=>`
+
+<label class="option">
+
+<input
+type="radio"
+name="question_${i}"
+value="${j}">
+
+${escapeHTML(o)}
+
+</label>
+
+`).join("")}
+
+</div>
+
+`).join("");
+
+
+remaining=
+Number(currentExam.duration || 20)*60;
+
+updateTimer();
+
+clearInterval(timer);
+
+timer=setInterval(()=>{
+
+remaining--;
+
+updateTimer();
+
+if(remaining<=0){
+
+clearInterval(timer);
+
+submitExam();
+
+}
+
+},1000);
+
+}
+
+
+function updateTimer(){
+
+const m=
+Math.floor(remaining/60);
+
+const s=
+remaining%60;
+
+document.getElementById("examTimer")
+.textContent=
+`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+
+}
+
+
+function submitExam(){
+
+clearInterval(timer);
+
+let marks=0;
+let total=0;
+let correct=0;
+let wrong=0;
+
+
+currentExam.questions.forEach((q,i)=>{
+
+const mark=
+Number(q.mark || 1);
+
+total+=mark;
+
+
+const selected=
+document.querySelector(
+`input[name="question_${i}"]:checked`
+);
+
+
+if(!selected)return;
+
+
+if(
+Number(selected.value) ===
+Number(q.answer)
+){
+
+marks+=mark;
+correct++;
+
+}else{
+
+marks-=Number(
+currentExam.negative || 0
+);
+
+wrong++;
+
+}
+
+});
+
+
+if(marks<0)marks=0;
+
+
+const percentage=
+total ? (marks/total)*100 : 0;
+
+
+let rating=1;
+
+if(percentage>=90)rating=5;
+else if(percentage>=80)rating=4.5;
+else if(percentage>=70)rating=4;
+else if(percentage>=60)rating=3.5;
+else if(percentage>=50)rating=3;
+else if(percentage>=40)rating=2;
+
+
+const points=
+Math.round(percentage);
+
+
+const studentId=
+prompt("Student ID / Roll লিখুন:");
+
+const studentName=
+prompt("Student Name লিখুন:");
+
+
+const result={
+
+id:Date.now(),
+
+examId:currentExam.id,
+
+examTitle:currentExam.title,
+
+studentId:studentId || "N/A",
+
+studentName:studentName || "Student",
+
+marks,
+
+total,
+
+percentage,
+
+correct,
+
+wrong,
+
+rating,
+
+points,
+
+date:new Date().toLocaleString()
+
+};
+
+
+db.results.push(result);
+
+
+/* Student aggregate */
+
+let student=
+db.students.find(
+s=>s.id===result.studentId
+);
+
+
+if(!student){
+
+student={
+id:result.studentId,
+name:result.studentName,
+points:0,
+exams:0,
+rating:0
+};
+
+db.students.push(student);
+
+}
+
+
+student.name=result.studentName;
+
+student.points+=points;
+
+student.exams++;
+
+
+const ratings=
+db.results
+.filter(r=>r.studentId===student.id)
+.map(r=>r.rating);
+
+
+student.rating=
+ratings.reduce((a,b)=>a+b,0)/
+ratings.length;
+
+
+save();
+
+
+document.getElementById("examScreen")
+.style.display="none";
+
+
+alert(
+
+`🎉 Exam Complete!
+
+Marks: ${marks}/${total}
+
+Percentage: ${percentage.toFixed(2)}%
+
+⭐ Rating: ${rating}/5
+
+🏆 Points: ${points}
+
+Correct: ${correct}
+
+Wrong: ${wrong}`
+
+);
+
+
+renderLeaderboard();
+
+renderAdmin();
+
+}
+
+
+/* ======================================================
+   RESULT SEARCH
+====================================================== */
+
+function searchResult(){
+
+const id=
+document.getElementById("resultSearch")
+.value.trim();
+
+const box=
+document.getElementById("resultOutput");
+
+
+const results=
+db.results.filter(
+r=>r.studentId===id
+);
+
+
+if(!results.length){
+
+box.innerHTML=
+`<div class="empty">
+এই Student ID-এর কোনো ফলাফল পাওয়া যায়নি।
+</div>`;
+
+return;
+
+}
+
+
+const student=
+db.students.find(
+s=>s.id===id
+);
+
+
+box.innerHTML=`
+
+<div class="card">
+
+<h2>
+👨‍🎓 ${escapeHTML(student?.name || "Student")}
+</h2>
+
+<p>
+Student ID: ${escapeHTML(id)}
+</p>
+
+<h3 style="margin-top:15px">
+🏆 Total Points:
+${student?.points || 0}
+</h3>
+
+<h3>
+⭐ Overall Rating:
+${(student?.rating || 0).toFixed(1)}/5
+</h3>
+
+<hr style="margin:15px 0;border:0;border-top:1px solid #ddd">
+
+${results.map(r=>`
+
+<div style="
+padding:12px 0;
+border-bottom:1px solid #eee">
+
+<b>
+${escapeHTML(r.examTitle)}
+</b>
+
+<br>
+
+Marks:
+${r.marks}/${r.total}
+
+•
+
+${r.percentage.toFixed(1)}%
+
+•
+
+⭐ ${r.rating}
+
+•
+
+🏆 ${r.points} points
+
+<br>
+
+<small style="color:#64748b">
+${escapeHTML(r.date)}
+</small>
+
+</div>
+
+`).join("")}
+
+</div>
+
+`;
+
+}
+
+
+/* ======================================================
+   LEADERBOARD
+====================================================== */
+
+function renderLeaderboard(){
+
+const box=
+document.getElementById("leaderboard");
+
+const list=
+[...db.students]
+.sort((a,b)=>b.points-a.points)
+.slice(0,10);
+
+
+if(!list.length){
+
+box.innerHTML=
+`<div class="empty">
+এখনও কোনো student result নেই।
+</div>`;
+
+return;
+
+}
+
+
+box.innerHTML=list.map((s,i)=>`
+
+<div class="card">
+
+<h2>
+${i===0?"🥇":i===1?"🥈":i===2?"🥉":"🏅"}
+</h2>
+
+<h3>
+${escapeHTML(s.name)}
+</h3>
+
+<p>
+Student ID:
+${escapeHTML(s.id)}
+</p>
+
+<h3 style="color:#2563eb;margin-top:8px">
+🏆 ${s.points} Points
+</h3>
+
+<p>
+⭐ ${(s.rating || 0).toFixed(1)}/5
+•
+📝 ${s.exams} Exams
+</p>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* ======================================================
+   ADMIN LOGIN
+====================================================== */
+
+/*
+ONE-FILE DEMO LOGIN
+
+Real production version-এ এই login
+Firebase Authentication দিয়ে replace করতে হবে।
+*/
+
+const ADMIN_EMAIL="admin@tsf.local";
+const ADMIN_PASSWORD="TSF@2026";
+
+
+function openLogin(){
+
+document.getElementById("loginModal")
+.style.display="grid";
+
+}
+
+
+function closeLogin(){
+
+document.getElementById("loginModal")
+.style.display="none";
+
+}
+
+
+function login(){
+
+const email=
+document.getElementById("loginEmail")
+.value.trim();
+
+const password=
+document.getElementById("loginPassword")
+.value;
+
+
+if(
+email===ADMIN_EMAIL &&
+password===ADMIN_PASSWORD
+){
+
+closeLogin();
+
+openAdmin();
+
+}else{
+
+document.getElementById("loginMessage")
+.textContent=
+"Email অথবা password সঠিক নয়।";
+
+}
+
+}
+
+
+function logout(){
+
+closeAdmin();
+
+}
+
+
+function openAdmin(){
+
+document.getElementById("adminPanel")
+.style.display="block";
+
+renderAdmin();
+
+}
+
+
+function closeAdmin(){
+
+document.getElementById("adminPanel")
+.style.display="none";
+
+}
+
+
+function adminPage(name){
+
+document.querySelectorAll(".adminPage")
+.forEach(p=>p.classList.remove("active"));
+
+document.getElementById(
+"page-"+name
+).classList.add("active");
+
+}
+
+
+/* ======================================================
+   ADMIN RESOURCE
+====================================================== */
+
+function addResource(){
+
+const title=
+document.getElementById("rTitle").value.trim();
+
+const subject=
+document.getElementById("rSubject").value.trim();
+
+const className=
+document.getElementById("rClass").value.trim();
+
+const chapter=
+document.getElementById("rChapter").value.trim();
+
+const url=
+document.getElementById("rUrl").value.trim();
+
+
+if(!title || !url){
+
+alert("Title এবং URL প্রয়োজন।");
+
+return;
+
+}
+
+
+db.resources.unshift({
+
+id:Date.now(),
+
+title,
+
+subject,
+
+className,
+
+chapter,
+
+url
+
+});
+
+
+save();
+
+renderResources();
+
+renderAdmin();
+
+alert("✓ Resource published.");
+
+}
+
+
+/* ======================================================
+   ADMIN NOTICE
+====================================================== */
+
+function addNotice(){
+
+const title=
+document.getElementById("nTitle").value.trim();
+
+const text=
+document.getElementById("nText").value.trim();
+
+
+if(!title || !text){
+
+alert("সব তথ্য দিন।");
+
+return;
+
+}
+
+
+db.notices.unshift({
+
+id:Date.now(),
+
+title,
+
+text,
+
+date:new Date().toLocaleDateString()
+
+});
+
+
+save();
+
+renderNotices();
+
+alert("✓ Notice published.");
+
+}
+
+
+/* ======================================================
+   ADMIN EXAM
+====================================================== */
+
+function addExam(){
+
+const title=
+document.getElementById("eTitle").value.trim();
+
+const subject=
+document.getElementById("eSubject").value.trim();
+
+const className=
+document.getElementById("eClass").value.trim();
+
+const duration=
+Number(
+document.getElementById("eDuration").value
+);
+
+const negative=
+Number(
+document.getElementById("eNegative").value || 0
+);
+
+const raw=
+document.getElementById("eQuestions")
+.value.trim();
+
+
+try{
+
+const questions=
+raw
+.split("\n")
+.map(x=>x.trim())
+.filter(Boolean)
+.map(x=>JSON.parse(x));
+
+
+if(!title || !questions.length){
+
+throw new Error(
+"Exam title এবং questions প্রয়োজন।"
+);
+
+}
+
+
+const totalMarks=
+questions.reduce(
+(sum,q)=>sum+Number(q.mark || 1),
+0
+);
+
+
+db.exams.unshift({
+
+id:Date.now(),
+
+title,
+
+subject,
+
+className,
+
+duration:duration || 20,
+
+negative,
+
+questions,
+
+totalMarks,
+
+createdAt:new Date().toISOString()
+
+});
+
+
+save();
+
+renderExams();
+
+renderAdmin();
+
+alert(
+"✓ Exam published successfully."
+);
+
+
+}catch(error){
+
+alert(
+"Question format ভুল:\n"+
+error.message
+);
+
+}
+
+}
+
+
+/* ======================================================
+   ADMIN DASHBOARD
+====================================================== */
+
+function renderAdmin(){
+
+document.getElementById("statResources")
+.textContent=db.resources.length;
+
+document.getElementById("statNotices")
+.textContent=db.notices.length;
+
+document.getElementById("statExams")
+.textContent=db.exams.length;
+
+document.getElementById("statStudents")
+.textContent=db.students.length;
+
+
+const resources=
+document.getElementById("adminResources");
+
+
+resources.innerHTML=
+db.resources.map(r=>`
+
+<div class="card"
+style="margin-top:10px">
+
+<b>
+${escapeHTML(r.title)}
+</b>
+
+<p>
+${escapeHTML(r.subject)}
+•
+${escapeHTML(r.className)}
+</p>
+
+<button
+class="btn danger"
+style="margin-top:8px"
+onclick="deleteResource(${r.id})">
+
+Delete
+
+</button>
+
+</div>
+
+`).join("");
+
+
+const resultBox=
+document.getElementById("adminResults");
+
+
+resultBox.innerHTML=
+db.results.length ?
+
+db.results
+.slice()
+.reverse()
+.map(r=>`
+
+<div style="
+padding:12px 0;
+border-bottom:1px solid var(--border)">
+
+<b>
+${escapeHTML(r.studentName)}
+</b>
+
+<br>
+
+${escapeHTML(r.studentId)}
+•
+
+${escapeHTML(r.examTitle)}
+
+<br>
+
+Marks:
+${r.marks}/${r.total}
+
+•
+
+⭐ ${r.rating}
+
+•
+
+🏆 ${r.points}
+
+</div>
+
+`).join("")
+
+:
+
+"<p>No results yet.</p>";
+
+}
+
+
+function deleteResource(id){
+
+if(!confirm("Resource delete করবেন?"))
+return;
+
+
+db.resources=
+db.resources.filter(
+r=>r.id!==id
+);
+
+save();
+
+renderResources();
+
+renderAdmin();
+
+}
+
+
+/* ======================================================
+   RESET
+====================================================== */
+
+function resetData(){
+
+if(!confirm(
+"সব demo data মুছে ফেলবেন?"
+))
+return;
+
+
+localStorage.removeItem(KEY);
+
+location.reload();
+
+}
+
+
+/* ======================================================
+   DARK MODE
+====================================================== */
+
+function toggleDark(){
+
+document.body.classList.toggle("dark");
+
+localStorage.setItem(
+"TSF_DARK",
+document.body.classList.contains("dark")
+);
+
+}
+
+
+if(
+localStorage.getItem("TSF_DARK")==="true"
+){
+
+document.body.classList.add("dark");
+
+}
+
+
+/* ======================================================
+   MOBILE
+====================================================== */
+
+function mobileNav(){
+
+const links=
+document.querySelector(".navLinks");
+
+if(
+links.style.display==="flex"
+){
+
+links.style.display="none";
+
+}else{
+
+links.style.display="flex";
+
+links.style.flexDirection="column";
+
+links.style.position="absolute";
+
+links.style.top="72px";
+
+links.style.left="0";
+
+links.style.right="0";
+
+links.style.background="var(--card)";
+
+links.style.padding="15px";
+
+}
+
+}
+
+
+/* ======================================================
+   INITIALIZE
+====================================================== */
+
+renderResources();
+
+renderNotices();
+
+renderExams();
+
+renderLeaderboard();
+
+renderAdmin();
 
 </script>
 
