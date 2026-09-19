@@ -2,26 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#08111f">
+  <meta name="description" content="TSF Super Admin Panel">
   <title>TSF — Super Admin</title>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     :root {
       --dark: #08111f;
-      --dark2: #101d31;
-      --green: #12b886;
-      --green2: #0ca678;
-      --bg: #f5f7fb;
+      --dark-2: #0e1b2d;
+      --green: #18b77a;
+      --green-dark: #0d8e5e;
+      --green-light: #dff8ee;
+      --bg: #f5f8fb;
       --white: #ffffff;
-      --text: #172033;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --danger: #e03131;
-      --warning: #f08c00;
-      --shadow: 0 15px 45px rgba(8,17,31,.10);
+      --text: #142033;
+      --muted: #718096;
+      --border: #e4eaf0;
+      --danger: #e5484d;
+      --danger-light: #fff0f1;
+      --warning: #e9a227;
+      --shadow: 0 15px 45px rgba(8, 17, 31, .08);
       --radius: 18px;
     }
 
@@ -31,8 +32,13 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -49,11 +55,18 @@
       cursor: pointer;
     }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     .hidden {
       display: none !important;
     }
 
-    /* LOGIN */
+    /* =========================
+       AUTH
+    ========================= */
 
     .auth-page {
       min-height: 100vh;
@@ -62,89 +75,94 @@
       justify-content: center;
       padding: 24px;
       background:
-        radial-gradient(circle at 20% 20%, rgba(18,184,134,.18), transparent 30%),
-        radial-gradient(circle at 80% 80%, rgba(20,100,180,.16), transparent 30%),
+        radial-gradient(circle at 10% 10%, rgba(24,183,122,.15), transparent 30%),
+        radial-gradient(circle at 90% 90%, rgba(24,183,122,.12), transparent 30%),
         var(--dark);
     }
 
     .auth-card {
       width: 100%;
-      max-width: 460px;
+      max-width: 470px;
       background: rgba(255,255,255,.98);
+      border: 1px solid rgba(255,255,255,.4);
       border-radius: 28px;
       padding: 34px;
-      box-shadow: 0 30px 80px rgba(0,0,0,.28);
+      box-shadow: 0 30px 90px rgba(0,0,0,.25);
     }
 
-    .logo {
-      width: 78px;
-      height: 78px;
+    .auth-logo {
+      width: 74px;
+      height: 74px;
       border-radius: 22px;
-      background: linear-gradient(135deg, var(--green), #087f5b);
-      color: white;
+      margin: 0 auto 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      background: var(--dark);
+      color: white;
       font-weight: 900;
-      letter-spacing: 1px;
-      margin-bottom: 22px;
-      box-shadow: 0 12px 30px rgba(18,184,134,.25);
+      font-size: 18px;
+      letter-spacing: 2px;
+      box-shadow: 0 15px 35px rgba(8,17,31,.2);
     }
 
-    .auth-card h1 {
-      font-size: 30px;
-      margin-bottom: 8px;
+    .auth-title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 7px;
     }
 
-    .auth-card .subtitle {
+    .auth-subtitle {
+      text-align: center;
       color: var(--muted);
+      margin-bottom: 28px;
       line-height: 1.6;
-      margin-bottom: 26px;
     }
 
-    .field {
+    .form-group {
       margin-bottom: 17px;
     }
 
-    .field label {
+    .form-group label {
       display: block;
-      font-weight: 700;
+      font-size: 13px;
+      font-weight: 800;
       margin-bottom: 8px;
-      font-size: 14px;
     }
 
-    .field input,
-    .field textarea,
-    .field select {
+    .input,
+    .textarea,
+    .select {
       width: 100%;
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 13px 14px;
-      outline: none;
       background: white;
       color: var(--text);
+      border-radius: 13px;
+      padding: 13px 14px;
+      outline: none;
+      transition: .2s ease;
     }
 
-    .field textarea {
+    .textarea {
       min-height: 120px;
       resize: vertical;
     }
 
-    .field input:focus,
-    .field textarea:focus,
-    .field select:focus {
+    .input:focus,
+    .textarea:focus,
+    .select:focus {
       border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(18,184,134,.12);
+      box-shadow: 0 0 0 4px rgba(24,183,122,.1);
     }
 
     .primary-btn,
     .secondary-btn,
     .danger-btn,
-    .warning-btn {
+    .ghost-btn {
       border: 0;
       border-radius: 12px;
-      padding: 12px 17px;
+      padding: 12px 16px;
       font-weight: 800;
       transition: .2s ease;
     }
@@ -155,151 +173,192 @@
     }
 
     .primary-btn:hover {
-      background: var(--green2);
+      background: var(--green-dark);
       transform: translateY(-1px);
     }
 
     .secondary-btn {
-      background: #eef2f7;
-      color: var(--text);
+      background: var(--dark);
+      color: white;
+    }
+
+    .secondary-btn:hover {
+      background: var(--dark-2);
     }
 
     .danger-btn {
-      background: #ffe3e3;
+      background: var(--danger-light);
       color: var(--danger);
     }
 
-    .warning-btn {
-      background: #fff3bf;
-      color: #8d5f00;
+    .danger-btn:hover {
+      background: var(--danger);
+      color: white;
     }
 
-    .full {
+    .ghost-btn {
+      background: #eef3f7;
+      color: var(--text);
+    }
+
+    .ghost-btn:hover {
+      background: #e3eaf0;
+    }
+
+    .full-btn {
       width: 100%;
     }
 
-    .forgot-btn {
-      display: block;
-      width: 100%;
+    .auth-links {
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .auth-links button {
+      background: none;
       border: 0;
-      background: transparent;
-      color: var(--green2);
+      color: var(--green-dark);
       font-weight: 800;
-      padding: 12px 0 2px;
     }
 
-    .forgot-btn:hover {
-      text-decoration: underline;
-    }
-
-    .security-note {
-      margin-top: 20px;
-      padding: 13px;
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      color: #166534;
+    .auth-message {
+      display: none;
+      padding: 12px 14px;
       border-radius: 12px;
-      font-size: 13px;
+      margin-bottom: 15px;
+      font-size: 14px;
       line-height: 1.5;
     }
 
-    /* ADMIN */
+    .auth-message.show {
+      display: block;
+    }
 
-    .admin-page {
+    .auth-message.error {
+      background: var(--danger-light);
+      color: #b52f34;
+    }
+
+    .auth-message.success {
+      background: var(--green-light);
+      color: #08744b;
+    }
+
+    /* =========================
+       DASHBOARD
+    ========================= */
+
+    .dashboard {
       min-height: 100vh;
     }
 
-    .admin-header {
-      background: var(--dark);
-      color: white;
-      padding: 16px 22px;
+    .topbar {
       position: sticky;
       top: 0;
       z-index: 50;
-      box-shadow: 0 8px 30px rgba(0,0,0,.12);
-    }
-
-    .header-inner {
-      max-width: 1250px;
-      margin: auto;
+      min-height: 74px;
+      background: rgba(8,17,31,.96);
+      color: white;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 15px;
+      gap: 16px;
+      padding: 12px 24px;
+      backdrop-filter: blur(16px);
     }
 
-    .header-brand {
+    .brand {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .mini-logo {
-      width: 45px;
-      height: 45px;
-      border-radius: 13px;
-      background: linear-gradient(135deg, var(--green), #087f5b);
+    .brand-logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #18b77a, #0b8f60);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 900;
+      letter-spacing: 1px;
     }
 
-    .header-brand strong {
+    .brand-title strong {
       display: block;
+      font-size: 15px;
     }
 
-    .header-brand small {
+    .brand-title small {
       display: block;
-      color: #aeb8c7;
-      margin-top: 3px;
+      color: #9cafc4;
+      font-size: 11px;
+      margin-top: 2px;
     }
 
-    .header-actions {
+    .top-actions {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+      gap: 9px;
+      align-items: center;
     }
 
-    .header-actions a,
-    .header-actions button {
-      text-decoration: none;
-      border: 1px solid rgba(255,255,255,.15);
-      background: rgba(255,255,255,.08);
+    .top-action {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.07);
       color: white;
-      padding: 9px 13px;
-      border-radius: 10px;
-      font-weight: 700;
+      border-radius: 11px;
+      padding: 10px 13px;
+      font-size: 13px;
+      font-weight: 800;
     }
 
-    .container {
-      max-width: 1250px;
-      margin: auto;
-      padding: 28px 20px 60px;
+    .top-action:hover {
+      background: rgba(255,255,255,.14);
+    }
+
+    .main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 28px 24px 60px;
     }
 
     .welcome {
-      margin-bottom: 22px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      color: var(--green-dark);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
     }
 
     .welcome h1 {
-      font-size: 30px;
-      margin-bottom: 6px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.1;
+      margin-bottom: 8px;
     }
 
     .welcome p {
       color: var(--muted);
     }
 
-    .stats {
+    /* =========================
+       STATS
+    ========================= */
+
+    .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 15px;
-      margin-bottom: 25px;
+      margin-bottom: 26px;
     }
 
-    .stat {
+    .stat-card {
       background: white;
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -307,233 +366,415 @@
       box-shadow: var(--shadow);
     }
 
-    .stat span {
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      background: var(--green-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      margin-bottom: 13px;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .stat-card span {
       color: var(--muted);
       font-size: 13px;
       font-weight: 700;
     }
 
-    .stat strong {
-      display: block;
-      font-size: 30px;
-      margin-top: 8px;
-    }
+    /* =========================
+       SECTION
+    ========================= */
 
-    .panel {
+    .section {
       background: white;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
       padding: 22px;
+      box-shadow: var(--shadow);
       margin-bottom: 22px;
     }
 
-    .panel-title {
+    .section-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 14px;
       margin-bottom: 18px;
-      flex-wrap: wrap;
     }
 
-    .panel-title h2 {
-      font-size: 21px;
+    .section-head h2 {
+      font-size: 20px;
     }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-
-    .full-field {
-      grid-column: 1 / -1;
-    }
-
-    .form-actions {
-      display: flex;
-      gap: 9px;
-      flex-wrap: wrap;
+    .section-head p {
+      color: var(--muted);
+      font-size: 13px;
       margin-top: 4px;
     }
 
-    .data-list {
-      display: grid;
-      gap: 11px;
+    .section-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
-    .data-item {
+    /* =========================
+       TABLE
+    ========================= */
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
     }
 
-    .data-main {
-      min-width: 0;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
     }
 
-    .data-main strong {
-      display: block;
-      margin-bottom: 5px;
+    th,
+    td {
+      text-align: left;
+      padding: 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
     }
 
-    .data-main p {
+    th {
+      background: #f8fafc;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .6px;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
-      word-break: break-word;
     }
 
-    .data-actions {
+    td {
+      font-size: 13px;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .item-name {
       display: flex;
-      gap: 7px;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 11px;
+      min-width: 180px;
+    }
+
+    .item-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      background: #eef6f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
       flex-shrink: 0;
     }
 
+    .item-name strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .item-name small {
+      color: var(--muted);
+    }
+
     .badge {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 99px;
-      background: #e7f8f2;
-      color: #087f5b;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .badge.active {
+      color: #08744b;
+      background: var(--green-light);
+    }
+
+    .badge.inactive {
+      color: #8a6200;
+      background: #fff5d9;
+    }
+
+    .row-actions {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .small-btn {
+      padding: 7px 10px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: white;
       font-size: 11px;
       font-weight: 800;
-      margin-top: 7px;
     }
 
-    .badge.off {
-      background: #ffe3e3;
-      color: var(--danger);
+    .small-btn:hover {
+      background: #f3f6f8;
     }
+
+    .small-btn.delete {
+      color: var(--danger);
+      border-color: #ffd6d8;
+    }
+
+    /* =========================
+       EMPTY / LOADING
+    ========================= */
 
     .empty {
-      padding: 28px;
       text-align: center;
+      padding: 35px 20px;
       color: var(--muted);
-      border: 1px dashed var(--border);
-      border-radius: 13px;
     }
 
-    /* MODAL */
+    .empty-icon {
+      font-size: 35px;
+      margin-bottom: 8px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 35px;
+      color: var(--muted);
+    }
+
+    .spinner {
+      width: 30px;
+      height: 30px;
+      border: 3px solid #dfe8e4;
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+      margin: 0 auto 12px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
 
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.55);
-      display: flex;
+      z-index: 100;
+      background: rgba(8,17,31,.62);
+      backdrop-filter: blur(6px);
+      display: none;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      z-index: 100;
+    }
+
+    .modal-backdrop.show {
+      display: flex;
     }
 
     .modal {
       width: 100%;
-      max-width: 430px;
+      max-width: 570px;
+      max-height: 92vh;
+      overflow-y: auto;
       background: white;
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: 0 30px 80px rgba(0,0,0,.3);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 30px 90px rgba(0,0,0,.28);
     }
 
-    .modal h3 {
-      margin-bottom: 10px;
-    }
-
-    .modal p {
-      color: var(--muted);
-      line-height: 1.6;
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
       margin-bottom: 20px;
     }
 
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
+    .modal-head h3 {
+      font-size: 21px;
     }
 
-    /* TOAST */
+    .close-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      border: 0;
+      background: #eef3f6;
+      font-size: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .checkbox-line {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 11px 0;
+    }
+
+    .checkbox-line input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--green);
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 9px;
+      margin-top: 20px;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
 
     .toast {
       position: fixed;
-      left: 50%;
-      bottom: 25px;
-      transform: translate(-50%, 20px);
+      z-index: 200;
+      right: 20px;
+      bottom: 20px;
+      max-width: 370px;
       background: var(--dark);
       color: white;
-      padding: 13px 18px;
-      border-radius: 12px;
-      box-shadow: 0 15px 40px rgba(0,0,0,.25);
+      padding: 13px 16px;
+      border-radius: 13px;
+      box-shadow: 0 15px 40px rgba(0,0,0,.2);
       opacity: 0;
+      transform: translateY(15px);
       pointer-events: none;
-      transition: .25s;
-      z-index: 200;
-      max-width: 90%;
-      text-align: center;
+      transition: .25s ease;
+      font-size: 13px;
+      line-height: 1.45;
     }
 
     .toast.show {
       opacity: 1;
-      transform: translate(-50%, 0);
+      transform: translateY(0);
     }
 
     .toast.success {
-      background: #087f5b;
+      background: #08744b;
     }
 
     .toast.error {
-      background: #c92a2a;
+      background: #b52f34;
     }
 
-    @media (max-width: 850px) {
-      .stats {
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 950px) {
+      .stats-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .topbar {
+        padding: 10px 14px;
+      }
+
+      .brand-title {
+        display: none;
+      }
+
+      .top-action {
+        padding: 9px 10px;
+        font-size: 11px;
+      }
+
+      .main {
+        padding: 20px 13px 45px;
+      }
+
+      .section {
+        padding: 16px;
+        border-radius: 15px;
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .stats-grid {
+        gap: 10px;
+      }
+
+      .stat-card {
+        padding: 15px;
+      }
+
+      .stat-card strong {
+        font-size: 23px;
+      }
+
+      .auth-card {
+        padding: 24px 19px;
+        border-radius: 22px;
       }
 
       .form-grid {
         grid-template-columns: 1fr;
       }
 
-      .full-field {
+      .full {
         grid-column: auto;
       }
-    }
 
-    @media (max-width: 600px) {
-      .auth-card {
-        padding: 25px 20px;
+      .modal {
+        padding: 18px;
       }
 
-      .auth-card h1 {
-        font-size: 25px;
+      .modal-footer {
+        flex-direction: column-reverse;
       }
 
-      .stats {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .data-item {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .data-actions {
+      .modal-footer button {
         width: 100%;
       }
 
-      .data-actions button {
-        flex: 1;
-      }
-
-      .header-inner {
-        align-items: flex-start;
-        flex-direction: column;
+      .toast {
+        left: 13px;
+        right: 13px;
+        bottom: 13px;
+        max-width: none;
       }
     }
   </style>
@@ -541,63 +782,117 @@
 
 <body>
 
-  <!-- LOGIN -->
-  <section id="loginPage" class="auth-page">
+  <!-- =========================
+       LOGIN PAGE
+  ========================== -->
 
+  <section id="loginPage" class="auth-page">
     <div class="auth-card">
 
-      <div class="logo">M-A-S</div>
+      <div class="auth-logo">M-A-S</div>
 
-      <h1>Super Admin</h1>
+      <h1 class="auth-title">TSF Super Admin</h1>
 
-      <p class="subtitle">
-        Teachers Students Friendship — secure platform management.
+      <p class="auth-subtitle">
+        Secure management panel for<br>
+        Teachers Students Friendship
       </p>
+
+      <div id="loginMessage" class="auth-message"></div>
 
       <form id="loginForm">
 
-        <div class="field">
-          <label>Email</label>
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
           <input
             id="loginEmail"
+            class="input"
             type="email"
+            autocomplete="email"
             value="maksudtahsin0@gmail.com"
-            readonly
             required
           >
         </div>
 
-        <div class="field">
-          <label>Password</label>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
           <input
             id="loginPassword"
+            class="input"
             type="password"
-            placeholder="Enter your password"
             autocomplete="current-password"
+            placeholder="Enter your password"
             required
           >
         </div>
 
         <button
           id="loginButton"
-          class="primary-btn full"
+          class="primary-btn full-btn"
           type="submit"
         >
-          Login to Admin
+          Sign In
         </button>
 
       </form>
 
-      <button
-        id="forgotPasswordButton"
-        class="forgot-btn"
-        type="button"
-      >
-        Forgot Password?
-      </button>
+      <div class="auth-links">
+        <button id="forgotPasswordButton" type="button">
+          Forgot Password?
+        </button>
+      </div>
 
-      <div class="security-note">
-        🔐 Only the authorized TSF Super Admin account can access this dashboard.
+    </div>
+  </section>
+
+
+  <!-- =========================
+       FORGOT PASSWORD PAGE
+  ========================== -->
+
+  <section id="forgotPage" class="auth-page hidden">
+
+    <div class="auth-card">
+
+      <div class="auth-logo">M-A-S</div>
+
+      <h1 class="auth-title">Reset Password</h1>
+
+      <p class="auth-subtitle">
+        We'll send a password reset link to your Super Admin email.
+      </p>
+
+      <div id="forgotMessage" class="auth-message"></div>
+
+      <form id="forgotForm">
+
+        <div class="form-group">
+          <label for="forgotEmail">Super Admin Email</label>
+
+          <input
+            id="forgotEmail"
+            class="input"
+            type="email"
+            value="maksudtahsin0@gmail.com"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <button
+          id="sendResetButton"
+          class="primary-btn full-btn"
+          type="submit"
+        >
+          Send Reset Link
+        </button>
+
+      </form>
+
+      <div class="auth-links">
+        <button id="backToLoginButton" type="button">
+          ← Back to Login
+        </button>
       </div>
 
     </div>
@@ -605,48 +900,57 @@
   </section>
 
 
-  <!-- PASSWORD RESET -->
+  <!-- =========================
+       NEW PASSWORD PAGE
+  ========================== -->
+
   <section id="resetPage" class="auth-page hidden">
 
     <div class="auth-card">
 
-      <div class="logo">M-A-S</div>
+      <div class="auth-logo">M-A-S</div>
 
-      <h1>Create New Password</h1>
+      <h1 class="auth-title">Create New Password</h1>
 
-      <p class="subtitle">
-        Set a new password for your TSF Super Admin account.
+      <p class="auth-subtitle">
+        Choose a strong new password for your Super Admin account.
       </p>
+
+      <div id="resetMessage" class="auth-message"></div>
 
       <form id="resetForm">
 
-        <div class="field">
-          <label>New Password</label>
+        <div class="form-group">
+          <label for="newPassword">New Password</label>
+
           <input
             id="newPassword"
+            class="input"
             type="password"
-            placeholder="Enter new password"
             autocomplete="new-password"
-            minlength="8"
+            placeholder="At least 6 characters"
+            minlength="6"
             required
           >
         </div>
 
-        <div class="field">
-          <label>Confirm New Password</label>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm New Password</label>
+
           <input
             id="confirmPassword"
+            class="input"
             type="password"
-            placeholder="Confirm new password"
             autocomplete="new-password"
-            minlength="8"
+            placeholder="Enter password again"
+            minlength="6"
             required
           >
         </div>
 
         <button
-          id="resetButton"
-          class="primary-btn full"
+          id="updatePasswordButton"
+          class="primary-btn full-btn"
           type="submit"
         >
           Update Password
@@ -659,69 +963,121 @@
   </section>
 
 
-  <!-- ADMIN DASHBOARD -->
-  <section id="adminPage" class="admin-page hidden">
+  <!-- =========================
+       DASHBOARD
+  ========================== -->
 
-    <header class="admin-header">
+  <section id="dashboardPage" class="dashboard hidden">
 
-      <div class="header-inner">
+    <header class="topbar">
 
-        <div class="header-brand">
-          <div class="mini-logo">M-A-S</div>
+      <a class="brand" href="./">
 
-          <div>
-            <strong>TSF Super Admin</strong>
-            <small>Teachers Students Friendship</small>
-          </div>
+        <div class="brand-logo">
+          M-A-S
         </div>
 
-        <div class="header-actions">
-
-          <a href="./" target="_blank">
-            🌐 Website
-          </a>
-
-          <button id="logoutButton" type="button">
-            Logout
-          </button>
-
+        <div class="brand-title">
+          <strong>TSF Super Admin</strong>
+          <small>Teachers Students Friendship</small>
         </div>
+
+      </a>
+
+      <div class="top-actions">
+
+        <a
+          class="top-action"
+          href="./"
+          target="_blank"
+          rel="noopener"
+        >
+          🌐 Website
+        </a>
+
+        <button
+          id="refreshButton"
+          class="top-action"
+          type="button"
+        >
+          ↻ Refresh
+        </button>
+
+        <button
+          id="logoutButton"
+          class="top-action"
+          type="button"
+        >
+          Logout
+        </button>
 
       </div>
 
     </header>
 
 
-    <main class="container">
+    <main class="main">
 
       <div class="welcome">
-        <h1>Admin Dashboard</h1>
-        <p>Manage TSF applications, resources and announcements.</p>
+
+        <div class="eyebrow">
+          TSF CONTROL CENTER
+        </div>
+
+        <h1>Welcome, Super Admin.</h1>
+
+        <p id="adminEmailText">
+          Loading account...
+        </p>
+
       </div>
 
 
       <!-- STATS -->
 
-      <div class="stats">
+      <div class="stats-grid">
 
-        <div class="stat">
+        <div class="stat-card">
+
+          <div class="stat-icon">🚀</div>
+
+          <strong id="appsCount">0</strong>
+
           <span>Applications</span>
-          <strong id="appCount">0</strong>
+
         </div>
 
-        <div class="stat">
+
+        <div class="stat-card">
+
+          <div class="stat-icon">📚</div>
+
+          <strong id="resourcesCount">0</strong>
+
           <span>Resources</span>
-          <strong id="resourceCount">0</strong>
+
         </div>
 
-        <div class="stat">
+
+        <div class="stat-card">
+
+          <div class="stat-icon">📢</div>
+
+          <strong id="announcementsCount">0</strong>
+
           <span>Announcements</span>
-          <strong id="announcementCount">0</strong>
+
         </div>
 
-        <div class="stat">
-          <span>Active Items</span>
+
+        <div class="stat-card">
+
+          <div class="stat-icon">🟢</div>
+
           <strong id="activeCount">0</strong>
+
+          <span>Active Items</span>
+
         </div>
 
       </div>
@@ -729,300 +1085,120 @@
 
       <!-- APPLICATIONS -->
 
-      <section class="panel">
+      <section class="section">
 
-        <div class="panel-title">
-          <h2>🚀 Applications</h2>
-          <button
-            id="cancelAppEdit"
-            class="secondary-btn hidden"
-            type="button"
-          >
-            Cancel Edit
-          </button>
-        </div>
+        <div class="section-head">
 
-        <form id="appForm">
+          <div>
 
-          <input type="hidden" id="appId">
+            <h2>🚀 Applications</h2>
 
-          <div class="form-grid">
-
-            <div class="field">
-              <label>Application Name</label>
-              <input
-                id="appName"
-                type="text"
-                placeholder="Example: Question Bank"
-                required
-              >
-            </div>
-
-            <div class="field">
-              <label>Icon</label>
-              <input
-                id="appIcon"
-                type="text"
-                placeholder="📚"
-                value="🚀"
-                required
-              >
-            </div>
-
-            <div class="field full-field">
-              <label>Description</label>
-              <textarea
-                id="appDescription"
-                placeholder="Short description..."
-              ></textarea>
-            </div>
-
-            <div class="field full-field">
-              <label>Application URL</label>
-              <input
-                id="appUrl"
-                type="url"
-                placeholder="https://example.com"
-                required
-              >
-            </div>
-
-            <div class="field">
-              <label>Sort Order</label>
-              <input
-                id="appSort"
-                type="number"
-                value="0"
-              >
-            </div>
-
-            <div class="field">
-              <label>Status</label>
-              <select id="appActive">
-                <option value="true">Active / Visible</option>
-                <option value="false">Hidden</option>
-              </select>
-            </div>
+            <p>
+              Manage the applications shown on the TSF website.
+            </p>
 
           </div>
 
-          <div class="form-actions">
+          <div class="section-actions">
 
             <button
+              id="addAppButton"
               class="primary-btn"
-              type="submit"
-              id="appSubmitButton"
-            >
-              Add Application
-            </button>
-
-            <button
-              id="appClearButton"
-              class="secondary-btn"
               type="button"
             >
-              Clear
+              + Add Application
             </button>
 
           </div>
 
-        </form>
+        </div>
 
-        <div style="height:20px"></div>
-
-        <div id="appList" class="data-list"></div>
+        <div id="appsTableContainer">
+          <div class="loading">
+            <div class="spinner"></div>
+            Loading applications...
+          </div>
+        </div>
 
       </section>
 
 
       <!-- RESOURCES -->
 
-      <section class="panel">
+      <section class="section">
 
-        <div class="panel-title">
+        <div class="section-head">
 
-          <h2>📚 Books & Resources</h2>
+          <div>
 
-          <button
-            id="cancelResourceEdit"
-            class="secondary-btn hidden"
-            type="button"
-          >
-            Cancel Edit
-          </button>
+            <h2>📚 Books & Resources</h2>
+
+            <p>
+              Manage books, notes, videos, question banks and learning resources.
+            </p>
+
+          </div>
+
+          <div class="section-actions">
+
+            <button
+              id="addResourceButton"
+              class="primary-btn"
+              type="button"
+            >
+              + Add Resource
+            </button>
+
+          </div>
 
         </div>
 
-        <form id="resourceForm">
-
-          <input type="hidden" id="resourceId">
-
-          <div class="form-grid">
-
-            <div class="field">
-              <label>Title</label>
-              <input
-                id="resourceTitle"
-                type="text"
-                placeholder="Example: English Grammar"
-                required
-              >
-            </div>
-
-            <div class="field">
-              <label>Category</label>
-              <input
-                id="resourceCategory"
-                type="text"
-                placeholder="Academic Books"
-                required
-              >
-            </div>
-
-            <div class="field full-field">
-              <label>Description</label>
-              <textarea
-                id="resourceDescription"
-                placeholder="Short description..."
-              ></textarea>
-            </div>
-
-            <div class="field full-field">
-              <label>Resource URL</label>
-              <input
-                id="resourceUrl"
-                type="url"
-                placeholder="https://example.com/book"
-                required
-              >
-            </div>
-
-            <div class="field">
-              <label>Sort Order</label>
-              <input
-                id="resourceSort"
-                type="number"
-                value="0"
-              >
-            </div>
-
-            <div class="field">
-              <label>Status</label>
-              <select id="resourceActive">
-                <option value="true">Active / Visible</option>
-                <option value="false">Hidden</option>
-              </select>
-            </div>
-
+        <div id="resourcesTableContainer">
+          <div class="loading">
+            <div class="spinner"></div>
+            Loading resources...
           </div>
-
-          <div class="form-actions">
-
-            <button
-              class="primary-btn"
-              type="submit"
-              id="resourceSubmitButton"
-            >
-              Add Resource
-            </button>
-
-            <button
-              id="resourceClearButton"
-              class="secondary-btn"
-              type="button"
-            >
-              Clear
-            </button>
-
-          </div>
-
-        </form>
-
-        <div style="height:20px"></div>
-
-        <div id="resourceList" class="data-list"></div>
+        </div>
 
       </section>
 
 
       <!-- ANNOUNCEMENTS -->
 
-      <section class="panel">
+      <section class="section">
 
-        <div class="panel-title">
+        <div class="section-head">
 
-          <h2>📢 Announcements</h2>
+          <div>
 
-          <button
-            id="cancelAnnouncementEdit"
-            class="secondary-btn hidden"
-            type="button"
-          >
-            Cancel Edit
-          </button>
+            <h2>📢 Announcements</h2>
+
+            <p>
+              Publish updates and important messages on the TSF website.
+            </p>
+
+          </div>
+
+          <div class="section-actions">
+
+            <button
+              id="addAnnouncementButton"
+              class="primary-btn"
+              type="button"
+            >
+              + Add Announcement
+            </button>
+
+          </div>
 
         </div>
 
-        <form id="announcementForm">
-
-          <input type="hidden" id="announcementId">
-
-          <div class="form-grid">
-
-            <div class="field full-field">
-              <label>Announcement Title</label>
-              <input
-                id="announcementTitle"
-                type="text"
-                placeholder="Important TSF Update"
-                required
-              >
-            </div>
-
-            <div class="field full-field">
-              <label>Announcement Body</label>
-              <textarea
-                id="announcementBody"
-                placeholder="Write your announcement..."
-                required
-              ></textarea>
-            </div>
-
-            <div class="field">
-              <label>Status</label>
-              <select id="announcementActive">
-                <option value="true">Published / Visible</option>
-                <option value="false">Hidden</option>
-              </select>
-            </div>
-
+        <div id="announcementsTableContainer">
+          <div class="loading">
+            <div class="spinner"></div>
+            Loading announcements...
           </div>
-
-          <div class="form-actions">
-
-            <button
-              class="primary-btn"
-              type="submit"
-              id="announcementSubmitButton"
-            >
-              Publish Announcement
-            </button>
-
-            <button
-              id="announcementClearButton"
-              class="secondary-btn"
-              type="button"
-            >
-              Clear
-            </button>
-
-          </div>
-
-        </form>
-
-        <div style="height:20px"></div>
-
-        <div id="announcementList" class="data-list"></div>
+        </div>
 
       </section>
 
@@ -1031,30 +1207,292 @@
   </section>
 
 
-  <!-- CONFIRM MODAL -->
+  <!-- =========================
+       ITEM MODAL
+  ========================== -->
 
-  <div id="confirmModal" class="modal-backdrop hidden">
+  <div id="itemModal" class="modal-backdrop">
 
     <div class="modal">
 
-      <h3>Confirm Action</h3>
+      <div class="modal-head">
 
-      <p id="confirmText">
+        <h3 id="itemModalTitle">
+          Add Application
+        </h3>
+
+        <button
+          id="closeItemModal"
+          class="close-btn"
+          type="button"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="itemForm">
+
+        <input
+          id="itemId"
+          type="hidden"
+        >
+
+        <input
+          id="itemType"
+          type="hidden"
+        >
+
+
+        <div class="form-grid">
+
+          <div id="nameGroup" class="form-group">
+
+            <label id="nameLabel" for="itemName">
+              Name
+            </label>
+
+            <input
+              id="itemName"
+              class="input"
+              type="text"
+              maxlength="150"
+              required
+            >
+
+          </div>
+
+
+          <div id="iconGroup" class="form-group">
+
+            <label for="itemIcon">
+              Icon
+            </label>
+
+            <input
+              id="itemIcon"
+              class="input"
+              type="text"
+              maxlength="10"
+              placeholder="📚"
+              value="🚀"
+            >
+
+          </div>
+
+
+          <div
+            id="categoryGroup"
+            class="form-group hidden"
+          >
+
+            <label for="itemCategory">
+              Category
+            </label>
+
+            <select
+              id="itemCategory"
+              class="select"
+            >
+
+              <option value="Story Books">
+                Story Books
+              </option>
+
+              <option value="Islamic Books">
+                Islamic Books
+              </option>
+
+              <option value="Academic Books">
+                Academic Books
+              </option>
+
+              <option value="English Books">
+                English Books
+              </option>
+
+              <option value="Notes & Guides">
+                Notes & Guides
+              </option>
+
+              <option value="Question Bank">
+                Question Bank
+              </option>
+
+              <option value="Educational Videos">
+                Educational Videos
+              </option>
+
+              <option value="Audio Learning">
+                Audio Learning
+              </option>
+
+              <option value="Quiz & Practice">
+                Quiz & Practice
+              </option>
+
+              <option value="Teachers Hub">
+                Teachers Hub
+              </option>
+
+              <option value="Students Hub">
+                Students Hub
+              </option>
+
+              <option value="Other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div
+            id="sortGroup"
+            class="form-group"
+          >
+
+            <label for="itemSort">
+              Sort Order
+            </label>
+
+            <input
+              id="itemSort"
+              class="input"
+              type="number"
+              value="0"
+              min="0"
+            >
+
+          </div>
+
+
+          <div class="form-group full">
+
+            <label for="itemDescription">
+              Description
+            </label>
+
+            <textarea
+              id="itemDescription"
+              class="textarea"
+              maxlength="1000"
+              placeholder="Write a short description..."
+            ></textarea>
+
+          </div>
+
+
+          <div class="form-group full">
+
+            <label for="itemUrl">
+              URL
+            </label>
+
+            <input
+              id="itemUrl"
+              class="input"
+              type="url"
+              placeholder="https://example.com"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group full">
+
+            <label class="checkbox-line">
+
+              <input
+                id="itemActive"
+                type="checkbox"
+                checked
+              >
+
+              <span>
+                Publish / Active
+              </span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+          <button
+            id="cancelItemButton"
+            class="ghost-btn"
+            type="button"
+          >
+            Cancel
+          </button>
+
+          <button
+            id="saveItemButton"
+            class="primary-btn"
+            type="submit"
+          >
+            Save
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       CONFIRM MODAL
+  ========================== -->
+
+  <div id="confirmModal" class="modal-backdrop">
+
+    <div class="modal" style="max-width:430px">
+
+      <div class="modal-head">
+
+        <h3>
+          Confirm Action
+        </h3>
+
+        <button
+          id="closeConfirmModal"
+          class="close-btn"
+          type="button"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <p
+        id="confirmText"
+        style="color:var(--muted);line-height:1.6"
+      >
         Are you sure?
       </p>
 
-      <div class="modal-actions">
+      <div class="modal-footer">
 
         <button
-          id="confirmCancel"
-          class="secondary-btn"
+          id="cancelConfirmButton"
+          class="ghost-btn"
           type="button"
         >
           Cancel
         </button>
 
         <button
-          id="confirmOkay"
+          id="confirmActionButton"
           class="danger-btn"
           type="button"
         >
@@ -1071,771 +1509,2845 @@
   <div id="toast" class="toast"></div>
 
 
-<script>
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-/* =========================================================
-   TSF SUPABASE CONFIG
-========================================================= */
 
-const SUPABASE_URL =
-  "https://bdsyjobzvwulaifpehvq.supabase.co";
+  <script>
+    /* =========================================================
+       TSF SUPABASE CONFIG
+       ========================================================= */
 
-const SUPABASE_KEY =
- sb_publishable_uVJ41MtBIJbKAQvABmBCdQ_uWtrBzWP _HERE";
+    const SUPABASE_URL =
+      "https://bdsyjobzvwulaifpehvq.supabase.co";
 
-const SUPER_ADMIN_EMAIL =
-  "maksudtahsin0@gmail.com";
+    /*
+      পাখি, শুধু এই নিচের লাইনে তোমার নিজের
+      Supabase Publishable Key বসাবে।
 
+      Example:
+      const SUPABASE_KEY = "sb_publishable_xxxxxxxxx";
 
-/* =========================================================
-   SUPABASE INITIALIZATION
-========================================================= */
+      এখানে "PASTE..." লেখা রেখে দিলে কাজ করবে না।
+    */
 
-if (
-  !window.supabase ||
-  !SUPABASE_KEY ||
-  SUPABASE_KEY.includes("PASTE_YOUR")
-) {
-  document.body.innerHTML = `
-    <div style="
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:25px;
-      font-family:Arial;
-      background:#08111f;
-      color:white;
-      text-align:center;
-    ">
-      <div>
-        <h2>TSF Supabase Key Missing</h2>
-        <p style="margin-top:10px;opacity:.8">
-          Add your Supabase Publishable Key inside admin.html.
-        </p>
-      </div>
-    </div>
-  `;
-  throw new Error("Supabase Publishable Key missing.");
-}
+    const SUPABASE_KEY =
+      "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE";
 
-const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+    const SUPER_ADMIN_EMAIL =
+      "maksudtahsin0@gmail.com";
 
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
+    /* =========================================================
+       GLOBALS
+       ========================================================= */
 
-const loginPage =
-  document.getElementById("loginPage");
+    let supabaseClient = null;
 
-const resetPage =
-  document.getElementById("resetPage");
+    let currentUser = null;
 
-const adminPage =
-  document.getElementById("adminPage");
+    let currentSession = null;
 
-const loginForm =
-  document.getElementById("loginForm");
+    let currentItems = [];
 
-const loginButton =
-  document.getElementById("loginButton");
+    let pendingConfirmAction = null;
 
-const forgotPasswordButton =
-  document.getElementById("forgotPasswordButton");
+    let toastTimer = null;
 
-const resetForm =
-  document.getElementById("resetForm");
 
-const resetButton =
-  document.getElementById("resetButton");
+    /* =========================================================
+       DOM HELPERS
+       ========================================================= */
 
-const logoutButton =
-  document.getElementById("logoutButton");
+    const $ = (id) =>
+      document.getElementById(id);
 
-const toast =
-  document.getElementById("toast");
 
+    const loginPage =
+      $("loginPage");
 
-/* =========================================================
-   HELPERS
-========================================================= */
+    const forgotPage =
+      $("forgotPage");
 
-function showToast(message, type = "") {
+    const resetPage =
+      $("resetPage");
 
-  toast.textContent = message;
+    const dashboardPage =
+      $("dashboardPage");
 
-  toast.className = "toast show " + type;
 
-  clearTimeout(window.toastTimer);
+    /* =========================================================
+       MESSAGE
+       ========================================================= */
 
-  window.toastTimer = setTimeout(() => {
-    toast.className = "toast";
-  }, 3500);
-}
+    function showMessage(element, message, type) {
 
+      element.textContent = message;
 
-function escapeHtml(value) {
+      element.className =
+        "auth-message show " + type;
 
-  return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-
-function validUrl(url) {
-
-  try {
-
-    const parsed =
-      new URL(url);
-
-    return (
-      parsed.protocol === "http:" ||
-      parsed.protocol === "https:"
-    );
-
-  } catch {
-
-    return false;
-
-  }
-}
-
-
-function showPage(page) {
-
-  loginPage.classList.add("hidden");
-  resetPage.classList.add("hidden");
-  adminPage.classList.add("hidden");
-
-  page.classList.remove("hidden");
-}
-
-
-/* =========================================================
-   SUPER ADMIN CHECK
-========================================================= */
-
-async function checkSuperAdmin() {
-
-  const {
-    data: {
-      session
-    }
-  } =
-    await supabaseClient.auth.getSession();
-
-  if (!session?.user) {
-    showPage(loginPage);
-    return false;
-  }
-
-  const email =
-    String(
-      session.user.email || ""
-    ).toLowerCase();
-
-  if (
-    email !==
-    SUPER_ADMIN_EMAIL.toLowerCase()
-  ) {
-
-    await supabaseClient.auth.signOut();
-
-    showPage(loginPage);
-
-    showToast(
-      "This account is not authorized as TSF Super Admin.",
-      "error"
-    );
-
-    return false;
-  }
-
-
-  const {
-    data: role,
-    error
-  } =
-    await supabaseClient
-      .from("user_roles")
-      .select("role")
-      .eq(
-        "user_id",
-        session.user.id
-      )
-      .maybeSingle();
-
-
-  if (
-    error ||
-    !role ||
-    role.role !== "super_admin"
-  ) {
-
-    await supabaseClient.auth.signOut();
-
-    showPage(loginPage);
-
-    showToast(
-      "Super Admin permission was not found.",
-      "error"
-    );
-
-    return false;
-  }
-
-
-  showPage(adminPage);
-
-  await loadEverything();
-
-  return true;
-}
-
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-loginForm.addEventListener(
-  "submit",
-  async event => {
-
-    event.preventDefault();
-
-    const password =
-      document.getElementById(
-        "loginPassword"
-      ).value.trim();
-
-
-    if (!password) {
-      showToast(
-        "Please enter your password.",
-        "error"
-      );
-      return;
     }
 
 
-    loginButton.disabled = true;
-    loginButton.textContent =
-      "Signing in...";
+    function hideMessage(element) {
 
+      element.textContent = "";
 
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth
-        .signInWithPassword({
-          email:
-            SUPER_ADMIN_EMAIL,
-          password
-        });
+      element.className =
+        "auth-message";
 
-
-    loginButton.disabled = false;
-    loginButton.textContent =
-      "Login to Admin";
-
-
-    if (error) {
-
-      showToast(
-        error.message,
-        "error"
-      );
-
-      return;
     }
 
 
-    if (!data?.user) {
+    /* =========================================================
+       TOAST
+       ========================================================= */
 
-      showToast(
-        "Login failed.",
-        "error"
-      );
+    function showToast(message, type = "") {
 
-      return;
+      const toast =
+        $("toast");
+
+      toast.textContent =
+        message;
+
+      toast.className =
+        "toast show " + type;
+
+      clearTimeout(toastTimer);
+
+      toastTimer =
+        setTimeout(() => {
+
+          toast.className =
+            "toast";
+
+        }, 3500);
+
     }
 
 
-    const allowed =
-      await checkSuperAdmin();
+    /* =========================================================
+       PAGE SWITCH
+       ========================================================= */
 
-    if (!allowed) {
-      return;
+    function showPage(page) {
+
+      loginPage.classList.add("hidden");
+
+      forgotPage.classList.add("hidden");
+
+      resetPage.classList.add("hidden");
+
+      dashboardPage.classList.add("hidden");
+
+      page.classList.remove("hidden");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
     }
 
 
-    document.getElementById(
-      "loginPassword"
-    ).value = "";
+    /* =========================================================
+       SUPABASE INITIALIZATION
+       ========================================================= */
 
-  }
-);
-
-
-/* =========================================================
-   FORGOT PASSWORD
-========================================================= */
-
-forgotPasswordButton.addEventListener(
-  "click",
-  async () => {
-
-    forgotPasswordButton.disabled =
-      true;
-
-    forgotPasswordButton.textContent =
-      "Sending reset link...";
-
-
-    const redirectTo =
-      window.location.origin +
-      window.location.pathname;
-
-
-    const {
-      error
-    } =
-      await supabaseClient.auth
-        .resetPasswordForEmail(
-          SUPER_ADMIN_EMAIL,
-          {
-            redirectTo
-          }
-        );
-
-
-    forgotPasswordButton.disabled =
-      false;
-
-    forgotPasswordButton.textContent =
-      "Forgot Password?";
-
-
-    if (error) {
-
-      showToast(
-        error.message,
-        "error"
-      );
-
-      return;
-    }
-
-
-    showToast(
-      "Password reset link sent to your email.",
-      "success"
-    );
-
-  }
-);
-
-
-/* =========================================================
-   PASSWORD RECOVERY
-========================================================= */
-
-supabaseClient.auth.onAuthStateChange(
-  async (event, session) => {
-
-    if (event === "PASSWORD_RECOVERY") {
-
-      showPage(resetPage);
-
-      return;
-    }
-
-    if (
-      event === "SIGNED_IN" &&
-      session
-    ) {
-
-      const url =
-        window.location.href;
+    function initSupabase() {
 
       if (
-        !url.includes("type=recovery")
+        !window.supabase ||
+        typeof window.supabase.createClient !== "function"
       ) {
-        await checkSuperAdmin();
+
+        showMessage(
+          $("loginMessage"),
+          "Supabase library could not load. Check your internet connection.",
+          "error"
+        );
+
+        return false;
+
+      }
+
+
+      if (
+        !SUPABASE_KEY ||
+        SUPABASE_KEY ===
+       sb_publishable_uVJ41MtBIJbKAQvABmBCdQ_uWtrBzWP_HERE"
+      ) {
+
+        showMessage(
+          $("loginMessage"),
+          "Please add your Supabase Publishable Key in admin.html first.",
+          "error"
+        );
+
+        return false;
+
+      }
+
+
+      try {
+
+        supabaseClient =
+          window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+          );
+
+        return true;
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          $("loginMessage"),
+          "Could not initialize Supabase.",
+          "error"
+        );
+
+        return false;
+
       }
 
     }
 
-  }
-);
+
+    /* =========================================================
+       AUTH — SUPER ADMIN CHECK
+       ========================================================= */
+
+    async function checkSuperAdmin() {
+
+      if (!supabaseClient) {
+        return false;
+      }
 
 
-/* =========================================================
-   UPDATE PASSWORD
-========================================================= */
+      try {
 
-resetForm.addEventListener(
-  "submit",
-  async event => {
-
-    event.preventDefault();
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth.getSession();
 
 
-    const password =
-      document.getElementById(
-        "newPassword"
-      ).value;
-
-    const confirm =
-      document.getElementById(
-        "confirmPassword"
-      ).value;
+        if (error) {
+          throw error;
+        }
 
 
-    if (password.length < 8) {
+        currentSession =
+          data.session;
 
-      showToast(
-        "Password must be at least 8 characters.",
-        "error"
-      );
 
-      return;
+        if (!currentSession) {
+
+          showPage(loginPage);
+
+          return false;
+
+        }
+
+
+        currentUser =
+          currentSession.user;
+
+
+        const email =
+          String(
+            currentUser.email || ""
+          ).toLowerCase();
+
+
+        if (
+          email !==
+          SUPER_ADMIN_EMAIL.toLowerCase()
+        ) {
+
+          await supabaseClient.auth.signOut();
+
+          showPage(loginPage);
+
+          showMessage(
+            $("loginMessage"),
+            "This account is not authorized as the TSF Super Admin.",
+            "error"
+          );
+
+          return false;
+
+        }
+
+
+        const {
+          data: roleData,
+          error: roleError
+        } =
+          await supabaseClient
+            .from("user_roles")
+            .select("role")
+            .eq("user_id", currentUser.id)
+            .maybeSingle();
+
+
+        if (roleError) {
+
+          console.error(roleError);
+
+          await supabaseClient.auth.signOut();
+
+          showPage(loginPage);
+
+          showMessage(
+            $("loginMessage"),
+            "Could not verify your Super Admin role.",
+            "error"
+          );
+
+          return false;
+
+        }
+
+
+        if (
+          !roleData ||
+          roleData.role !== "super_admin"
+        ) {
+
+          await supabaseClient.auth.signOut();
+
+          showPage(loginPage);
+
+          showMessage(
+            $("loginMessage"),
+            "Your account does not have the super_admin role.",
+            "error"
+          );
+
+          return false;
+
+        }
+
+
+        $("adminEmailText").textContent =
+          currentUser.email;
+
+
+        showPage(dashboardPage);
+
+        await loadEverything();
+
+        return true;
+
+      } catch (error) {
+
+        console.error(error);
+
+        showPage(loginPage);
+
+        showMessage(
+          $("loginMessage"),
+          error.message ||
+          "Authentication check failed.",
+          "error"
+        );
+
+        return false;
+
+      }
+
     }
 
 
-    if (password !== confirm) {
+    /* =========================================================
+       LOGIN
+       ========================================================= */
 
-      showToast(
-        "Passwords do not match.",
-        "error"
-      );
+    $("loginForm").addEventListener(
+      "submit",
+      async (event) => {
 
-      return;
-    }
+        event.preventDefault();
 
+        if (!supabaseClient) {
+          initSupabase();
+        }
 
-    resetButton.disabled = true;
-    resetButton.textContent =
-      "Updating...";
-
-
-    const {
-      error
-    } =
-      await supabaseClient.auth
-        .updateUser({
-          password
-        });
+        if (!supabaseClient) {
+          return;
+        }
 
 
-    resetButton.disabled = false;
-    resetButton.textContent =
-      "Update Password";
+        const email =
+          $("loginEmail").value.trim();
+
+        const password =
+          $("loginPassword").value;
 
 
-    if (error) {
-
-      showToast(
-        error.message,
-        "error"
-      );
-
-      return;
-    }
+        const button =
+          $("loginButton");
 
 
-    document.getElementById(
-      "newPassword"
-    ).value = "";
+        button.disabled = true;
 
-    document.getElementById(
-      "confirmPassword"
-    ).value = "";
+        button.textContent =
+          "Signing in...";
 
 
-    showToast(
-      "Password updated successfully.",
-      "success"
+        hideMessage(
+          $("loginMessage")
+        );
+
+
+        try {
+
+          const {
+            data,
+            error
+          } =
+            await supabaseClient.auth.signInWithPassword({
+              email,
+              password
+            });
+
+
+          if (error) {
+            throw error;
+          }
+
+
+          currentSession =
+            data.session;
+
+          currentUser =
+            data.user;
+
+
+          const success =
+            await checkSuperAdmin();
+
+
+          if (!success) {
+            return;
+          }
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          showMessage(
+            $("loginMessage"),
+            error.message ||
+            "Login failed. Check your email and password.",
+            "error"
+          );
+
+        } finally {
+
+          button.disabled = false;
+
+          button.textContent =
+            "Sign In";
+
+        }
+
+      }
     );
 
 
-    setTimeout(
+    /* =========================================================
+       FORGOT PASSWORD
+       ========================================================= */
+
+    $("forgotPasswordButton").addEventListener(
+      "click",
+      () => {
+
+        $("forgotEmail").value =
+          $("loginEmail").value.trim() ||
+          SUPER_ADMIN_EMAIL;
+
+        hideMessage(
+          $("forgotMessage")
+        );
+
+        showPage(
+          forgotPage
+        );
+
+      }
+    );
+
+
+    $("backToLoginButton").addEventListener(
+      "click",
+      () => {
+
+        hideMessage(
+          $("loginMessage")
+        );
+
+        showPage(
+          loginPage
+        );
+
+      }
+    );
+
+
+    $("forgotForm").addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+
+        if (!supabaseClient) {
+
+          if (!initSupabase()) {
+            return;
+          }
+
+        }
+
+
+        const email =
+          $("forgotEmail").value.trim();
+
+
+        if (
+          email.toLowerCase() !==
+          SUPER_ADMIN_EMAIL.toLowerCase()
+        ) {
+
+          showMessage(
+            $("forgotMessage"),
+            "Only the authorized Super Admin email can request this reset.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const button =
+          $("sendResetButton");
+
+
+        button.disabled = true;
+
+        button.textContent =
+          "Sending reset link...";
+
+
+        hideMessage(
+          $("forgotMessage")
+        );
+
+
+        try {
+
+          /*
+            Using admin.html as redirect target.
+            Supabase will return the user here after
+            the password recovery link is opened.
+          */
+
+          const redirectTo =
+            window.location.origin +
+            window.location.pathname;
+
+
+          const {
+            error
+          } =
+            await supabaseClient.auth
+              .resetPasswordForEmail(
+                email,
+                {
+                  redirectTo
+                }
+              );
+
+
+          if (error) {
+            throw error;
+          }
+
+
+          showMessage(
+            $("forgotMessage"),
+            "Reset link sent. Check your email and open the link from the same device/browser.",
+            "success"
+          );
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          showMessage(
+            $("forgotMessage"),
+            error.message ||
+            "Could not send the reset email.",
+            "error"
+          );
+
+        } finally {
+
+          button.disabled = false;
+
+          button.textContent =
+            "Send Reset Link";
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       PASSWORD RECOVERY
+       ========================================================= */
+
+    async function handleRecoveryUrl() {
+
+      if (!supabaseClient) {
+        return;
+      }
+
+
+      /*
+        Supabase may return recovery information
+        through the URL hash or query parameters.
+      */
+
+      try {
+
+        const hash =
+          window.location.hash || "";
+
+        const search =
+          window.location.search || "";
+
+
+        const isRecovery =
+          hash.includes("type=recovery") ||
+          search.includes("type=recovery") ||
+          search.includes("code=");
+
+
+        if (!isRecovery) {
+          return false;
+        }
+
+
+        /*
+          If there is a PKCE code, exchange it.
+        */
+
+        const params =
+          new URLSearchParams(
+            search.replace(/^\?/, "")
+          );
+
+
+        const code =
+          params.get("code");
+
+
+        if (code) {
+
+          const {
+            error
+          } =
+            await supabaseClient.auth
+              .exchangeCodeForSession(code);
+
+
+          if (error) {
+            throw error;
+          }
+
+        }
+
+
+        const {
+          data
+        } =
+          await supabaseClient.auth
+            .getSession();
+
+
+        if (data.session) {
+
+          currentSession =
+            data.session;
+
+          currentUser =
+            data.session.user;
+
+
+          showPage(
+            resetPage
+          );
+
+          return true;
+
+        }
+
+
+        return false;
+
+      } catch (error) {
+
+        console.error(error);
+
+        showPage(
+          resetPage
+        );
+
+        showMessage(
+          $("resetMessage"),
+          "The reset link could not be verified. Please request a new reset link.",
+          "error"
+        );
+
+        return true;
+
+      }
+
+    }
+
+
+    /* =========================================================
+       AUTH STATE
+    ========================================================= */
+
+    async function setupAuthListener() {
+
+      if (!supabaseClient) {
+        return;
+      }
+
+
+      supabaseClient.auth.onAuthStateChange(
+        async (event, session) => {
+
+          console.log(
+            "Supabase auth event:",
+            event
+          );
+
+
+          if (
+            event ===
+            "PASSWORD_RECOVERY"
+          ) {
+
+            currentSession =
+              session;
+
+            currentUser =
+              session?.user || null;
+
+            showPage(
+              resetPage
+            );
+
+            return;
+
+          }
+
+
+          if (
+            event ===
+            "SIGNED_OUT"
+          ) {
+
+            currentSession =
+              null;
+
+            currentUser =
+              null;
+
+            showPage(
+              loginPage
+            );
+
+            return;
+
+          }
+
+
+          if (
+            event ===
+            "SIGNED_IN" &&
+            session
+          ) {
+
+            currentSession =
+              session;
+
+            currentUser =
+              session.user;
+
+            /*
+              Do not interrupt password recovery.
+            */
+
+            const recovery =
+              window.location.hash
+                .includes("type=recovery") ||
+              window.location.search
+                .includes("type=recovery");
+
+
+            if (!recovery) {
+
+              await checkSuperAdmin();
+
+            }
+
+          }
+
+        }
+      );
+
+    }
+
+
+    /* =========================================================
+       UPDATE PASSWORD
+    ========================================================= */
+
+    $("resetForm").addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+
+        if (!supabaseClient) {
+          return;
+        }
+
+
+        const password =
+          $("newPassword").value;
+
+        const confirm =
+          $("confirmPassword").value;
+
+
+        if (password.length < 6) {
+
+          showMessage(
+            $("resetMessage"),
+            "Password must be at least 6 characters.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (password !== confirm) {
+
+          showMessage(
+            $("resetMessage"),
+            "Passwords do not match.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const button =
+          $("updatePasswordButton");
+
+
+        button.disabled = true;
+
+        button.textContent =
+          "Updating...";
+
+
+        hideMessage(
+          $("resetMessage")
+        );
+
+
+        try {
+
+          const {
+            error
+          } =
+            await supabaseClient.auth
+              .updateUser({
+                password
+              });
+
+
+          if (error) {
+            throw error;
+          }
+
+
+          showMessage(
+            $("resetMessage"),
+            "Password updated successfully. Redirecting to the Admin Panel...",
+            "success"
+          );
+
+
+          $("newPassword").value = "";
+
+          $("confirmPassword").value = "";
+
+
+          setTimeout(
+            async () => {
+
+              await checkSuperAdmin();
+
+            },
+            1500
+          );
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          showMessage(
+            $("resetMessage"),
+            error.message ||
+            "Could not update password.",
+            "error"
+          );
+
+        } finally {
+
+          button.disabled = false;
+
+          button.textContent =
+            "Update Password";
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       LOGOUT
+    ========================================================= */
+
+    $("logoutButton").addEventListener(
+      "click",
       async () => {
 
-        await checkSuperAdmin();
-
-      },
-      1000
-    );
-
-  }
-);
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-logoutButton.addEventListener(
-  "click",
-  async () => {
-
-    await supabaseClient.auth.signOut();
-
-    showPage(loginPage);
-
-    showToast(
-      "Logged out successfully.",
-      "success"
-    );
-
-  }
-);
-
-
-/* =========================================================
-   APPLICATIONS
-========================================================= */
-
-const appForm =
-  document.getElementById("appForm");
-
-const appList =
-  document.getElementById("appList");
-
-const appId =
-  document.getElementById("appId");
-
-const appName =
-  document.getElementById("appName");
-
-const appIcon =
-  document.getElementById("appIcon");
-
-const appDescription =
-  document.getElementById("appDescription");
-
-const appUrl =
-  document.getElementById("appUrl");
-
-const appSort =
-  document.getElementById("appSort");
-
-const appActive =
-  document.getElementById("appActive");
-
-const appSubmitButton =
-  document.getElementById(
-    "appSubmitButton"
-  );
-
-const appClearButton =
-  document.getElementById(
-    "appClearButton"
-  );
-
-const cancelAppEdit =
-  document.getElementById(
-    "cancelAppEdit"
-  );
-
-
-async function loadApps() {
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("app_items")
-      .select("*")
-      .order(
-        "sort_order",
-        {
-          ascending: true
+        if (!supabaseClient) {
+          return;
         }
+
+
+        try {
+
+          await supabaseClient.auth.signOut();
+
+          showPage(
+            loginPage
+          );
+
+          $("loginPassword").value = "";
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          showToast(
+            "Logout failed.",
+            "error"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       SAFE HTML
+    ========================================================= */
+
+    function escapeHTML(value) {
+
+      return String(
+        value ?? ""
       )
-      .order(
-        "created_at",
-        {
-          ascending: false
-        }
-      );
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
-
-  if (error) {
-
-    showToast(
-      error.message,
-      "error"
-    );
-
-    return [];
-
-  }
-
-
-  return data || [];
-}
-
-
-function renderApps(apps) {
-
-  appList.innerHTML = "";
-
-
-  if (!apps.length) {
-
-    appList.innerHTML =
-      `<div class="empty">
-        No applications yet.
-      </div>`;
-
-    return;
-  }
-
-
-  apps.forEach(app => {
-
-    const item =
-      document.createElement("div");
-
-    item.className =
-      "data-item";
-
-
-    item.innerHTML = `
-
-      <div class="data-main">
-
-        <strong>
-          ${escapeHtml(app.icon)}
-          ${escapeHtml(app.name)}
-        </strong>
-
-        <p>
-          ${escapeHtml(app.description)}
-        </p>
-
-        <span class="badge ${
-          app.active ? "" : "off"
-        }">
-          ${app.active ? "VISIBLE" : "HIDDEN"}
-        </span>
-
-      </div>
-
-      <div class="data-actions">
-
-        <button
-          class="secondary-btn"
-          onclick="editApp('${app.id}')"
-        >
-          Edit
-        </button>
-
-        <button
-          class="${
-            app.active
-              ? "warning-btn"
-              : "primary-btn"
-          }"
-          onclick="toggleApp('${app.id}', ${
-            app.active
-          })"
-        >
-          ${
-            app.active
-              ? "Hide"
-              : "Show"
-          }
-        </button>
-
-        <button
-          class="danger-btn"
-          onclick="deleteApp('${app.id}')"
-        >
-          Delete
-        </button>
-
-      </div>
-
-    `;
-
-
-    appList.appendChild(item);
-
-  });
-
-}
-
-
-async function refreshApps() {
-
-  const apps =
-    await loadApps();
-
-  renderApps(apps);
-
-  document.getElementById(
-    "appCount"
-  ).textContent =
-    apps.length;
-
-  return apps;
-}
-
-
-appForm.addEventListener(
-  "submit",
-  async event => {
-
-    event.preventDefault();
-
-
-    const id =
-      appId.value.trim();
-
-    const name =
-      appName.value.trim();
-
-    const icon =
-      appIcon.value.trim() || "🚀";
-
-    const description =
-      appDescription.value.trim();
-
-    const url =
-      appUrl.value.trim();
-
-    const sort =
-      Number(appSort.value) || 0;
-
-    const active =
-      appActive.value === "true";
-
-
-    if (!name || !validUrl(url)) {
-
-      showToast(
-        "Enter a valid application URL.",
-        "error"
-      );
-
-      return;
     }
 
 
-    const payload = {
-      name,
-      icon
+    /* =========================================================
+       SAFE URL
+    ========================================================= */
+
+    function isSafeUrl(value) {
+
+      const url =
+        String(value || "").trim();
+
+
+      if (!url) {
+        return false;
+      }
+
+
+      if (url === "#") {
+        return true;
+      }
+
+
+      try {
+
+        const parsed =
+          new URL(
+            url,
+            window.location.href
+          );
+
+
+        return [
+          "http:",
+          "https:"
+        ].includes(
+          parsed.protocol
+        );
+
+      } catch {
+
+        return false;
+
+      }
+
+    }
+
+
+    /* =========================================================
+       LOAD EVERYTHING
+    ========================================================= */
+
+    async function loadEverything() {
+
+      await Promise.all([
+        loadApps(),
+        loadResources(),
+        loadAnnouncements()
+      ]);
+
+      updateStats();
+
+    }
+
+
+    /* =========================================================
+       LOAD APPS
+    ========================================================= */
+
+    async function loadApps() {
+
+      const container =
+        $("appsTableContainer");
+
+
+      container.innerHTML =
+        `
+          <div class="loading">
+            <div class="spinner"></div>
+            Loading applications...
+          </div>
+        `;
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .from("app_items")
+            .select("*")
+            .order("sort_order", {
+              ascending: true
+            })
+            .order("created_at", {
+              ascending: true
+            });
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        window.TSF_ADMIN_APPS =
+          data || [];
+
+
+        renderApps(
+          data || []
+        );
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        container.innerHTML =
+          `
+            <div class="empty">
+              <div class="empty-icon">⚠️</div>
+              <strong>Could not load applications.</strong>
+              <p>${escapeHTML(error.message)}</p>
+            </div>
+          `;
+
+      }
+
+    }
+
+
+    function renderApps(items) {
+
+      const container =
+        $("appsTableContainer");
+
+
+      if (!items.length) {
+
+        container.innerHTML =
+          `
+            <div class="empty">
+              <div class="empty-icon">🚀</div>
+              <strong>No applications yet.</strong>
+              <p>Add your first TSF application.</p>
+            </div>
+          `;
+
+        return;
+
+      }
+
+
+      let rows = "";
+
+
+      items.forEach(
+        (item) => {
+
+          rows += `
+            <tr>
+
+              <td>
+
+                <div class="item-name">
+
+                  <div class="item-icon">
+                    ${escapeHTML(item.icon || "🚀")}
+                  </div>
+
+                  <div>
+
+                    <strong>
+                      ${escapeHTML(item.name)}
+                    </strong>
+
+                    <small>
+                      ${escapeHTML(item.description || "No description")}
+                    </small>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+
+              <td>
+                ${item.url && item.url !== "#"
+                  ? "External / Link"
+                  : "Internal"}
+              </td>
+
+
+              <td>
+                ${Number(item.sort_order || 0)}
+              </td>
+
+
+              <td>
+
+                <span class="badge ${item.active ? "active" : "inactive"}">
+                  ${item.active ? "Active" : "Hidden"}
+                </span>
+
+              </td>
+
+
+              <td>
+
+                <div class="row-actions">
+
+                  <button
+                    class="small-btn"
+                    type="button"
+                    data-action="edit-app"
+                    data-id="${escapeHTML(item.id)}"
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    class="small-btn"
+                    type="button"
+                    data-action="toggle-app"
+                    data-id="${escapeHTML(item.id)}"
+                  >
+                    ${item.active ? "Hide" : "Show"}
+                  </button>
+
+                  <button
+                    class="small-btn delete"
+                    type="button"
+                    data-action="delete-app"
+                    data-id="${escapeHTML(item.id)}"
+                  >
+                    Delete
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+          `;
+
+        }
+      );
+
+
+      container.innerHTML =
+        `
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>Application</th>
+                  <th>URL</th>
+                  <th>Order</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+
+              </thead>
+
+              <tbody>
+                ${rows}
+              </tbody>
+
+            </table>
+
+          </div>
+        `;
+
+    }
+
+
+    /* =========================================================
+       LOAD RESOURCES
+    ========================================================= */
+
+    async function loadResources() {
+
+      const container =
+        $("resourcesTableContainer");
+
+
+      container.innerHTML =
+        `
+          <div class="loading">
+            <div class="spinner"></div>
+            Loading resources...
+          </div>
+        `;
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .from("content_items")
+            .select("*")
+            .order("sort_order", {
+              ascending: true
+            })
+            .order("created_at", {
+              ascending: true
+            });
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        window.TSF_ADMIN_RESOURCES =
+          data || [];
+
+
+        renderResources(
+          data || []
+        );
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        container.innerHTML =
+          `
+            <div class="empty">
+              <div class="empty-icon">⚠️</div>
+              <strong>Could not load resources.</strong>
+              <p>${escapeHTML(error.message)}</p>
+            </div>
+          `;
+
+      }
+
+    }
+
+
+    function renderResources(items) {
+
+      const container =
+        $("resourcesTableContainer");
+
+
+      if (!items.length) {
+
+        container.innerHTML =
+          `
+            <div class="empty">
+              <div class="empty-icon">📚</div>
+              <strong>No resources yet.</strong>
+              <p>Add books, notes, videos or learning resources.</p>
+            </div>
+          `;
+
+        return;
+
+      }
+
+
+      let rows = "";
+
+
+      items.forEach(
+        (item) => {
+
+          rows += `
+            <tr>
+
+              <td>
+
+                <div class="item-name">
+
+                  <div class="item-icon">
+                    📚
+                  </div>
+
+                  <div>
+
+                    <strong>
+                      ${escapeHTML(item.title)}
+                    </strong>
+
+                    <small>
+                      ${escapeHTML(item.description || "No description")}
+                    </small>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+
+              <td>
+                ${escapeHTML(item.category)}
+              </td>
+
+
+              <td>
+                ${Number(item.sort_order || 0)}
+              </td>
+
+
+              <td>
+
+                <span class="badge ${item.active ? "active" : "inactive"}">
+                  ${item.active ? "Active" : "Hidden"}
+                </span>
+
+              </td>
+
+
+              <td>
+
+                <div class="row-actions">
+
+                  <button
+                    class="small-btn"
+                    type="button"
+                    data-action="edit-resource"
+                    data-id="${escapeHTML(item.id)}"
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    class="small-btn"
+                    type="button"
+                    data-action="toggle-resource"
+                    data-id="${escapeHTML(item.id)}"
+                  >
+                    ${item.active ? "Hide" : "Show"}
+                  </button>
+
+                  <button
+                    class="small-btn delete"
+                    type="button"
+                    data-action="delete-resource"
+                    data-id="${escapeHTML(item.id)}"
+                  >
+                    Delete
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+          `;
+
+        }
+      );
+
+
+      container.innerHTML =
+        `
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>Resource</th>
+                  <th>Category</th>
+                  <th>Order</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+
+              </thead>
+
+              <tbody>
+                ${rows}
+              </tbody>
+
+            </table>
+
+          </div>
+        `;
+
+    }
+
+
+    /* =========================================================
+       LOAD ANNOUNCEMENTS
+    ========================================================= */
+
+    async function loadAnnouncements() {
+
+      const container =
+        $("announcementsTableContainer");
+
+
+      container.innerHTML =
+        `
+          <div class="loading">
+            <div class="spinner"></div>
+            Loading announcements...
+          </div>
+        `;
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .from("announcements")
+            .select("*")
+            .order("created_at", {
+              ascending: false
+            });
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        window.TSF_ADMIN_ANNOUNCEMENTS =
+          data || [];
+
+
+        renderAnnouncements(
+          data || []
+        );
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        container.innerHTML =
+          `
+            <div class="empty">
+              <div class="empty-icon">⚠️</div>
+              <strong>Could not load announcements.</strong>
+              <p>${escapeHTML(error.message)}</p>
+            </div>
+          `;
+
+      }
+
+    }
+
+
+    function renderAnnouncements(items) {
+
+      const container =
+        $("announcementsTableContainer");
+
+
+      if (!items.length) {
+
+        container.innerHTML =
+          `
+            <div class="empty">
+              <div class="empty-icon">📢</div>
+              <strong>No announcements yet.</strong>
+              <p>Create your first TSF announcement.</p>
+            </div>
+          `;
+
+        return;
+
+      }
+
+
+      let rows = "";
+
+
+      items.forEach(
+        (item) => {
+
+          const date =
+            item.created_at
+              ? new Date(
+                  item.created_at
+                ).toLocaleDateString()
+              : "";
+
+
+          rows += `
+            <tr>
+
+              <td>
+
+                <div class="item-name">
+
+                  <div class="item-icon">
+                    📢
+                  </div>
+
+                  <div>
+
+                    <strong>
+                      ${escapeHTML(item.title)}
+                    </strong>
+
+                    <small>
+                      ${escapeHTML(
+                        (item.body || "")
+                          .slice(0, 100)
+                      )}
+                    </small>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+
+              <td>
+                ${escapeHTML(date)}
+              </td>
+
+
+              <td>
+
+                <span class="badge ${item.active ? "active" : "inactive"}">
+                  ${item.active ? "Published" : "Hidden"}
+                </span>
+
+              </td>
+
+
+              <td>
+
+                <div class="row-actions">
+
+                  <button
+                    class="small-btn"
+                    type="button"
+                    data-action="edit-announcement"
+                    data-id="${escapeHTML(item.id)}"
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    class="small-btn"
+                    type="button"
+                    data-action="toggle-announcement"
+                    data-id="${escapeHTML(item.id)}"
+                  >
+                    ${item.active ? "Hide" : "Publish"}
+                  </button>
+
+                  <button
+                    class="small-btn delete"
+                    type="button"
+                    data-action="delete-announcement"
+                    data-id="${escapeHTML(item.id)}"
+                  >
+                    Delete
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+          `;
+
+        }
+      );
+
+
+      container.innerHTML =
+        `
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>Announcement</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+
+              </thead>
+
+              <tbody>
+                ${rows}
+              </tbody>
+
+            </table>
+
+          </div>
+        `;
+
+    }
+
+
+    /* =========================================================
+       STATS
+    ========================================================= */
+
+    function updateStats() {
+
+      const apps =
+        window.TSF_ADMIN_APPS || [];
+
+      const resources =
+        window.TSF_ADMIN_RESOURCES || [];
+
+      const announcements =
+        window.TSF_ADMIN_ANNOUNCEMENTS || [];
+
+
+      $("appsCount").textContent =
+        apps.length;
+
+      $("resourcesCount").textContent =
+        resources.length;
+
+      $("announcementsCount").textContent =
+        announcements.length;
+
+
+      const active =
+        apps.filter(
+          item => item.active
+        ).length
+        +
+        resources.filter(
+          item => item.active
+        ).length
+        +
+        announcements.filter(
+          item => item.active
+        ).length;
+
+
+      $("activeCount").textContent =
+        active;
+
+    }
+
+
+    /* =========================================================
+       OPEN ADD APP
+    ========================================================= */
+
+    $("addAppButton").addEventListener(
+      "click",
+      () => {
+
+        openItemModal(
+          "app"
+        );
+
+      }
+    );
+
+
+    /* =========================================================
+       OPEN ADD RESOURCE
+    ========================================================= */
+
+    $("addResourceButton").addEventListener(
+      "click",
+      () => {
+
+        openItemModal(
+          "resource"
+        );
+
+      }
+    );
+
+
+    /* =========================================================
+       OPEN ADD ANNOUNCEMENT
+    ========================================================= */
+
+    $("addAnnouncementButton").addEventListener(
+      "click",
+      () => {
+
+        openItemModal(
+          "announcement"
+        );
+
+      }
+    );
+
+
+    /* =========================================================
+       MODAL
+    ========================================================= */
+
+    function openItemModal(type, item = null) {
+
+      $("itemForm").reset();
+
+
+      $("itemId").value =
+        item?.id || "";
+
+      $("itemType").value =
+        type;
+
+
+      $("itemActive").checked =
+        item
+          ? Boolean(item.active)
+          : true;
+
+
+      $("itemSort").value =
+        item?.sort_order ??
+        0;
+
+
+      $("itemDescription").value =
+        item?.description || "";
+
+
+      $("itemUrl").value =
+        item?.url || "";
+
+
+      $("itemIcon").value =
+        item?.icon || "🚀";
+
+
+      $("itemCategory").value =
+        item?.category ||
+        "Story Books";
+
+
+      $("itemName").value =
+        item?.name ||
+        item?.title ||
+        item?.body ||
+        "";
+
+
+      $("categoryGroup")
+        .classList.toggle(
+          "hidden",
+          type !== "resource"
+        );
+
+
+      $("iconGroup")
+        .classList.toggle(
+          "hidden",
+          type !== "app"
+        );
+
+
+      $("sortGroup")
+        .classList.toggle(
+          "hidden",
+          type === "announcement"
+        );
+
+
+      if (type === "app") {
+
+        $("itemModalTitle").textContent =
+          item
+            ? "Edit Application"
+            : "Add Application";
+
+        $("nameLabel").textContent =
+          "Application Name";
+
+        $("itemUrl").required =
+          true;
+
+      }
+
+
+      if (type === "resource") {
+
+        $("itemModalTitle").textContent =
+          item
+            ? "Edit Resource"
+            : "Add Resource";
+
+        $("nameLabel").textContent =
+          "Resource Title";
+
+        $("itemUrl").required =
+          true;
+
+      }
+
+
+      if (type === "announcement") {
+
+        $("itemModalTitle").textContent =
+          item
+            ? "Edit Announcement"
+            : "Add Announcement";
+
+        $("nameLabel").textContent =
+          "Announcement Title";
+
+        /*
+          For announcement:
+          URL and icon are not needed.
+        */
+
+        $("itemUrl").required =
+          false;
+
+        $("itemUrl").value =
+          "#";
+
+        $("iconGroup")
+          .classList.add("hidden");
+
+      }
+
+
+      $("itemModal")
+        .classList.add("show");
+
+    }
+
+
+    function closeItemModal() {
+
+      $("itemModal")
+        .classList.remove("show");
+
+    }
+
+
+    $("closeItemModal").addEventListener(
+      "click",
+      closeItemModal
+    );
+
+
+    $("cancelItemButton").addEventListener(
+      "click",
+      closeItemModal
+    );
+
+
+    $("itemModal").addEventListener(
+      "click",
+      (event) => {
+
+        if (
+          event.target ===
+          $("itemModal")
+        ) {
+
+          closeItemModal();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       SAVE ITEM
+    ========================================================= */
+
+    $("itemForm").addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+
+        const type =
+          $("itemType").value;
+
+        const id =
+          $("itemId").value;
+
+
+        const name =
+          $("itemName").value.trim();
+
+        const description =
+          $("itemDescription").value.trim();
+
+        const url =
+          $("itemUrl").value.trim() ||
+          "#";
+
+        const active =
+          $("itemActive").checked;
+
+        const sortOrder =
+          Number(
+            $("itemSort").value || 0
+          );
+
+
+        if (!name) {
+
+          showToast(
+            "Please enter a name/title.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (
+          type !== "announcement" &&
+          !isSafeUrl(url)
+        ) {
+
+          showToast(
+            "Please enter a valid http:// or https:// URL.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const button =
+          $("saveItemButton");
+
+
+        button.disabled = true;
+
+        button.textContent =
+          "Saving...";
+
+
+        try {
+
+          let table = "";
+
+          let payload = {};
+
+
+          if (type === "app") {
+
+            table =
+              "app_items";
+
+
+            payload = {
+
+              name,
+
+              icon:
+                $("itemIcon")
+                  .value
+                  .trim() ||
+                "🚀",
+
+              description,
+
+              url,
+
+              active,
+
+              sort_order:
+                sortOrder
+
+            };
+
+          }
+
+
+          if (type === "resource") {
+
+            table =
+              "content_items";
+
+
+            payload = {
+
+              title:
+                name,
+
+              category:
+                $("itemCategory")
+                  .value,
+
+              description,
+
+              url,
+
+              active,
+
+              sort_order:
+                sortOrder
+
+            };
+
+          }
+
+
+          if (type === "announcement") {
+
+            table =
+              "announcements";
+
+
+            payload = {
+
+              title:
+                name,
+
+              body:
+                description,
+
+              active
+
+            };
+
+          }
+
+
+          let response;
+
+
+          if (id) {
+
+            response =
+              await supabaseClient
+                .from(table)
+                .update(payload)
+                .eq("id", id)
+                .select()
+                .single();
+
+          } else {
+
+            response =
+              await supabaseClient
+                .from(table)
+                .insert(payload)
+                .select()
+                .single();
+
+          }
+
+
+          if (response.error) {
+            throw response.error;
+          }
+
+
+          closeItemModal();
+
+
+          showToast(
+            id
+              ? "Updated successfully."
+              : "Created successfully.",
+            "success"
+          );
+
+
+          await loadEverything();
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          showToast(
+            error.message ||
+            "Could not save item.",
+            "error"
+          );
+
+        } finally {
+
+          button.disabled = false;
+
+          button.textContent =
+            "Save";
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       EVENT DELEGATION
+    ========================================================= */
+
+    document.addEventListener(
+      "click",
+      async (event) => {
+
+        const button =
+          event.target.closest(
+            "[data-action]"
+          );
+
+
+        if (!button) {
+          return;
+        }
+
+
+        const action =
+          button.dataset.action;
+
+        const id =
+          button.dataset.id;
+
+
+        /* EDIT APP */
+
+        if (
+          action ===
+          "edit-app"
+        ) {
+
+          const item =
+            (
+              window.TSF_ADMIN_APPS ||
+              []
+            ).find(
+              x => x.id === id
+            );
+
+
+          if (item) {
+
+            openItemModal(
+              "app",
+              item
+            );
+
+          }
+
+          return;
+
+        }
+
+
+        /* TOGGLE APP */
+
+        if (
+          action ===
+          "toggle-app"
+        ) {
+
+          const item =
+            (
+              window.TSF_ADMIN_APPS ||
+              []
+            ).find(
+              x => x.id === id
+            );
+
+
+          if (!item) {
+            return;
+          }
+
+
+          await toggleItem(
+            "app_items",
+            id,
+            !item.active
+          );
+
+
+          return;
+
+        }
+
+
+        /* DELETE APP */
+
+        if (
+          action ===
+          "delete-app"
+        ) {
+
+          confirmAction(
+            "Delete this application permanently?",
+            async () => {
+
+              await deleteItem(
+                "app_items",
+                id
+              );
+
+            }
+          );
+
+
+          return;
+
+        }
+
+
+        /* EDIT RESOURCE */
+
+        if (
+          action ===
+          "edit-resource"
+        ) {
+
+          const item =
+            (
+              window.TSF_ADMIN_RESOURCES ||
+              []
+            ).find(
+              x => x.id === id
+            );
+
+
+          if (item) {
+
+            openItemModal(
+              "resource",
+              item
+            );
+
+          }
+
+          return;
+
+        }
+
+
+        /* TOGGLE RESOURCE */
+
+        if (
+          action ===
+          "toggle-resource"
+        ) {
+
+          const item =
+            (
+              window.TSF_ADMIN_RESOURCES ||
+              []
+            ).find(
+              x => x.id === id
+            );
+
+
+          if (!item) {
+            return;
+          }
+
+
+          await toggleItem(
+            "content_items",
+            id,
+            !item.active
+          );
+
+
+          return;
+
+        }
+
+
+        /* DELETE RESOURCE */
+
+        if (
+          action ===
+          "delete-resource"
+        ) {
+
+          confirmAction(
+            "Delete this resource permanently?",
+            async () => {
+
+              await deleteItem(
+                "content_items",
+                id
+              );
+
+            }
+          );
+
+
+          return;
+
+        }
+
+
+        /* EDIT ANNOUNCEMENT */
+
+        if (
+          action ===
+          "edit-announcement"
+        ) {
+
+          const item =
+            (
+              window.TSF_ADMIN_ANNOUNCEMENTS ||
+              []
+            ).find(
+              x => x.id === id
+            );
+
+
+          if (item) {
+
+            const converted =
+              {
+                ...item,
+                name:
+                  item.title,
+                description:
+                  item.body,
+                url:
+                  "#"
+              };
+
+
+            openItemModal(
+              "announcement",
+              converted
+            );
+
+          }
+
+          return;
+
+        }
+
+
+        /* TOGGLE ANNOUNCEMENT */
+
+        if (
+          action ===
+          "toggle-announcement"
+        ) {
+
+          const item =
+            (
+              window.TSF_ADMIN_ANNOUNCEMENTS ||
+              []
+            ).find(
+              x => x.id === id
+            );
+
+
+          if (!item) {
+            return;
+          }
+
+
+          await toggleItem(
+            "announcements",
+            id,
+            !item.active
+          );
+
+
+          return;
+
+        }
+
+
+        /* DELETE ANNOUNCEMENT */
+
+        if (
+          action ===
+          "delete-announcement"
+        ) {
+
+          confirmAction(
+            "Delete this announcement permanently?",
+            async () => {
+
+              await deleteItem(
+                "announcements",
+                id
+              );
+
+            }
+          );
+
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       TOGGLE ITEM
+    ========================================================= */
+
+    async function toggleItem(
+      table,
+      id,
+      active
+    ) {
+
+      try {
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .from(table)
+            .update({
+              active
+            })
+            .eq("id", id);
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        showToast(
+          active
+            ? "Item published."
+            : "Item hidden.",
+          "success"
+        );
+
+
+        await loadEverything();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showToast(
+          error.message ||
+          "Could not update status.",
+          "error"
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       DELETE ITEM
+    ========================================================= */
+
+    async function deleteItem(
+      table,
+      id
+    ) {
+
+      try {
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .from(table)
+            .delete()
+            .eq("id", id);
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        showToast(
+          "Deleted successfully.",
+          "success"
+        );
+
+
+        await loadEverything();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showToast(
+          error.message ||
+          "Could not delete item.",
+          "error"
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       CONFIRM
+    ========================================================= */
+
+    function confirmAction(
+      message,
+      callback
+    ) {
+
+      $("confirmText")
+        .textContent =
+        message;
+
+
+      pendingConfirmAction =
+        callback;
+
+
+      $("confirmModal")
+        .classList.add("show");
+
+    }
+
+
+    function closeConfirm() {
+
+      $("confirmModal")
+        .classList.remove("show");
+
+
+      pendingConfirmAction =
+        null;
+
+    }
+
+
+    $("closeConfirmModal")
+      .addEventListener(
+        "click",
+        closeConfirm
+      );
+
+
+    $("cancelConfirmButton")
+      .addEventListener(
+        "click",
+        closeConfirm
+      );
+
+
+    $("confirmActionButton")
+      .addEventListener(
+        "click",
+        async () => {
+
+          if (
+            typeof pendingConfirmAction ===
+            "function"
+          ) {
+
+            const callback =
+              pendingConfirmAction;
+
+
+            closeConfirm();
+
+
+            await callback();
+
+          }
+
+        }
+      );
+
+
+    $("confirmModal")
+      .addEventListener(
+        "click",
+        (event) => {
+
+          if (
+            event.target ===
+            $("confirmModal")
+          ) {
+
+            closeConfirm();
+
+          }
+
+        }
+      );
+
+
+    /* =========================================================
+       REFRESH
+    ========================================================= */
+
+    $("refreshButton")
+      .addEventListener(
+        "click",
+        async () => {
+
+          const button =
+            $("refreshButton");
+
+
+          button.disabled = true;
+
+          button.textContent =
+            "↻ Loading...";
+
+
+          try {
+
+            await loadEverything();
+
+            showToast(
+              "Dashboard refreshed.",
+              "success"
+            );
+
+          } finally {
+
+            button.disabled = false;
+
+            button.textContent =
+              "↻ Refresh";
+
+          }
+
+        }
+      );
+
+
+    /* =========================================================
+       ESCAPE KEY
+    ========================================================= */
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key ===
+          "Escape"
+        ) {
+
+          closeItemModal();
+
+          closeConfirm();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       INITIAL STARTUP
+    ========================================================= */
+
+    async function startTSFAdmin() {
+
+      const initialized =
+        initSupabase();
+
+
+      if (!initialized) {
+        return;
+      }
+
+
+      await setupAuthListener();
+
+
+      /*
+        First handle a password recovery URL.
+      */
+
+      const recoveryHandled =
+        await handleRecoveryUrl();
+
+
+      if (recoveryHandled) {
+        return;
+      }
+
+
+      /*
+        Otherwise check normal session.
+      */
+
+      await checkSuperAdmin();
+
+    }
+
+
+    startTSFAdmin();
+
+
+    /* =========================================================
+       GLOBAL API
+    ========================================================= */
+
+    window.TSF_ADMIN = {
+
+      reload:
+        loadEverything,
+
+      logout:
+        async () => {
+
+          if (supabaseClient) {
+
+            await supabaseClient
+              .auth
+              .signOut();
+
+          }
+
+        }
+
+    };
+
+  </script>
+
+</body>
+</html>
