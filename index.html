@@ -1,3082 +1,2711 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head><head>
-    ...
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#2563eb">
-</head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#172554">
-<meta name="description" content="Teachers Students Friendship - শিক্ষক ও শিক্ষার্থীর জ্ঞান, সহযোগিতা ও বন্ধুত্বের প্ল্যাটফর্ম">
-<title>Teachers Students Friendship</title>
+<!-- =========================================================
+     MAS INTERNATIONAL SUPER APP LAYER
+     Add this block immediately BEFORE </body>
+     It is designed to preserve the existing MAS application.
+========================================================= -->
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+/* ================= MAS SUPER APP ================= */
 
 :root{
- --primary:#172554;
- --blue:#2563eb;
- --sky:#0ea5e9;
- --green:#16a34a;
- --gold:#f59e0b;
- --bg:#f5f7fb;
- --text:#172033;
- --muted:#64748b;
- --white:#fff;
- --border:#e5e7eb;
- --shadow:0 12px 35px rgba(15,23,42,.08);
-}
-
-html{scroll-behavior:smooth}
-
-body{<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js")
-      .then(() => console.log("M-A-S service worker registered"))
-      .catch(err => console.error("Service worker registration failed:", err));
-  });
-}
-</script>
- font-family:system-ui,-apple-system,"Noto Sans Bengali","Noto Sans",sans-serif;
- background:var(--bg);
- color:var(--text);
- line-height:1.6;
-}
-
-button,input,textarea,select{font:inherit}
-button,a{cursor:pointer}
-button{border:0}
-a{text-decoration:none}
-
-.container{
- width:min(1200px,calc(100% - 28px));
- margin:auto;
-}
-
-/* NAV */
-header{
- position:sticky;
- top:0;
- z-index:1000;
- background:rgba(255,255,255,.94);
- backdrop-filter:blur(16px);
- border-bottom:1px solid var(--border);
-}
-
-.nav{
- min-height:72px;
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:15px;
-}
-
-.brand{
- display:flex;
- align-items:center;
- gap:11px;
- min-width:0;
-}
-
-.logo{
- width:49px;
- height:49px;
- flex:none;
- display:grid;
- place-items:center;
- border-radius:16px;
- color:#fff;
- font-weight:950;
- font-size:14px;
- letter-spacing:-1px;
- background:linear-gradient(135deg,#111827,#2563eb,#0ea5e9);
- box-shadow:0 9px 25px rgba(37,99,235,.25);
-}
-
-.brand-title{
- font-weight:850;
- font-size:16px;
- white-space:nowrap;
-}
-
-.brand-sub{
- color:var(--muted);
- font-size:12px;
- white-space:nowrap;
-}
-
-.teacher-btn{
- padding:11px 15px;
- border-radius:13px;
- background:var(--primary);
- color:#fff;
- font-weight:800;
- box-shadow:0 7px 20px rgba(23,37,84,.18);
-}
-
-/* HERO */
-.hero{
- margin:25px 0 0;
- padding:48px 30px;
- border-radius:30px;
- color:#fff;
- position:relative;
- overflow:hidden;
- background:
- radial-gradient(circle at 85% 20%,rgba(96,165,250,.3),transparent 28%),
- radial-gradient(circle at 20% 100%,rgba(14,165,233,.22),transparent 30%),
- linear-gradient(135deg,#0f172a,#172554 45%,#2563eb);
- box-shadow:0 25px 60px rgba(23,37,84,.22);
-}
+  --mas-primary:#2563eb;
+  --mas-primary-2:#7c3aed;
+  --mas-bg:#f6f8fc;
+  --mas-card:#ffffff;
+  --mas-text:#172033;
+  --mas-muted:#64748b;
+  --mas-border:#e5e7eb;
+  --mas-shadow:0 12px 35px rgba(15,23,42,.09);
+  --mas-radius:22px;
+}
 
-.hero:after{
- content:"MAS";
- position:absolute;
- right:-25px;
- bottom:-55px;
- font-size:180px;
- font-weight:1000;
- color:#ffffff08;
- pointer-events:none;
+*{
+  box-sizing:border-box;
+}
+
+.mas-super-layer{
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--mas-text);
 }
 
-.badge{
- display:inline-flex;
- padding:6px 11px;
- border-radius:999px;
- background:#ffffff18;
- border:1px solid #ffffff2b;
- font-size:12px;
- font-weight:800;
+.mas-appbar{
+  position:sticky;
+  top:0;
+  z-index:9990;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 16px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--mas-border);
 }
 
-.hero h1{
- margin-top:12px;
- max-width:760px;
- font-size:clamp(31px,5vw,57px);
- line-height:1.12;
- letter-spacing:-1px;
- position:relative;
- z-index:1;
+.mas-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
 }
 
-.hero p{
- max-width:700px;
- margin:15px 0 22px;
- color:#dbeafe;
- position:relative;
- z-index:1;
+.mas-brand-icon{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  color:white;
+  background:linear-gradient(135deg,var(--mas-primary),var(--mas-primary-2));
+  box-shadow:0 8px 20px rgba(37,99,235,.25);
 }
 
-.actions{
- display:flex;
- flex-wrap:wrap;
- gap:10px;
- position:relative;
- z-index:2;
+.mas-top-actions{
+  display:flex;
+  gap:8px;
 }
 
-.btn{
- display:inline-flex;
- align-items:center;
- justify-content:center;
- gap:7px;
- padding:11px 16px;
- border-radius:13px;
- font-weight:800;
- transition:.18s;
+.mas-icon-btn{
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:14px;
+  background:#f1f5f9;
+  cursor:pointer;
+  font-size:18px;
 }
 
-.btn:hover{transform:translateY(-2px)}
+.mas-main-shell{
+  max-width:1200px;
+  margin:auto;
+  padding:18px 16px 100px;
+}
 
-.btn-primary{
- background:#fff;
- color:var(--primary);
+.mas-hero{
+  position:relative;
+  overflow:hidden;
+  border-radius:28px;
+  padding:28px;
+  margin-bottom:20px;
+  color:white;
+  background:
+    radial-gradient(circle at 90% 10%,rgba(255,255,255,.22),transparent 28%),
+    linear-gradient(135deg,#2563eb,#4f46e5 55%,#7c3aed);
+  box-shadow:var(--mas-shadow);
 }
 
-.btn-blue{
- background:var(--blue);
- color:#fff;
+.mas-hero h1{
+  margin:0 0 8px;
+  font-size:clamp(27px,5vw,44px);
 }
 
-.btn-dark{
- background:var(--primary);
- color:#fff;
+.mas-hero p{
+  margin:0;
+  opacity:.9;
 }
 
-.btn-light{
- background:#f1f5f9;
- color:#172033;
+.mas-quick-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:22px;
 }
 
-.btn-danger{
- background:#fee2e2;
- color:#991b1b;
+.mas-card{
+  background:var(--mas-card);
+  border:1px solid var(--mas-border);
+  border-radius:var(--mas-radius);
+  box-shadow:var(--mas-shadow);
 }
 
-/* SECTIONS */
-.section{
- padding-top:32px;
+.mas-quick-card{
+  padding:18px;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.section-head{
- margin-bottom:16px;
+.mas-quick-card:hover{
+  transform:translateY(-3px);
 }
 
-.section-head h2{
- font-size:25px;
+.mas-quick-icon{
+  font-size:28px;
+  margin-bottom:9px;
 }
 
-.section-head p{
- color:var(--muted);
- font-size:14px;
+.mas-quick-title{
+  font-weight:800;
 }
 
-/* SEARCH */
-.search-box{
- display:flex;
- gap:9px;
- padding:9px;
- background:#fff;
- border:1px solid var(--border);
- border-radius:17px;
- box-shadow:var(--shadow);
+.mas-quick-desc{
+  color:var(--mas-muted);
+  font-size:13px;
+  margin-top:4px;
 }
 
-.search-box input{
- flex:1;
- min-width:0;
- border:0;
- outline:0;
- padding:9px;
- background:transparent;
+.mas-section{
+  margin-top:24px;
 }
 
-.search-box button{
- padding:10px 17px;
- border-radius:12px;
- color:#fff;
- background:var(--blue);
- font-weight:800;
+.mas-section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
 }
 
-/* GRID */
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
- gap:15px;
+.mas-section-head h2{
+  margin:0;
+  font-size:21px;
 }
 
-.card{
- background:#fff;
- border:1px solid var(--border);
- border-radius:21px;
- padding:20px;
- box-shadow:var(--shadow);
- transition:.2s;
+.mas-section-head button{
+  border:0;
+  background:none;
+  color:var(--mas-primary);
+  font-weight:700;
+  cursor:pointer;
 }
 
-.card:hover{
- transform:translateY(-3px);
- box-shadow:0 18px 40px rgba(15,23,42,.12);
+.mas-app-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
 }
 
-.card-icon{
- font-size:31px;
- margin-bottom:8px;
+.mas-app-card{
+  padding:18px;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.card h3{
- margin-bottom:5px;
- font-size:19px;
+.mas-app-card:hover{
+  transform:translateY(-3px);
 }
 
-.card p{
- color:var(--muted);
- font-size:14px;
+.mas-app-logo{
+  width:55px;
+  height:55px;
+  border-radius:17px;
+  display:grid;
+  place-items:center;
+  font-size:27px;
+  background:#eff6ff;
+  margin-bottom:12px;
 }
 
-.card .btn{
- margin-top:14px;
+.mas-app-card h3{
+  margin:0 0 5px;
 }
 
-/* SPECIAL COURSE */
-.course{
- padding:24px;
- border-radius:24px;
- color:#fff;
- background:linear-gradient(135deg,#312e81,#2563eb);
- box-shadow:0 20px 45px rgba(37,99,235,.2);
+.mas-app-card p{
+  margin:0;
+  color:var(--mas-muted);
+  font-size:13px;
 }
 
-.course small{color:#dbeafe}
-.course h2{margin:6px 0}
+.mas-bottom-nav{
+  position:fixed;
+  left:50%;
+  bottom:10px;
+  transform:translateX(-50%);
+  z-index:9995;
+  width:min(680px,calc(100% - 20px));
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  padding:8px;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(18px);
+  border:1px solid var(--mas-border);
+  border-radius:22px;
+  box-shadow:0 15px 40px rgba(15,23,42,.18);
+}
 
-/* ENGLISH */
-.english-wrap{
- padding:24px;
- border-radius:27px;
- background:
- radial-gradient(circle at top right,#60a5fa20,transparent 30%),
- #fff;
- border:1px solid var(--border);
- box-shadow:var(--shadow);
+.mas-nav-btn{
+  border:0;
+  background:transparent;
+  padding:9px 4px;
+  border-radius:15px;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:700;
+  color:var(--mas-muted);
 }
 
-.english-grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
- gap:15px;
+.mas-nav-btn span{
+  display:block;
+  font-size:20px;
+  margin-bottom:2px;
 }
 
-.english-card{
- padding:20px;
- border:1px solid var(--border);
- border-radius:20px;
- background:#fff;
+.mas-nav-btn.active{
+  color:var(--mas-primary);
+  background:#eff6ff;
 }
 
-.english-icon{
- font-size:32px;
- margin-bottom:8px;
+/* ================= MODAL ================= */
+
+.mas-modal{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  background:rgba(15,23,42,.58);
+  backdrop-filter:blur(5px);
 }
 
-.english-card p{
- color:var(--muted);
- font-size:14px;
- margin-bottom:13px;
+.mas-modal.show{
+  display:flex;
 }
 
-.app-tag{
- display:inline-block;
- padding:5px 9px;
- border-radius:999px;
- background:#eff6ff;
- color:#1d4ed8;
- font-size:11px;
- font-weight:800;
+.mas-modal-box{
+  width:min(850px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:white;
+  border-radius:26px;
+  box-shadow:0 25px 70px rgba(0,0,0,.25);
+  padding:22px;
 }
 
-/* NOTICE */
-.notice{
- padding:17px;
- background:#fff;
- border:1px solid var(--border);
- border-left:4px solid var(--blue);
- border-radius:14px;
- margin-bottom:10px;
+.mas-modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:18px;
 }
 
-.notice p{color:var(--muted);font-size:14px}
+.mas-modal-head h2{
+  margin:0;
+}
 
-/* TEACHER */
-.teacher-box{
- padding:26px;
- border-radius:25px;
- color:#fff;
- background:linear-gradient(135deg,#111827,#334155);
+.mas-close{
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:13px;
+  background:#f1f5f9;
+  cursor:pointer;
+  font-size:18px;
 }
 
-.teacher-box p{color:#cbd5e1}
+.mas-input,
+.mas-textarea,
+.mas-select{
+  width:100%;
+  border:1px solid #dbe1ea;
+  border-radius:13px;
+  padding:12px 13px;
+  margin:6px 0 12px;
+  font:inherit;
+  outline:none;
+}
 
-/* MODAL */
-.modal{
- display:none;
- position:fixed;
- inset:0;
- z-index:5000;
- padding:14px;
- background:rgba(2,6,23,.72);
- backdrop-filter:blur(5px);
- overflow:auto;
+.mas-input:focus,
+.mas-textarea:focus,
+.mas-select:focus{
+  border-color:var(--mas-primary);
+  box-shadow:0 0 0 3px rgba(37,99,235,.1);
 }
 
-.modal.show{
- display:flex;
- align-items:center;
- justify-content:center;
+.mas-textarea{
+  min-height:110px;
+  resize:vertical;
 }
 
-.modal-box{
- width:min(900px,100%);
- max-height:94vh;
- overflow:auto;
- background:#fff;
- border-radius:25px;
- padding:24px;
- box-shadow:0 30px 90px rgba(0,0,0,.3);
+.mas-btn{
+  border:0;
+  border-radius:13px;
+  padding:11px 16px;
+  cursor:pointer;
+  font-weight:800;
 }
 
-.modal-head{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:12px;
- margin-bottom:18px;
+.mas-btn-primary{
+  color:white;
+  background:linear-gradient(135deg,var(--mas-primary),var(--mas-primary-2));
 }
 
-.close{
- width:39px;
- height:39px;
- border-radius:50%;
- background:#f1f5f9;
- color:#334155;
- font-weight:900;
+.mas-btn-light{
+  background:#f1f5f9;
+  color:#334155;
 }
 
-/* FORM */
-.form{
- display:grid;
- gap:11px;
+.mas-btn-danger{
+  background:#fee2e2;
+  color:#b91c1c;
 }
 
-.form input,
-.form textarea,
-.form select{
- width:100%;
- padding:12px 13px;
- border:1px solid #dbe1ea;
- border-radius:12px;
- outline:0;
- background:#fff;
+.mas-btn-row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
 }
 
-.form textarea{
- min-height:110px;
- resize:vertical;
+.mas-admin-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
 }
 
-.form input:focus,
-.form textarea:focus,
-.form select:focus{
- border-color:#60a5fa;
- box-shadow:0 0 0 3px #2563eb18;
+.mas-admin-card{
+  padding:17px;
+  border:1px solid var(--mas-border);
+  border-radius:18px;
+  background:#fafcff;
 }
 
-/* ADMIN */
-.admin-tabs{
- display:flex;
- flex-wrap:wrap;
- gap:7px;
- margin-bottom:17px;
+.mas-admin-card h3{
+  margin:0 0 6px;
 }
 
-.admin-tabs button{
- padding:9px 12px;
- border-radius:11px;
- background:#eef2ff;
- color:#1e3a8a;
- font-weight:750;
+.mas-admin-card p{
+  margin:0 0 12px;
+  color:var(--mas-muted);
+  font-size:13px;
 }
 
-.admin-panel{display:none}
-.admin-panel.active{display:block}
+/* ================= SEARCH ================= */
 
-.admin-card{
- background:#f8fafc;
- border:1px solid var(--border);
- padding:17px;
- border-radius:17px;
- margin-bottom:12px;
+.mas-search{
+  display:flex;
+  gap:8px;
+  margin-bottom:18px;
 }
 
-/* EXAM */
-.timer{
- position:sticky;
- top:0;
- z-index:5;
- padding:12px;
- text-align:center;
- background:#172554;
- color:#fff;
- border-radius:14px;
- margin-bottom:12px;
- font-weight:900;
+.mas-search input{
+  flex:1;
+  border:1px solid var(--mas-border);
+  border-radius:15px;
+  padding:13px 15px;
+  font:inherit;
 }
 
-.question{
- padding:18px;
- background:#fff;
- border:1px solid var(--border);
- border-radius:17px;
- margin-bottom:12px;
-}
+/* ================= SPORTS ================= */
 
-.option{
- display:block;
- padding:11px;
- margin-top:8px;
- border:1px solid #e5e7eb;
- border-radius:11px;
- cursor:pointer;
+.mas-sports-player{
+  background:#020617;
+  border-radius:20px;
+  overflow:hidden;
+  color:white;
 }
 
-.option:hover{background:#f8fafc}
-
-/* RESULT */
-.result{
- text-align:center;
- padding:25px;
- border-radius:20px;
- background:#eff6ff;
+.mas-sports-screen{
+  min-height:280px;
+  display:grid;
+  place-items:center;
+  padding:20px;
+  text-align:center;
 }
 
-.score{
- font-size:48px;
- font-weight:950;
- color:#1d4ed8;
+.mas-timer{
+  font-size:36px;
+  font-weight:900;
+  margin:12px 0;
 }
 
-/* FOOTER */
-footer{
- margin-top:50px;
- padding:35px 15px;
- text-align:center;
- color:#cbd5e1;
- background:#0f172a;
+.mas-warning{
+  padding:11px 13px;
+  border-radius:13px;
+  background:#fff7ed;
+  color:#9a3412;
+  font-size:13px;
+  margin-bottom:12px;
 }
 
-footer strong{color:#fff}
+/* ================= RESPONSIVE ================= */
 
-/* EMPTY */
-.empty{
- text-align:center;
- padding:30px;
- color:var(--muted);
- background:#fff;
- border-radius:18px;
- border:1px dashed #cbd5e1;
-}
+@media(max-width:800px){
+  .mas-quick-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 
-/* MOBILE */
-@media(max-width:650px){
- .container{width:min(100% - 20px,1200px)}
- .nav{min-height:65px}
- .brand-title{font-size:14px}
- .brand-sub{font-size:10px}
- .logo{width:43px;height:43px;border-radius:13px}
- .teacher-btn{font-size:12px;padding:9px 10px}
- .hero{padding:35px 20px;border-radius:23px}
- .hero h1{font-size:33px}
- .search-box{flex-direction:column}
- .search-box button{width:100%}
- .modal-box{padding:18px;border-radius:20px}
+  .mas-app-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .mas-admin-grid{
+    grid-template-columns:1fr;
+  }
 }
+
+@media(max-width:520px){
+  .mas-main-shell{
+    padding-left:11px;
+    padding-right:11px;
+  }
+
+  .mas-hero{
+    padding:22px;
+    border-radius:23px;
+  }
+
+  .mas-quick-grid{
+    gap:9px;
+  }
+
+  .mas-quick-card{
+    padding:14px;
+  }
+
+  .mas-app-grid{
+    grid-template-columns:1fr;
+  }
 
-@media(max-width:430px){
- .brand-sub{display:none}
- .hero h1{font-size:29px}
- .btn{width:100%}
- .actions{display:grid}
+  .mas-modal-box{
+    padding:16px;
+    border-radius:22px;
+  }
 }
 </style>
-</head>
 
-<body>
 
-<header>
- <nav class="nav container">
+<div id="masSuperAppLayer" class="mas-super-layer">
 
-  <div class="brand">
-   <div class="logo">MAS</div>
+  <!-- ================= TOP APP BAR ================= -->
 
-   <div>
-    <div class="brand-title">
-     Teachers Students Friendship
+  <div class="mas-appbar">
+
+    <div class="mas-brand">
+      <div class="mas-brand-icon">M</div>
+      <div>
+        <div>MAS</div>
+        <small style="color:#64748b">Learning • Sports • Apps</small>
+      </div>
     </div>
-    <div class="brand-sub">
-     শিক্ষক ও শিক্ষার্থীর জ্ঞান, সহযোগিতা ও বন্ধুত্ব
+
+    <div class="mas-top-actions">
+      <button class="mas-icon-btn"
+              onclick="MASSuper.openSearch()"
+              aria-label="Search">
+        🔎
+      </button>
+
+      <button class="mas-icon-btn"
+              onclick="MASSuper.openSettings()"
+              aria-label="Settings">
+        ⚙️
+      </button>
     </div>
-   </div>
-  </div>
-
-  <button class="teacher-btn" onclick="openTeacherLogin()">
-   👨‍🏫 Only Teacher
-  </button>
-
- </nav>
-</header>
-
-
-<main class="container">
-
-<!-- HERO -->
-
-<section class="hero">
-
- <span class="badge">
-  🎓 Student Learning Platform
- </span>
-
- <h1>
-  শিখি, অনুশীলন করি,<br>
-  নিজেকে এগিয়ে নিই।
- </h1>
-
- <p>
-  Teachers Students Friendship হলো শিক্ষক ও শিক্ষার্থীর
-  জ্ঞান, সহযোগিতা, অনুশীলন এবং যোগাযোগের একটি
-  সহজ ও আধুনিক প্ল্যাটফর্ম।
- </p>
-
- <div class="actions">
-
-  <button class="btn btn-primary" onclick="focusSearch()">
-   🔎 Practice & Search
-  </button>
-
-  <button class="btn btn-primary" onclick="openAI()">
-   🤖 Ask AI
-  </button>
-
-  <button class="btn btn-primary" onclick="openExams()">
-   📝 Online Exam
-  </button>
-
- </div>
-
-</section>
-
-
-<!-- QUICK FEATURES -->
-
-<section class="section">
-
- <div class="section-head">
-  <h2>✨ Student Zone</h2>
-  <p>শিক্ষার্থীদের প্রয়োজনীয় সবকিছু সহজে খুঁজে নিন</p>
- </div>
-
- <div class="grid">
-
-  <div class="card">
-   <div class="card-icon">🎓</div>
-   <h3>Special Course</h3>
-   <p>বিশেষ কোর্সের নাম, ফি ও যোগাযোগের ব্যবস্থা।</p>
-   <button class="btn btn-dark" onclick="openCourse()">দেখুন</button>
-  </div>
-
-
-  <div class="card">
-   <div class="card-icon">🇬🇧</div>
-   <h3>Special Learning English</h3>
-   <p>Vocabulary, Grammar, Listening, Speaking এবং Apps।</p>
-   <button class="btn btn-dark" onclick="openEnglish()">শুরু করুন</button>
-  </div>
-
-
-  <div class="card">
-   <div class="card-icon">📚</div>
-   <h3>Study Resources</h3>
-   <p>PDF, Word, Image ও অন্যান্য শিক্ষামূলক resources।</p>
-   <button class="btn btn-dark" onclick="openResources()">দেখুন</button>
-  </div>
-
-
-  <div class="card">
-   <div class="card-icon">📝</div>
-   <h3>Online Exam</h3>
-   <p>MCQ পরীক্ষা, timer, automatic marks ও result।</p>
-   <button class="btn btn-dark" onclick="openExams()">পরীক্ষা দিন</button>
-  </div>
-
-
-  <div class="card">
-   <div class="card-icon">🏆</div>
-   <h3>Results & Points</h3>
-   <p>পরীক্ষার ফলাফল, points এবং rating system।</p>
-   <button class="btn btn-dark" onclick="openResults()">ফলাফল</button>
-  </div>
-
-
-  <div class="card">
-   <div class="card-icon">🎥</div>
-   <h3>Online Class</h3>
-   <p>অনলাইন ক্লাস ও meeting link।</p>
-   <button class="btn btn-dark" onclick="openClasses()">ক্লাস</button>
-  </div>
-
-
-  <div class="card">
-   <div class="card-icon">📢</div>
-   <h3>Notice Board</h3>
-   <p>গুরুত্বপূর্ণ ঘোষণা ও নতুন প্রকাশনা।</p>
-   <button class="btn btn-dark" onclick="openNotices()">নোটিশ</button>
-  </div>
-
-
-  <div class="card">
-   <div class="card-icon">💬</div>
-   <h3>Ask Teacher</h3>
-   <p>শিক্ষকের কাছে প্রশ্ন বা সমস্যার কথা জানান।</p>
-   <button class="btn btn-dark" onclick="askTeacher()">যোগাযোগ</button>
-  </div>
-
- </div>
-</section>
-
-
-<!-- SEARCH -->
-
-<section class="section" id="searchSection">
-
- <div class="section-head">
-  <h2>🔎 Practice & Search</h2>
-  <p>Website-এর শিক্ষামূলক বিষয় খুঁজে নিন</p>
- </div>
-
- <div class="search-box">
-
-  <input
-   id="searchInput"
-   type="search"
-   placeholder="যেমন: English, Math, Exam, PDF..."
-   onkeydown="if(event.key==='Enter')searchSite()">
-
-  <button onclick="searchSite()">Search</button>
-
- </div>
-
- <div id="searchResults" style="margin-top:15px"></div>
-
-</section>
-
-
-<!-- SPECIAL COURSE -->
-
-<section class="section">
-
- <div class="course">
-
-  <small>🎓 SPECIAL COURSE</small>
-
-  <h2 id="homeCourseName">
-   Special Course
-  </h2>
-
-  <p id="homeCourseFee">
-   কোর্সের ফি জানতে যোগাযোগ করুন।
-  </p>
-
-  <div class="actions" style="margin-top:15px">
-
-   <button class="btn btn-primary" onclick="openCourse()">
-    বিস্তারিত
-   </button>
-
-   <button class="btn btn-primary" onclick="askTeacher()">
-    💬 WhatsApp
-   </button>
 
   </div>
 
- </div>
 
-</section>
+  <main class="mas-main-shell">
 
+    <!-- ================= HERO ================= -->
 
-<!-- ENGLISH -->
+    <section class="mas-hero">
 
-<section class="section">
+      <h1>Welcome to MAS 🚀</h1>
 
- <div class="english-wrap">
+      <p>
+        Learn • Practice • Read • Explore • Play • Grow
+      </p>
 
-  <div class="section-head">
-   <h2>🇬🇧 Special Learning English</h2>
-   <p>
-    English শেখার জন্য Apps + Vocabulary + Daily English +
-    Grammar + Listening + Speaking
-   </p>
-  </div>
+      <div style="margin-top:18px">
+        <button
+          class="mas-btn"
+          style="background:white;color:#2563eb"
+          onclick="MASSuper.openAllApps()">
+          Explore MAS Apps →
+        </button>
+      </div>
 
-  <div class="english-grid">
-
-   <!-- EXACT APP 1 -->
-
-   <div class="english-card">
-    <div class="english-icon">🟢</div>
-    <span class="app-tag">LEARNING APP</span>
-    <h3>Duolingo</h3>
-
-    <p>
-     সহজ ও মজারভাবে English practice করার জন্য
-     Duolingo ব্যবহার করুন।
-    </p>
-
-    <a
-     class="btn btn-dark"
-     target="_blank"
-     rel="noopener noreferrer"
-     href="https://play.google.com/store/apps/details?id=com.duolingo">
-     📱 Open Duolingo
-    </a>
-   </div>
+    </section>
 
 
-   <!-- EXACT APP 2 -->
+    <!-- ================= QUICK ACCESS ================= -->
 
-   <div class="english-card">
-    <div class="english-icon">📚</div>
-    <span class="app-tag">LEARNING APP</span>
-    <h3>VocabO – Learning English</h3>
+    <section>
 
-    <p>
-     English vocabulary ও learning practice-এর
-     জন্য VocabO ব্যবহার করুন।
-    </p>
+      <div class="mas-section-head">
+        <h2>Quick Access</h2>
+      </div>
 
-    <a
-     class="btn btn-dark"
-     target="_blank"
-     rel="noopener noreferrer"
-     href="https://play.google.com/store/search?q=VocabO%20Learning%20English&c=apps">
-     📱 Open VocabO
-    </a>
-   </div>
+      <div class="mas-quick-grid">
+
+        <div class="mas-card mas-quick-card"
+             onclick="MASSuper.callExisting('openCourse')">
+          <div class="mas-quick-icon">🎓</div>
+          <div class="mas-quick-title">Courses</div>
+          <div class="mas-quick-desc">
+            Learn from available courses
+          </div>
+        </div>
+
+        <div class="mas-card mas-quick-card"
+             onclick="MASSuper.callExisting('openEnglish')">
+          <div class="mas-quick-icon">🇬🇧</div>
+          <div class="mas-quick-title">English</div>
+          <div class="mas-quick-desc">
+            Improve English skills
+          </div>
+        </div>
+
+        <div class="mas-card mas-quick-card"
+             onclick="MASSuper.callExisting('openExams')">
+          <div class="mas-quick-icon">📝</div>
+          <div class="mas-quick-title">Exams</div>
+          <div class="mas-quick-desc">
+            Practice and test yourself
+          </div>
+        </div>
+
+        <div class="mas-card mas-quick-card"
+             onclick="MASSuper.openLibrary()">
+          <div class="mas-quick-icon">📚</div>
+          <div class="mas-quick-title">Library</div>
+          <div class="mas-quick-desc">
+            Books and stories
+          </div>
+        </div>
+
+        <div class="mas-card mas-quick-card"
+             onclick="MASSuper.openSports()">
+          <div class="mas-quick-icon">🏏</div>
+          <div class="mas-quick-title">Sports</div>
+          <div class="mas-quick-desc">
+            Sports content and live sources
+          </div>
+        </div>
+
+        <div class="mas-card mas-quick-card"
+             onclick="MASSuper.openAllApps()">
+          <div class="mas-quick-icon">🧩</div>
+          <div class="mas-quick-title">App Center</div>
+          <div class="mas-quick-desc">
+            Useful apps inside MAS
+          </div>
+        </div>
+
+        <div class="mas-card mas-quick-card"
+             onclick="MASSuper.callExisting('openNotices')">
+          <div class="mas-quick-icon">📢</div>
+          <div class="mas-quick-title">Notices</div>
+          <div class="mas-quick-desc">
+            Latest announcements
+          </div>
+        </div>
+
+        <div class="mas-card mas-quick-card"
+             onclick="MASSuper.openAdmin()">
+          <div class="mas-quick-icon">👑</div>
+          <div class="mas-quick-title">Super Admin</div>
+          <div class="mas-quick-desc">
+            Manage MAS
+          </div>
+        </div>
+
+      </div>
+
+    </section>
 
 
-   <div class="english-card">
-    <div class="english-icon">📖</div>
-    <h3>Vocabulary</h3>
+    <!-- ================= APP CENTER ================= -->
 
-    <p>
-     Teacher প্রকাশিত word, বাংলা অর্থ,
-     example sentence ও pronunciation।
-    </p>
+    <section class="mas-section">
 
-    <button class="btn btn-dark" onclick="openVocabulary()">
-     📖 Learn
+      <div class="mas-section-head">
+        <h2>MAS App Center 🧩</h2>
+
+        <button onclick="MASSuper.openAllApps()">
+          View all
+        </button>
+      </div>
+
+      <div id="masFeaturedApps"
+           class="mas-app-grid">
+      </div>
+
+    </section>
+
+
+    <!-- ================= PROGRESS ================= -->
+
+    <section class="mas-section">
+
+      <div class="mas-section-head">
+        <h2>Your Learning</h2>
+      </div>
+
+      <div class="mas-card" style="padding:20px">
+
+        <div style="display:flex;justify-content:space-between">
+          <strong>Learning Progress</strong>
+          <strong id="masProgressPercent">0%</strong>
+        </div>
+
+        <div style="
+          height:10px;
+          background:#e5e7eb;
+          border-radius:20px;
+          margin-top:12px;
+          overflow:hidden;
+        ">
+          <div id="masProgressBar"
+               style="
+               height:100%;
+               width:0%;
+               background:linear-gradient(90deg,#2563eb,#7c3aed);
+               border-radius:20px;
+               transition:.5s;
+               ">
+          </div>
+        </div>
+
+        <div style="
+          display:flex;
+          gap:10px;
+          margin-top:15px;
+          flex-wrap:wrap;
+        ">
+
+          <span class="mas-btn mas-btn-light">
+            ⭐ <span id="masPoints">0</span> Points
+          </span>
+
+          <span class="mas-btn mas-btn-light">
+            🔥 Learning Streak
+          </span>
+
+          <span class="mas-btn mas-btn-light">
+            🏆 Achievements
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================= BOTTOM NAV ================= -->
+
+  <nav class="mas-bottom-nav">
+
+    <button class="mas-nav-btn active"
+            onclick="MASSuper.goHome(this)">
+      <span>🏠</span>
+      Home
     </button>
-   </div>
 
-
-   <div class="english-card">
-    <div class="english-icon">🎧</div>
-    <h3>Listening Practice</h3>
-
-    <p>
-     British Council-এর English listening practice।
-    </p>
-
-    <a
-     class="btn btn-dark"
-     target="_blank"
-     rel="noopener noreferrer"
-     href="https://learnenglish.britishcouncil.org/skills/listening">
-     🎧 Practice
-    </a>
-   </div>
-
-
-   <div class="english-card">
-    <div class="english-icon">🗣️</div>
-    <h3>Speaking Practice</h3>
-
-    <p>
-     English speaking skill উন্নত করার practice।
-    </p>
-
-    <a
-     class="btn btn-dark"
-     target="_blank"
-     rel="noopener noreferrer"
-     href="https://learnenglish.britishcouncil.org/skills/speaking">
-     🗣️ Practice
-    </a>
-   </div>
-
-
-   <div class="english-card">
-    <div class="english-icon">☀️</div>
-    <h3>Daily English</h3>
-
-    <p>
-     প্রতিদিন Teacher প্রকাশিত English content।
-    </p>
-
-    <button class="btn btn-dark" onclick="openDaily()">
-     ☀️ Open
+    <button class="mas-nav-btn"
+            onclick="MASSuper.openAllApps()">
+      <span>🧩</span>
+      Apps
     </button>
-   </div>
 
-
-   <div class="english-card">
-    <div class="english-icon">✍️</div>
-    <h3>Grammar & Practice</h3>
-
-    <p>
-     Grammar rules, examples এবং practice।
-    </p>
-
-    <button class="btn btn-dark" onclick="openGrammar()">
-     ✍️ Practice
+    <button class="mas-nav-btn"
+            onclick="MASSuper.openLibrary()">
+      <span>📚</span>
+      Library
     </button>
-   </div>
+
+    <button class="mas-nav-btn"
+            onclick="MASSuper.openSports()">
+      <span>🏏</span>
+      Sports
+    </button>
+
+    <button class="mas-nav-btn"
+            onclick="MASSuper.openAdmin()">
+      <span>👑</span>
+      Admin
+    </button>
+
+  </nav>
+
+</div>
+
+
+<!-- =========================================================
+     UNIVERSAL MAS MODAL
+========================================================= -->
+
+<div id="masModal"
+     class="mas-modal"
+     onclick="if(event.target===this)MASSuper.closeModal()">
+
+  <div class="mas-modal-box">
+
+    <div class="mas-modal-head">
+
+      <h2 id="masModalTitle">
+        MAS
+      </h2>
+
+      <button class="mas-close"
+              onclick="MASSuper.closeModal()">
+        ✕
+      </button>
+
+    </div>
+
+    <div id="masModalContent"></div>
 
   </div>
-
- </div>
-
-</section>
-
-
-<!-- NOTICE PREVIEW -->
-
-<section class="section">
-
- <div class="section-head">
-  <h2>📢 Latest Notice</h2>
- </div>
-
- <div id="noticePreview"></div>
-
-</section>
-
-
-<!-- TEACHER -->
-
-<section class="section">
-
- <div class="teacher-box">
-
-  <h2>👨‍🏫 Maksud Tahsin</h2>
-
-  <p>
-   Teachers Students Friendship-এর শিক্ষক/পরিচালনা।
-  </p>
-
-  <div class="actions" style="margin-top:16px">
-
-   <button class="btn btn-primary" onclick="askTeacher()">
-    💬 WhatsApp
-   </button>
-
-   <button class="btn btn-primary" onclick="callTeacher()">
-    📞 Call
-   </button>
-
-   <button class="btn btn-primary" onclick="emailTeacher()">
-    ✉️ Email
-   </button>
-
-  </div>
-
- </div>
-
-</section>
-
-</main>
-
-
-<footer>
-
- <strong>Teachers Students Friendship</strong>
-
- <br>
-
- শিক্ষক ও শিক্ষার্থীর জ্ঞান, সহযোগিতা ও বন্ধুত্ব
-
- <br><br>
-
- 👨‍🏫 Maksud Tahsin
-
- <br><br>
-
- WhatsApp: 01979840081
-
- <br>
-
- © <span id="year"></span> All Rights Reserved
-
-</footer>
-
-
-<!-- MODAL -->
-
-<div class="modal" id="modal">
-
- <div class="modal-box">
-
-  <div class="modal-head">
-
-   <h2 id="modalTitle">Title</h2>
-
-   <button class="close" onclick="closeModal()">✕</button>
-
-  </div>
-
-  <div id="modalBody"></div>
-
- </div>
 
 </div>
 
 
 <script>
-
 /* =========================================================
-   TEACHERS STUDENTS FRIENDSHIP
-   SINGLE FILE VERSION
+   MAS SUPER APP ENGINE
 ========================================================= */
 
+(function(){
 
-/* =========================
-   DEFAULT DATA
-========================= */
+"use strict";
 
-const DEFAULT_DATA = {
+const STORAGE_APPS = "MAS_SUPER_APPS_V1";
+const STORAGE_NOTICES = "MAS_SUPER_NOTICES_V1";
+const STORAGE_BOOKS = "MAS_SUPER_BOOKS_V1";
+const STORAGE_POINTS = "MAS_SUPER_POINTS_V1";
 
- course:{
-  name:"Special Course",
-  fee:"কোর্সের ফি জানতে WhatsApp-এ যোগাযোগ করুন।"
- },
+const defaultApps = [
 
- notices:[
   {
-   title:"Welcome",
-   text:"Teachers Students Friendship-এ সবাইকে স্বাগতম।"
-  }
- ],
+    id:"english",
+    name:"English Learning",
+    icon:"🇬🇧",
+    description:"Learn English with lessons and practice.",
+    category:"Education",
+    type:"internal",
+    action:"openEnglish"
+  },
 
- resources:[],
-
- vocabulary:[
   {
-   word:"Beautiful",
-   meaning:"সুন্দর",
-   example:"This is a beautiful place."
-  }
- ],
+    id:"courses",
+    name:"Special Courses",
+    icon:"🎓",
+    description:"Explore special learning courses.",
+    category:"Education",
+    type:"internal",
+    action:"openCourse"
+  },
 
- daily:[
-  "Practice English every day."
- ],
-
- grammar:[
-  "Teacher-এর প্রকাশিত Grammar & Practice এখানে দেখা যাবে।"
- ],
-
- exams:[
   {
-   id:"demo-exam",
-   title:"Demo MCQ Exam",
-   duration:5,
-   questions:[
-    {
-     q:"বাংলাদেশের রাজধানী কোনটি?",
-     options:["চট্টগ্রাম","ঢাকা","রাজশাহী","খুলনা"],
-     answer:1
-    },
-    {
-     q:"2 + 2 = কত?",
-     options:["3","4","5","6"],
-     answer:1
-    },
-    {
-     q:"English-এ 'বই' কোনটি?",
-     options:["Pen","Book","Table","Chair"],
-     answer:1
-    }
-   ]
+    id:"resources",
+    name:"Study Resources",
+    icon:"📘",
+    description:"Notes, learning resources and materials.",
+    category:"Education",
+    type:"internal",
+    action:"openResources"
+  },
+
+  {
+    id:"exams",
+    name:"Online Exam",
+    icon:"📝",
+    description:"Practice exams and check results.",
+    category:"Education",
+    type:"internal",
+    action:"openExams"
+  },
+
+  {
+    id:"ai",
+    name:"AI Learning",
+    icon:"🤖",
+    description:"AI-powered learning assistant.",
+    category:"AI",
+    type:"internal",
+    action:"openAI"
+  },
+
+  {
+    id:"library",
+    name:"MAS Library",
+    icon:"📚",
+    description:"Books, stories and other reading materials.",
+    category:"Books",
+    type:"internal",
+    action:"library"
+  },
+
+  {
+    id:"sports",
+    name:"Sports Hub",
+    icon:"🏏",
+    description:"Sports information and authorized live sources.",
+    category:"Sports",
+    type:"internal",
+    action:"sports"
   }
- ],
 
- results:[],
+];
 
- onlineClass:{
-  title:"Online Class",
-  link:"",
-  description:"Teacher ক্লাসের লিংক প্রকাশ করলে এখানে দেখা যাবে।"
- }
+let apps = load(STORAGE_APPS, defaultApps);
 
-};
+let books = load(STORAGE_BOOKS, [
+  {
+    id:"book-1",
+    title:"Example Book",
+    category:"Other Books",
+    description:"Add your first book from Super Admin."
+  }
+]);
+
+let notices = load(STORAGE_NOTICES, []);
+
+let points = Number(localStorage.getItem(STORAGE_POINTS) || 0);
 
 
-let data=loadData();
+/* =========================================================
+   STORAGE
+========================================================= */
 
-let currentExam=null;
-let examTimer=null;
-let examSeconds=0;
+function load(key, fallback){
+
+  try{
+
+    const value = localStorage.getItem(key);
+
+    if(!value) return fallback;
+
+    const parsed = JSON.parse(value);
+
+    return Array.isArray(parsed) ? parsed : fallback;
+
+  }catch(e){
+
+    return fallback;
+
+  }
+
+}
 
 
-/* =========================
-   LOCAL STORAGE
-========================= */
+function save(key,value){
 
-function loadData(){
-
- try{
-
-  const saved=localStorage.getItem(
-   "TSF_COMPLETE_DATA"
+  localStorage.setItem(
+    key,
+    JSON.stringify(value)
   );
 
-  if(saved){
-
-   const parsed=JSON.parse(saved);
-
-   return {
-    ...DEFAULT_DATA,
-    ...parsed
-   };
-
-  }
-
- }catch(e){}
-
- return JSON.parse(
-  JSON.stringify(DEFAULT_DATA)
- );
 }
 
 
-function saveData(){
-
- localStorage.setItem(
-  "TSF_COMPLETE_DATA",
-  JSON.stringify(data)
- );
-
- refreshHome();
-}
-
-
-/* =========================
+/* =========================================================
    MODAL
-========================= */
+========================================================= */
 
-function openModal(title,body){
+function openModal(title,html){
 
- document.getElementById("modalTitle")
- .textContent=title;
+  document.getElementById("masModalTitle").textContent = title;
 
- document.getElementById("modalBody")
- .innerHTML=body;
+  document.getElementById("masModalContent").innerHTML = html;
 
- document.getElementById("modal")
- .classList.add("show");
+  document.getElementById("masModal").classList.add("show");
 
 }
 
 
 function closeModal(){
 
- document.getElementById("modal")
- .classList.remove("show");
+  document.getElementById("masModal").classList.remove("show");
 
 }
 
 
-/* =========================
-   SEARCH
-========================= */
+/* =========================================================
+   EXISTING APP CONNECTOR
+========================================================= */
 
-function focusSearch(){
+function callExisting(name){
 
- const box=document.getElementById(
-  "searchSection"
- );
+  if(typeof window[name] === "function"){
 
- box.scrollIntoView({
-  behavior:"smooth"
- });
+    try{
 
- setTimeout(()=>{
-  document.getElementById("searchInput").focus();
- },500);
+      window[name]();
 
-}
+      return;
 
+    }catch(e){}
 
-function searchSite(){
-
- const q=document.getElementById(
-  "searchInput"
- ).value.toLowerCase().trim();
-
- if(!q){
-
-  document.getElementById(
-   "searchResults"
-  ).innerHTML="";
-
-  return;
- }
-
-
- const items=[
-
-  {
-   title:"🎓 Special Course",
-   text:data.course.name+" "+data.course.fee,
-   action:"openCourse()"
-  },
-
-  {
-   title:"📚 Study Resources",
-   text:data.resources.map(
-    x=>x.title
-   ).join(" ")
-  },
-
-  {
-   title:"🇬🇧 Vocabulary",
-   text:data.vocabulary.map(
-    x=>x.word+" "+x.meaning+" "+x.example
-   ).join(" ")
-  },
-
-  {
-   title:"☀️ Daily English",
-   text:data.daily.join(" ")
-  },
-
-  {
-   title:"✍️ Grammar & Practice",
-   text:data.grammar.join(" ")
-  },
-
-  {
-   title:"📝 Online Exam",
-   text:data.exams.map(
-    x=>x.title
-   ).join(" ")
-  },
-
-  {
-   title:"📢 Notice",
-   text:data.notices.map(
-    x=>x.title+" "+x.text
-   ).join(" ")
   }
-
- ];
-
-
- const found=items.filter(item=>
-  (item.title+" "+item.text)
-  .toLowerCase()
-  .includes(q)
- );
-
-
- document.getElementById(
-  "searchResults"
- ).innerHTML=found.length
-
- ?`
- <div class="grid">
- ${found.map(x=>`
-  <div class="card">
-   <div class="card-icon">🔎</div>
-   <h3>${x.title}</h3>
-   <p>${x.text}</p>
-   ${x.action?
-   `<button class="btn btn-dark"
-    onclick="${x.action}">
-    Open
-   </button>`:""}
-  </div>
- `).join("")}
- </div>
- `
-
- :`
- <div class="empty">
-  <h3>কিছু পাওয়া যায়নি</h3>
-  <p>অন্য keyword দিয়ে আবার চেষ্টা করুন।</p>
- </div>
- `;
-
-}
-
-
-/* =========================
-   COURSE
-========================= */
-
-function openCourse(){
-
- openModal(
-  "🎓 Special Course",
-
- `
- <div class="course">
-
-  <small>SPECIAL COURSE</small>
-
-  <h2>${escapeHTML(data.course.name)}</h2>
-
-  <h3>💰 ${escapeHTML(data.course.fee)}</h3>
-
-  <div class="actions" style="margin-top:17px">
-
-   <button class="btn btn-primary"
-    onclick="askTeacher()">
-    💬 Send message in WhatsApp
-   </button>
-
-   <button class="btn btn-primary"
-    onclick="callTeacher()">
-    📞 Teacher's Call
-   </button>
-
-   <button class="btn btn-primary"
-    onclick="emailTeacher()">
-    ✉️ Email
-   </button>
-
-  </div>
-
- </div>
- `
- );
-
-}
-
-
-/* =========================
-   ENGLISH
-========================= */
-
-function openEnglish(){
-
- openModal(
-  "🇬🇧 Special Learning English",
-
- `
- <div class="english-grid">
-
-  <div class="english-card">
-   <div class="english-icon">🟢</div>
-   <h3>Duolingo</h3>
-   <p>English learning app.</p>
-
-   <a class="btn btn-dark"
-    target="_blank"
-    href="https://play.google.com/store/apps/details?id=com.duolingo">
-    📱 Open
-   </a>
-  </div>
-
-
-  <div class="english-card">
-   <div class="english-icon">📚</div>
-   <h3>VocabO – Learning English</h3>
-   <p>Vocabulary ও English learning practice.</p>
-
-   <a class="btn btn-dark"
-    target="_blank"
-    href="https://play.google.com/store/search?q=VocabO%20Learning%20English&c=apps">
-    📱 Open
-   </a>
-  </div>
-
-
-  <div class="english-card">
-   <div class="english-icon">📖</div>
-   <h3>Vocabulary</h3>
-   <button class="btn btn-dark"
-    onclick="openVocabulary()">
-    Learn
-   </button>
-  </div>
-
-
-  <div class="english-card">
-   <div class="english-icon">🎧</div>
-   <h3>Listening</h3>
-
-   <a class="btn btn-dark"
-    target="_blank"
-    href="https://learnenglish.britishcouncil.org/skills/listening">
-    Practice
-   </a>
-  </div>
-
-
-  <div class="english-card">
-   <div class="english-icon">🗣️</div>
-   <h3>Speaking</h3>
-
-   <a class="btn btn-dark"
-    target="_blank"
-    href="https://learnenglish.britishcouncil.org/skills/speaking">
-    Practice
-   </a>
-  </div>
-
-
-  <div class="english-card">
-   <div class="english-icon">☀️</div>
-   <h3>Daily English</h3>
-
-   <button class="btn btn-dark"
-    onclick="openDaily()">
-    Learn
-   </button>
-  </div>
-
-
-  <div class="english-card">
-   <div class="english-icon">✍️</div>
-   <h3>Grammar & Practice</h3>
-
-   <button class="btn btn-dark"
-    onclick="openGrammar()">
-    Practice
-   </button>
-  </div>
-
- </div>
- `
- );
-
-}
-
-
-function openVocabulary(){
-
- openModal(
-  "📖 Vocabulary",
-
- `
- ${data.vocabulary.map(x=>`
-  <div class="notice">
-   <h3>${escapeHTML(x.word)}</h3>
-   <p>
-    <strong>বাংলা অর্থ:</strong>
-    ${escapeHTML(x.meaning)}
-   </p>
-   <p>
-    <strong>Example:</strong>
-    ${escapeHTML(x.example)}
-   </p>
-  </div>
- `).join("")}
- `
- );
-
-}
-
-
-function openDaily(){
-
- openModal(
-  "☀️ Daily English",
-
- `
- ${data.daily.map(x=>`
-  <div class="notice">
-   <p>${escapeHTML(x)}</p>
-  </div>
- `).join("")}
- `
- );
-
-}
-
-
-function openGrammar(){
-
- openModal(
-  "✍️ Grammar & Practice",
-
- `
- ${data.grammar.map(x=>`
-  <div class="notice">
-   <p>${escapeHTML(x)}</p>
-  </div>
- `).join("")}
- `
- );
-
-}
-
-
-/* =========================
-   RESOURCES
-========================= */
-
-function openResources(){
-
- if(!data.resources.length){
 
   openModal(
-   "📚 Study Resources",
-   `<div class="empty">
-    Teacher এখনো কোনো resource publish করেননি।
-   </div>`
+    "MAS",
+    `
+      <div class="mas-warning">
+        Existing feature detected but its function name
+        could not be connected automatically.
+      </div>
+
+      <p>
+        Your original MAS feature has not been deleted.
+      </p>
+    `
   );
 
-  return;
- }
+}
 
 
- openModal(
-  "📚 Study Resources",
+/* =========================================================
+   APP CENTER
+========================================================= */
 
- `
- ${data.resources.map((x,i)=>`
-  <div class="notice">
+function renderApps(){
 
-   <h3>${escapeHTML(x.title)}</h3>
+  const box =
+    document.getElementById("masFeaturedApps");
 
-   <p>
-    ${escapeHTML(x.description||"")}
-   </p>
+  if(!box) return;
 
-   ${
-    x.url
-    ?
-    `<a class="btn btn-dark"
-      target="_blank"
-      href="${escapeAttribute(x.url)}">
-      ⬇️ Open / Download
-     </a>`
-    :""
-   }
+  box.innerHTML = "";
 
-  </div>
- `).join("")}
- `
- );
+  apps.slice(0,6).forEach(app => {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "mas-card mas-app-card";
+
+    card.innerHTML = `
+
+      <div class="mas-app-logo">
+        ${escapeHTML(app.icon || "🧩")}
+      </div>
+
+      <h3>
+        ${escapeHTML(app.name)}
+      </h3>
+
+      <p>
+        ${escapeHTML(app.description || "")}
+      </p>
+
+      <div style="margin-top:12px">
+
+        <button
+          class="mas-btn mas-btn-light"
+          onclick="MASSuper.launchApp('${escapeAttr(app.id)}')">
+
+          Open →
+
+        </button>
+
+      </div>
+
+    `;
+
+    box.appendChild(card);
+
+  });
 
 }
 
 
-/* =========================
-   NOTICE
-========================= */
+function openAllApps(){
 
-function openNotices(){
+  const categories = {};
 
- openModal(
-  "📢 Notice Board",
+  apps.forEach(app => {
 
- `
- ${data.notices.map(x=>`
-  <div class="notice">
-
-   <h3>${escapeHTML(x.title)}</h3>
-
-   <p>${escapeHTML(x.text)}</p>
-
-  </div>
- `).join("")}
- `
- );
-
-}
-
-
-function refreshHome(){
-
- document.getElementById(
-  "homeCourseName"
- ).textContent=data.course.name;
-
- document.getElementById(
-  "homeCourseFee"
- ).textContent=data.course.fee;
-
-
- const box=document.getElementById(
-  "noticePreview"
- );
-
- if(!data.notices.length){
-
-  box.innerHTML=`
-   <div class="empty">
-    কোনো notice নেই।
-   </div>
-  `;
-
- }else{
-
-  box.innerHTML=data.notices
-   .slice(0,3)
-   .map(x=>`
-    <div class="notice">
-     <h3>${escapeHTML(x.title)}</h3>
-     <p>${escapeHTML(x.text)}</p>
-    </div>
-   `).join("");
-
- }
-
-}
-
-
-/* =========================
-   ONLINE CLASS
-========================= */
-
-function openClasses(){
-
- const c=data.onlineClass;
-
- openModal(
-  "🎥 Online Class",
-
- `
- <div class="card">
-
-  <h3>${escapeHTML(c.title)}</h3>
-
-  <p>${escapeHTML(c.description)}</p>
-
-  ${
-   c.link
-   ?
-   `<a class="btn btn-dark"
-    target="_blank"
-    href="${escapeAttribute(c.link)}">
-    🎥 Join Class
-   </a>`
-   :
-   `<div class="empty" style="margin-top:15px">
-    Teacher এখনো ক্লাসের link প্রকাশ করেননি।
-   </div>`
-  }
-
- </div>
- `
- );
-
-}
-
-
-/* =========================
-   RESULTS
-========================= */
-
-function openResults(){
-
- openModal(
-  "🏆 Results & Points",
-
- `
- <div class="form">
-
-  <input
-   id="resultSearch"
-   placeholder="আপনার নাম লিখুন">
-
-  <button class="btn btn-dark"
-   onclick="findResult()">
-   🔎 Search Result
-  </button>
-
-  <div id="resultBox"></div>
-
- </div>
- `
- );
-
-}
-
-
-function findResult(){
-
- const name=document.getElementById(
-  "resultSearch"
- ).value.trim().toLowerCase();
-
- const results=data.results.filter(x=>
-  x.name.toLowerCase()===name
- );
-
- const box=document.getElementById(
-  "resultBox"
- );
-
- if(!results.length){
-
-  box.innerHTML=`
-   <div class="empty">
-    এই নামে কোনো result পাওয়া যায়নি।
-   </div>
-  `;
-
-  return;
- }
-
- box.innerHTML=results.map(x=>`
-
-  <div class="result" style="margin-top:12px">
-
-   <h2>${escapeHTML(x.name)}</h2>
-
-   <p>${escapeHTML(x.from)}</p>
-
-   <div class="score">
-    ${x.score}/${x.total}
-   </div>
-
-   <h3>
-    ${x.percent}%
-   </h3>
-
-   <p>
-    ⭐ Points: ${x.points}
-   </p>
-
-  </div>
-
- `).join("");
-
-}
-
-
-/* =========================
-   EXAM CENTER
-========================= */
-
-function openExams(){
-
- openModal(
-  "📝 Online Exam Center",
-
- `
- <div class="grid">
-
- ${data.exams.map(x=>`
-
-  <div class="card">
-
-   <span class="app-tag">
-    ${x.duration} MIN
-   </span>
-
-   <h3>${escapeHTML(x.title)}</h3>
-
-   <p>
-    ${x.questions.length}টি MCQ প্রশ্ন
-   </p>
-
-   <button class="btn btn-dark"
-    onclick="startExam('${escapeAttribute(x.id)}')">
-    📝 Start Exam
-   </button>
-
-  </div>
-
- `).join("")}
-
- </div>
- `
- );
-
-}
-
-
-function startExam(id){
-
- currentExam=data.exams.find(
-  x=>x.id===id
- );
-
- if(!currentExam)return;
-
- let html=`
-
- <div class="form">
-
-  <input
-   id="studentName"
-   placeholder="আপনার নাম">
-
-  <input
-   id="studentFrom"
-   placeholder="কোথা থেকে পরীক্ষা দিচ্ছেন?">
-
-  <div id="timerBox" class="timer">
-   ⏱️ সময়:
-   <strong id="examTimer">--:--</strong>
-  </div>
-
-  <form id="examForm">
-
- `;
-
-
- currentExam.questions.forEach((q,i)=>{
-
-  html+=`
-
-   <div class="question">
-
-    <h3>
-     ${i+1}. ${escapeHTML(q.q)}
-    </h3>
-
-    ${
-     q.options.map((o,j)=>`
-
-      <label class="option">
-
-       <input
-        type="radio"
-        name="question_${i}"
-        value="${j}">
-
-       ${escapeHTML(o)}
-
-      </label>
-
-     `).join("")
+    if(!categories[app.category]){
+      categories[app.category] = [];
     }
 
-   </div>
+    categories[app.category].push(app);
+
+  });
+
+
+  let html = `
+
+    <div class="mas-search">
+
+      <input
+        id="masAppSearch"
+        placeholder="Search MAS apps..."
+        oninput="MASSuper.filterApps(this.value)"
+      >
+
+    </div>
+
+    <div
+      id="masAllAppsList"
+      class="mas-app-grid"
+      style="grid-template-columns:repeat(2,1fr)"
+    >
+    </div>
 
   `;
 
- });
+  openModal("🧩 MAS App Center",html);
+
+  renderAllApps();
+
+}
 
 
- html+=`
+function renderAllApps(filter=""){
 
-   <button
-    type="button"
-    class="btn btn-dark"
-    onclick="submitExam()">
+  const box =
+    document.getElementById("masAllAppsList");
 
-    ✅ Submit Exam
+  if(!box) return;
 
-   </button>
+  box.innerHTML = "";
 
-  </form>
+  const q =
+    String(filter).toLowerCase();
 
- </div>
+  apps
+    .filter(app =>
+      !q ||
+      String(app.name).toLowerCase().includes(q) ||
+      String(app.description).toLowerCase().includes(q) ||
+      String(app.category).toLowerCase().includes(q)
+    )
+    .forEach(app => {
 
- `;
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "mas-card mas-app-card";
+
+      card.innerHTML = `
+
+        <div class="mas-app-logo">
+          ${escapeHTML(app.icon || "🧩")}
+        </div>
+
+        <h3>
+          ${escapeHTML(app.name)}
+        </h3>
+
+        <p>
+          ${escapeHTML(app.description || "")}
+        </p>
+
+        <small style="display:block;margin-top:8px;color:#64748b">
+          ${escapeHTML(app.category || "Other")}
+        </small>
+
+        <div style="margin-top:12px">
+
+          <button
+            class="mas-btn mas-btn-primary"
+            onclick="MASSuper.launchApp('${escapeAttr(app.id)}')">
+            Open
+          </button>
+
+        </div>
+      `;
+
+      box.appendChild(card);
+
+    });
+
+}
 
 
- openModal(
-  currentExam.title,
-  html
- );
+function filterApps(value){
+
+  renderAllApps(value);
+
+}
 
 
- examSeconds=currentExam.duration*60;
+/* =========================================================
+   APP LAUNCHER
+========================================================= */
 
- updateTimer();
+function launchApp(id){
 
- examTimer=setInterval(()=>{
+  const app =
+    apps.find(x => x.id === id);
 
-  examSeconds--;
+  if(!app) return;
 
-  updateTimer();
+  if(app.action === "library"){
 
-  if(examSeconds<=0){
+    openLibrary();
 
-   clearInterval(examTimer);
-
-   submitExam();
+    return;
 
   }
 
- },1000);
+  if(app.action === "sports"){
+
+    openSports();
+
+    return;
+
+  }
+
+  if(app.type === "internal"){
+
+    closeModal();
+
+    callExisting(app.action);
+
+    return;
+
+  }
+
+  if(app.type === "url"){
+
+    /*
+      External apps/web apps are opened in a new tab.
+      Only add trusted/authorized URLs.
+    */
+
+    if(app.url){
+
+      window.open(
+        app.url,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+    }
+
+    return;
+
+  }
 
 }
 
 
-function updateTimer(){
+/* =========================================================
+   LIBRARY
+========================================================= */
 
- const el=document.getElementById(
-  "examTimer"
- );
+function openLibrary(){
 
- if(!el)return;
+  let html = `
 
- const m=Math.floor(
-  examSeconds/60
- );
+    <div class="mas-app-grid">
 
- const s=examSeconds%60;
+      <div class="mas-card mas-app-card"
+           onclick="MASSuper.showBooks('Books')">
 
- el.textContent=
-  String(m).padStart(2,"0")
-  +":"
-  +String(s).padStart(2,"0");
+        <div class="mas-app-logo">📚</div>
+
+        <h3>Books</h3>
+
+        <p>
+          Educational and useful books.
+        </p>
+
+      </div>
+
+      <div class="mas-card mas-app-card"
+           onclick="MASSuper.showBooks('Stories')">
+
+        <div class="mas-app-logo">📖</div>
+
+        <h3>Stories</h3>
+
+        <p>
+          Stories for learning and reading.
+        </p>
+
+      </div>
+
+      <div class="mas-card mas-app-card"
+           onclick="MASSuper.showBooks('Other Books')">
+
+        <div class="mas-app-logo">🗂️</div>
+
+        <h3>Other Books</h3>
+
+        <p>
+          Other reading materials.
+        </p>
+
+      </div>
+
+    </div>
+
+  `;
+
+  openModal("📚 MAS Library",html);
 
 }
 
 
-function submitExam(){
+function showBooks(category){
 
- if(!currentExam)return;
+  const list =
+    books.filter(x => x.category === category);
 
- clearInterval(examTimer);
+  let html = `
 
- const name=document.getElementById(
-  "studentName"
- )?.value.trim();
+    <button
+      class="mas-btn mas-btn-light"
+      onclick="MASSuper.openLibrary()">
+      ← Back
+    </button>
 
- const from=document.getElementById(
-  "studentFrom"
- )?.value.trim();
+    <div style="margin-top:15px">
 
- if(!name||!from){
+  `;
 
-  alert(
-   "নাম এবং কোথা থেকে পরীক্ষা দিচ্ছেন—দুটিই লিখুন।"
+  if(!list.length){
+
+    html += `
+      <div class="mas-card" style="padding:20px">
+        No books have been added yet.
+      </div>
+    `;
+
+  }else{
+
+    list.forEach(book => {
+
+      html += `
+
+        <div class="mas-card"
+             style="padding:17px;margin-bottom:10px">
+
+          <h3>
+            📘 ${escapeHTML(book.title)}
+          </h3>
+
+          <p style="color:#64748b">
+            ${escapeHTML(book.description || "")}
+          </p>
+
+          ${
+            book.url
+            ?
+            `<button
+              class="mas-btn mas-btn-primary"
+              onclick="window.open('${escapeAttr(book.url)}','_blank','noopener,noreferrer')">
+              Open Book
+            </button>`
+            :
+            ""
+          }
+
+        </div>
+
+      `;
+
+    });
+
+  }
+
+  html += "</div>";
+
+  openModal("📚 " + category,html);
+
+}
+
+
+/* =========================================================
+   SPORTS HUB
+========================================================= */
+
+let sportsTimer = null;
+let sportsSeconds = 1200;
+
+function openSports(){
+
+  openModal(
+
+    "🏏 MAS Sports Hub",
+
+    `
+
+      <div class="mas-warning">
+
+        ⏱️ Live viewing inside MAS is limited to
+        a maximum of 20 minutes.
+
+      </div>
+
+      <div class="mas-sports-player">
+
+        <div class="mas-sports-screen">
+
+          <div>
+
+            <div style="font-size:50px">
+              🏏
+            </div>
+
+            <h2>
+              Sports Viewer
+            </h2>
+
+            <div class="mas-timer"
+                 id="masSportsTimer">
+              20:00
+            </div>
+
+            <p style="opacity:.8">
+              The in-app viewer will close automatically
+              when the timer ends.
+            </p>
+
+            <button
+              class="mas-btn"
+              style="background:white;color:#111827"
+              onclick="MASSuper.startSportsTimer()">
+
+              Start 20-Minute Session
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div style="margin-top:15px">
+
+        <h3>Sports Content</h3>
+
+        <p style="color:#64748b">
+
+          Add your authorized sports source from
+          Super Admin. MAS does not provide
+          unauthorized streams.
+
+        </p>
+
+      </div>
+
+    `
+
   );
 
-  return;
-
- }
+}
 
 
- let score=0;
+function startSportsTimer(){
 
- currentExam.questions.forEach((q,i)=>{
+  clearInterval(sportsTimer);
 
-  const selected=document.querySelector(
-   `input[name="question_${i}"]:checked`
+  sportsSeconds = 1200;
+
+  updateSportsTimer();
+
+  sportsTimer =
+    setInterval(() => {
+
+      sportsSeconds--;
+
+      updateSportsTimer();
+
+      if(sportsSeconds <= 0){
+
+        clearInterval(sportsTimer);
+
+        closeModal();
+
+        alert(
+          "20-minute sports viewing session has ended."
+        );
+
+      }
+
+    },1000);
+
+}
+
+
+function updateSportsTimer(){
+
+  const el =
+    document.getElementById("masSportsTimer");
+
+  if(!el) return;
+
+  const min =
+    Math.floor(sportsSeconds / 60);
+
+  const sec =
+    sportsSeconds % 60;
+
+  el.textContent =
+    String(min).padStart(2,"0") +
+    ":" +
+    String(sec).padStart(2,"0");
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function openSearch(){
+
+  openModal(
+
+    "🔎 MAS Search",
+
+    `
+
+      <div class="mas-search">
+
+        <input
+          id="masGlobalSearch"
+          autofocus
+          placeholder="Search courses, apps, books..."
+          oninput="MASSuper.globalSearch(this.value)"
+        >
+
+      </div>
+
+      <div id="masSearchResults"></div>
+
+    `
+
   );
+
+}
+
+
+function globalSearch(value){
+
+  const box =
+    document.getElementById("masSearchResults");
+
+  if(!box) return;
+
+  const q =
+    String(value).toLowerCase().trim();
+
+  if(!q){
+
+    box.innerHTML =
+      "<p style='color:#64748b'>Start typing to search.</p>";
+
+    return;
+
+  }
+
+  const results =
+    apps.filter(app =>
+      String(app.name).toLowerCase().includes(q) ||
+      String(app.description).toLowerCase().includes(q)
+    );
+
+  box.innerHTML = "";
+
+  if(!results.length){
+
+    box.innerHTML =
+      "<p>No MAS app found.</p>";
+
+    return;
+
+  }
+
+  results.forEach(app => {
+
+    const item =
+      document.createElement("div");
+
+    item.className = "mas-card";
+
+    item.style.padding = "15px";
+    item.style.marginBottom = "10px";
+
+    item.innerHTML = `
+
+      <strong>
+        ${escapeHTML(app.icon || "🧩")}
+        ${escapeHTML(app.name)}
+      </strong>
+
+      <p style="color:#64748b">
+        ${escapeHTML(app.description || "")}
+      </p>
+
+      <button
+        class="mas-btn mas-btn-primary"
+        onclick="MASSuper.launchApp('${escapeAttr(app.id)}')">
+        Open
+      </button>
+
+    `;
+
+    box.appendChild(item);
+
+  });
+
+}
+
+
+/* =========================================================
+   SUPER ADMIN
+========================================================= */
+
+function openAdmin(){
+
+  openModal(
+
+    "👑 MAS Super Admin",
+
+    `
+
+      <div class="mas-warning">
+
+        Super Admin access is required to manage
+        MAS content.
+
+      </div>
+
+      <label>Admin Access Key</label>
+
+      <input
+        id="masAdminKey"
+        class="mas-input"
+        type="password"
+        placeholder="Enter your admin key"
+      >
+
+      <button
+        class="mas-btn mas-btn-primary"
+        onclick="MASSuper.verifyAdmin()">
+
+        🔐 Enter Super Admin
+
+      </button>
+
+    `
+
+  );
+
+}
+
+
+/*
+  IMPORTANT:
+  This browser-only key is NOT a production security system.
+  For real multi-user administration use Firebase/Supabase
+  Authentication + database.
+*/
+
+function verifyAdmin(){
+
+  const key =
+    document.getElementById("masAdminKey").value;
+
+  /*
+    CHANGE THIS DEMO KEY.
+
+    Do NOT use a real password here for production.
+  */
+
+  const DEMO_ADMIN_KEY =
+    "MAS-ADMIN-2026";
+
+  if(key !== DEMO_ADMIN_KEY){
+
+    alert("Invalid Admin Access.");
+
+    return;
+
+  }
+
+  openAdminDashboard();
+
+}
+
+
+function openAdminDashboard(){
+
+  openModal(
+
+    "👑 Super Admin Control Center",
+
+    `
+
+      <div class="mas-admin-grid">
+
+        <div class="mas-admin-card">
+
+          <h3>🧩 App Manager</h3>
+
+          <p>
+            Add useful apps to MAS without editing code.
+          </p>
+
+          <button
+            class="mas-btn mas-btn-primary"
+            onclick="MASSuper.openAppManager()">
+
+            Manage Apps
+
+          </button>
+
+        </div>
+
+
+        <div class="mas-admin-card">
+
+          <h3>📚 Book Manager</h3>
+
+          <p>
+            Add Books, Stories and Other Books.
+          </p>
+
+          <button
+            class="mas-btn mas-btn-primary"
+            onclick="MASSuper.openBookManager()">
+
+            Manage Books
+
+          </button>
+
+        </div>
+
+
+        <div class="mas-admin-card">
+
+          <h3>📢 Notice Manager</h3>
+
+          <p>
+            Create and manage announcements.
+          </p>
+
+          <button
+            class="mas-btn mas-btn-primary"
+            onclick="MASSuper.openNoticeManager()">
+
+            Manage Notices
+
+          </button>
+
+        </div>
+
+
+        <div class="mas-admin-card">
+
+          <h3>🏏 Sports Manager</h3>
+
+          <p>
+            Manage sports content and authorized sources.
+          </p>
+
+          <button
+            class="mas-btn mas-btn-primary"
+            onclick="MASSuper.openSportsManager()">
+
+            Manage Sports
+
+          </button>
+
+        </div>
+
+
+        <div class="mas-admin-card">
+
+          <h3>🎓 Course Manager</h3>
+
+          <p>
+            Connect the existing course system.
+          </p>
+
+          <button
+            class="mas-btn mas-btn-light"
+            onclick="MASSuper.callExisting('openCourse')">
+
+            Open Courses
+
+          </button>
+
+        </div>
+
+
+        <div class="mas-admin-card">
+
+          <h3>📝 Exam Manager</h3>
+
+          <p>
+            Use the existing MAS exam system.
+          </p>
+
+          <button
+            class="mas-btn mas-btn-light"
+            onclick="MASSuper.callExisting('openExams')">
+
+            Open Exams
+
+          </button>
+
+        </div>
+
+      </div>
+
+      <hr style="margin:22px 0;border:0;border-top:1px solid #e5e7eb">
+
+      <h3>⚙️ Website Editor</h3>
+
+      <p style="color:#64748b">
+
+        এই Control Center থেকে ভবিষ্যতে code না লিখে
+        MAS-এর content, apps, books, notices ও অন্যান্য
+        sections পরিচালনা করা যাবে।
+
+      </p>
+
+      <div class="mas-btn-row">
+
+        <button
+          class="mas-btn mas-btn-primary"
+          onclick="MASSuper.openAppManager()">
+
+          🧩 Add App
+
+        </button>
+
+        <button
+          class="mas-btn mas-btn-light"
+          onclick="MASSuper.openBookManager()">
+
+          📚 Add Book
+
+        </button>
+
+        <button
+          class="mas-btn mas-btn-light"
+          onclick="MASSuper.openNoticeManager()">
+
+          📢 Add Notice
+
+        </button>
+
+      </div>
+
+    `
+
+  );
+
+}
+
+
+/* =========================================================
+   APP MANAGER
+========================================================= */
+
+function openAppManager(){
+
+  let list = apps.map(app => `
+
+    <div class="mas-card"
+         style="padding:15px;margin-bottom:9px">
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:10px;
+        align-items:center;
+      ">
+
+        <div>
+
+          <strong>
+            ${escapeHTML(app.icon || "🧩")}
+            ${escapeHTML(app.name)}
+          </strong>
+
+          <div style="
+            font-size:12px;
+            color:#64748b;
+            margin-top:4px;
+          ">
+            ${escapeHTML(app.category || "Other")}
+          </div>
+
+        </div>
+
+        <button
+          class="mas-btn mas-btn-danger"
+          onclick="MASSuper.deleteApp('${escapeAttr(app.id)}')">
+
+          Delete
+
+        </button>
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+
+  openModal(
+
+    "🧩 App Manager",
+
+    `
+
+      <h3>Add a New App</h3>
+
+      <label>App Name</label>
+
+      <input
+        id="masNewAppName"
+        class="mas-input"
+        placeholder="Example: Calculator"
+      >
+
+      <label>Icon / Emoji</label>
+
+      <input
+        id="masNewAppIcon"
+        class="mas-input"
+        value="🧩"
+        placeholder="🧮"
+      >
+
+      <label>Description</label>
+
+      <input
+        id="masNewAppDescription"
+        class="mas-input"
+        placeholder="Useful calculator for students"
+      >
+
+      <label>Category</label>
+
+      <select
+        id="masNewAppCategory"
+        class="mas-select">
+
+        <option>Education</option>
+        <option>AI</option>
+        <option>Tools</option>
+        <option>Books</option>
+        <option>Sports</option>
+        <option>Productivity</option>
+        <option>Other</option>
+
+      </select>
+
+
+      <label>App Type</label>
+
+      <select
+        id="masNewAppType"
+        class="mas-select"
+        onchange="MASSuper.toggleAppURL()">
+
+        <option value="url">
+          External Web App
+        </option>
+
+        <option value="internal">
+          Existing MAS Feature
+        </option>
+
+      </select>
+
+
+      <div id="masAppUrlBox">
+
+        <label>Web App URL</label>
+
+        <input
+          id="masNewAppURL"
+          class="mas-input"
+          placeholder="https://example.com"
+        >
+
+      </div>
+
+
+      <div class="mas-btn-row">
+
+        <button
+          class="mas-btn mas-btn-primary"
+          onclick="MASSuper.addApp()">
+
+          ➕ Add App
+
+        </button>
+
+        <button
+          class="mas-btn mas-btn-light"
+          onclick="MASSuper.openAdminDashboard()">
+
+          ← Back
+
+        </button>
+
+      </div>
+
+
+      <hr style="margin:20px 0;border:0;border-top:1px solid #e5e7eb">
+
+      <h3>Installed Apps</h3>
+
+      ${list}
+
+    `
+
+  );
+
+}
+
+
+function toggleAppURL(){
+
+  const type =
+    document.getElementById("masNewAppType").value;
+
+  const box =
+    document.getElementById("masAppUrlBox");
+
+  if(box){
+
+    box.style.display =
+      type === "url" ? "block" : "none";
+
+  }
+
+}
+
+
+function addApp(){
+
+  const name =
+    document.getElementById("masNewAppName").value.trim();
+
+  const icon =
+    document.getElementById("masNewAppIcon").value.trim() || "🧩";
+
+  const description =
+    document.getElementById("masNewAppDescription").value.trim();
+
+  const category =
+    document.getElementById("masNewAppCategory").value;
+
+  const type =
+    document.getElementById("masNewAppType").value;
+
+  const url =
+    document.getElementById("masNewAppURL")
+      ?.value.trim();
+
+
+  if(!name){
+
+    alert("Please enter the App Name.");
+
+    return;
+
+  }
+
+
+  if(type === "url" && !url){
+
+    alert("Please enter the Web App URL.");
+
+    return;
+
+  }
+
+
+  /*
+    Basic safety check:
+    only http/https web apps are accepted.
+  */
 
   if(
-   selected &&
-   Number(selected.value)===q.answer
+    type === "url" &&
+    !/^https?:\/\//i.test(url)
   ){
-   score++;
-  }
 
- });
+    alert(
+      "Only HTTP/HTTPS web app URLs are allowed."
+    );
 
-
- const total=currentExam.questions.length;
-
- const percent=Math.round(
-  score/total*100
- );
-
- const points=score*10;
-
-
- data.results.unshift({
-
-  name,
-  from,
-  exam:currentExam.title,
-  score,
-  total,
-  percent,
-  points,
-  date:new Date().toLocaleString("bn-BD")
-
- });
-
- saveData();
-
-
- openModal(
-  "🏆 Exam Result",
-
- `
- <div class="result">
-
-  <h2>${escapeHTML(name)}</h2>
-
-  <p>${escapeHTML(from)}</p>
-
-  <div class="score">
-   ${score}/${total}
-  </div>
-
-  <h3>${percent}%</h3>
-
-  <p style="margin-top:8px">
-   ⭐ Points: <strong>${points}</strong>
-  </p>
-
-  <p style="margin-top:8px;color:#64748b">
-   ফলাফল সংরক্ষণ করা হয়েছে।
-  </p>
-
- </div>
- `
- );
-
- currentExam=null;
-
-}
-
-
-/* =========================
-   AI
-========================= */
-
-function openAI(){
-
- openModal(
-  "🤖 Ask AI",
-
- `
- <div class="grid">
-
-  <div class="card">
-
-   <div class="card-icon">🤖</div>
-
-   <h3>ChatGPT</h3>
-
-   <p>
-    পড়াশোনা, explanation ও practice-এর জন্য।
-   </p>
-
-   <a
-    class="btn btn-dark"
-    target="_blank"
-    href="https://chatgpt.com/">
-    Open ChatGPT
-   </a>
-
-  </div>
-
-
-  <div class="card">
-
-   <div class="card-icon">✨</div>
-
-   <h3>Gemini</h3>
-
-   <p>
-    AI learning assistance।
-   </p>
-
-   <a
-    class="btn btn-dark"
-    target="_blank"
-    href="https://gemini.google.com/">
-    Open Gemini
-   </a>
-
-  </div>
-
- </div>
-
- <div class="notice" style="margin-top:15px">
-  <strong>Teacher Note:</strong>
-  AI-generated questions public student side থেকে
-  তৈরি করা হবে না। Teacher বাইরে AI ব্যবহার করে
-  question তৈরি করে Control Center থেকে publish করবেন।
- </div>
- `
- );
-
-}
-
-
-/* =========================
-   TEACHER LOGIN
-========================= */
-
-function openTeacherLogin(){
-
- openModal(
-  "👨‍🏫 Only Teacher",
-
- `
- <div class="form">
-
-  <input
-   id="teacherEmail"
-   type="email"
-   placeholder="Teacher / Super Admin Email">
-
-  <input
-   id="teacherPassword"
-   type="password"
-   placeholder="Password">
-
-  <button
-   class="btn btn-dark"
-   onclick="teacherLogin()">
-   🔐 Login
-  </button>
-
-  <div class="notice">
-
-   <strong>Production Security</strong>
-
-   <p>
-    এই single-file version-এ login demo হিসেবে কাজ করে।
-    আসল website-এ Firebase Authentication দিয়ে
-    Super Admin ও Teacher authentication করতে হবে।
-   </p>
-
-  </div>
-
- </div>
- `
- );
-
-}
-
-
-function teacherLogin(){
-
- const email=document.getElementById(
-  "teacherEmail"
- ).value.trim();
-
- const password=document.getElementById(
-  "teacherPassword"
- ).value;
-
- if(!email||!password){
-
-  alert("Email এবং password দিন।");
-
-  return;
- }
-
- /*
-  Single-file version:
-  Admin panel open.
-  Production:
-  Firebase Authentication verify করবে।
- */
-
- openControlCenter();
-
-}
-
-
-/* =========================
-   CONTROL CENTER
-========================= */
-
-function openControlCenter(){
-
- openModal(
-  "👑 Teacher Control Center",
-
- `
-
- <div class="admin-tabs">
-
-  <button onclick="adminTab('upload')">
-   📂 Upload
-  </button>
-
-  <button onclick="adminTab('course')">
-   🎓 Course
-  </button>
-
-  <button onclick="adminTab('question')">
-   🤖 AI Question
-  </button>
-
-  <button onclick="adminTab('english')">
-   🇬🇧 English
-  </button>
-
-  <button onclick="adminTab('exam')">
-   📝 Exam
-  </button>
-
-  <button onclick="adminTab('notice')">
-   📢 Notice
-  </button>
-
-  <button onclick="adminTab('class')">
-   🎥 Class
-  </button>
-
-  <button onclick="adminTab('teacher')">
-   👨‍🏫 Teacher
-  </button>
-
-  <button onclick="adminTab('student')">
-   🎓 Special Student
-  </button>
-
- </div>
-
-
- <!-- UPLOAD -->
-
- <div id="admin-upload"
-  class="admin-panel active">
-
-  <div class="admin-card">
-
-   <h3>📂 File Upload Center</h3>
-
-   <br>
-
-   <div class="form">
-
-    <select id="uploadType">
-
-     <option>PDF File</option>
-     <option>Word File</option>
-     <option>Image</option>
-     <option>Online Class</option>
-     <option>Other Upload</option>
-
-    </select>
-
-    <input
-     id="uploadTitle"
-     placeholder="Content Title">
-
-    <input
-     id="uploadFile"
-     type="file">
-
-    <textarea
-     id="uploadDescription"
-     placeholder="Description"></textarea>
-
-    <input
-     id="uploadURL"
-     placeholder="File / Class URL (যদি থাকে)">
-
-    <button
-     class="btn btn-dark"
-     onclick="publishResource()">
-     📤 Publish
-    </button>
-
-   </div>
-
-  </div>
-
- </div>
-
-
- <!-- COURSE -->
-
- <div id="admin-course"
-  class="admin-panel">
-
-  <div class="admin-card">
-
-   <h3>🎓 Special Course</h3>
-
-   <br>
-
-   <div class="form">
-
-    <input
-     id="adminCourseName"
-     placeholder="Course Name">
-
-    <input
-     id="adminCourseFee"
-     placeholder="Course Fee">
-
-    <button
-     class="btn btn-dark"
-     onclick="publishCourse()">
-     🎓 Publish Course
-    </button>
-
-   </div>
-
-  </div>
-
- </div>
-
-
- <!-- AI QUESTION -->
-
- <div id="admin-question"
-  class="admin-panel">
-
-  <div class="admin-card">
-
-   <h3>🤖 AI Question Paste</h3>
-
-   <p style="color:#64748b">
-    ChatGPT/Gemini থেকে তৈরি প্রশ্ন এখানে paste করুন।
-   </p>
-
-   <br>
-
-   <div class="form">
-
-    <input
-     id="aiExamTitle"
-     placeholder="Exam Name">
-
-    <input
-     id="aiExamTime"
-     type="number"
-     placeholder="Time in minutes">
-
-    <textarea
-     id="aiQuestionText"
-     placeholder="প্রশ্নগুলো এখানে paste করুন..."></textarea>
-
-    <button
-     class="btn btn-dark"
-     onclick="publishAIQuestion()">
-     🤖 Preview & Publish
-    </button>
-
-   </div>
-
-  </div>
-
- </div>
-
-
- <!-- ENGLISH -->
-
- <div id="admin-english"
-  class="admin-panel">
-
-  <div class="admin-card">
-
-   <h3>🇬🇧 Special Learning English</h3>
-
-   <br>
-
-   <div class="form">
-
-    <input
-     id="vocabWord"
-     placeholder="Vocabulary Word">
-
-    <input
-     id="vocabMeaning"
-     placeholder="বাংলা অর্থ">
-
-    <input
-     id="vocabExample"
-     placeholder="Example Sentence">
-
-    <button
-     class="btn btn-dark"
-     onclick="publishVocabulary()">
-     📖 Publish Vocabulary
-    </button>
-
-    <textarea
-     id="dailyEnglish"
-     placeholder="Daily English"></textarea>
-
-    <button
-     class="btn btn-dark"
-     onclick="publishDaily()">
-     ☀️ Publish Daily English
-    </button>
-
-    <textarea
-     id="grammarText"
-     placeholder="Grammar & Practice"></textarea>
-
-    <button
-     class="btn btn-dark"
-     onclick="publishGrammar()">
-     ✍️ Publish Grammar
-    </button>
-
-   </div>
-
-  </div>
-
- </div>
-
-
- <!-- EXAM -->
-
- <div id="admin-exam"
-  class="admin-panel">
-
-  <div class="admin-card">
-
-   <h3>📝 Create MCQ Exam</h3>
-
-   <p style="color:#64748b">
-    সহজে MCQ exam তৈরি করুন।
-   </p>
-
-   <br>
-
-   <div class="form">
-
-    <input
-     id="examTitle"
-     placeholder="Exam Title">
-
-    <input
-     id="examTime"
-     type="number"
-     value="10"
-     placeholder="Time in minutes">
-
-    <textarea
-     id="examJSON"
-     placeholder='Advanced format:
-[
- {"q":"2+2=?",
-  "options":["3","4","5","6"],
-  "answer":1}
-]'></textarea>
-
-    <button
-     class="btn btn-dark"
-     onclick="createExam()">
-     📝 Create Exam
-    </button>
-
-   </div>
-
-  </div>
-
- </div>
-
-
- <!-- NOTICE -->
-
- <div id="admin-notice"
-  class="admin-panel">
-
-  <div class="admin-card">
-
-   <h3>📢 Publish Notice</h3>
-
-   <br>
-
-   <div class="form">
-
-    <input
-     id="noticeTitle"
-     placeholder="Notice Title">
-
-    <textarea
-     id="noticeText"
-     placeholder="Notice Details"></textarea>
-
-    <button
-     class="btn btn-dark"
-     onclick="publishNotice()">
-     📢 Publish Notice
-    </button>
-
-   </div>
-
-  </div>
-
- </div>
-
-
- <!-- CLASS -->
-
- <div id="admin-class"
-  class="admin-panel">
-
-  <div class="admin-card">
-
-   <h3>🎥 Online Class</h3>
-
-   <br>
-
-   <div class="form">
-
-    <input
-     id="classTitle"
-     placeholder="Class Title">
-
-    <input
-     id="classLink"
-     placeholder="Meeting / Video Link">
-
-    <textarea
-     id="classDescription"
-     placeholder="Class Description"></textarea>
-
-    <button
-     class="btn btn-dark"
-     onclick="publishClass()">
-     🎥 Publish Class
-    </button>
-
-   </div>
-
-  </div>
-
- </div>
-
-
- <!-- TEACHER -->
-
- <div id="admin-teacher"
-  class="admin-panel">
-
-  <div class="admin-card">
-
-   <h3>👨‍🏫 Add Teacher</h3>
-
-   <br>
-
-   <div class="form">
-
-    <input
-     placeholder="Teacher Name">
-
-    <input
-     placeholder="Teacher WhatsApp Number">
-
-    <input
-     type="email"
-     placeholder="Teacher Email">
-
-    <button
-     class="btn btn-dark"
-     onclick="alert('Production version-এ Firebase Cloud Function দিয়ে verification code পাঠানো হবে।')">
-     🔐 Send Verification Code
-    </button>
-
-   </div>
-
-  </div>
-
- </div>
-
-
- <!-- SPECIAL STUDENT -->
-
- <div id="admin-student"
-  class="admin-panel">
-
-  <div class="admin-card">
-
-   <h3>🎓 Special Students</h3>
-
-   <br>
-
-   <div class="form">
-
-    <input
-     placeholder="Student Name">
-
-    <input
-     placeholder="WhatsApp Number">
-
-    <button
-     class="btn btn-dark"
-     onclick="alert('Special Student যুক্ত করার backend system Firebase-এ থাকবে।')">
-     ➕ Add Student
-    </button>
-
-   </div>
-
-   <br>
-
-   <div class="notice">
-
-    Special Student group-এর জন্য
-    common-password architecture রাখা হবে।
-
-   </div>
-
-  </div>
-
- </div>
-
- `
- );
-
-}
-
-
-/* =========================
-   ADMIN TAB
-========================= */
-
-function adminTab(id){
-
- document.querySelectorAll(
-  ".admin-panel"
- ).forEach(x=>
-  x.classList.remove("active")
- );
-
- const panel=document.getElementById(
-  "admin-"+id
- );
-
- if(panel)panel.classList.add("active");
-
-}
-
-
-/* =========================
-   PUBLISH RESOURCE
-========================= */
-
-function publishResource(){
-
- const title=document.getElementById(
-  "uploadTitle"
- ).value.trim();
-
- const description=document.getElementById(
-  "uploadDescription"
- ).value.trim();
-
- const url=document.getElementById(
-  "uploadURL"
- ).value.trim();
-
- const type=document.getElementById(
-  "uploadType"
- ).value;
-
- const file=document.getElementById(
-  "uploadFile"
- ).files[0];
-
-
- if(!title){
-
-  alert("Content title দিন.");
-
-  return;
- }
-
-
- data.resources.unshift({
-
-  title,
-  description,
-  type,
-  url:file
-   ? URL.createObjectURL(file)
-   :url
-
- });
-
-
- saveData();
-
- alert("Resource publish হয়েছে।");
-
-}
-
-
-/* =========================
-   PUBLISH COURSE
-========================= */
-
-function publishCourse(){
-
- const name=document.getElementById(
-  "adminCourseName"
- )?.value.trim();
-
- const fee=document.getElementById(
-  "adminCourseFee"
- )?.value.trim();
-
- if(!name){
-
-  alert("Course name দিন।");
-
-  return;
- }
-
-
- data.course={
-  name,
-  fee:fee||"যোগাযোগ করুন"
- };
-
-
- saveData();
-
- alert("Special Course publish হয়েছে।");
-
- openCourse();
-
-}
-
-
-/* =========================
-   PUBLISH NOTICE
-========================= */
-
-function publishNotice(){
-
- const title=document.getElementById(
-  "noticeTitle"
- ).value.trim();
-
- const text=document.getElementById(
-  "noticeText"
- ).value.trim();
-
- if(!title||!text){
-
-  alert("Title এবং notice লিখুন।");
-
-  return;
- }
-
-
- data.notices.unshift({
-  title,
-  text
- });
-
- saveData();
-
- alert("Notice publish হয়েছে।");
-
-}
-
-
-/* =========================
-   PUBLISH VOCABULARY
-========================= */
-
-function publishVocabulary(){
-
- const word=document.getElementById(
-  "vocabWord"
- ).value.trim();
-
- const meaning=document.getElementById(
-  "vocabMeaning"
- ).value.trim();
-
- const example=document.getElementById(
-  "vocabExample"
- ).value.trim();
-
- if(!word||!meaning){
-
-  alert("Word ও বাংলা অর্থ দিন।");
-
-  return;
- }
-
-
- data.vocabulary.unshift({
-  word,
-  meaning,
-  example
- });
-
-
- saveData();
-
- alert("Vocabulary publish হয়েছে।");
-
-}
-
-
-/* =========================
-   DAILY ENGLISH
-========================= */
-
-function publishDaily(){
-
- const text=document.getElementById(
-  "dailyEnglish"
- ).value.trim();
-
- if(!text){
-
-  alert("Daily English লিখুন।");
-
-  return;
- }
-
- data.daily.unshift(text);
-
- saveData();
-
- alert("Daily English publish হয়েছে।");
-
-}
-
-
-/* =========================
-   GRAMMAR
-========================= */
-
-function publishGrammar(){
-
- const text=document.getElementById(
-  "grammarText"
- ).value.trim();
-
- if(!text){
-
-  alert("Grammar content লিখুন।");
-
-  return;
- }
-
- data.grammar.unshift(text);
-
- saveData();
-
- alert("Grammar publish হয়েছে।");
-
-}
-
-
-/* =========================
-   ONLINE CLASS
-========================= */
-
-function publishClass(){
-
- const title=document.getElementById(
-  "classTitle"
- ).value.trim();
-
- const link=document.getElementById(
-  "classLink"
- ).value.trim();
-
- const description=document.getElementById(
-  "classDescription"
- ).value.trim();
-
- if(!title){
-
-  alert("Class title দিন।");
-
-  return;
- }
-
- data.onlineClass={
-  title,
-  link,
-  description
- };
-
- saveData();
-
- alert("Online Class publish হয়েছে।");
-
-}
-
-
-/* =========================
-   CREATE EXAM
-========================= */
-
-function createExam(){
-
- const title=document.getElementById(
-  "examTitle"
- ).value.trim();
-
- const duration=Number(
-  document.getElementById(
-   "examTime"
-  ).value
- )||10;
-
- const raw=document.getElementById(
-  "examJSON"
- ).value.trim();
-
- if(!title||!raw){
-
-  alert(
-   "Exam title ও MCQ JSON দিন।"
-  );
-
-  return;
- }
-
-
- try{
-
-  const questions=JSON.parse(raw);
-
-  if(!Array.isArray(questions)||
-     !questions.length){
-
-   throw new Error();
+    return;
 
   }
 
 
-  data.exams.unshift({
+  const newApp = {
 
-   id:"exam-"+Date.now(),
+    id:
+      "app-" +
+      Date.now() +
+      "-" +
+      Math.random()
+        .toString(36)
+        .slice(2,8),
 
-   title,
+    name,
+    icon,
+    description,
+    category,
+    type,
+    url:type === "url" ? url : null
 
-   duration,
+  };
 
-   questions
+
+  apps.push(newApp);
+
+  save(STORAGE_APPS,apps);
+
+  renderApps();
+
+  alert(
+    "✅ App added to MAS App Center."
+  );
+
+  openAppManager();
+
+}
+
+
+function deleteApp(id){
+
+  if(!confirm(
+    "Remove this app from MAS?"
+  )) return;
+
+  apps =
+    apps.filter(app => app.id !== id);
+
+  save(STORAGE_APPS,apps);
+
+  renderApps();
+
+  openAppManager();
+
+}
+
+
+/* =========================================================
+   BOOK MANAGER
+========================================================= */
+
+function openBookManager(){
+
+  openModal(
+
+    "📚 Book Manager",
+
+    `
+
+      <label>Title</label>
+
+      <input
+        id="masBookTitle"
+        class="mas-input"
+        placeholder="Book title"
+      >
+
+      <label>Category</label>
+
+      <select
+        id="masBookCategory"
+        class="mas-select">
+
+        <option>Books</option>
+        <option>Stories</option>
+        <option>Other Books</option>
+
+      </select>
+
+      <label>Description</label>
+
+      <textarea
+        id="masBookDescription"
+        class="mas-textarea"
+        placeholder="Book description">
+      </textarea>
+
+      <label>Book URL (optional)</label>
+
+      <input
+        id="masBookURL"
+        class="mas-input"
+        placeholder="https://..."
+      >
+
+      <button
+        class="mas-btn mas-btn-primary"
+        onclick="MASSuper.addBook()">
+
+        ➕ Add Book
+
+      </button>
+
+      <hr style="margin:20px 0;border:0;border-top:1px solid #e5e7eb">
+
+      <h3>Current Books</h3>
+
+      ${
+        books.map(book => `
+
+          <div class="mas-card"
+               style="padding:13px;margin-bottom:8px">
+
+            📘 <strong>
+              ${escapeHTML(book.title)}
+            </strong>
+
+            <div style="color:#64748b;font-size:12px">
+              ${escapeHTML(book.category)}
+            </div>
+
+          </div>
+
+        `).join("")
+      }
+
+    `
+
+  );
+
+}
+
+
+function addBook(){
+
+  const title =
+    document.getElementById("masBookTitle")
+      .value.trim();
+
+  const category =
+    document.getElementById("masBookCategory")
+      .value;
+
+  const description =
+    document.getElementById("masBookDescription")
+      .value.trim();
+
+  const url =
+    document.getElementById("masBookURL")
+      .value.trim();
+
+
+  if(!title){
+
+    alert("Book title is required.");
+
+    return;
+
+  }
+
+
+  if(url && !/^https?:\/\//i.test(url)){
+
+    alert("Book URL must start with http:// or https://");
+
+    return;
+
+  }
+
+
+  books.push({
+
+    id:"book-" + Date.now(),
+
+    title,
+
+    category,
+
+    description,
+
+    url
 
   });
 
 
-  saveData();
+  save(STORAGE_BOOKS,books);
 
-  alert("MCQ Exam তৈরি হয়েছে।");
+  points += 5;
 
- }catch(e){
-
-  alert(
-   "MCQ format ঠিক নয়। Example format ব্যবহার করুন।"
+  localStorage.setItem(
+    STORAGE_POINTS,
+    String(points)
   );
 
- }
+  updateProgress();
+
+  alert("📚 Book added.");
+
+  openBookManager();
 
 }
 
 
-/* =========================
-   AI QUESTION PASTE
-========================= */
+/* =========================================================
+   NOTICE MANAGER
+========================================================= */
 
-function publishAIQuestion(){
+function openNoticeManager(){
 
- const title=document.getElementById(
-  "aiExamTitle"
- ).value.trim();
+  openModal(
 
- const duration=Number(
-  document.getElementById(
-   "aiExamTime"
-  ).value
- )||10;
+    "📢 Notice Manager",
 
- const raw=document.getElementById(
-  "aiQuestionText"
- ).value.trim();
+    `
 
+      <label>Notice Title</label>
 
- if(!title||!raw){
+      <input
+        id="masNoticeTitle"
+        class="mas-input"
+        placeholder="Notice title"
+      >
 
-  alert(
-   "Exam name এবং question দিন।"
+      <label>Notice Details</label>
+
+      <textarea
+        id="masNoticeText"
+        class="mas-textarea"
+        placeholder="Write notice...">
+      </textarea>
+
+      <button
+        class="mas-btn mas-btn-primary"
+        onclick="MASSuper.addNotice()">
+
+        📢 Publish Notice
+
+      </button>
+
+      <hr style="margin:20px 0;border:0;border-top:1px solid #e5e7eb">
+
+      <h3>Notices</h3>
+
+      ${
+        notices.map(n => `
+
+          <div class="mas-card"
+               style="padding:14px;margin-bottom:8px">
+
+            <strong>
+              ${escapeHTML(n.title)}
+            </strong>
+
+            <p style="color:#64748b">
+              ${escapeHTML(n.text)}
+            </p>
+
+          </div>
+
+        `).join("")
+      }
+
+    `
+
   );
 
-  return;
- }
+}
 
 
- /*
-  AI paste-এর জন্য JSON format support।
- */
+function addNotice(){
 
- try{
+  const title =
+    document.getElementById("masNoticeTitle")
+      .value.trim();
 
-  const questions=JSON.parse(raw);
+  const text =
+    document.getElementById("masNoticeText")
+      .value.trim();
 
-  if(!Array.isArray(questions))
-   throw new Error();
+
+  if(!title || !text){
+
+    alert("Title and details are required.");
+
+    return;
+
+  }
 
 
-  data.exams.unshift({
+  notices.unshift({
 
-   id:"ai-exam-"+Date.now(),
+    id:"notice-" + Date.now(),
 
-   title,
+    title,
 
-   duration,
+    text,
 
-   questions
+    createdAt:new Date().toISOString()
 
   });
 
 
-  saveData();
+  save(STORAGE_NOTICES,notices);
 
-  alert(
-   "AI Question → Exam হিসেবে publish হয়েছে।"
+  points += 2;
+
+  localStorage.setItem(
+    STORAGE_POINTS,
+    String(points)
   );
 
- }catch(e){
+  updateProgress();
 
-  alert(
-   "AI question-এর format JSON হতে হবে।"
+  alert("📢 Notice published.");
+
+  openNoticeManager();
+
+}
+
+
+/* =========================================================
+   SPORTS ADMIN
+========================================================= */
+
+function openSportsManager(){
+
+  openModal(
+
+    "🏏 Sports Manager",
+
+    `
+
+      <div class="mas-warning">
+
+        Only use sports sources you are authorized
+        to publish or embed.
+
+      </div>
+
+      <label>Sports Content Title</label>
+
+      <input
+        id="masSportsTitle"
+        class="mas-input"
+        placeholder="Example: Cricket Updates"
+      >
+
+      <label>Authorized Sports URL</label>
+
+      <input
+        id="masSportsURL"
+        class="mas-input"
+        placeholder="https://..."
+      >
+
+      <button
+        class="mas-btn mas-btn-primary"
+        onclick="MASSuper.saveSportsSource()">
+
+        💾 Save Sports Source
+
+      </button>
+
+      <p style="color:#64748b;font-size:13px;margin-top:15px">
+
+        The MAS viewer automatically limits each
+        in-app viewing session to 20 minutes.
+
+      </p>
+
+    `
+
   );
 
- }
+}
+
+
+function saveSportsSource(){
+
+  const title =
+    document.getElementById("masSportsTitle")
+      .value.trim();
+
+  const url =
+    document.getElementById("masSportsURL")
+      .value.trim();
+
+
+  if(!title || !url){
+
+    alert("Title and URL are required.");
+
+    return;
+
+  }
+
+
+  if(!/^https?:\/\//i.test(url)){
+
+    alert("Use a valid HTTP/HTTPS URL.");
+
+    return;
+
+  }
+
+
+  localStorage.setItem(
+    "MAS_SPORTS_SOURCE",
+    JSON.stringify({
+      title,
+      url
+    })
+  );
+
+
+  alert("🏏 Sports source saved.");
 
 }
 
 
-/* =========================
-   CONTACT
-========================= */
+/* =========================================================
+   SETTINGS
+========================================================= */
 
-function askTeacher(){
+function openSettings(){
 
- window.open(
-  "https://wa.me/8801979840081",
-  "_blank"
- );
+  openModal(
+
+    "⚙️ MAS Settings",
+
+    `
+
+      <div class="mas-admin-card">
+
+        <h3>🌐 Language</h3>
+
+        <p>
+          MAS can support Bengali and English
+          localization.
+        </p>
+
+        <button
+          class="mas-btn mas-btn-light"
+          onclick="alert('Language system ready for localization.')">
+
+          Language Settings
+
+        </button>
+
+      </div>
+
+      <br>
+
+      <div class="mas-admin-card">
+
+        <h3>♿ Accessibility</h3>
+
+        <p>
+          Future options: larger text, high contrast,
+          reduced motion and screen-reader friendly UI.
+        </p>
+
+      </div>
+
+      <br>
+
+      <div class="mas-admin-card">
+
+        <h3>🔐 Security</h3>
+
+        <p>
+          Production Super Admin should use
+          Firebase/Supabase Authentication rather
+          than a browser-only password.
+        </p>
+
+      </div>
+
+    `
+
+  );
 
 }
 
 
-function callTeacher(){
+/* =========================================================
+   PROGRESS
+========================================================= */
 
- window.location.href=
-  "tel:01979840081";
+function updateProgress(){
+
+  const progress =
+    Math.min(
+      100,
+      Math.round(points / 2)
+    );
+
+  const p =
+    document.getElementById(
+      "masProgressPercent"
+    );
+
+  const bar =
+    document.getElementById(
+      "masProgressBar"
+    );
+
+  const pointEl =
+    document.getElementById(
+      "masPoints"
+    );
+
+
+  if(p) p.textContent = progress + "%";
+
+  if(bar) bar.style.width = progress + "%";
+
+  if(pointEl) pointEl.textContent = points;
 
 }
 
 
-function emailTeacher(){
+/* =========================================================
+   HOME
+========================================================= */
 
- window.location.href=
-  "mailto:maksudhasan0@gmail.com";
+function goHome(button){
+
+  document
+    .querySelectorAll(".mas-nav-btn")
+    .forEach(btn =>
+      btn.classList.remove("active")
+    );
+
+  if(button)
+    button.classList.add("active");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
 
 
-/* =========================
+/* =========================================================
    SECURITY HELPERS
-========================= */
+========================================================= */
 
 function escapeHTML(value){
 
- return String(value??"")
-  .replaceAll("&","&amp;")
-  .replaceAll("<","&lt;")
-  .replaceAll(">","&gt;")
-  .replaceAll('"',"&quot;")
-  .replaceAll("'","&#039;");
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
 
-function escapeAttribute(value){
+function escapeAttr(value){
 
- return String(value??"")
-  .replaceAll('"',"&quot;")
-  .replaceAll("<","%3C")
-  .replaceAll(">","%3E");
+  return String(value ?? "")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'");
 
 }
 
 
-/* =========================
+/* =========================================================
+   PUBLIC API
+========================================================= */
+
+window.MASSuper = {
+
+  closeModal,
+
+  callExisting,
+
+  openAllApps,
+
+  renderAllApps,
+
+  filterApps,
+
+  launchApp,
+
+  openLibrary,
+
+  showBooks,
+
+  openSports,
+
+  startSportsTimer,
+
+  openSearch,
+
+  globalSearch,
+
+  openAdmin,
+
+  verifyAdmin,
+
+  openAdminDashboard,
+
+  openAppManager,
+
+  toggleAppURL,
+
+  addApp,
+
+  deleteApp,
+
+  openBookManager,
+
+  addBook,
+
+  openNoticeManager,
+
+  addNotice,
+
+  openSportsManager,
+
+  saveSportsSource,
+
+  openSettings,
+
+  goHome
+
+};
+
+
+/* =========================================================
    INITIALIZE
-========================= */
+========================================================= */
 
-document.getElementById(
- "year"
-).textContent=new Date().getFullYear();
+function init(){
 
-refreshHome();
+  renderApps();
 
+  updateProgress();
+
+}
+
+
+/* Run after DOM is ready */
+
+if(document.readyState === "loading"){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    init
+  );
+
+}else{
+
+  init();
+
+}
+
+})();
 </script>
 
-</body>
-</html>
+<!-- ================= END MAS SUPER APP ================= -->
