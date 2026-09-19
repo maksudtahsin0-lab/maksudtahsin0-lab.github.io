@@ -457,13 +457,14 @@
 
       </div>
 
-    `;
+    `
+  const hero = main.querySelector(".hero-section");
 
-    main.insertBefore(
-      section,
-      main.firstElementChild
-    );
-  }
+if (hero) {
+  hero.insertAdjacentElement("afterend", section);
+} else {
+  main.appendChild(section);
+}
 
 
   /* =========================================================
