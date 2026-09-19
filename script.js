@@ -1,680 +1,1526 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* =========================================================
+   TSF — Teachers Students Friendship
+   Main Application Script
+   M-A-S • Learn • Connect • Grow Together
+   ========================================================= */
 
-  /* ================================
-     TSF — Teachers Students Friendship
-     Main Website Script
-     ================================ */
+(() => {
+  "use strict";
 
-  const SUPABASE_URL =
-    "https://bdsyjobzvwulaifpehvq.supabase.co";
+  /* =========================================================
+     1. CONFIGURATION
+     ========================================================= */
 
-  const SUPABASE_KEY =
-    "তোমার_PUBLISHABLE_KEY";
+  const SUPABASE_URL = "https://bdsyjobzvwulaifpehvq.supabase.co";
+
+  // এখানে তোমার Supabase Publishable/Anon Key বসাও
+  // Gmail password বা Supabase service_role key এখানে কখনো দেবে না।
+  const SUPABASE_KEY = "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE";
+
+  const SUPER_ADMIN_EMAIL = "maksudtahsin0@gmail.com";
+
+  const supabaseReady =
+    typeof window.supabase !== "undefined" &&
+    SUPABASE_KEY &&
+    !SUPABASE_KEY.includes("PASTE_YOUR");
+
+  const supabaseClient = supabaseReady
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+    : null;
 
 
-  /* ================================
-     Supabase
-     ================================ */
+  /* =========================================================
+     2. DEFAULT APPLICATIONS
+     These keep the website working even before database setup.
+     ========================================================= */
 
-  let supabaseClient = null;
+  const DEFAULT_APPS = [
+    {
+      id: "story-books",
+      name: "Story Books",
+      icon: "📖",
+      description: "Discover stories and public-domain books for enjoyable reading.",
+      url: "https://www.gutenberg.org/",
+      category: "Story Books",
+      external: true
+    },
+    {
+      id: "another-books",
+      name: "Another Books",
+      icon: "📚",
+      description: "Explore a large online library and discover books from around the world.",
+      url: "https://openlibrary.org/",
+      category: "Another Books",
+      external: true
+    },
+    {
+      id: "islamic-books",
+      name: "Islamic Books",
+      icon: "☪️",
+      description: "A dedicated area for Islamic learning resources and books.",
+      url: "#",
+      category: "Islamic Books"
+    },
+    {
+      id: "academic-books",
+      name: "Academic Books",
+      icon: "🎓",
+      description: "School and academic learning materials in one place.",
+      url: "#",
+      category: "Academic Books"
+    },
+    {
+      id: "english-books",
+      name: "English Books",
+      icon: "🔤",
+      description: "English learning books, reading materials and resources.",
+      url: "#",
+      category: "English Books"
+    },
+    {
+      id: "notes-guides",
+      name: "Notes & Guides",
+      icon: "📝",
+      description: "Helpful notes, guides and study materials.",
+      url: "#",
+      category: "Notes & Guides"
+    },
+    {
+      id: "question-bank",
+      name: "Question Bank",
+      icon: "❓",
+      description: "Practice questions and exam preparation materials.",
+      url: "#",
+      category: "Question Bank"
+    },
+    {
+      id: "educational-videos",
+      name: "Educational Videos",
+      icon: "🎬",
+      description: "Learn through useful educational video content.",
+      url: "#",
+      category: "Educational Videos"
+    },
+    {
+      id: "audio-learning",
+      name: "Audio Learning",
+      icon: "🎧",
+      description: "Listen and learn with educational audio resources.",
+      url: "#",
+      category: "Audio Learning"
+    },
+    {
+      id: "quiz-practice",
+      name: "Quiz & Practice",
+      icon: "🧠",
+      description: "Test your knowledge and practice what you learn.",
+      url: "#",
+      category: "Quiz & Practice"
+    },
+    {
+      id: "teachers-hub",
+      name: "Teachers Hub",
+      icon: "👨‍🏫",
+      description: "A dedicated space for teachers and teaching resources.",
+      url: "#",
+      category: "Teachers Hub"
+    },
+    {
+      id: "students-hub",
+      name: "Students Hub",
+      icon: "🎒",
+      description: "Student-focused learning tools and resources.",
+      url: "#",
+      category: "Students Hub"
+    },
+    {
+      id: "announcements-app",
+      name: "Announcements",
+      icon: "📢",
+      description: "Important TSF news and platform updates.",
+      url: "#",
+      category: "Announcements"
+    },
+    {
+      id: "ask-teacher",
+      name: "Ask a Teacher",
+      icon: "💬",
+      description: "A future-ready area for student questions and teacher support.",
+      url: "#",
+      category: "Ask a Teacher"
+    }
+  ];
 
-  if (
-    window.supabase &&
-    SUPABASE_KEY !== "তোমার_PUBLISHABLE_KEY"
+
+  /* =========================================================
+     3. STATE
+     ========================================================= */
+
+  let applications = [];
+  let contentItems = [];
+  let announcements = [];
+  let deferredInstallPrompt = null;
+
+
+  /* =========================================================
+     4. DOM HELPERS
+     ========================================================= */
+
+  const $ = (selector) => document.querySelector(selector);
+
+  const applicationGrid = $("#applicationGrid");
+  const resourceGrid = $("#resourceGrid");
+  const announcementList = $("#announcementList");
+  const menuButton = $("#menuButton");
+  const topMenu = $("#topMenu");
+  const installAppButton = $("#installAppButton");
+  const toastElement = $("#tsfToast");
+
+
+  /* =========================================================
+     5. SECURITY / TEXT ESCAPING
+     ========================================================= */
+
+  function escapeHTML(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+
+  function safeURL(value) {
+    const url = String(value || "").trim();
+
+    if (!url || url === "#") {
+      return "#";
+    }
+
+    if (
+      url.startsWith("https://") ||
+      url.startsWith("http://") ||
+      url.startsWith("mailto:")
+    ) {
+      return url;
+    }
+
+    return "#";
+  }
+
+
+  /* =========================================================
+     6. TOAST
+     ========================================================= */
+
+  let toastTimer = null;
+
+  function showToast(message, type = "normal") {
+    if (!toastElement) return;
+
+    toastElement.textContent = message;
+
+    toastElement.classList.remove(
+      "show",
+      "success",
+      "error"
+    );
+
+    if (type === "success") {
+      toastElement.classList.add("success");
+    }
+
+    if (type === "error") {
+      toastElement.classList.add("error");
+    }
+
+    requestAnimationFrame(() => {
+      toastElement.classList.add("show");
+    });
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(() => {
+      toastElement.classList.remove("show");
+    }, 3200);
+  }
+
+
+  /* =========================================================
+     7. LOADING / EMPTY / ERROR STATES
+     ========================================================= */
+
+  function loadingHTML(message = "Loading...") {
+    return `
+      <div class="loading-state">
+        <div class="loading-spinner"></div>
+        <strong>${escapeHTML(message)}</strong>
+        <span>Please wait a moment.</span>
+      </div>
+    `;
+  }
+
+
+  function emptyHTML(
+    icon = "📂",
+    title = "No files available yet",
+    description = "This area is ready. Content can be added from Super Admin."
   ) {
-    try {
-      supabaseClient =
-        window.supabase.createClient(
-          SUPABASE_URL,
-          SUPABASE_KEY
-        );
-    } catch (error) {
-      console.error(
-        "Supabase initialization error:",
-        error
+    return `
+      <div class="empty-state">
+        <div class="empty-state-icon">${escapeHTML(icon)}</div>
+        <strong>${escapeHTML(title)}</strong>
+        <span>${escapeHTML(description)}</span>
+      </div>
+    `;
+  }
+
+
+  function errorHTML(message = "Something went wrong.") {
+    return `
+      <div class="error-state">
+        <div class="empty-state-icon">⚠️</div>
+        <strong>Unable to load this area</strong>
+        <span>${escapeHTML(message)}</span>
+        <button
+          type="button"
+          class="primary-button retry-button"
+          onclick="window.location.reload()"
+        >
+          Retry →
+        </button>
+      </div>
+    `;
+  }
+
+
+  /* =========================================================
+     8. MENU
+     ========================================================= */
+
+  function setupMenu() {
+    if (!menuButton || !topMenu) return;
+
+    menuButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      const isOpen = topMenu.classList.toggle("open");
+
+      menuButton.setAttribute(
+        "aria-expanded",
+        String(isOpen)
       );
-    }
-  }
+    });
 
+    topMenu.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        topMenu.classList.remove("open");
 
-  /* ================================
-     Elements
-     ================================ */
-
-  const teacherLoginBtn =
-    document.getElementById("teacherLoginBtn");
-
-  const loginModal =
-    document.getElementById("loginModal");
-
-  const closeModal =
-    document.getElementById("closeModal");
-
-  const languageBtn =
-    document.getElementById("languageBtn");
-
-  const themeBtn =
-    document.getElementById("themeBtn");
-
-  const menuButton =
-    document.getElementById("menuButton");
-
-  const mobileMenu =
-    document.getElementById("mobileMenu");
-
-  const askTeacherBtn =
-    document.getElementById("askTeacherBtn");
-
-  const year =
-    document.getElementById("year");
-
-
-  /* ================================
-     Year
-     ================================ */
-
-  if (year) {
-    year.textContent =
-      new Date().getFullYear();
-  }
-
-
-  /* ================================
-     Mobile Menu
-     ================================ */
-
-  if (menuButton && mobileMenu) {
-
-    menuButton.addEventListener(
-      "click",
-      () => {
-
-        mobileMenu.classList.toggle(
-          "show"
+        menuButton.setAttribute(
+          "aria-expanded",
+          "false"
         );
-
       }
-    );
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        !topMenu.contains(event.target) &&
+        !menuButton.contains(event.target)
+      ) {
+        topMenu.classList.remove("open");
+
+        menuButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+      }
+    });
+  }
 
 
-    mobileMenu
-      .querySelectorAll("a")
-      .forEach(link => {
+  /* =========================================================
+     9. RENDER APPLICATIONS
+     ========================================================= */
 
-        link.addEventListener(
-          "click",
-          () => {
+  function renderApplications() {
+    if (!applicationGrid) return;
 
-            mobileMenu.classList.remove(
-              "show"
-            );
+    if (!applications.length) {
+      applicationGrid.innerHTML = emptyHTML(
+        "🚀",
+        "No applications available yet",
+        "Applications can be added from the Super Admin panel."
+      );
+      return;
+    }
 
+    applicationGrid.innerHTML = applications
+      .map((app, index) => {
+        const id = String(app.id || `app-${index}`);
+
+        return `
+          <article class="application-card">
+            <div class="application-icon">
+              ${escapeHTML(app.icon || "🚀")}
+            </div>
+
+            <div class="application-card-content">
+              <span class="application-number">
+                ${String(index + 1).padStart(2, "0")}
+              </span>
+
+              <h3>${escapeHTML(app.name)}</h3>
+
+              <p>
+                ${escapeHTML(
+                  app.description ||
+                  "Open this TSF application."
+                )}
+              </p>
+
+              <button
+                type="button"
+                class="application-open-button"
+                data-app-id="${escapeHTML(id)}"
+                aria-label="Open ${escapeHTML(app.name)}"
+              >
+                Open
+                <span>→</span>
+              </button>
+            </div>
+          </article>
+        `;
+      })
+      .join("");
+
+    applicationGrid
+      .querySelectorAll("[data-app-id]")
+      .forEach((button) => {
+        button.addEventListener("click", () => {
+          const appId = button.dataset.appId;
+
+          const app = applications.find(
+            (item) => String(item.id) === String(appId)
+          );
+
+          if (app) {
+            openApplication(app);
           }
-        );
-
+        });
       });
-
   }
 
 
-  /* ================================
-     Language System
-     ================================ */
+  /* =========================================================
+     10. APPLICATION VIEWER
+     Full-screen interior experience
+     ========================================================= */
 
-  let currentLanguage =
-    localStorage.getItem(
-      "tsf-language"
-    ) || "en";
+  function createApplicationViewer() {
+    if ($("#tsfApplicationViewer")) return;
 
+    const viewer = document.createElement("div");
 
-  function applyLanguage(language) {
+    viewer.id = "tsfApplicationViewer";
 
-    currentLanguage =
-      language;
+    viewer.innerHTML = `
+      <div class="tsf-viewer-backdrop"></div>
 
-    document.documentElement.lang =
-      language === "bn"
-        ? "bn"
-        : "en";
+      <div
+        class="tsf-viewer"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="tsfViewerTitle"
+      >
+        <div class="tsf-viewer-header">
+          <button
+            type="button"
+            class="tsf-viewer-close"
+            id="tsfViewerClose"
+            aria-label="Close"
+          >
+            ←
+          </button>
 
+          <div>
+            <span id="tsfViewerIcon">🚀</span>
+            <strong id="tsfViewerTitle">TSF Application</strong>
+          </div>
+        </div>
 
-    document.body.classList.toggle(
-      "bn",
-      language === "bn"
+        <div id="tsfViewerBody" class="tsf-viewer-body"></div>
+      </div>
+    `;
+
+    document.body.appendChild(viewer);
+
+    const closeButton = $("#tsfViewerClose");
+    const backdrop = viewer.querySelector(
+      ".tsf-viewer-backdrop"
     );
 
+    closeButton.addEventListener(
+      "click",
+      closeApplicationViewer
+    );
 
-    document
-      .querySelectorAll(
-        "[data-en][data-bn]"
+    backdrop.addEventListener(
+      "click",
+      closeApplicationViewer
+    );
+  }
+
+
+  function addViewerStyles() {
+    if ($("#tsfDynamicViewerStyles")) return;
+
+    const style = document.createElement("style");
+
+    style.id = "tsfDynamicViewerStyles";
+
+    style.textContent = `
+      #tsfApplicationViewer {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: none;
+      }
+
+      #tsfApplicationViewer.open {
+        display: block;
+      }
+
+      .tsf-viewer-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(3, 10, 20, .78);
+        backdrop-filter: blur(8px);
+      }
+
+      .tsf-viewer {
+        position: absolute;
+        inset: 4vh 4vw;
+        max-width: 1100px;
+        margin: auto;
+        overflow: hidden;
+        border-radius: 24px;
+        background: #f7f9fc;
+        box-shadow: 0 30px 100px rgba(0,0,0,.35);
+      }
+
+      .tsf-viewer-header {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 14px 18px;
+        background: #08111f;
+        color: white;
+      }
+
+      .tsf-viewer-header > div {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 18px;
+      }
+
+      .tsf-viewer-close {
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgba(255,255,255,.15);
+        border-radius: 12px;
+        background: rgba(255,255,255,.08);
+        color: white;
+        font-size: 22px;
+        cursor: pointer;
+      }
+
+      .tsf-viewer-body {
+        height: calc(100% - 72px);
+        overflow-y: auto;
+        padding: 28px;
+      }
+
+      .viewer-intro {
+        max-width: 760px;
+        margin-bottom: 24px;
+      }
+
+      .viewer-intro h2 {
+        margin: 0 0 10px;
+        font-size: clamp(25px, 4vw, 38px);
+      }
+
+      .viewer-intro p {
+        margin: 0;
+        color: #64748b;
+        line-height: 1.7;
+      }
+
+      .viewer-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .viewer-content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        margin-top: 22px;
+      }
+
+      .viewer-content-card {
+        background: white;
+        border: 1px solid #e5eaf1;
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(15,23,42,.06);
+      }
+
+      .viewer-content-card h3 {
+        margin: 0 0 8px;
+      }
+
+      .viewer-content-card p {
+        color: #64748b;
+        line-height: 1.6;
+      }
+
+      .viewer-content-card a {
+        display: inline-flex;
+        margin-top: 12px;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .viewer-search {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #dbe3ed;
+        background: white;
+        border-radius: 14px;
+        padding: 13px 15px;
+        font-size: 15px;
+        outline: none;
+        margin-bottom: 8px;
+      }
+
+      .viewer-search:focus {
+        border-color: #19a974;
+      }
+
+      @media (max-width: 650px) {
+        .tsf-viewer {
+          inset: 0;
+          border-radius: 0;
+        }
+
+        .tsf-viewer-body {
+          padding: 20px;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+
+  async function openApplication(app) {
+    createApplicationViewer();
+    addViewerStyles();
+
+    const viewer = $("#tsfApplicationViewer");
+    const icon = $("#tsfViewerIcon");
+    const title = $("#tsfViewerTitle");
+    const body = $("#tsfViewerBody");
+
+    if (!viewer || !body) return;
+
+    icon.textContent = app.icon || "🚀";
+    title.textContent = app.name || "TSF Application";
+
+    viewer.classList.add("open");
+    document.body.style.overflow = "hidden";
+
+    if (
+      app.url &&
+      app.url !== "#" &&
+      (
+        app.url.startsWith("http://") ||
+        app.url.startsWith("https://") ||
+        app.url.startsWith("mailto:")
       )
-      .forEach(element => {
+    ) {
+      body.innerHTML = `
+        <div class="viewer-intro">
+          <h2>${escapeHTML(app.name)}</h2>
 
-        element.textContent =
-          language === "bn"
-            ? element.getAttribute(
-                "data-bn"
-              )
-            : element.getAttribute(
-                "data-en"
-              );
+          <p>
+            ${escapeHTML(
+              app.description ||
+              "Open this resource to continue learning."
+            )}
+          </p>
 
-      });
+          <div class="viewer-actions">
+            <a
+              class="primary-button"
+              href="${escapeHTML(safeURL(app.url))}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open Resource →
+            </a>
 
+            <button
+              type="button"
+              class="secondary-button"
+              id="viewerBackButton"
+            >
+              Back to TSF
+            </button>
+          </div>
+        </div>
+      `;
 
-    if (languageBtn) {
+      $("#viewerBackButton")?.addEventListener(
+        "click",
+        closeApplicationViewer
+      );
 
-      languageBtn.textContent =
-        language === "bn"
-          ? "English"
-          : "বাংলা";
-
-    }
-
-
-    localStorage.setItem(
-      "tsf-language",
-      language
-    );
-
-  }
-
-
-  applyLanguage(
-    currentLanguage
-  );
-
-
-  if (languageBtn) {
-
-    languageBtn.addEventListener(
-      "click",
-      () => {
-
-        applyLanguage(
-          currentLanguage === "en"
-            ? "bn"
-            : "en"
-        );
-
-      }
-    );
-
-  }
-
-
-  /* ================================
-     Theme
-     ================================ */
-
-  let darkMode =
-    localStorage.getItem(
-      "tsf-theme"
-    ) === "dark";
-
-
-  function applyTheme() {
-
-    document.body.classList.toggle(
-      "dark",
-      darkMode
-    );
-
-
-    if (themeBtn) {
-
-      themeBtn.textContent =
-        darkMode
-          ? "☀"
-          : "◐";
-
-    }
-
-  }
-
-
-  applyTheme();
-
-
-  if (themeBtn) {
-
-    themeBtn.addEventListener(
-      "click",
-      () => {
-
-        darkMode =
-          !darkMode;
-
-        localStorage.setItem(
-          "tsf-theme",
-          darkMode
-            ? "dark"
-            : "light"
-        );
-
-        applyTheme();
-
-      }
-    );
-
-  }
-
-
-  /* ================================
-     Login Modal
-     ================================ */
-
-  function openLogin() {
-
-    if (!loginModal) {
       return;
     }
 
-    loginModal.classList.add(
-      "show"
+    body.innerHTML = loadingHTML(
+      `Opening ${app.name || "application"}...`
     );
 
-    document.body.style.overflow =
-      "hidden";
-
-  }
-
-
-  function closeLogin() {
-
-    if (!loginModal) {
-      return;
-    }
-
-    loginModal.classList.remove(
-      "show"
-    );
-
-    document.body.style.overflow =
+    const category =
+      app.category ||
+      app.name ||
       "";
 
-  }
+    const items = await getContentByCategory(category);
 
+    if (!items.length) {
+      body.innerHTML = `
+        <div class="viewer-intro">
+          <h2>${escapeHTML(app.name)}</h2>
 
-  if (teacherLoginBtn) {
+          <p>
+            ${escapeHTML(
+              app.description ||
+              "This dedicated TSF area is ready."
+            )}
+          </p>
+        </div>
 
-    teacherLoginBtn.addEventListener(
-      "click",
-      openLogin
-    );
+        ${emptyHTML(
+          "📂",
+          "No files available yet",
+          "This application is ready for content. The Super Admin can add books, videos, notes, questions or other resources."
+        )}
+      `;
 
-  }
-
-
-  if (closeModal) {
-
-    closeModal.addEventListener(
-      "click",
-      closeLogin
-    );
-
-  }
-
-
-  if (loginModal) {
-
-    loginModal.addEventListener(
-      "click",
-      event => {
-
-        if (
-          event.target ===
-          loginModal
-        ) {
-
-          closeLogin();
-
-        }
-
-      }
-    );
-
-  }
-
-
-  /* ================================
-     Ask Teacher
-     ================================ */
-
-  if (askTeacherBtn) {
-
-    askTeacherBtn.addEventListener(
-      "click",
-      () => {
-
-        const target =
-          document.getElementById(
-            "ask-teacher"
-          );
-
-        if (target) {
-
-          target.scrollIntoView({
-            behavior: "smooth"
-          });
-
-        }
-
-      }
-    );
-
-  }
-
-
-  /* ================================
-     Login Button
-     ================================ */
-
-  const loginButton =
-    document.querySelector(
-      ".modal-login-btn"
-    );
-
-
-  if (loginButton) {
-
-    loginButton.addEventListener(
-      "click",
-      async () => {
-
-        if (!supabaseClient) {
-
-          showMessage(
-            currentLanguage === "bn"
-              ? "⚠️ Supabase এখনো সংযুক্ত হয়নি।"
-              : "⚠️ Supabase is not connected yet."
-          );
-
-          return;
-
-        }
-
-
-        const email =
-          prompt(
-            currentLanguage === "bn"
-              ? "আপনার Super Admin email দিন:"
-              : "Enter your Super Admin email:"
-          );
-
-
-        if (!email) {
-          return;
-        }
-
-
-        const password =
-          prompt(
-            currentLanguage === "bn"
-              ? "আপনার password দিন:"
-              : "Enter your password:"
-          );
-
-
-        if (!password) {
-          return;
-        }
-
-
-        try {
-
-          const {
-            data,
-            error
-          } =
-            await supabaseClient.auth
-              .signInWithPassword({
-                email:
-                  email.trim(),
-                password:
-                  password
-              });
-
-
-          if (error) {
-            throw error;
-          }
-
-
-          await checkUserRole(
-            data.user
-          );
-
-        }
-
-        catch (error) {
-
-          console.error(
-            "Login error:",
-            error
-          );
-
-
-          showMessage(
-            currentLanguage === "bn"
-              ? "❌ Login সফল হয়নি। Email অথবা password পরীক্ষা করুন।"
-              : "❌ Login failed. Check your email or password."
-          );
-
-        }
-
-      }
-    );
-
-  }
-
-
-  /* ================================
-     Check Super Admin Role
-     ================================ */
-
-  async function checkUserRole(
-    user
-  ) {
-
-    if (!user) {
       return;
     }
 
+    renderViewerContent(
+      app,
+      items
+    );
+  }
+
+
+  function renderViewerContent(app, items) {
+    const body = $("#tsfViewerBody");
+
+    if (!body) return;
+
+    body.innerHTML = `
+      <div class="viewer-intro">
+        <h2>${escapeHTML(app.name)}</h2>
+
+        <p>
+          ${escapeHTML(
+            app.description ||
+            "Explore the available learning resources."
+          )}
+        </p>
+      </div>
+
+      <input
+        type="search"
+        class="viewer-search"
+        id="viewerSearch"
+        placeholder="Search in ${escapeHTML(app.name)}..."
+        aria-label="Search ${escapeHTML(app.name)}"
+      >
+
+      <div
+        class="viewer-content-grid"
+        id="viewerContentGrid"
+      ></div>
+    `;
+
+    const grid = $("#viewerContentGrid");
+    const search = $("#viewerSearch");
+
+    function render(list) {
+      if (!list.length) {
+        grid.innerHTML = emptyHTML(
+          "🔎",
+          "Nothing found",
+          "Try another search term."
+        );
+        return;
+      }
+
+      grid.innerHTML = list
+        .map((item) => {
+          const url = safeURL(item.url);
+
+          return `
+            <article class="viewer-content-card">
+              <h3>${escapeHTML(item.title)}</h3>
+
+              <p>
+                ${escapeHTML(
+                  item.description ||
+                  "Learning resource"
+                )}
+              </p>
+
+              ${
+                url !== "#"
+                  ? `
+                    <a
+                      class="primary-button"
+                      href="${escapeHTML(url)}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Open →
+                    </a>
+                  `
+                  : `
+                    <button
+                      type="button"
+                      class="secondary-button"
+                      disabled
+                    >
+                      Coming soon
+                    </button>
+                  `
+              }
+            </article>
+          `;
+        })
+        .join("");
+    }
+
+    render(items);
+
+    search.addEventListener("input", () => {
+      const query =
+        search.value
+          .trim()
+          .toLowerCase();
+
+      if (!query) {
+        render(items);
+        return;
+      }
+
+      const filtered = items.filter((item) => {
+        const text = `
+          ${item.title || ""}
+          ${item.description || ""}
+          ${item.category || ""}
+        `.toLowerCase();
+
+        return text.includes(query);
+      });
+
+      render(filtered);
+    });
+  }
+
+
+  function closeApplicationViewer() {
+    const viewer = $("#tsfApplicationViewer");
+
+    if (!viewer) return;
+
+    viewer.classList.remove("open");
+
+    document.body.style.overflow = "";
+  }
+
+
+  /* =========================================================
+     11. SUPABASE — LOAD APPLICATIONS
+     ========================================================= */
+
+  async function loadApplications() {
+    if (!applicationGrid) return;
+
+    applicationGrid.innerHTML =
+      loadingHTML("Loading TSF applications...");
+
+    if (!supabaseClient) {
+      applications = DEFAULT_APPS;
+
+      renderApplications();
+
+      return;
+    }
 
     try {
-
-      const {
-        data,
-        error
-      } =
+      const { data, error } =
         await supabaseClient
-          .from("user_roles")
-          .select("role")
-          .eq(
-            "user_id",
-            user.id
-          )
-          .maybeSingle();
-
+          .from("app_items")
+          .select("*")
+          .eq("active", true)
+          .order("sort_order", {
+            ascending: true
+          })
+          .order("created_at", {
+            ascending: true
+          });
 
       if (error) {
-
-        console.error(
-          "Role check error:",
+        console.warn(
+          "TSF applications database error:",
           error
         );
 
-        showMessage(
-          currentLanguage === "bn"
-            ? "❌ Permission check করা যায়নি।"
-            : "❌ Permission check failed."
-        );
+        applications = DEFAULT_APPS;
+
+        renderApplications();
 
         return;
-
       }
 
+      applications =
+        data && data.length
+          ? data.map((app) => ({
+              ...app,
+              external:
+                app.url &&
+                (
+                  app.url.startsWith("http://") ||
+                  app.url.startsWith("https://")
+                )
+            }))
+          : DEFAULT_APPS;
 
-      if (
-        data &&
-        data.role ===
-          "super_admin"
-      ) {
+      renderApplications();
 
-        showMessage(
-          currentLanguage === "bn"
-            ? "✅ Super Admin access অনুমোদিত!"
-            : "✅ Super Admin access approved!"
-        );
+    } catch (error) {
+      console.error(error);
 
+      applications = DEFAULT_APPS;
 
-        closeLogin();
-
-
-        setTimeout(
-          () => {
-
-            window.location.href =
-              "./admin.html";
-
-          },
-          800
-        );
-
-
-      }
-
-      else {
-
-        await supabaseClient.auth
-          .signOut();
-
-
-        showMessage(
-          currentLanguage === "bn"
-            ? "⛔ আপনার Super Admin permission নেই।"
-            : "⛔ You do not have Super Admin permission."
-        );
-
-      }
-
+      renderApplications();
     }
-
-    catch (error) {
-
-      console.error(
-        error
-      );
-
-      showMessage(
-        currentLanguage === "bn"
-          ? "❌ Security verification failed."
-          : "❌ Security verification failed."
-      );
-
-    }
-
   }
 
 
-  /* ================================
-     Message System
-     ================================ */
+  /* =========================================================
+     12. SUPABASE — LOAD CONTENT
+     ========================================================= */
 
-  window.showMessage =
-    function(message) {
+  async function loadContent() {
+    if (!resourceGrid) return;
 
-      let box =
-        document.getElementById(
-          "tsfMessage"
+    resourceGrid.innerHTML =
+      loadingHTML("Loading resources...");
+
+    if (!supabaseClient) {
+      resourceGrid.innerHTML = emptyHTML(
+        "📚",
+        "Your resource library is ready",
+        "Books, notes, videos and other learning files will appear here when they are added from Super Admin."
+      );
+
+      return;
+    }
+
+    try {
+      const { data, error } =
+        await supabaseClient
+          .from("content_items")
+          .select("*")
+          .eq("active", true)
+          .order("sort_order", {
+            ascending: true
+          })
+          .order("created_at", {
+            ascending: false
+          });
+
+      if (error) {
+        console.warn(
+          "TSF content database error:",
+          error
         );
 
-
-      if (!box) {
-
-        box =
-          document.createElement(
-            "div"
+        resourceGrid.innerHTML =
+          errorHTML(
+            "The resource database could not be reached. Your applications are still available."
           );
 
-
-        box.id =
-          "tsfMessage";
-
-
-        box.style.position =
-          "fixed";
-
-        box.style.left =
-          "50%";
-
-        box.style.bottom =
-          "25px";
-
-        box.style.transform =
-          "translate(-50%, 100px)";
-
-        box.style.padding =
-          "14px 20px";
-
-        box.style.borderRadius =
-          "14px";
-
-        box.style.background =
-          "#111827";
-
-        box.style.color =
-          "#ffffff";
-
-        box.style.fontWeight =
-          "700";
-
-        box.style.zIndex =
-          "999999";
-
-        box.style.transition =
-          ".3s ease";
-
-        box.style.maxWidth =
-          "90%";
-
-        box.style.textAlign =
-          "center";
-
-
-        document.body.appendChild(
-          box
-        );
-
+        return;
       }
 
+      contentItems = data || [];
 
-      box.textContent =
-        message;
+      renderResources();
+
+    } catch (error) {
+      console.error(error);
+
+      resourceGrid.innerHTML =
+        errorHTML(
+          "Please check your connection and try again."
+        );
+    }
+  }
 
 
-      requestAnimationFrame(
+  async function getContentByCategory(category) {
+    const normalized =
+      String(category || "")
+        .trim()
+        .toLowerCase();
+
+    if (!supabaseClient) {
+      return [];
+    }
+
+    try {
+      const { data, error } =
+        await supabaseClient
+          .from("content_items")
+          .select("*")
+          .eq("active", true)
+          .order("sort_order", {
+            ascending: true
+          })
+          .order("created_at", {
+            ascending: false
+          });
+
+      if (error) {
+        console.warn(error);
+        return [];
+      }
+
+      return (data || []).filter(
+        (item) =>
+          String(item.category || "")
+            .trim()
+            .toLowerCase() === normalized
+      );
+
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  }
+
+
+  function renderResources() {
+    if (!resourceGrid) return;
+
+    if (!contentItems.length) {
+      resourceGrid.innerHTML = emptyHTML(
+        "📂",
+        "No resources available yet",
+        "Your library is ready. Books, notes, videos and other resources can be added from Super Admin."
+      );
+
+      return;
+    }
+
+    resourceGrid.innerHTML =
+      contentItems
+        .slice(0, 12)
+        .map((item) => {
+          const url = safeURL(item.url);
+
+          return `
+            <article class="application-card">
+              <div class="application-icon">
+                📚
+              </div>
+
+              <div class="application-card-content">
+                <span class="application-number">
+                  ${escapeHTML(
+                    item.category || "RESOURCE"
+                  )}
+                </span>
+
+                <h3>
+                  ${escapeHTML(item.title)}
+                </h3>
+
+                <p>
+                  ${escapeHTML(
+                    item.description ||
+                    "TSF learning resource."
+                  )}
+                </p>
+
+                ${
+                  url !== "#"
+                    ? `
+                      <a
+                        class="application-open-button"
+                        href="${escapeHTML(url)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Open
+                        <span>→</span>
+                      </a>
+                    `
+                    : `
+                      <button
+                        type="button"
+                        class="application-open-button"
+                        disabled
+                      >
+                        Available soon
+                        <span>•</span>
+                      </button>
+                    `
+                }
+              </div>
+            </article>
+          `;
+        })
+        .join("");
+  }
+
+
+  /* =========================================================
+     13. ANNOUNCEMENTS
+     ========================================================= */
+
+  async function loadAnnouncements() {
+    if (!announcementList) return;
+
+    announcementList.innerHTML =
+      loadingHTML("Loading announcements...");
+
+    if (!supabaseClient) {
+      announcementList.innerHTML =
+        emptyHTML(
+          "📢",
+          "No announcements yet",
+          "Important TSF updates will appear here."
+        );
+
+      return;
+    }
+
+    try {
+      const { data, error } =
+        await supabaseClient
+          .from("announcements")
+          .select("*")
+          .eq("active", true)
+          .order("created_at", {
+            ascending: false
+          });
+
+      if (error) {
+        console.warn(error);
+
+        announcementList.innerHTML =
+          errorHTML(
+            "Announcements could not be loaded."
+          );
+
+        return;
+      }
+
+      announcements = data || [];
+
+      renderAnnouncements();
+
+    } catch (error) {
+      console.error(error);
+
+      announcementList.innerHTML =
+        errorHTML(
+          "Please check your internet connection."
+        );
+    }
+  }
+
+
+  function renderAnnouncements() {
+    if (!announcementList) return;
+
+    if (!announcements.length) {
+      announcementList.innerHTML =
+        emptyHTML(
+          "📢",
+          "No announcements yet",
+          "New TSF announcements will appear here."
+        );
+
+      return;
+    }
+
+    announcementList.innerHTML =
+      announcements
+        .map((item) => {
+          const date = item.created_at
+            ? new Date(
+                item.created_at
+              ).toLocaleDateString(
+                "en-US",
+                {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric"
+                }
+              )
+            : "";
+
+          return `
+            <article class="announcement-card">
+              <div class="announcement-icon">
+                📢
+              </div>
+
+              <div>
+                <span class="section-label">
+                  ${escapeHTML(date)}
+                </span>
+
+                <h3>
+                  ${escapeHTML(item.title)}
+                </h3>
+
+                <p>
+                  ${escapeHTML(item.body)}
+                </p>
+              </div>
+            </article>
+          `;
+        })
+        .join("");
+  }
+
+
+  /* =========================================================
+     14. PWA INSTALL
+     ========================================================= */
+
+  function setupInstallPrompt() {
+    window.addEventListener(
+      "beforeinstallprompt",
+      (event) => {
+        event.preventDefault();
+
+        deferredInstallPrompt = event;
+
+        if (installAppButton) {
+          installAppButton.hidden = false;
+        }
+      }
+    );
+
+    if (!installAppButton) return;
+
+    installAppButton.addEventListener(
+      "click",
+      async () => {
+        if (!deferredInstallPrompt) {
+          showToast(
+            "Install is available from your browser menu when supported."
+          );
+
+          return;
+        }
+
+        deferredInstallPrompt.prompt();
+
+        const result =
+          await deferredInstallPrompt.userChoice;
+
+        if (
+          result &&
+          result.outcome === "accepted"
+        ) {
+          showToast(
+            "TSF installation started.",
+            "success"
+          );
+        }
+
+        deferredInstallPrompt = null;
+
+        installAppButton.hidden = true;
+      }
+    );
+
+    window.addEventListener(
+      "appinstalled",
+      () => {
+        deferredInstallPrompt = null;
+
+        installAppButton.hidden = true;
+
+        showToast(
+          "TSF installed successfully.",
+          "success"
+        );
+      }
+    );
+  }
+
+
+  /* =========================================================
+     15. SERVICE WORKER
+     ========================================================= */
+
+  function registerServiceWorker() {
+    if (
+      "serviceWorker" in navigator &&
+      location.protocol === "https:"
+    ) {
+      window.addEventListener(
+        "load",
         () => {
-
-          box.style.transform =
-            "translate(-50%, 0)";
-
+          navigator.serviceWorker
+            .register("./sw.js")
+            .then(() => {
+              console.log(
+                "TSF Service Worker registered."
+              );
+            })
+            .catch((error) => {
+              console.warn(
+                "TSF Service Worker registration failed:",
+                error
+              );
+            });
         }
       );
+    }
+  }
 
 
-      setTimeout(
-        () => {
+  /* =========================================================
+     16. CURRENT YEAR
+     ========================================================= */
 
-          box.style.transform =
-            "translate(-50%, 100px)";
+  function setCurrentYear() {
+    const yearElement =
+      $("#currentYear");
 
-        },
-        2800
+    if (yearElement) {
+      yearElement.textContent =
+        new Date().getFullYear();
+    }
+  }
+
+
+  /* =========================================================
+     17. SMOOTH NAVIGATION
+     ========================================================= */
+
+  function setupNavigation() {
+    document
+      .querySelectorAll('a[href^="#"]')
+      .forEach((link) => {
+        link.addEventListener(
+          "click",
+          (event) => {
+            const targetID =
+              link.getAttribute("href");
+
+            if (
+              !targetID ||
+              targetID === "#"
+            ) {
+              return;
+            }
+
+            const target =
+              document.querySelector(
+                targetID
+              );
+
+            if (!target) return;
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+          }
+        );
+      });
+  }
+
+
+  /* =========================================================
+     18. KEYBOARD SUPPORT
+     ========================================================= */
+
+  function setupKeyboard() {
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "Escape") {
+          closeApplicationViewer();
+
+          if (topMenu) {
+            topMenu.classList.remove("open");
+          }
+
+          if (menuButton) {
+            menuButton.setAttribute(
+              "aria-expanded",
+              "false"
+            );
+          }
+        }
+      }
+    );
+  }
+
+
+  /* =========================================================
+     19. SUPABASE AUTH STATE
+     ========================================================= */
+
+  async function checkCurrentUser() {
+    if (!supabaseClient) return;
+
+    try {
+      const {
+        data: { session }
+      } = await supabaseClient.auth.getSession();
+
+      if (!session?.user) return;
+
+      const email =
+        String(
+          session.user.email || ""
+        ).toLowerCase();
+
+      if (
+        email ===
+        SUPER_ADMIN_EMAIL.toLowerCase()
+      ) {
+        console.log(
+          "TSF Super Admin session detected."
+        );
+      }
+
+    } catch (error) {
+      console.warn(
+        "Could not check TSF session:",
+        error
+      );
+    }
+  }
+
+
+  /* =========================================================
+     20. GLOBAL APP API
+     ========================================================= */
+
+  window.TSF = {
+    openApplication,
+    closeApplicationViewer,
+    showToast,
+    reload: async () => {
+      await Promise.all([
+        loadApplications(),
+        loadContent(),
+        loadAnnouncements()
+      ]);
+    }
+  };
+
+
+  /* =========================================================
+     21. INITIALIZE TSF
+     ========================================================= */
+
+  async function initTSF() {
+    try {
+      setCurrentYear();
+
+      setupMenu();
+
+      setupInstallPrompt();
+
+      setupNavigation();
+
+      setupKeyboard();
+
+      createApplicationViewer();
+
+      addViewerStyles();
+
+      registerServiceWorker();
+
+      await checkCurrentUser();
+
+      await Promise.all([
+        loadApplications(),
+        loadContent(),
+        loadAnnouncements()
+      ]);
+
+      console.log(
+        "🚀 TSF — Teachers Students Friendship is ready."
       );
 
-    };
+    } catch (error) {
+      console.error(
+        "TSF initialization error:",
+        error
+      );
+
+      showToast(
+        "TSF loaded with limited features.",
+        "error"
+      );
+    }
+  }
 
 
-});
+  /* =========================================================
+     22. START
+     ========================================================= */
+
+  if (
+    document.readyState === "loading"
+  ) {
+    document.addEventListener(
+      "DOMContentLoaded",
+      initTSF
+    );
+  } else {
+    initTSF();
+  }
+
+})();
