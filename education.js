@@ -15,7 +15,7 @@
     "https://bdsyjobzvwulaifpehvq.supabase.co";
 
   const SUPABASE_KEY =
-    "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE";
+    "sb_publishable_uVJ41MtBIJbKAQvABmBCdQ_uWtrBzWP";
 
   const db =
     window.supabase &&
