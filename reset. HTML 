@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TSF Password Reset</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      font-family:Arial,sans-serif;
+      background:#f4f7fb;
+    }
+    .box{
+      width:100%;
+      max-width:430px;
+      background:white;
+      padding:30px;
+      border-radius:22px;
+      box-shadow:0 15px 45px rgba(0,0,0,.1);
+    }
+    .logo{
+      width:70px;height:70px;
+      margin:0 auto 15px;
+      border-radius:20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg,#111827,#2563eb);
+      color:white;
+      font-weight:900;
+    }
+    h1{text-align:center}
+    p{text-align:center;color:#6b7280}
+    input{
+      width:100%;
+      padding:14px;
+      margin:8px 0 15px;
+      border:1px solid #ddd;
+      border-radius:12px;
+      font-size:15px;
+    }
+    button{
+      width:100%;
+      padding:14px;
+      border:0;
+      border-radius:12px;
+      background:#2563eb;
+      color:white;
+      font-weight:800;
+      cursor:pointer;
+    }
+    .msg{
+      margin-top:15px;
+      padding:12px;
+      border-radius:10px;
+      display:none;
+      line-height:1.5;
+    }
+    .show{display:block}
+    .ok{background:#dcfce7;color:#166534}
+    .err{background:#fee2e2;color:#991b1b}
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <div class="logo">M-A-S</div>
+
+  <h1 id="title">Reset Admin Password</h1>
+
+  <p id="info">
+    Enter your TSF admin email.
+  </p>
+
+  <form id="form">
+
+    <div id="emailBox">
+      <input
+        id="email"
+        type="email"
+        value="maksudtahsin0@gmail.com"
+        placeholder="Admin email"
+        required
+      >
+    </div>
+
+    <div id="passwordBox" style="display:none">
+
+      <input
+        id="password"
+        type="password"
+        minlength="8"
+        placeholder="New password"
+      >
+
+      <input
+        id="confirm"
+        type="password"
+        minlength="8"
+        placeholder="Confirm new password"
+      >
+
+    </div>
+
+    <button id="button" type="submit">
+      Send Reset Link
+    </button>
+
+  </form>
+
+  <div id="message" class="msg"></div>
+
+</div>
+
+<script>
+
+const SUPABASE_URL =
+  "https://bdsyjobzvwulaifpehvq.supabase.co";
+
+/*
+  তোমার admin.html-এ যে Publishable Key আছে,
+  EXACT সেই একই key এখানে বসাও।
+*/
+const SUPABASE_KEY sb_publishable_uVJ41MtBIJbKAQvABmBCdQ_uWtrBzWP_HERE";
+
+const ADMIN_EMAIL =
+  "maksudtahsin0@gmail.com";
+
+const supabase =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+const form = document.getElementById("form");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const confirm = document.getElementById("confirm");
+const button = document.getElementById("button");
+const message = document.getElementById("message");
+
+function show(text, type){
+  message.textContent = text;
+  message.className = "msg show " + type;
+}
+
+async function start(){
+
+  const hash =
+    new URLSearchParams(
+      location.hash.substring(1)
+    );
+
+  const query =
+    new URLSearchParams(
+      location.search
+    );
+
+  const type =
+    hash.get("type") ||
+    query.get("type");
+
+  const code =
+    query.get("code");
+
+  if(code){
+
+    const result =
+      await supabase.auth.exchangeCodeForSession(code);
+
+    if(result.error){
+      show(
+        "This reset link is invalid or expired.",
+        "err"
+      );
+      return;
+    }
+
+    openPassword();
+    return;
+  }
+
+  if(type === "recovery"){
+    openPassword();
+  }
+}
+
+function openPassword(){
+
+  document.getElementById("title").textContent =
+    "Create New Password";
+
+  document.getElementById("info").textContent =
+    "Enter your new TSF admin password.";
+
+  document.getElementById("emailBox").style.display =
+    "none";
+
+  document.getElementById("passwordBox").style.display =
+    "block";
+
+  button.textContent =
+    "Update Password";
+}
+
+form.addEventListener("submit", async function(e){
+
+  e.preventDefault();
+
+  message.className = "msg";
+
+  if(
+    document.getElementById("passwordBox").style.display
+    === "none"
+  ){
+
+    if(
+      email.value.trim().toLowerCase()
+      !== ADMIN_EMAIL.toLowerCase()
+    ){
+      show(
+        "Please use the authorized TSF admin email.",
+        "err"
+      );
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Sending...";
+
+    const redirectTo =
+      window.location.origin +
+      "/reset.html";
+
+    const {error} =
+      await supabase.auth.resetPasswordForEmail(
+        email.value.trim(),
+        {redirectTo}
+      );
+
+    button.disabled = false;
+    button.textContent = "Send Reset Link";
+
+    if(error){
+      show(error.message,"err");
+      return;
+    }
+
+    show(
+      "Reset link sent. Check your Gmail Inbox and Spam/Junk folder.",
+      "ok"
+    );
+
+    return;
+  }
+
+
+  if(password.value.length < 8){
+    show(
+      "Password must be at least 8 characters.",
+      "err"
+    );
+    return;
+  }
+
+  if(password.value !== confirm.value){
+    show(
+      "Passwords do not match.",
+      "err"
+    );
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Updating...";
+
+  const {error} =
+    await supabase.auth.updateUser({
+      password: password.value
+    });
+
+  button.disabled = false;
+  button.textContent = "Update Password";
+
+  if(error){
+    show(error.message,"err");
+    return;
+  }
+
+  show(
+    "Password updated successfully! You can now login to TSF Admin.",
+    "ok"
+  );
+
+});
+
+start();
+
+</script>
+
+</body>
+</html>
