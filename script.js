@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "https://bdsyjobzvwulaifpehvq.supabase.co";
 
   const SUPABASE_KEY =
-    "তোমার_PUBLISHABLE_KEY";
+    "তোমার_PUBLISHABLE_KEY";sb_publishable_uVJ41MtBIJbKAQvABmBCdQ_uWtrBzWP
 
 
   /* ================================
