@@ -1,4 +1,4 @@
-const CACHE_NAME = "tsf-v1";
+const CACHE_NAME = "tsf-v2";
 
 const FILES_TO_CACHE = [
   "./",
