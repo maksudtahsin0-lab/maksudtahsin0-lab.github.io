@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08111f">
   <title>TSF Super Admin</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -18,6 +19,13 @@
       font-family: Arial, sans-serif;
       background: #f4f7fb;
       color: #172033;
+      min-height: 100vh;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
     }
 
     .container {
@@ -25,12 +33,28 @@
       margin: 30px auto;
     }
 
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 25px;
-      margin-bottom: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    .hidden {
+      display: none !important;
+    }
+
+    .brand {
+      text-align: center;
+      margin: 40px auto 25px;
+    }
+
+    .logo {
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 18px;
+      border-radius: 24px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #08111f, #344054);
+      color: white;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      box-shadow: 0 15px 35px rgba(8,17,31,.2);
     }
 
     h1 {
@@ -42,39 +66,59 @@
     }
 
     p {
-      color: #687386;
+      color: #667085;
       line-height: 1.6;
     }
 
-    input, textarea, select, button {
+    .card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 35px rgba(16,24,40,.08);
+    }
+
+    input,
+    textarea {
       width: 100%;
-      padding: 13px 15px;
+      padding: 14px 15px;
       margin-top: 10px;
+      border: 1px solid #d0d5dd;
       border-radius: 12px;
-      border: 1px solid #d8deea;
-      font-size: 15px;
+      outline: none;
+      background: #fff;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #344054;
+      box-shadow: 0 0 0 3px rgba(52,64,84,.08);
     }
 
     textarea {
-      min-height: 110px;
+      min-height: 120px;
       resize: vertical;
     }
 
     button {
-      border: none;
-      background: #101828;
+      width: 100%;
+      padding: 14px 16px;
+      margin-top: 12px;
+      border: 0;
+      border-radius: 12px;
+      background: #08111f;
       color: white;
       font-weight: 700;
       cursor: pointer;
     }
 
     button:hover {
-      opacity: .9;
+      opacity: .92;
     }
 
-    .secondary {
-      background: #e9eef7;
-      color: #172033;
+    button:disabled {
+      opacity: .55;
+      cursor: not-allowed;
     }
 
     .danger {
@@ -82,37 +126,20 @@
     }
 
     .success {
-      background: #078a55;
+      background: #087443;
     }
 
-    .hidden {
-      display: none !important;
-    }
-
-    .brand {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .logo {
-      width: 75px;
-      height: 75px;
-      border-radius: 22px;
-      margin: auto;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg,#111827,#344054);
-      color: white;
-      font-size: 24px;
-      font-weight: 900;
-      letter-spacing: 2px;
+    .secondary {
+      background: #eaecf0;
+      color: #172033;
     }
 
     .message {
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 10px;
       display: none;
+      margin-top: 15px;
+      padding: 13px;
+      border-radius: 12px;
+      line-height: 1.5;
     }
 
     .message.show {
@@ -129,36 +156,59 @@
       color: #067647;
     }
 
-    .otp {
+    .pin-input {
       text-align: center;
-      font-size: 26px;
-      font-weight: bold;
-      letter-spacing: 8px;
+      font-size: 25px;
+      letter-spacing: 6px;
+      font-weight: 700;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .topbar button {
+      width: auto;
+      margin: 0;
+      padding: 11px 20px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
     }
 
     .stat {
-      padding: 20px;
-      background: #f8fafc;
-      border-radius: 15px;
+      background: white;
+      padding: 22px;
+      border-radius: 18px;
+      box-shadow: 0 8px 25px rgba(16,24,40,.06);
     }
 
     .stat strong {
       display: block;
-      font-size: 30px;
+      font-size: 32px;
       margin-top: 5px;
     }
 
     .item {
-      border: 1px solid #e4e7ec;
-      padding: 15px;
-      border-radius: 14px;
       margin-top: 12px;
+      padding: 16px;
+      border: 1px solid #eaecf0;
+      border-radius: 14px;
+      background: #fcfcfd;
+    }
+
+    .item strong {
+      display: block;
+      margin-bottom: 5px;
     }
 
     .item-actions {
@@ -171,25 +221,10 @@
       margin: 0;
     }
 
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .topbar button {
-      width: auto;
-      margin: 0;
-      padding: 10px 18px;
-    }
-
-    .cooldown {
-      text-align: center;
-      margin-top: 10px;
-      color: #667085;
+    .small {
+      font-size: 13px;
+      color: #98a2b3;
+      word-break: break-word;
     }
   </style>
 </head>
@@ -198,78 +233,69 @@
 
 <div class="container">
 
-  <!-- LOGIN -->
+  <!-- ================= LOGIN ================= -->
+
   <section id="loginSection">
 
     <div class="brand">
       <div class="logo">M-A-S</div>
+
       <h1>TSF Super Admin</h1>
+
       <p>Teachers Students Friendship</p>
+
       <p>Learn • Connect • Grow Together</p>
     </div>
 
     <div class="card">
-      <h2>Super Admin Verification</h2>
+
+      <h2>Admin Access</h2>
+
       <p>
-        Enter your registered admin email. A verification code will be sent to your email.
+        Enter your private Super Admin PIN to continue.
       </p>
 
       <input
-        id="email"
-        type="email"
-        placeholder="Admin email"
-        autocomplete="email"
+        id="pinInput"
+        class="pin-input"
+        type="password"
+        inputmode="numeric"
+        autocomplete="off"
+        placeholder="Enter Admin PIN"
       >
 
-      <button id="sendOtpButton">
-        Send Verification Code
+      <button id="loginButton">
+        Enter Super Admin
       </button>
 
-      <div id="otpArea" class="hidden">
-        <input
-          id="otp"
-          class="otp"
-          type="text"
-          inputmode="numeric"
-          maxlength="6"
-          placeholder="000000"
-          autocomplete="one-time-code"
-        >
+      <div id="loginMessage" class="message"></div>
 
-        <button id="verifyOtpButton" class="success">
-          Verify & Enter Super Admin
-        </button>
-
-        <button id="resendButton" class="secondary">
-          Resend Code
-        </button>
-
-        <div id="cooldown" class="cooldown"></div>
-      </div>
-
-      <div id="message" class="message"></div>
     </div>
 
   </section>
 
 
-  <!-- DASHBOARD -->
+  <!-- ================= DASHBOARD ================= -->
+
   <section id="dashboardSection" class="hidden">
 
     <div class="topbar">
+
       <div>
         <h1>Super Admin Dashboard</h1>
-        <p id="adminEmail"></p>
+        <p>Teachers Students Friendship</p>
       </div>
 
       <button id="logoutButton" class="danger">
         Logout
       </button>
+
     </div>
 
 
     <!-- STATS -->
-    <div class="grid">
+
+    <div class="stats">
 
       <div class="stat">
         <p>Applications</p>
@@ -290,49 +316,90 @@
 
 
     <!-- APPLICATIONS -->
+
     <div class="card">
+
       <h2>Manage Applications</h2>
 
-      <input id="appTitle" placeholder="Application title">
-      <input id="appDescription" placeholder="Application description">
-      <input id="appUrl" placeholder="Application URL">
+      <input
+        id="appTitle"
+        placeholder="Application title"
+      >
+
+      <input
+        id="appDescription"
+        placeholder="Application description"
+      >
+
+      <input
+        id="appUrl"
+        placeholder="Application URL"
+      >
 
       <button id="addAppButton">
         Add Application
       </button>
 
       <div id="appsList"></div>
+
     </div>
 
 
     <!-- CONTENT -->
+
     <div class="card">
+
       <h2>Manage Content</h2>
 
-      <input id="contentTitle" placeholder="Content title">
-      <textarea id="contentBody" placeholder="Content description"></textarea>
-      <input id="contentUrl" placeholder="Content URL">
+      <input
+        id="contentTitle"
+        placeholder="Content title"
+      >
+
+      <textarea
+        id="contentBody"
+        placeholder="Content description"
+      ></textarea>
+
+      <input
+        id="contentUrl"
+        placeholder="Content URL"
+      >
 
       <button id="addContentButton">
         Add Content
       </button>
 
       <div id="contentList"></div>
+
     </div>
 
 
     <!-- ANNOUNCEMENTS -->
+
     <div class="card">
+
       <h2>Announcements</h2>
 
-      <input id="announcementTitle" placeholder="Announcement title">
-      <textarea id="announcementBody" placeholder="Announcement message"></textarea>
+      <input
+        id="announcementTitle"
+        placeholder="Announcement title"
+      >
 
-      <button id="addAnnouncementButton">
+      <textarea
+        id="announcementBody"
+        placeholder="Announcement message"
+      ></textarea>
+
+      <button
+        id="addAnnouncementButton"
+        class="success"
+      >
         Publish Announcement
       </button>
 
       <div id="announcementList"></div>
+
     </div>
 
   </section>
@@ -341,29 +408,21 @@
 
 
 <script>
-  /* ================================
-     TSF SUPABASE CONFIG
-  ================================= */
+
+  /* =========================================
+     SUPABASE CONFIG
+  ========================================= */
 
   const SUPABASE_URL =
     "https://bdsyjobzvwulaifpehvq.supabase.co";
 
   const SUPABASE_KEY =
-    sb_publishable_uVJ41MtBIJbKAQvABmBCdQ_uWtrBzWP_HERE";
-
-  /*
-    IMPORTANT:
-    Keep your real Supabase Publishable Key here.
-    Do NOT put a service-role/secret key here.
-  */
-
-  const ADMIN_EMAIL =
-    maksudtahsin0@gmail.com";
+    "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE";
 
 
-  /* ================================
-     SUPABASE
-  ================================= */
+  /* =========================================
+     CREATE SUPABASE CLIENT
+  ========================================= */
 
   const supabaseClient =
     window.supabase.createClient(
@@ -372,9 +431,9 @@
     );
 
 
-  /* ================================
+  /* =========================================
      ELEMENTS
-  ================================= */
+  ========================================= */
 
   const loginSection =
     document.getElementById("loginSection");
@@ -382,306 +441,168 @@
   const dashboardSection =
     document.getElementById("dashboardSection");
 
-  const emailInput =
-    document.getElementById("email");
+  const pinInput =
+    document.getElementById("pinInput");
 
-  const otpInput =
-    document.getElementById("otp");
+  const loginButton =
+    document.getElementById("loginButton");
 
-  const otpArea =
-    document.getElementById("otpArea");
-
-  const message =
-    document.getElementById("message");
-
-  const cooldown =
-    document.getElementById("cooldown");
-
-  let currentEmail = "";
-  let resendTimer = null;
+  const loginMessage =
+    document.getElementById("loginMessage");
 
 
-  /* ================================
+  /* =========================================
      MESSAGE
-  ================================= */
+  ========================================= */
 
-  function showMessage(text, type = "error") {
-    message.textContent = text;
-    message.className =
+  function showLoginMessage(text, type = "error") {
+
+    loginMessage.textContent = text;
+
+    loginMessage.className =
       "message show " + type;
   }
 
 
-  function clearMessage() {
-    message.textContent = "";
-    message.className = "message";
+  function clearLoginMessage() {
+
+    loginMessage.textContent = "";
+
+    loginMessage.className =
+      "message";
   }
 
 
-  /* ================================
-     SUPER ADMIN CHECK
-  ================================= */
+  /* =========================================
+     VERIFY PIN THROUGH SUPABASE
+  ========================================= */
 
-  async function checkSuperAdmin(user) {
+  async function verifyAdminPin() {
 
-    if (!user) {
-      return false;
-    }
+    clearLoginMessage();
 
-    if (
-      !user.email ||
-      user.email.toLowerCase() !==
-      ADMIN_EMAIL.toLowerCase()
-    ) {
-      return false;
-    }
+    const pin =
+      pinInput.value.trim();
 
-    const { data, error } =
-      await supabaseClient
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", user.id)
-        .maybeSingle();
+    if (!pin) {
 
-    if (error) {
-      console.error(error);
-      return false;
-    }
-
-    return data &&
-      data.role === "super_admin";
-  }
-
-
-  /* ================================
-     SEND OTP
-  ================================= */
-
-  async function sendOTP() {
-
-    clearMessage();
-
-    const email =
-      emailInput.value.trim();
-
-    if (!email) {
-      showMessage(
-        "Please enter your admin email."
+      showLoginMessage(
+        "Please enter your Admin PIN."
       );
+
       return;
     }
 
-    if (
-      email.toLowerCase() !==
-      ADMIN_EMAIL.toLowerCase()
-    ) {
-      showMessage(
-        "This email is not authorized as Super Admin."
-      );
-      return;
-    }
+    loginButton.disabled = true;
 
-    const button =
-      document.getElementById("sendOtpButton");
-
-    button.disabled = true;
-    button.textContent = "Sending...";
-
-    try {
-
-      const { error } =
-        await supabaseClient.auth.signInWithOtp({
-          email: email,
-          options: {
-            shouldCreateUser: false
-          }
-        });
-
-      if (error) {
-        throw error;
-      }
-
-      currentEmail = email;
-
-      otpArea.classList.remove("hidden");
-
-      showMessage(
-        "Verification code sent to your email.",
-        "ok"
-      );
-
-      startCooldown();
-
-    } catch (error) {
-
-      console.error(error);
-
-      showMessage(
-        error.message ||
-        "Could not send verification code."
-      );
-
-    } finally {
-
-      button.disabled = false;
-      button.textContent = "Send Verification Code";
-    }
-  }
-
-
-  /* ================================
-     VERIFY OTP
-  ================================= */
-
-  async function verifyOTP() {
-
-    clearMessage();
-
-    const token =
-      otpInput.value.trim();
-
-    if (!currentEmail) {
-      showMessage(
-        "Please request a verification code first."
-      );
-      return;
-    }
-
-    if (!/^\d{6}$/.test(token)) {
-      showMessage(
-        "Enter the 6-digit verification code."
-      );
-      return;
-    }
-
-    const button =
-      document.getElementById("verifyOtpButton");
-
-    button.disabled = true;
-    button.textContent = "Verifying...";
+    loginButton.textContent =
+      "Verifying...";
 
     try {
 
       const { data, error } =
-        await supabaseClient.auth.verifyOtp({
-          email: currentEmail,
-          token: token,
-          type: "email"
-        });
+        await supabaseClient.rpc(
+          "verify_tsf_admin_pin",
+          {
+            input_pin: pin
+          }
+        );
 
       if (error) {
-        throw error;
-      }
 
-      const isAdmin =
-        await checkSuperAdmin(data.user);
-
-      if (!isAdmin) {
-
-        await supabaseClient.auth.signOut();
+        console.error(error);
 
         throw new Error(
-          "Verification succeeded, but this account is not authorized as Super Admin."
+          "Unable to verify Admin PIN."
         );
       }
 
-      document.getElementById("adminEmail")
-        .textContent =
-        data.user.email;
+      if (data !== true) {
 
-      loginSection.classList.add("hidden");
+        throw new Error(
+          "Incorrect Admin PIN."
+        );
+      }
 
-      dashboardSection.classList.remove("hidden");
 
-      await loadDashboard();
+      /*
+        PIN verified successfully.
+        Create a temporary browser session.
+      */
+
+      sessionStorage.setItem(
+        "tsf_super_admin",
+        "true"
+      );
+
+      showDashboard();
 
     } catch (error) {
 
       console.error(error);
 
-      showMessage(
+      showLoginMessage(
         error.message ||
-        "Invalid or expired verification code."
+        "Admin verification failed."
       );
+
+      pinInput.value = "";
 
     } finally {
 
-      button.disabled = false;
-      button.textContent =
-        "Verify & Enter Super Admin";
+      loginButton.disabled = false;
+
+      loginButton.textContent =
+        "Enter Super Admin";
     }
   }
 
 
-  /* ================================
-     COOLDOWN
-  ================================= */
+  /* =========================================
+     SHOW DASHBOARD
+  ========================================= */
 
-  function startCooldown() {
+  async function showDashboard() {
 
-    let seconds = 60;
-
-    document.getElementById(
-      "resendButton"
-    ).disabled = true;
-
-    clearInterval(resendTimer);
-
-    cooldown.textContent =
-      "You can resend the code in " +
-      seconds +
-      " seconds.";
-
-    resendTimer =
-      setInterval(() => {
-
-        seconds--;
-
-        cooldown.textContent =
-          "You can resend the code in " +
-          seconds +
-          " seconds.";
-
-        if (seconds <= 0) {
-
-          clearInterval(resendTimer);
-
-          document.getElementById(
-            "resendButton"
-          ).disabled = false;
-
-          cooldown.textContent =
-            "You can resend the code now.";
-        }
-
-      }, 1000);
-  }
-
-
-  /* ================================
-     LOGOUT
-  ================================= */
-
-  async function logout() {
-
-    await supabaseClient.auth.signOut();
-
-    dashboardSection.classList.add("hidden");
-    loginSection.classList.remove("hidden");
-
-    otpArea.classList.add("hidden");
-    otpInput.value = "";
-
-    showMessage(
-      "You have been logged out.",
-      "ok"
+    loginSection.classList.add(
+      "hidden"
     );
+
+    dashboardSection.classList.remove(
+      "hidden"
+    );
+
+    await loadDashboard();
   }
 
 
-  /* ================================
-     LOAD DASHBOARD
-  ================================= */
+  /* =========================================
+     LOGOUT
+  ========================================= */
+
+  function logout() {
+
+    sessionStorage.removeItem(
+      "tsf_super_admin"
+    );
+
+    dashboardSection.classList.add(
+      "hidden"
+    );
+
+    loginSection.classList.remove(
+      "hidden"
+    );
+
+    pinInput.value = "";
+
+    clearLoginMessage();
+  }
+
+
+  /* =========================================
+     LOAD EVERYTHING
+  ========================================= */
 
   async function loadDashboard() {
 
@@ -693,33 +614,36 @@
   }
 
 
-  /* ================================
+  /* =========================================
      APPLICATIONS
-  ================================= */
+  ========================================= */
 
   async function loadApps() {
 
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("app_items")
-      .select("*")
-      .order("created_at", {
-        ascending: false
-      });
+    const { data, error } =
+      await supabaseClient
+        .from("app_items")
+        .select("*")
+        .order("created_at", {
+          ascending: false
+        });
 
     if (error) {
+
       console.error(error);
+
       return;
     }
 
-    document.getElementById("appCount")
-      .textContent =
+    document.getElementById(
+      "appCount"
+    ).textContent =
       data?.length || 0;
 
     const list =
-      document.getElementById("appsList");
+      document.getElementById(
+        "appsList"
+      );
 
     list.innerHTML = "";
 
@@ -731,17 +655,27 @@
       div.className = "item";
 
       div.innerHTML = `
-        <strong>${escapeHTML(item.title || "")}</strong>
-        <p>${escapeHTML(item.description || "")}</p>
-        <small>${escapeHTML(item.url || "")}</small>
+        <strong>
+          ${escapeHTML(item.title || "")}
+        </strong>
+
+        <p>
+          ${escapeHTML(item.description || "")}
+        </p>
+
+        <div class="small">
+          ${escapeHTML(item.url || "")}
+        </div>
 
         <div class="item-actions">
+
           <button
             class="danger"
             onclick="deleteApp('${item.id}')"
           >
             Delete
           </button>
+
         </div>
       `;
 
@@ -753,19 +687,26 @@
   async function addApp() {
 
     const title =
-      document.getElementById("appTitle")
-        .value.trim();
+      document.getElementById(
+        "appTitle"
+      ).value.trim();
 
     const description =
-      document.getElementById("appDescription")
-        .value.trim();
+      document.getElementById(
+        "appDescription"
+      ).value.trim();
 
     const url =
-      document.getElementById("appUrl")
-        .value.trim();
+      document.getElementById(
+        "appUrl"
+      ).value.trim();
 
     if (!title) {
-      alert("Application title is required.");
+
+      alert(
+        "Application title is required."
+      );
+
       return;
     }
 
@@ -779,13 +720,23 @@
         });
 
     if (error) {
+
       alert(error.message);
+
       return;
     }
 
-    document.getElementById("appTitle").value = "";
-    document.getElementById("appDescription").value = "";
-    document.getElementById("appUrl").value = "";
+    document.getElementById(
+      "appTitle"
+    ).value = "";
+
+    document.getElementById(
+      "appDescription"
+    ).value = "";
+
+    document.getElementById(
+      "appUrl"
+    ).value = "";
 
     await loadApps();
   }
@@ -793,7 +744,11 @@
 
   async function deleteApp(id) {
 
-    if (!confirm("Delete this application?")) {
+    if (
+      !confirm(
+        "Delete this application?"
+      )
+    ) {
       return;
     }
 
@@ -804,7 +759,9 @@
         .eq("id", id);
 
     if (error) {
+
       alert(error.message);
+
       return;
     }
 
@@ -812,33 +769,36 @@
   }
 
 
-  /* ================================
+  /* =========================================
      CONTENT
-  ================================= */
+  ========================================= */
 
   async function loadContent() {
 
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("content_items")
-      .select("*")
-      .order("created_at", {
-        ascending: false
-      });
+    const { data, error } =
+      await supabaseClient
+        .from("content_items")
+        .select("*")
+        .order("created_at", {
+          ascending: false
+        });
 
     if (error) {
+
       console.error(error);
+
       return;
     }
 
-    document.getElementById("contentCount")
-      .textContent =
+    document.getElementById(
+      "contentCount"
+    ).textContent =
       data?.length || 0;
 
     const list =
-      document.getElementById("contentList");
+      document.getElementById(
+        "contentList"
+      );
 
     list.innerHTML = "";
 
@@ -850,16 +810,27 @@
       div.className = "item";
 
       div.innerHTML = `
-        <strong>${escapeHTML(item.title || "")}</strong>
-        <p>${escapeHTML(item.body || "")}</p>
+        <strong>
+          ${escapeHTML(item.title || "")}
+        </strong>
+
+        <p>
+          ${escapeHTML(item.body || "")}
+        </p>
+
+        <div class="small">
+          ${escapeHTML(item.url || "")}
+        </div>
 
         <div class="item-actions">
+
           <button
             class="danger"
             onclick="deleteContent('${item.id}')"
           >
             Delete
           </button>
+
         </div>
       `;
 
@@ -871,19 +842,26 @@
   async function addContent() {
 
     const title =
-      document.getElementById("contentTitle")
-        .value.trim();
+      document.getElementById(
+        "contentTitle"
+      ).value.trim();
 
     const body =
-      document.getElementById("contentBody")
-        .value.trim();
+      document.getElementById(
+        "contentBody"
+      ).value.trim();
 
     const url =
-      document.getElementById("contentUrl")
-        .value.trim();
+      document.getElementById(
+        "contentUrl"
+      ).value.trim();
 
     if (!title) {
-      alert("Content title is required.");
+
+      alert(
+        "Content title is required."
+      );
+
       return;
     }
 
@@ -897,13 +875,23 @@
         });
 
     if (error) {
+
       alert(error.message);
+
       return;
     }
 
-    document.getElementById("contentTitle").value = "";
-    document.getElementById("contentBody").value = "";
-    document.getElementById("contentUrl").value = "";
+    document.getElementById(
+      "contentTitle"
+    ).value = "";
+
+    document.getElementById(
+      "contentBody"
+    ).value = "";
+
+    document.getElementById(
+      "contentUrl"
+    ).value = "";
 
     await loadContent();
   }
@@ -911,7 +899,11 @@
 
   async function deleteContent(id) {
 
-    if (!confirm("Delete this content?")) {
+    if (
+      !confirm(
+        "Delete this content?"
+      )
+    ) {
       return;
     }
 
@@ -922,7 +914,9 @@
         .eq("id", id);
 
     if (error) {
+
       alert(error.message);
+
       return;
     }
 
@@ -930,24 +924,24 @@
   }
 
 
-  /* ================================
+  /* =========================================
      ANNOUNCEMENTS
-  ================================= */
+  ========================================= */
 
   async function loadAnnouncements() {
 
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("announcements")
-      .select("*")
-      .order("created_at", {
-        ascending: false
-      });
+    const { data, error } =
+      await supabaseClient
+        .from("announcements")
+        .select("*")
+        .order("created_at", {
+          ascending: false
+        });
 
     if (error) {
+
       console.error(error);
+
       return;
     }
 
@@ -971,16 +965,23 @@
       div.className = "item";
 
       div.innerHTML = `
-        <strong>${escapeHTML(item.title || "")}</strong>
-        <p>${escapeHTML(item.body || "")}</p>
+        <strong>
+          ${escapeHTML(item.title || "")}
+        </strong>
+
+        <p>
+          ${escapeHTML(item.body || "")}
+        </p>
 
         <div class="item-actions">
+
           <button
             class="danger"
             onclick="deleteAnnouncement('${item.id}')"
           >
             Delete
           </button>
+
         </div>
       `;
 
@@ -1002,9 +1003,11 @@
       ).value.trim();
 
     if (!title || !body) {
+
       alert(
         "Announcement title and message are required."
       );
+
       return;
     }
 
@@ -1017,7 +1020,9 @@
         });
 
     if (error) {
+
       alert(error.message);
+
       return;
     }
 
@@ -1035,7 +1040,11 @@
 
   async function deleteAnnouncement(id) {
 
-    if (!confirm("Delete this announcement?")) {
+    if (
+      !confirm(
+        "Delete this announcement?"
+      )
+    ) {
       return;
     }
 
@@ -1046,7 +1055,9 @@
         .eq("id", id);
 
     if (error) {
+
       alert(error.message);
+
       return;
     }
 
@@ -1054,9 +1065,9 @@
   }
 
 
-  /* ================================
-     SECURITY
-  ================================= */
+  /* =========================================
+     HTML SECURITY
+  ========================================= */
 
   function escapeHTML(value) {
 
@@ -1069,29 +1080,24 @@
   }
 
 
-  /* ================================
-     BUTTONS
-  ================================= */
+  /* =========================================
+     BUTTON EVENTS
+  ========================================= */
 
-  document.getElementById(
-    "sendOtpButton"
-  ).addEventListener(
+  loginButton.addEventListener(
     "click",
-    sendOTP
+    verifyAdminPin
   );
 
-  document.getElementById(
-    "verifyOtpButton"
-  ).addEventListener(
-    "click",
-    verifyOTP
-  );
+  pinInput.addEventListener(
+    "keydown",
+    event => {
 
-  document.getElementById(
-    "resendButton"
-  ).addEventListener(
-    "click",
-    sendOTP
+      if (event.key === "Enter") {
+        verifyAdminPin();
+      }
+
+    }
   );
 
   document.getElementById(
@@ -1123,52 +1129,18 @@
   );
 
 
-  /* ================================
-     EXISTING SESSION
-  ================================= */
+  /* =========================================
+     RESTORE SESSION
+  ========================================= */
 
-  async function checkExistingSession() {
+  if (
+    sessionStorage.getItem(
+      "tsf_super_admin"
+    ) === "true"
+  ) {
 
-    const {
-      data
-    } = await supabaseClient.auth
-      .getSession();
-
-    const session =
-      data?.session;
-
-    if (!session) {
-      return;
-    }
-
-    const isAdmin =
-      await checkSuperAdmin(
-        session.user
-      );
-
-    if (!isAdmin) {
-
-      await supabaseClient.auth.signOut();
-
-      return;
-    }
-
-    document.getElementById(
-      "adminEmail"
-    ).textContent =
-      session.user.email;
-
-    loginSection.classList.add("hidden");
-
-    dashboardSection.classList.remove(
-      "hidden"
-    );
-
-    await loadDashboard();
+    showDashboard();
   }
-
-
-  checkExistingSession();
 
 </script>
 
