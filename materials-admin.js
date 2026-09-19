@@ -1,606 +1,338 @@
-/* =========================================================
-   TSF SUPER ADMIN — MATERIALS MANAGER
-   Class → Subject → Notes / Sheets / Questions / Videos / Other
-   ========================================================= */
-
 (() => {
-  "use strict";
+  const db = window.TSFAdminDB;
 
-  let selectedClassId = "";
-  let selectedSubjectId = "";
-
-  function $(id) {
-    return document.getElementById(id);
+  if (!db) {
+    console.error("TSFAdminDB not found.");
+    return;
   }
 
-  function esc(value) {
-    return String(value ?? "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
+  const SECTION_ID = "materialsSection";
 
-  function getDB() {
-    return window.TSFAdminDB || null;
-  }
-
-  /* =========================================================
-     CREATE MATERIALS SECTION
-     ========================================================= */
-
-  function createMaterialsSection() {
-
-    if ($("materialsSection")) return;
-
-    const main = document.querySelector(".main");
-
-    if (!main) return;
+  function createSection() {
+    if (document.getElementById(SECTION_ID)) return;
 
     const section = document.createElement("section");
-
-    section.id = "materialsSection";
+    section.id = SECTION_ID;
     section.className = "hidden";
 
     section.innerHTML = `
+      <div style="
+        background:#fff;
+        padding:24px;
+        border-radius:18px;
+        box-shadow:0 8px 30px rgba(0,0,0,.08);
+        margin-top:20px;
+      ">
+        <h2>📂 Learning Materials</h2>
+        <p style="color:#666">
+          Upload PDF, DOC, DOCX, PPT, PPTX, images, videos and other learning resources.
+        </p>
 
-      <h1 class="page-title">
-        Learning Materials
-      </h1>
+        <div style="display:grid;gap:14px;margin-top:20px">
 
-      <p class="page-subtitle">
-        Publish notes, sheets, question banks, videos
-        and other learning resources.
-      </p>
+          <select id="matClass">
+            <option value="">Select Class</option>
+          </select>
 
-      <div class="manager">
+          <select id="matSubject">
+            <option value="">Select Subject</option>
+          </select>
 
-        <h2>➕ Add Learning Resource</h2>
-
-        <div class="form-grid">
-
-          <div>
-            <label>Class</label>
-
-            <select id="materialClass">
-              <option value="">
-                Select Class
-              </option>
-            </select>
-          </div>
-
-          <div>
-            <label>Subject</label>
-
-            <select id="materialSubject">
-              <option value="">
-                Select Subject
-              </option>
-            </select>
-          </div>
-
-          <div>
-            <label>Resource Type</label>
-
-            <select id="materialCategory">
-
-              <option value="notes">
-                📚 Notes
-              </option>
-
-              <option value="sheets">
-                📝 Sheets
-              </option>
-
-              <option value="questions">
-                ❓ Question Bank
-              </option>
-
-              <option value="videos">
-                🎥 Videos
-              </option>
-
-              <option value="other">
-                📦 Other Resources
-              </option>
-
-            </select>
-          </div>
-
-          <div>
-            <label>Title</label>
-
-            <input
-              id="materialTitle"
-              placeholder="Example: Class 6 Math Notes"
-            >
-          </div>
-
-          <div class="full">
-
-            <label>Description</label>
-
-            <textarea
-              id="materialDescription"
-              placeholder="Short description of this resource"
-            ></textarea>
-
-          </div>
-
-          <div class="full">
-
-            <label>
-              Resource URL
-            </label>
-
-            <input
-              id="materialURL"
-              type="url"
-              placeholder="PDF / Video / Document URL"
-            >
-
-            <small>
-              আপাতত এখানে PDF বা Video-এর public link দিতে পারবে।
-            </small>
-
-          </div>
-
-        </div>
-
-        <label
-          style="
-            display:flex;
-            align-items:center;
-            gap:10px;
-            margin:10px 0 18px;
-          "
-        >
+          <select id="matCategory">
+            <option value="notes">📘 Notes</option>
+            <option value="sheets">📄 Sheets</option>
+            <option value="questions">📝 Question Bank</option>
+            <option value="videos">🎥 Videos</option>
+            <option value="other">📁 Other Resources</option>
+          </select>
 
           <input
-            id="materialFeatured"
-            type="checkbox"
-            style="width:auto;margin:0"
+            id="matTitle"
+            type="text"
+            placeholder="Resource title"
           >
 
-          ⭐ Featured Resource
-
-        </label>
-
-        <label
-          style="
-            display:flex;
-            align-items:center;
-            gap:10px;
-            margin-bottom:18px;
-          "
-        >
+          <textarea
+            id="matDescription"
+            placeholder="Description"
+            rows="4"
+          ></textarea>
 
           <input
-            id="materialActive"
-            type="checkbox"
-            checked
-            style="width:auto;margin:0"
+            id="matFile"
+            type="file"
+            accept="
+              .pdf,
+              .doc,
+              .docx,
+              .ppt,
+              .pptx,
+              .jpg,
+              .jpeg,
+              .png,
+              .webp,
+              .mp4,
+              .webm,
+              .mp3,
+              .wav
+            "
           >
 
-          👁️ Publish immediately
+          <label>
+            <input id="matFeatured" type="checkbox">
+            ⭐ Featured Resource
+          </label>
 
-        </label>
+          <button
+            id="matUploadBtn"
+            type="button"
+            style="
+              padding:14px;
+              border:0;
+              border-radius:12px;
+              background:#111827;
+              color:white;
+              font-size:16px;
+              cursor:pointer;
+            "
+          >
+            ⬆️ Upload Material
+          </button>
 
-        <button
-          class="primary"
-          id="addMaterialButton"
-        >
-          + Publish Resource
-        </button>
-
-        <div
-          id="materialStatus"
-          class="status"
-        ></div>
-
-      </div>
-
-
-      <div class="manager">
-
-        <div class="manager-header">
-
-          <div>
-
-            <h2>
-              Published Resources
-            </h2>
-
-            <p
-              style="
-                color:#687386;
-                margin-top:6px;
-              "
-            >
-              Manage resources for the selected
-              class and subject.
-            </p>
-
-          </div>
+          <div id="matStatus"></div>
 
         </div>
 
-        <div
-          id="materialList"
-          class="list"
-        >
-          Select a class and subject.
-        </div>
+        <hr style="margin:30px 0">
 
+        <h3>📚 Uploaded Materials</h3>
+        <div id="materialsList">Loading...</div>
       </div>
-
     `;
 
-    main.appendChild(section);
+    const main = document.querySelector(".main");
 
-    $("materialClass")
-      .addEventListener(
-        "change",
-        async e => {
-
-          selectedClassId =
-            e.target.value;
-
-          await loadMaterialSubjects();
-
-        }
-      );
-
-    $("materialSubject")
-      .addEventListener(
-        "change",
-        async e => {
-
-          selectedSubjectId =
-            e.target.value;
-
-          await loadMaterials();
-
-        }
-      );
-
-    $("materialCategory")
-      .addEventListener(
-        "change",
-        loadMaterials
-      );
-
-    $("addMaterialButton")
-      .addEventListener(
-        "click",
-        addMaterial
-      );
-
+    if (main) {
+      main.appendChild(section);
+    } else {
+      document.body.appendChild(section);
+    }
   }
 
-
-  /* =========================================================
-     ADD NAVIGATION BUTTON
-     ========================================================= */
-
   function addNavigation() {
-
-    const sidebar =
-      document.querySelector(".sidebar");
+    const sidebar = document.querySelector(".sidebar");
 
     if (!sidebar) return;
 
-    if ($("materialsNavButton")) return;
+    if (document.getElementById("materialsNavBtn")) return;
 
-    const button =
-      document.createElement("button");
+    const button = document.createElement("button");
 
-    button.id =
-      "materialsNavButton";
+    button.id = "materialsNavBtn";
+    button.type = "button";
+    button.innerHTML = "📂 Learning Materials";
 
-    button.className =
-      "nav-btn";
+    button.onclick = () => {
+      document.querySelectorAll(".main > section").forEach(s => {
+        s.classList.add("hidden");
+      });
 
-    button.textContent =
-      "📂 Learning Materials";
+      const section = document.getElementById(SECTION_ID);
 
-    button.addEventListener(
-      "click",
-      () => {
-
-        if (typeof window.showSection === "function") {
-          window.showSection("materials");
-        }
-
-        document
-          .querySelectorAll(
-            "main > section"
-          )
-          .forEach(section => {
-
-            if (
-              section.id ===
-              "materialsSection"
-            ) {
-
-              section.classList.remove(
-                "hidden"
-              );
-
-            }
-
-          });
-
-        loadMaterialClasses();
-
+      if (section) {
+        section.classList.remove("hidden");
       }
-    );
+
+      loadClasses();
+      loadMaterials();
+    };
 
     sidebar.appendChild(button);
-
   }
 
-
-  /* =========================================================
-     LOAD CLASSES
-     ========================================================= */
-
-  async function loadMaterialClasses() {
-
-    const db = getDB();
-
-    if (!db) return;
-
-    const select =
-      $("materialClass");
+  async function loadClasses() {
+    const select = document.getElementById("matClass");
 
     if (!select) return;
 
-    const { data, error } =
-      await db
-        .from("classes")
-        .select("id,name,class_number")
-        .eq("is_active", true)
-        .order("class_number");
+    const { data, error } = await db
+      .from("classes")
+      .select("id,name,class_number")
+      .eq("is_active", true)
+      .order("display_order");
 
     if (error) {
-
       console.error(error);
-
-      select.innerHTML =
-        `<option value="">
-          Failed to load classes
-        </option>`;
-
       return;
     }
 
     select.innerHTML =
-      `<option value="">
-        Select Class
-      </option>` +
+      `<option value="">Select Class</option>` +
+      (data || []).map(c => `
+        <option value="${c.id}">
+          ${escapeHtml(c.name)}
+        </option>
+      `).join("");
 
-      (data || [])
-        .map(item => `
-
-          <option value="${esc(item.id)}">
-            ${esc(item.name)}
-          </option>
-
-        `)
-        .join("");
-
+    select.onchange = () => loadSubjects(select.value);
   }
 
+  async function loadSubjects(classId) {
+    const select = document.getElementById("matSubject");
 
-  /* =========================================================
-     LOAD SUBJECTS
-     ========================================================= */
+    if (!select) return;
 
-  async function loadMaterialSubjects() {
+    select.innerHTML =
+      `<option value="">Select Subject</option>`;
 
-    const db = getDB();
+    if (!classId) return;
 
-    const subject =
-      $("materialSubject");
-
-    if (!db || !subject) return;
-
-    selectedSubjectId = "";
-
-    subject.innerHTML =
-      `<option value="">
-        Loading subjects...
-      </option>`;
-
-    if (!selectedClassId) {
-
-      subject.innerHTML =
-        `<option value="">
-          Select Subject
-        </option>`;
-
-      $("materialList").innerHTML =
-        "Select a class and subject.";
-
-      return;
-    }
-
-    const { data, error } =
-      await db
-        .from("subjects")
-        .select("id,name")
-        .eq(
-          "class_id",
-          selectedClassId
-        )
-        .eq(
-          "is_active",
-          true
-        )
-        .order("display_order");
+    const { data, error } = await db
+      .from("subjects")
+      .select("id,name")
+      .eq("class_id", classId)
+      .eq("is_active", true)
+      .order("display_order");
 
     if (error) {
-
       console.error(error);
-
-      subject.innerHTML =
-        `<option value="">
-          Failed to load subjects
-        </option>`;
-
       return;
     }
 
-    subject.innerHTML =
-      `<option value="">
-        Select Subject
-      </option>` +
-
-      (data || [])
-        .map(item => `
-
-          <option value="${esc(item.id)}">
-            ${esc(item.name)}
-          </option>
-
-        `)
-        .join("");
-
-    $("materialList").innerHTML =
-      "Select a subject to see resources.";
-
+    select.innerHTML +=
+      (data || []).map(s => `
+        <option value="${s.id}">
+          ${escapeHtml(s.name)}
+        </option>
+      `).join("");
   }
 
-
-  /* =========================================================
-     ADD MATERIAL
-     ========================================================= */
-
-  async function addMaterial() {
-
-    const db = getDB();
-
-    if (!db) {
-
-      showStatus(
-        "Supabase connection not available.",
-        true
-      );
-
-      return;
-    }
-
+  async function uploadMaterial() {
     const classId =
-      $("materialClass").value;
+      document.getElementById("matClass").value;
 
     const subjectId =
-      $("materialSubject").value;
+      document.getElementById("matSubject").value;
 
     const category =
-      $("materialCategory").value;
+      document.getElementById("matCategory").value;
 
     const title =
-      $("materialTitle")
-        .value
-        .trim();
+      document.getElementById("matTitle").value.trim();
 
     const description =
-      $("materialDescription")
-        .value
-        .trim();
+      document.getElementById("matDescription").value.trim();
 
-    const url =
-      $("materialURL")
-        .value
-        .trim();
+    const file =
+      document.getElementById("matFile").files[0];
 
     const featured =
-      $("materialFeatured")
-        .checked;
+      document.getElementById("matFeatured").checked;
 
-    const active =
-      $("materialActive")
-        .checked;
-
-    if (
-      !classId ||
-      !subjectId ||
-      !title
-    ) {
-
-      showStatus(
-        "Class, Subject and Title are required.",
-        true
-      );
-
-      return;
-    }
-
-    if (!url) {
-
-      showStatus(
-        "Please add the resource URL.",
-        true
-      );
-
-      return;
-    }
+    const status =
+      document.getElementById("matStatus");
 
     const button =
-      $("addMaterialButton");
+      document.getElementById("matUploadBtn");
+
+    if (!classId) {
+      status.innerHTML = "❌ Please select a class.";
+      return;
+    }
+
+    if (!subjectId) {
+      status.innerHTML = "❌ Please select a subject.";
+      return;
+    }
+
+    if (!title) {
+      status.innerHTML = "❌ Please enter a title.";
+      return;
+    }
+
+    if (!file) {
+      status.innerHTML = "❌ Please select a file.";
+      return;
+    }
+
+    if (file.size > 50 * 1024 * 1024) {
+      status.innerHTML =
+        "❌ File must be smaller than 50 MB.";
+      return;
+    }
 
     button.disabled = true;
+    button.innerText = "Uploading...";
 
-    button.textContent =
-      "Publishing...";
+    status.innerHTML =
+      "⏳ Uploading material...";
 
     try {
 
-      const { error } =
+      const safeName =
+        file.name.replace(
+          /[^a-zA-Z0-9._-]/g,
+          "_"
+        );
+
+      const path =
+        `${classId}/${subjectId}/${category}/${Date.now()}-${safeName}`;
+
+      const { error: uploadError } =
+        await db.storage
+          .from("tsf-materials")
+          .upload(
+            path,
+            file,
+            {
+              cacheControl: "3600",
+              upsert: false,
+              contentType:
+                file.type ||
+                "application/octet-stream"
+            }
+          );
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      const { data: publicData } =
+        db.storage
+          .from("tsf-materials")
+          .getPublicUrl(path);
+
+      const fileUrl =
+        publicData.publicUrl;
+
+      const { error: dbError } =
         await db
           .from("materials")
           .insert({
-
             class_id: classId,
-
             subject_id: subjectId,
-
             category: category,
-
             title: title,
-
             description: description,
-
-            external_url: url,
-
-            is_featured: featured,
-
-            is_active: active
-
+            file_url: fileUrl,
+            file_type: file.type || null,
+            file_size: file.size,
+            is_free: true,
+            is_active: true,
+            is_featured: featured
           });
 
-      if (error) {
-
-        console.error(error);
-
-        throw error;
-
+      if (dbError) {
+        throw dbError;
       }
 
-      showStatus(
-        "Resource published successfully."
-      );
+      status.innerHTML =
+        "✅ Material uploaded successfully!";
 
-      $("materialTitle").value = "";
-
-      $("materialDescription").value = "";
-
-      $("materialURL").value = "";
-
-      $("materialFeatured").checked =
-        false;
+      document.getElementById("matTitle").value = "";
+      document.getElementById("matDescription").value = "";
+      document.getElementById("matFile").value = "";
+      document.getElementById("matFeatured").checked = false;
 
       await loadMaterials();
 
@@ -608,384 +340,189 @@
 
       console.error(error);
 
-      showStatus(
-        error.message ||
-        "Failed to publish resource.",
-        true
-      );
+      status.innerHTML =
+        "❌ Upload failed: " +
+        escapeHtml(error.message || "Unknown error");
 
     } finally {
 
       button.disabled = false;
-
-      button.textContent =
-        "+ Publish Resource";
-
+      button.innerText = "⬆️ Upload Material";
     }
-
   }
-
-
-  /* =========================================================
-     LOAD MATERIALS
-     ========================================================= */
 
   async function loadMaterials() {
-
-    const db = getDB();
-
     const list =
-      $("materialList");
+      document.getElementById("materialsList");
 
-    if (!db || !list) return;
+    if (!list) return;
 
-    if (
-      !selectedClassId ||
-      !selectedSubjectId
-    ) {
-
-      list.innerHTML =
-        "Select a class and subject.";
-
-      return;
-    }
-
-    list.innerHTML =
-      "Loading resources...";
-
-    let query =
-      db
-        .from("materials")
-        .select("*")
-        .eq(
-          "class_id",
-          selectedClassId
-        )
-        .eq(
-          "subject_id",
-          selectedSubjectId
-        )
-        .order(
-          "created_at",
-          {
-            ascending:false
-          }
-        );
-
-    const category =
-      $("materialCategory")?.value;
-
-    if (category) {
-
-      query =
-        query.eq(
-          "category",
-          category
-        );
-
-    }
+    list.innerHTML = "Loading...";
 
     const { data, error } =
-      await query;
+      await db
+        .from("materials")
+        .select(`
+          id,
+          title,
+          description,
+          category,
+          file_url,
+          file_type,
+          file_size,
+          is_featured,
+          created_at
+        `)
+        .order("created_at", {
+          ascending: false
+        });
 
     if (error) {
-
-      console.error(error);
-
       list.innerHTML =
-        `<div class="error">
-          ${esc(error.message)}
-        </div>`;
-
+        "❌ " + escapeHtml(error.message);
       return;
     }
 
-    if (!data || !data.length) {
-
+    if (!data || data.length === 0) {
       list.innerHTML =
-        `<div
-          style="
-            padding:30px;
-            text-align:center;
-            color:#687386;
-          "
-        >
-          No resources added yet.
-        </div>`;
-
+        "<p>No materials uploaded yet.</p>";
       return;
     }
 
     list.innerHTML =
-      data
-        .map(renderMaterial)
-        .join("");
+      data.map(item => {
 
-    list
-      .querySelectorAll(
-        "[data-delete-material]"
-      )
-      .forEach(button => {
+        const size =
+          item.file_size
+            ? formatFileSize(item.file_size)
+            : "";
 
-        button.addEventListener(
-          "click",
-          () => {
+        return `
+          <div style="
+            border:1px solid #e5e7eb;
+            padding:15px;
+            border-radius:14px;
+            margin-bottom:12px;
+          ">
 
-            deleteMaterial(
-              button.dataset.deleteMaterial
-            );
+            <strong>
+              ${escapeHtml(item.title)}
+            </strong>
 
-          }
-        );
+            ${item.is_featured ? " ⭐" : ""}
 
-      });
+            <div style="color:#666;margin:5px 0">
+              ${escapeHtml(item.category)}
+              ${size ? " • " + size : ""}
+            </div>
 
-  }
+            <a
+              href="${item.file_url}"
+              target="_blank"
+              rel="noopener"
+            >
+              🔗 Open Resource
+            </a>
 
+            <br>
 
-  /* =========================================================
-     RENDER MATERIAL
-     ========================================================= */
-
-  function renderMaterial(item) {
-
-    const categories = {
-
-      notes: "📚 Notes",
-
-      sheets: "📝 Sheets",
-
-      questions: "❓ Question Bank",
-
-      videos: "🎥 Videos",
-
-      other: "📦 Other Resources"
-
-    };
-
-    const url =
-      item.file_url ||
-      item.external_url ||
-      "";
-
-    return `
-
-      <div class="item">
-
-        <div>
-
-          <div class="item-title">
-
-            ${esc(item.title)}
-
-            ${
-              item.is_featured
-                ? " ⭐"
-                : ""
-            }
+            <button
+              type="button"
+              onclick="window.deleteTSFMaterial('${item.id}')"
+              style="
+                margin-top:8px;
+                padding:7px 12px;
+                border:0;
+                border-radius:8px;
+                cursor:pointer;
+              "
+            >
+              🗑️ Delete
+            </button>
 
           </div>
-
-          <div class="item-meta">
-
-            ${esc(
-              categories[item.category] ||
-              item.category ||
-              "Resource"
-            )}
-
-            •
-
-            ${
-              item.is_active
-                ? "Published"
-                : "Unpublished"
-            }
-
-          </div>
-
-          ${
-            item.description
-              ? `
-                <div
-                  style="
-                    margin-top:7px;
-                    color:#687386;
-                    font-size:14px;
-                  "
-                >
-                  ${esc(
-                    item.description
-                  )}
-                </div>
-              `
-              : ""
-          }
-
-        </div>
-
-        <div class="actions">
-
-          ${
-            url
-              ? `
-                <a
-                  href="${esc(url)}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="secondary"
-                  style="
-                    text-decoration:none;
-                    padding:10px 13px;
-                    border-radius:10px;
-                  "
-                >
-                  Open
-                </a>
-              `
-              : ""
-          }
-
-          <button
-            class="danger"
-            data-delete-material="${esc(item.id)}"
-          >
-            Delete
-          </button>
-
-        </div>
-
-      </div>
-
-    `;
-
+        `;
+      }).join("");
   }
 
+  window.deleteTSFMaterial = async function(id) {
 
-  /* =========================================================
-     DELETE MATERIAL
-     ========================================================= */
-
-  async function deleteMaterial(id) {
-
-    if (
-      !confirm(
-        "Delete this learning resource?"
-      )
-    ) return;
-
-    const db = getDB();
-
-    if (!db) return;
-
-    try {
-
-      const { error } =
-        await db
-          .from("materials")
-          .delete()
-          .eq(
-            "id",
-            id
-          );
-
-      if (error) {
-
-        throw error;
-
-      }
-
-      await loadMaterials();
-
-    } catch (error) {
-
-      console.error(error);
-
-      alert(
-        error.message ||
-        "Failed to delete resource."
-      );
-
+    if (!confirm("Delete this material?")) {
+      return;
     }
 
-  }
+    const { error } =
+      await db
+        .from("materials")
+        .delete()
+        .eq("id", id);
 
+    if (error) {
+      alert("Delete failed: " + error.message);
+      return;
+    }
 
-  /* =========================================================
-     STATUS
-     ========================================================= */
-
-  function showStatus(
-    message,
-    isError = false
-  ) {
-
-    const element =
-      $("materialStatus");
-
-    if (!element) return;
-
-    element.textContent =
-      message;
-
-    element.className =
-      "status " +
-      (
-        isError
-          ? "error"
-          : "success"
-      );
-
-  }
-
-
-  /* =========================================================
-     PUBLIC
-     ========================================================= */
-
-  window.TSFMaterialsAdmin = {
-
-    init() {
-
-      createMaterialsSection();
-
-      addNavigation();
-
-      loadMaterialClasses();
-
-    },
-
-    loadMaterials
-
+    loadMaterials();
   };
 
+  function formatFileSize(bytes) {
 
-  /* =========================================================
-     START
-     ========================================================= */
+    if (!bytes) return "";
 
-  function start() {
+    const units = [
+      "B",
+      "KB",
+      "MB",
+      "GB"
+    ];
 
-    createMaterialsSection();
+    let i = 0;
+    let size = bytes;
 
+    while (
+      size >= 1024 &&
+      i < units.length - 1
+    ) {
+      size /= 1024;
+      i++;
+    }
+
+    return `${size.toFixed(1)} ${units[i]}`;
+  }
+
+  function escapeHtml(value) {
+
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function init() {
+
+    createSection();
     addNavigation();
 
+    const uploadButton =
+      document.getElementById("matUploadBtn");
+
+    if (uploadButton) {
+      uploadButton.onclick =
+        uploadMaterial;
+    }
   }
 
   if (
-    document.readyState ===
-    "loading"
+    document.readyState === "loading"
   ) {
-
     document.addEventListener(
       "DOMContentLoaded",
-      start
+      init
     );
-
   } else {
-
-    start();
-
+    init();
   }
 
 })();
