@@ -1,579 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>TSF • Super Admin</title>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --bg: #07111f;
-      --panel: #0d1b2e;
-      --panel2: #10243b;
-      --border: rgba(255,255,255,.09);
-      --text: #f5f8ff;
-      --muted: #91a4bd;
-      --accent: #6c63ff;
-      --accent2: #00c2ff;
-      --success: #20d68b;
-      --danger: #ff5d73;
-      --warning: #ffc857;
-    }
-
-    body {
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 10% 10%, rgba(108,99,255,.18), transparent 30%),
-        radial-gradient(circle at 90% 20%, rgba(0,194,255,.13), transparent 30%),
-        var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    /* LOGIN */
-
-    #loginScreen {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .login-card {
-      width: min(430px, 100%);
-      padding: 34px;
-      background: rgba(13,27,46,.94);
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      box-shadow: 0 30px 90px rgba(0,0,0,.45);
-      backdrop-filter: blur(18px);
-    }
-
-    .brand {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .logo {
-      width: 82px;
-      height: 82px;
-      margin: 0 auto 17px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 24px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: -1.5px;
-      box-shadow: 0 15px 45px rgba(76,105,255,.3);
-    }
-
-    .brand h1 {
-      font-size: 26px;
-      margin-bottom: 7px;
-    }
-
-    .brand p {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .field {
-      margin-bottom: 16px;
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 8px;
-      color: #c8d4e5;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .field input {
-      width: 100%;
-      padding: 15px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      outline: none;
-      background: #081525;
-      color: white;
-      font-size: 16px;
-    }
-
-    .field input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(108,99,255,.1);
-    }
-
-    .primary-btn {
-      width: 100%;
-      border: 0;
-      border-radius: 14px;
-      padding: 15px;
-      color: white;
-      font-weight: 800;
-      cursor: pointer;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      transition: .2s;
-    }
-
-    .primary-btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .primary-btn:disabled {
-      opacity: .65;
-      cursor: wait;
-      transform: none;
-    }
-
-    #loginMessage {
-      min-height: 22px;
-      text-align: center;
-      margin-top: 15px;
-      color: var(--danger);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    /* APP */
-
-    #app {
-      min-height: 100vh;
-    }
-
-    .topbar {
-      height: 74px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      background: rgba(7,17,31,.88);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(18px);
-    }
-
-    .top-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .mini-logo {
-      width: 43px;
-      height: 43px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 13px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      font-size: 11px;
-      font-weight: 900;
-    }
-
-    .top-brand strong {
-      display: block;
-      font-size: 15px;
-    }
-
-    .top-brand span {
-      display: block;
-      margin-top: 2px;
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .logout-btn {
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      color: #d9e5f5;
-      padding: 9px 14px;
-      border-radius: 11px;
-      cursor: pointer;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: 245px 1fr;
-      min-height: calc(100vh - 74px);
-    }
-
-    .sidebar {
-      border-right: 1px solid var(--border);
-      padding: 20px 14px;
-      background: rgba(8,19,33,.65);
-    }
-
-    .side-label {
-      color: #647892;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin: 12px 12px 9px;
-    }
-
-    .nav-btn {
-      width: 100%;
-      border: 0;
-      background: transparent;
-      color: #9eb0c8;
-      text-align: left;
-      padding: 12px;
-      border-radius: 12px;
-      margin-bottom: 4px;
-      cursor: pointer;
-      font-weight: 650;
-      transition: .2s;
-    }
-
-    .nav-btn:hover,
-    .nav-btn.active {
-      background: rgba(108,99,255,.14);
-      color: white;
-    }
-
-    .content {
-      padding: 28px;
-      max-width: 1500px;
-      width: 100%;
-      margin: auto;
-    }
-
-    .page {
-      display: none;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    .page-header {
-      margin-bottom: 25px;
-    }
-
-    .page-header h2 {
-      font-size: clamp(25px, 3vw, 34px);
-      margin-bottom: 7px;
-    }
-
-    .page-header p {
-      color: var(--muted);
-      max-width: 800px;
-      line-height: 1.6;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-
-    .stat {
-      background: linear-gradient(145deg, rgba(16,36,59,.9), rgba(10,24,41,.9));
-      border: 1px solid var(--border);
-      border-radius: 19px;
-      padding: 20px;
-    }
-
-    .stat .icon {
-      font-size: 21px;
-      margin-bottom: 14px;
-    }
-
-    .stat .value {
-      font-size: 28px;
-      font-weight: 850;
-      margin-bottom: 4px;
-    }
-
-    .stat .label {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .card {
-      background: rgba(13,27,46,.78);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 21px;
-    }
-
-    .card h3 {
-      font-size: 16px;
-      margin-bottom: 9px;
-    }
-
-    .card p {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.65;
-    }
-
-    .badge {
-      display: inline-flex;
-      margin-top: 15px;
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: rgba(108,99,255,.13);
-      color: #b7b2ff;
-      font-size: 10px;
-      font-weight: 800;
-    }
-
-    .badge.success {
-      color: #69edb1;
-      background: rgba(32,214,139,.1);
-    }
-
-    .badge.warning {
-      color: #ffd978;
-      background: rgba(255,200,87,.1);
-    }
-
-    .feature-hero {
-      padding: 28px;
-      border-radius: 23px;
-      border: 1px solid var(--border);
-      background:
-        radial-gradient(circle at 100% 0%, rgba(0,194,255,.12), transparent 35%),
-        radial-gradient(circle at 0% 100%, rgba(108,99,255,.13), transparent 35%),
-        rgba(13,27,46,.8);
-      margin-bottom: 18px;
-    }
-
-    .feature-hero h3 {
-      font-size: 21px;
-      margin-bottom: 8px;
-    }
-
-    .feature-hero p {
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 850px;
-    }
-
-    .notice {
-      padding: 13px 15px;
-      margin-top: 17px;
-      border-radius: 12px;
-      background: rgba(255,200,87,.06);
-      border: 1px solid rgba(255,200,87,.14);
-      color: #d8c993;
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    .roadmap {
-      display: grid;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .road-item {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      padding: 15px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.025);
-      border-radius: 15px;
-    }
-
-    .number {
-      min-width: 35px;
-      height: 35px;
-      border-radius: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(108,99,255,.16);
-      color: #bdb9ff;
-      font-weight: 900;
-      font-size: 12px;
-    }
-
-    .road-item strong {
-      display: block;
-      font-size: 13px;
-      margin-bottom: 3px;
-    }
-
-    .road-item span {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .status-box {
-      margin-top: 18px;
-      padding: 13px 15px;
-      border-radius: 12px;
-      font-size: 12px;
-      line-height: 1.6;
-      background: rgba(32,214,139,.06);
-      border: 1px solid rgba(32,214,139,.14);
-      color: #8decc2;
-    }
-
-    @media (max-width: 1000px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        position: sticky;
-        top: 74px;
-        z-index: 50;
-        overflow-x: auto;
-        border-right: 0;
-        border-bottom: 1px solid var(--border);
-        display: flex;
-        gap: 5px;
-        padding: 10px;
-      }
-
-      .side-label {
-        display: none;
-      }
-
-      .nav-btn {
-        white-space: nowrap;
-        width: auto;
-        margin: 0;
-      }
-
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 650px) {
-      .content {
-        padding: 18px 13px;
-      }
-
-      .topbar {
-        padding: 0 13px;
-      }
-
-      .top-brand span {
-        display: none;
-      }
-
-      .stats,
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .login-card {
-        padding: 25px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TSF Super Admin</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.login-page{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:linear-gradient(135deg,#081b33,#123c68,#176b87);
+}
+
+.login-card{
+  width:100%;
+  max-width:420px;
+  background:white;
+  padding:35px;
+  border-radius:24px;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+  text-align:center;
+}
+
+.logo{
+  width:80px;
+  height:80px;
+  margin:auto;
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:22px;
+  letter-spacing:3px;
+  color:white;
+  background:linear-gradient(135deg,#00a8ff,#6c5ce7);
+}
+
+h1{
+  margin-top:18px;
+  font-size:25px;
+}
+
+.subtitle{
+  color:#687386;
+  margin:8px 0 25px;
+}
+
+input,textarea,select{
+  width:100%;
+  padding:13px 14px;
+  margin-top:8px;
+  margin-bottom:14px;
+  border:1px solid #d8deea;
+  border-radius:12px;
+  font-size:15px;
+  outline:none;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+button{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.primary{
+  width:100%;
+  background:#176bff;
+  color:white;
+}
+
+.danger{
+  background:#ff4757;
+  color:white;
+}
+
+.secondary{
+  background:#eaf0f8;
+  color:#24344d;
+}
+
+.message{
+  margin-top:15px;
+  color:#e63946;
+  font-size:14px;
+}
+
+.admin{
+  min-height:100vh;
+}
+
+.topbar{
+  background:#081b33;
+  color:white;
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.brand{
+  font-weight:900;
+  font-size:20px;
+}
+
+.logout{
+  background:#ff4757;
+  color:white;
+}
+
+.layout{
+  display:flex;
+  min-height:calc(100vh - 65px);
+}
+
+.sidebar{
+  width:230px;
+  background:white;
+  border-right:1px solid #e4e9f1;
+  padding:20px;
+}
+
+.nav-btn{
+  width:100%;
+  text-align:left;
+  background:transparent;
+  margin-bottom:8px;
+}
+
+.nav-btn:hover{
+  background:#eef5ff;
+}
+
+.main{
+  flex:1;
+  padding:24px;
+  max-width:1400px;
+}
+
+.page-title{
+  font-size:28px;
+  margin-bottom:6px;
+}
+
+.page-subtitle{
+  color:#687386;
+  margin-bottom:25px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.stat{
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  border:1px solid #e7ebf2;
+}
+
+.stat-number{
+  font-size:30px;
+  font-weight:900;
+  margin-top:7px;
+}
+
+.manager{
+  background:white;
+  border-radius:20px;
+  padding:20px;
+  border:1px solid #e5eaf2;
+  margin-bottom:20px;
+}
+
+.manager-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.form-grid .full{
+  grid-column:1/-1;
+}
+
+.list{
+  margin-top:20px;
+}
+
+.item{
+  border:1px solid #e4e9f1;
+  border-radius:14px;
+  padding:15px;
+  margin-bottom:10px;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:center;
+}
+
+.item-title{
+  font-weight:800;
+}
+
+.item-meta{
+  font-size:13px;
+  color:#758096;
+  margin-top:4px;
+}
+
+.actions{
+  display:flex;
+  gap:7px;
+}
+
+.status{
+  margin-top:10px;
+  font-size:14px;
+}
+
+.success{
+  color:#16803c;
+}
+
+.error{
+  color:#d62828;
+}
+
+@media(max-width:850px){
+
+  .layout{
+    display:block;
+  }
+
+  .sidebar{
+    width:100%;
+    border-right:0;
+    border-bottom:1px solid #e4e9f1;
+    display:flex;
+    overflow-x:auto;
+    gap:8px;
+  }
+
+  .nav-btn{
+    width:auto;
+    white-space:nowrap;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-grid .full{
+    grid-column:auto;
+  }
+}
+
+@media(max-width:500px){
+
+  .main{
+    padding:15px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .item{
+    display:block;
+  }
+
+  .actions{
+    margin-top:12px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-<section id="loginScreen">
+<!-- LOGIN -->
+
+<section id="loginPage" class="login-page">
 
   <div class="login-card">
 
-    <div class="brand">
-      <div class="logo">M-A-S</div>
+    <div class="logo">M-A-S</div>
 
-      <h1>TSF Super Admin</h1>
+    <h1>TSF Super Admin</h1>
 
-      <p>
-        Teachers Students Friendship • Control Center
-      </p>
-    </div>
+    <p class="subtitle">
+      Teachers Students Friendship
+    </p>
 
-    <div class="field">
-
-      <label for="adminPin">
-        Admin PIN
-      </label>
-
-      <input
-        id="adminPin"
-        type="password"
-        inputmode="numeric"
-        autocomplete="off"
-        placeholder="Enter your admin PIN"
-      >
-
-    </div>
-
-    <button
-      class="primary-btn"
-      id="loginBtn"
-      type="button"
+    <input
+      id="pinInput"
+      type="password"
+      inputmode="numeric"
+      placeholder="Enter Admin PIN"
     >
-      Enter Control Center
+
+    <button class="primary" onclick="login()">
+      Access Dashboard
     </button>
 
-    <div id="loginMessage"></div>
+    <div id="loginMessage" class="message"></div>
 
   </div>
 
 </section>
 
 
-<section id="app" class="hidden">
+<!-- ADMIN -->
+
+<section id="adminPage" class="admin hidden">
 
   <header class="topbar">
 
-    <div class="top-brand">
-
-      <div class="mini-logo">M-A-S</div>
-
-      <div>
-        <strong>TSF Control Center</strong>
-        <span>Learn • Connect • Grow Together</span>
-      </div>
-
+    <div class="brand">
+      TSF • Super Admin
     </div>
 
-    <button
-      class="logout-btn"
-      id="logoutBtn"
-      type="button"
-    >
+    <button class="logout" onclick="logout()">
       Logout
     </button>
 
@@ -584,233 +375,61 @@
 
     <aside class="sidebar">
 
-      <div class="side-label">Management</div>
-
-      <button class="nav-btn active" data-page="overview">
-        📊 Overview
+      <button class="nav-btn" onclick="showSection('dashboard')">
+        📊 Dashboard
       </button>
 
-      <button class="nav-btn" data-page="content">
-        📚 Content
+      <button class="nav-btn" onclick="showSection('classes')">
+        🎓 Classes
       </button>
 
-      <button class="nav-btn" data-page="classes">
-        🎓 Classes & Subjects
+      <button class="nav-btn" onclick="showSection('subjects')">
+        📚 Subjects
       </button>
 
-      <button class="nav-btn" data-page="exams">
-        📝 Exams & Results
+      <button class="nav-btn" onclick="showSection('chapters')">
+        📖 Chapters
       </button>
 
-      <div class="side-label">Learning</div>
-
-      <button class="nav-btn" data-page="ai">
-        🤖 AI Learning
-      </button>
-
-      <button class="nav-btn" data-page="community">
-        👥 Community
-      </button>
-
-      <button class="nav-btn" data-page="media">
-        📁 Media & Materials
-      </button>
-
-      <div class="side-label">System</div>
-
-      <button class="nav-btn" data-page="settings">
-        ⚙️ Platform Settings
+      <button class="nav-btn" onclick="showSection('lessons')">
+        📝 Lessons
       </button>
 
     </aside>
 
 
-    <main class="content">
+    <main class="main">
 
-      <section class="page active" id="page-overview">
+      <!-- DASHBOARD -->
 
-        <div class="page-header">
+      <section id="dashboardSection">
 
-          <h2>Good to see you, Admin.</h2>
+        <h1 class="page-title">Dashboard</h1>
 
-          <p>
-            Welcome to the central management layer
-            of the TSF education platform.
-          </p>
-
-        </div>
-
+        <p class="page-subtitle">
+          Manage your TSF education platform.
+        </p>
 
         <div class="stats">
 
           <div class="stat">
-
-            <div class="icon">📚</div>
-
-            <div class="value" id="contentCount">
-              —
-            </div>
-
-            <div class="label">
-              Learning Content
-            </div>
-
+            <div>Classes</div>
+            <div id="classCount" class="stat-number">0</div>
           </div>
-
 
           <div class="stat">
-
-            <div class="icon">🧩</div>
-
-            <div class="value" id="appCount">
-              —
-            </div>
-
-            <div class="label">
-              Platform Apps / Modules
-            </div>
-
+            <div>Subjects</div>
+            <div id="subjectCount" class="stat-number">0</div>
           </div>
-
 
           <div class="stat">
-
-            <div class="icon">📝</div>
-
-            <div class="value">
-              Ready
-            </div>
-
-            <div class="label">
-              Exam Architecture
-            </div>
-
+            <div>Chapters</div>
+            <div id="chapterCount" class="stat-number">0</div>
           </div>
-
 
           <div class="stat">
-
-            <div class="icon">🤖</div>
-
-            <div class="value">
-              Ready
-            </div>
-
-            <div class="label">
-              AI Architecture
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="grid">
-
-          <div class="card">
-
-            <h3>🎓 Student Learning</h3>
-
-            <p>
-              Classes, subjects, chapters, lessons,
-              notes, practice and progress tracking.
-            </p>
-
-            <span class="badge success">
-              Architecture Ready
-            </span>
-
-          </div>
-
-
-          <div class="card">
-
-            <h3>👨‍🏫 Teacher Hub</h3>
-
-            <p>
-              Teacher resources, learning support,
-              communication and educational tools.
-            </p>
-
-            <span class="badge">
-              Planned
-            </span>
-
-          </div>
-
-
-          <div class="card">
-
-            <h3>🤖 AI Tutor</h3>
-
-            <p>
-              AI explanations, practice generation,
-              mistake analysis and personalized learning.
-            </p>
-
-            <span class="badge">
-              Planned
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <div class="card" style="margin-top:18px">
-
-          <h3>🚀 TSF Development Roadmap</h3>
-
-          <div class="roadmap">
-
-            <div class="road-item">
-              <div class="number">01</div>
-              <div>
-                <strong>Super Admin Foundation</strong>
-                <span>Central control and management layer.</span>
-              </div>
-            </div>
-
-            <div class="road-item">
-              <div class="number">02</div>
-              <div>
-                <strong>Classes → Subjects → Chapters → Lessons</strong>
-                <span>Complete academic content structure.</span>
-              </div>
-            </div>
-
-            <div class="road-item">
-              <div class="number">03</div>
-              <div>
-                <strong>Student & Teacher Hubs</strong>
-                <span>Learning, interaction and resource sharing.</span>
-              </div>
-            </div>
-
-            <div class="road-item">
-              <div class="number">04</div>
-              <div>
-                <strong>Online Exam + Automatic Results</strong>
-                <span>MCQ, True/False, numerical and written exams.</span>
-              </div>
-            </div>
-
-            <div class="road-item">
-              <div class="number">05</div>
-              <div>
-                <strong>AI Learning Hub + Solve My Question</strong>
-                <span>Photo-based question solving and AI tutoring.</span>
-              </div>
-            </div>
-
-            <div class="road-item">
-              <div class="number">06</div>
-              <div>
-                <strong>Premium Platform Architecture</strong>
-                <span>Future premium content and platform services.</span>
-              </div>
-            </div>
-
+            <div>Lessons</div>
+            <div id="lessonCount" class="stat-number">0</div>
           </div>
 
         </div>
@@ -818,342 +437,168 @@
       </section>
 
 
-      <section class="page" id="page-content">
+      <!-- CLASSES -->
 
-        <div class="page-header">
+      <section id="classesSection" class="hidden">
 
-          <h2>📚 Content Management</h2>
+        <h1 class="page-title">Classes</h1>
 
-          <p>
-            Manage lessons, notes, books,
-            question banks and educational resources.
-          </p>
+        <p class="page-subtitle">
+          Create and manage academic classes.
+        </p>
 
-        </div>
+        <div class="manager">
 
-        <div class="feature-hero">
+          <h2>Add Class</h2>
 
-          <h3>One place for every learning resource.</h3>
+          <div class="form-grid">
 
-          <p>
-            The content system will allow you to
-            create, edit, organize and publish
-            educational materials without editing code.
-          </p>
+            <div>
+              <label>Class Name</label>
+              <input id="className" placeholder="Class 6">
+            </div>
 
-          <div class="notice">
-            Phase 2 will connect this area to
-            Classes → Subjects → Chapters → Lessons.
+            <div>
+              <label>Class Number</label>
+              <input id="classNumber" type="number" placeholder="6">
+            </div>
+
+            <div class="full">
+              <label>Description</label>
+              <textarea id="classDescription"
+                placeholder="Class description"></textarea>
+            </div>
+
           </div>
 
-        </div>
+          <button class="primary" onclick="addClass()">
+            + Add Class
+          </button>
 
-        <div class="grid">
+          <div id="classStatus" class="status"></div>
 
-          <div class="card">
-            <h3>📖 Lessons</h3>
-            <p>Create and manage individual lessons.</p>
-            <span class="badge warning">Phase 2</span>
-          </div>
-
-          <div class="card">
-            <h3>📄 Notes & PDFs</h3>
-            <p>Upload and organize study materials.</p>
-            <span class="badge warning">Phase 2</span>
-          </div>
-
-          <div class="card">
-            <h3>📢 Announcements</h3>
-            <p>Publish important platform updates.</p>
-            <span class="badge warning">Expansion</span>
-          </div>
+          <div id="classList" class="list"></div>
 
         </div>
 
       </section>
 
 
-      <section class="page" id="page-classes">
+      <!-- SUBJECTS -->
 
-        <div class="page-header">
+      <section id="subjectsSection" class="hidden">
 
-          <h2>🎓 Classes & Subjects</h2>
+        <h1 class="page-title">Subjects</h1>
 
-          <p>
-            The academic structure of TSF.
-          </p>
+        <p class="page-subtitle">
+          Add subjects under a class.
+        </p>
 
-        </div>
+        <div class="manager">
 
-        <div class="feature-hero">
+          <h2>Add Subject</h2>
 
-          <h3>Academic Structure</h3>
+          <select id="subjectClass"></select>
 
-          <p>
-            Classes contain subjects.
-            Subjects contain chapters.
-            Chapters contain lessons and resources.
-          </p>
+          <input id="subjectName"
+            placeholder="Subject name">
 
-          <div class="notice">
-            Example:
-            Class 8 → Mathematics → Algebra → Linear Equations.
-          </div>
+          <input id="subjectCode"
+            placeholder="Subject code">
 
-        </div>
+          <textarea id="subjectDescription"
+            placeholder="Description"></textarea>
 
-        <div class="grid">
+          <button class="primary" onclick="addSubject()">
+            + Add Subject
+          </button>
 
-          <div class="card">
-            <h3>🏫 Classes</h3>
-            <p>Add and manage supported classes.</p>
-            <span class="badge warning">Phase 2</span>
-          </div>
+          <div id="subjectStatus" class="status"></div>
 
-          <div class="card">
-            <h3>📘 Subjects</h3>
-            <p>Organize subjects under each class.</p>
-            <span class="badge warning">Phase 2</span>
-          </div>
-
-          <div class="card">
-            <h3>🧠 Chapters & Lessons</h3>
-            <p>Build the complete learning hierarchy.</p>
-            <span class="badge warning">Phase 2</span>
-          </div>
+          <div id="subjectList" class="list"></div>
 
         </div>
 
       </section>
 
 
-      <section class="page" id="page-exams">
+      <!-- CHAPTERS -->
 
-        <div class="page-header">
+      <section id="chaptersSection" class="hidden">
 
-          <h2>📝 Exams & Results</h2>
+        <h1 class="page-title">Chapters</h1>
 
-          <p>
-            Complete online examination system.
-          </p>
+        <p class="page-subtitle">
+          Organize subjects into chapters.
+        </p>
 
-        </div>
+        <div class="manager">
 
-        <div class="grid">
+          <h2>Add Chapter</h2>
 
-          <div class="card">
-            <h3>☑️ MCQ</h3>
-            <p>Automatic checking and scoring.</p>
-            <span class="badge warning">Phase 4</span>
-          </div>
+          <select id="chapterSubject"></select>
 
-          <div class="card">
-            <h3>🔢 Numerical</h3>
-            <p>Math and science numerical answers.</p>
-            <span class="badge warning">Phase 4</span>
-          </div>
+          <input id="chapterName"
+            placeholder="Chapter name">
 
-          <div class="card">
-            <h3>✍️ Written</h3>
-            <p>Written answers with rubric-based evaluation.</p>
-            <span class="badge warning">Phase 4</span>
-          </div>
+          <input id="chapterNumber"
+            type="number"
+            placeholder="Chapter number">
 
-          <div class="card">
-            <h3>📊 Result Analysis</h3>
-            <p>Marks, mistakes, weak topics and recommendations.</p>
-            <span class="badge warning">Phase 4</span>
-          </div>
+          <textarea id="chapterDescription"
+            placeholder="Description"></textarea>
 
-          <div class="card">
-            <h3>🏆 Achievements</h3>
-            <p>Progress and learning milestones.</p>
-            <span class="badge warning">Phase 4</span>
-          </div>
+          <button class="primary" onclick="addChapter()">
+            + Add Chapter
+          </button>
 
-          <div class="card">
-            <h3>👨‍🏫 Teacher Review</h3>
-            <p>Optional teacher review for subjective answers.</p>
-            <span class="badge warning">Phase 4</span>
-          </div>
+          <div id="chapterStatus" class="status"></div>
+
+          <div id="chapterList" class="list"></div>
 
         </div>
 
       </section>
 
 
-      <section class="page" id="page-ai">
+      <!-- LESSONS -->
 
-        <div class="page-header">
+      <section id="lessonsSection" class="hidden">
 
-          <h2>🤖 AI Learning Hub</h2>
+        <h1 class="page-title">Lessons</h1>
 
-          <p>
-            AI will work as a learning assistant inside TSF.
-          </p>
+        <p class="page-subtitle">
+          Create lessons and learning content.
+        </p>
 
-        </div>
+        <div class="manager">
 
-        <div class="grid">
+          <h2>Add Lesson</h2>
 
-          <div class="card">
-            <h3>💬 AI Tutor</h3>
-            <p>Explain difficult topics step-by-step.</p>
-            <span class="badge warning">Phase 5</span>
-          </div>
+          <select id="lessonChapter"></select>
 
-          <div class="card">
-            <h3>📷 Solve My Question</h3>
-            <p>Upload a question photo and receive a structured solution.</p>
-            <span class="badge warning">Phase 5</span>
-          </div>
+          <input id="lessonTitle"
+            placeholder="Lesson title">
 
-          <div class="card">
-            <h3>🧪 Practice Generator</h3>
-            <p>Generate similar practice questions.</p>
-            <span class="badge warning">Phase 5</span>
-          </div>
+          <textarea id="lessonDescription"
+            placeholder="Short description"></textarea>
 
-          <div class="card">
-            <h3>🔍 Mistake Analysis</h3>
-            <p>Identify mistakes and recommend practice.</p>
-            <span class="badge warning">Phase 5</span>
-          </div>
+          <textarea id="lessonContent"
+            placeholder="Lesson content"></textarea>
 
-          <div class="card">
-            <h3>🌐 Multilingual Learning</h3>
-            <p>Bangla, English and Arabic workflows.</p>
-            <span class="badge warning">Phase 5</span>
-          </div>
+          <input id="lessonVideo"
+            placeholder="Video URL (optional)">
 
-          <div class="card">
-            <h3>📑 Document Learning</h3>
-            <p>Turn study materials into interactive learning.</p>
-            <span class="badge warning">Phase 5</span>
-          </div>
+          <input id="lessonAudio"
+            placeholder="Audio URL (optional)">
 
-        </div>
+          <button class="primary" onclick="addLesson()">
+            + Add Lesson
+          </button>
 
-      </section>
+          <div id="lessonStatus" class="status"></div>
 
-
-      <section class="page" id="page-community">
-
-        <div class="page-header">
-
-          <h2>👥 Community</h2>
-
-          <p>
-            A safe learning environment for students and teachers.
-          </p>
-
-        </div>
-
-        <div class="grid">
-
-          <div class="card">
-            <h3>👨‍🏫 Teacher Hub</h3>
-            <p>Teacher profiles and educational support.</p>
-            <span class="badge warning">Planned</span>
-          </div>
-
-          <div class="card">
-            <h3>👨‍🎓 Students Hub</h3>
-            <p>Student learning spaces and progress.</p>
-            <span class="badge warning">Planned</span>
-          </div>
-
-          <div class="card">
-            <h3>❓ Ask a Teacher</h3>
-            <p>Students can ask educational questions.</p>
-            <span class="badge warning">Planned</span>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <section class="page" id="page-media">
-
-        <div class="page-header">
-
-          <h2>📁 Media & Materials</h2>
-
-          <p>
-            Centralized management for educational files.
-          </p>
-
-        </div>
-
-        <div class="grid">
-
-          <div class="card">
-            <h3>📄 Documents</h3>
-            <p>PDFs and study documents.</p>
-            <span class="badge warning">Planned</span>
-          </div>
-
-          <div class="card">
-            <h3>🎥 Videos</h3>
-            <p>Educational video resources.</p>
-            <span class="badge warning">Planned</span>
-          </div>
-
-          <div class="card">
-            <h3>🎧 Audio</h3>
-            <p>Audio learning materials.</p>
-            <span class="badge warning">Planned</span>
-          </div>
-
-          <div class="card">
-            <h3>🖼️ Images</h3>
-            <p>Diagrams and question images.</p>
-            <span class="badge warning">Planned</span>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <section class="page" id="page-settings">
-
-        <div class="page-header">
-
-          <h2>⚙️ Platform Settings</h2>
-
-          <p>
-            Global TSF platform configuration.
-          </p>
-
-        </div>
-
-        <div class="grid">
-
-          <div class="card">
-            <h3>🌐 Platform Identity</h3>
-            <p>TSF name, logo and platform information.</p>
-            <span class="badge warning">Expansion</span>
-          </div>
-
-          <div class="card">
-            <h3>🔐 Security</h3>
-            <p>Admin permissions and access control.</p>
-            <span class="badge warning">Expansion</span>
-          </div>
-
-          <div class="card">
-            <h3>💳 Premium Features</h3>
-            <p>Future premium-content architecture.</p>
-            <span class="badge warning">Phase 6</span>
-          </div>
-
-          <div class="card">
-            <h3>📈 Analytics</h3>
-            <p>Platform and learning statistics.</p>
-            <span class="badge warning">Expansion</span>
-          </div>
+          <div id="lessonList" class="list"></div>
 
         </div>
 
@@ -1168,441 +613,855 @@
 
 <script>
 
-  /* =========================================
-     SUPABASE CONFIG
-  ========================================= */
+const SUPABASE_URL =
+"https://bdsyjobzvwulaifpehvq.supabase.co";
 
-  const SUPABASE_URL =
-    "https://bdsyjobzvwulaifpehvq.supabase.co";
+const SUPABASE_KEY =
+"sb_publishable_uVJ41MtBIJbKAQvABmBCdQ_uWtrBzWP";
 
-  /*
-    IMPORTANT:
-    Put your Supabase PUBLISHABLE KEY here.
-    Do NOT put the Secret / Service Role key.
-  */
-
-  const SUPABASE_KEY =
-    "sb_publishable_uVJ41MtBIJbKAQvABmBCdQ_uWtrBzWP";
+let db = null;
 
 
-  /* =========================================
-     SUPABASE INITIALIZATION
-  ========================================= */
+function init(){
 
-  let supabaseClient = null;
+  if(
+    !SUPABASE_KEY ||
+    SUPABASE_KEY.includes("PASTE_YOUR")
+  ){
 
-  function initializeSupabase() {
+    document.getElementById("loginMessage").textContent =
+      "Supabase Publishable Key is missing.";
 
-    try {
-
-      if (!window.supabase) {
-        throw new Error(
-          "Supabase library did not load."
-        );
-      }
-
-      if (
-        !SUPABASE_KEY ||
-        SUPABASE_KEY.includes("PASTE_YOUR")
-      ) {
-        throw new Error(
-          "Supabase Publishable Key is missing."
-        );
-      }
-
-      supabaseClient =
-        window.supabase.createClient(
-          SUPABASE_URL,
-          SUPABASE_KEY
-        );
-
-      return true;
-
-    } catch (error) {
-
-      console.error(
-        "Supabase initialization error:",
-        error
-      );
-
-      return false;
-    }
+    return false;
   }
 
+  db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
-  /* =========================================
-     ELEMENTS
-  ========================================= */
+  return true;
+}
 
-  const loginScreen =
-    document.getElementById("loginScreen");
 
-  const app =
-    document.getElementById("app");
+async function login(){
 
-  const adminPin =
-    document.getElementById("adminPin");
+  const pin =
+    document.getElementById("pinInput").value.trim();
 
-  const loginBtn =
-    document.getElementById("loginBtn");
-
-  const logoutBtn =
-    document.getElementById("logoutBtn");
-
-  const loginMessage =
+  const message =
     document.getElementById("loginMessage");
 
+  message.textContent = "";
 
-  /* =========================================
-     MESSAGE
-  ========================================= */
+  if(!pin){
 
-  function showMessage(message) {
-
-    loginMessage.textContent =
-      message;
-
+    message.textContent = "Please enter your PIN.";
+    return;
   }
 
+  if(!db){
 
-  /* =========================================
-     VERIFY ADMIN PIN
-  ========================================= */
+    message.textContent =
+      "Supabase is not configured.";
+    return;
+  }
 
-  async function verifyAdmin(pin) {
+  try{
 
-    if (!supabaseClient) {
-      throw new Error(
-        "Supabase is not initialized."
-      );
-    }
-
-    const { data, error } =
-      await supabaseClient.rpc(
+    const {data,error} =
+      await db.rpc(
         "verify_tsf_admin_pin",
-        {
-          input_pin: pin
-        }
+        {input_pin:pin}
       );
 
-    if (error) {
-      throw error;
-    }
+    if(error){
 
-    return data === true;
-  }
+      console.error(error);
 
-
-  /* =========================================
-     LOGIN
-  ========================================= */
-
-  async function login() {
-
-    const pin =
-      adminPin.value.trim();
-
-    showMessage("");
-
-    if (!pin) {
-
-      showMessage(
-        "Please enter your admin PIN."
-      );
-
+      message.textContent =
+        "PIN verification failed.";
       return;
     }
 
-    if (!supabaseClient) {
-
-      showMessage(
-        "Supabase is not configured. Please add your Publishable Key."
-      );
-
-      return;
-    }
-
-    loginBtn.disabled = true;
-
-    loginBtn.textContent =
-      "Checking...";
-
-    try {
-
-      const valid =
-        await verifyAdmin(pin);
-
-      if (!valid) {
-
-        showMessage(
-          "Incorrect admin PIN."
-        );
-
-        adminPin.focus();
-
-        return;
-      }
+    if(data === true){
 
       sessionStorage.setItem(
         "tsf_super_admin",
         "true"
       );
 
-      showApp();
+      openDashboard();
 
-    } catch (error) {
+    }else{
 
-      console.error(
-        "Admin login error:",
-        error
-      );
-
-      showMessage(
-        "PIN verification failed. Check Supabase configuration and RPC."
-      );
-
-    } finally {
-
-      loginBtn.disabled = false;
-
-      loginBtn.textContent =
-        "Enter Control Center";
-
+      message.textContent =
+        "Incorrect Admin PIN.";
     }
+
+  }catch(err){
+
+    console.error(err);
+
+    message.textContent =
+      "Unable to connect to Supabase.";
   }
+}
 
 
-  /* =========================================
-     SHOW APP
-  ========================================= */
-
-  function showApp() {
-
-    loginScreen.classList.add(
-      "hidden"
-    );
-
-    app.classList.remove(
-      "hidden"
-    );
-
-    loadStats();
-
-  }
-
-
-  /* =========================================
-     LOGOUT
-  ========================================= */
-
-  function logout() {
-
-    sessionStorage.removeItem(
-      "tsf_super_admin"
-    );
-
-    app.classList.add(
-      "hidden"
-    );
-
-    loginScreen.classList.remove(
-      "hidden"
-    );
-
-    adminPin.value = "";
-
-    showMessage("");
-
-  }
-
-
-  /* =========================================
-     NAVIGATION
-  ========================================= */
+function openDashboard(){
 
   document
-    .querySelectorAll(".nav-btn")
-    .forEach(function(button) {
+    .getElementById("loginPage")
+    .classList.add("hidden");
 
-      button.addEventListener(
-        "click",
-        function() {
+  document
+    .getElementById("adminPage")
+    .classList.remove("hidden");
 
-          const target =
-            button.dataset.page;
+  showSection("dashboard");
 
-          document
-            .querySelectorAll(".nav-btn")
-            .forEach(function(btn) {
+  loadAll();
 
-              btn.classList.remove(
-                "active"
-              );
+}
 
-            });
 
-          document
-            .querySelectorAll(".page")
-            .forEach(function(page) {
+function logout(){
 
-              page.classList.remove(
-                "active"
-              );
+  sessionStorage.removeItem(
+    "tsf_super_admin"
+  );
 
-            });
+  location.reload();
 
-          button.classList.add(
-            "active"
-          );
+}
 
-          const targetPage =
-            document.getElementById(
-              "page-" + target
-            );
 
-          if (targetPage) {
+function showSection(section){
 
-            targetPage.classList.add(
-              "active"
-            );
+  const sections = [
+    "dashboard",
+    "classes",
+    "subjects",
+    "chapters",
+    "lessons"
+  ];
 
-          }
+  sections.forEach(name=>{
 
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-          });
-
-        }
+    const el =
+      document.getElementById(
+        name + "Section"
       );
 
-    });
+    if(el){
 
-
-  /* =========================================
-     LOAD DASHBOARD STATS
-  ========================================= */
-
-  async function loadStats() {
-
-    if (!supabaseClient) {
-      return;
-    }
-
-    try {
-
-      const { count, error } =
-        await supabaseClient
-          .from("content_items")
-          .select("*", {
-            count: "exact",
-            head: true
-          });
-
-      if (
-        !error &&
-        typeof count === "number"
-      ) {
-
-        document.getElementById(
-          "contentCount"
-        ).textContent = count;
-
-      }
-
-    } catch (error) {
-
-      console.warn(
-        "Content count unavailable:",
-        error
+      el.classList.toggle(
+        "hidden",
+        name !== section
       );
 
     }
 
+  });
 
-    try {
+}
 
-      const { count, error } =
-        await supabaseClient
-          .from("app_items")
-          .select("*", {
-            count: "exact",
-            head: true
-          });
 
-      if (
-        !error &&
-        typeof count === "number"
-      ) {
+async function adminRPC(
+  action,
+  table,
+  id,
+  payload
+){
 
-        document.getElementById(
-          "appCount"
-        ).textContent = count;
-
+  const {data,error} =
+    await db.rpc(
+      "tsf_admin_manage",
+      {
+        action:action,
+        target_table:table,
+        record_id:id || null,
+        payload:payload || {}
       }
+    );
 
-    } catch (error) {
+  if(error){
 
-      console.warn(
-        "App count unavailable:",
-        error
-      );
+    console.error(error);
+
+    throw error;
+  }
+
+  return data;
+}
+
+
+/* =========================
+   CLASSES
+========================= */
+
+async function addClass(){
+
+  const name =
+    document.getElementById("className").value.trim();
+
+  if(!name){
+
+    setStatus(
+      "classStatus",
+      "Class name is required.",
+      true
+    );
+
+    return;
+  }
+
+  try{
+
+    await adminRPC(
+      "create",
+      "classes",
+      null,
+      {
+        name:name,
+        class_number:
+          document.getElementById("classNumber").value,
+        description:
+          document.getElementById("classDescription").value
+      }
+    );
+
+    clearInputs([
+      "className",
+      "classNumber",
+      "classDescription"
+    ]);
+
+    setStatus(
+      "classStatus",
+      "Class added successfully."
+    );
+
+    loadClasses();
+
+  }catch(e){
+
+    setStatus(
+      "classStatus",
+      e.message || "Failed to add class.",
+      true
+    );
+
+  }
+
+}
+
+
+async function deleteClass(id){
+
+  if(!confirm(
+    "Delete this class? Its subjects, chapters and lessons may also be affected."
+  )) return;
+
+  try{
+
+    await adminRPC(
+      "delete",
+      "classes",
+      id,
+      {}
+    );
+
+    loadAll();
+
+  }catch(e){
+
+    alert(e.message);
+  }
+
+}
+
+
+async function loadClasses(){
+
+  const {data,error} =
+    await db
+      .from("classes")
+      .select("*")
+      .order("display_order");
+
+  if(error){
+
+    console.error(error);
+    return;
+  }
+
+  document.getElementById("classCount")
+    .textContent = data.length;
+
+  const list =
+    document.getElementById("classList");
+
+  list.innerHTML = data.map(item=>`
+
+    <div class="item">
+
+      <div>
+
+        <div class="item-title">
+          ${escapeHTML(item.name)}
+        </div>
+
+        <div class="item-meta">
+          Class ${item.class_number || ""}
+        </div>
+
+      </div>
+
+      <div class="actions">
+
+        <button
+          class="danger"
+          onclick="deleteClass('${item.id}')">
+          Delete
+        </button>
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+  const select =
+    document.getElementById("subjectClass");
+
+  select.innerHTML =
+    `<option value="">Select Class</option>` +
+    data.map(item=>`
+      <option value="${item.id}">
+        ${escapeHTML(item.name)}
+      </option>
+    `).join("");
+
+}
+
+
+/* =========================
+   SUBJECTS
+========================= */
+
+async function addSubject(){
+
+  const classId =
+    document.getElementById("subjectClass").value;
+
+  const name =
+    document.getElementById("subjectName").value.trim();
+
+  if(!classId || !name){
+
+    setStatus(
+      "subjectStatus",
+      "Select a class and enter subject name.",
+      true
+    );
+
+    return;
+  }
+
+  try{
+
+    await adminRPC(
+      "create",
+      "subjects",
+      null,
+      {
+        class_id:classId,
+        name:name,
+        code:
+          document.getElementById("subjectCode").value,
+        description:
+          document.getElementById("subjectDescription").value
+      }
+    );
+
+    clearInputs([
+      "subjectName",
+      "subjectCode",
+      "subjectDescription"
+    ]);
+
+    setStatus(
+      "subjectStatus",
+      "Subject added successfully."
+    );
+
+    loadSubjects();
+
+  }catch(e){
+
+    setStatus(
+      "subjectStatus",
+      e.message,
+      true
+    );
+
+  }
+
+}
+
+
+async function deleteSubject(id){
+
+  if(!confirm("Delete this subject?")) return;
+
+  try{
+
+    await adminRPC(
+      "delete",
+      "subjects",
+      id,
+      {}
+    );
+
+    loadAll();
+
+  }catch(e){
+
+    alert(e.message);
+  }
+
+}
+
+
+async function loadSubjects(){
+
+  const {data,error} =
+    await db
+      .from("subjects")
+      .select("*,classes(name)")
+      .order("display_order");
+
+  if(error){
+
+    console.error(error);
+    return;
+  }
+
+  document.getElementById("subjectCount")
+    .textContent = data.length;
+
+  document.getElementById("subjectList")
+    .innerHTML = data.map(item=>`
+
+      <div class="item">
+
+        <div>
+
+          <div class="item-title">
+            ${escapeHTML(item.name)}
+          </div>
+
+          <div class="item-meta">
+            ${escapeHTML(item.classes?.name || "")}
+          </div>
+
+        </div>
+
+        <button
+          class="danger"
+          onclick="deleteSubject('${item.id}')">
+          Delete
+        </button>
+
+      </div>
+
+    `).join("");
+
+  const select =
+    document.getElementById("chapterSubject");
+
+  select.innerHTML =
+    `<option value="">Select Subject</option>` +
+    data.map(item=>`
+
+      <option value="${item.id}">
+        ${escapeHTML(item.name)}
+      </option>
+
+    `).join("");
+
+}
+
+
+/* =========================
+   CHAPTERS
+========================= */
+
+async function addChapter(){
+
+  const subjectId =
+    document.getElementById("chapterSubject").value;
+
+  const name =
+    document.getElementById("chapterName").value.trim();
+
+  if(!subjectId || !name){
+
+    setStatus(
+      "chapterStatus",
+      "Select a subject and enter chapter name.",
+      true
+    );
+
+    return;
+  }
+
+  try{
+
+    await adminRPC(
+      "create",
+      "chapters",
+      null,
+      {
+        subject_id:subjectId,
+        name:name,
+        chapter_number:
+          document.getElementById("chapterNumber").value,
+        description:
+          document.getElementById("chapterDescription").value
+      }
+    );
+
+    clearInputs([
+      "chapterName",
+      "chapterNumber",
+      "chapterDescription"
+    ]);
+
+    setStatus(
+      "chapterStatus",
+      "Chapter added successfully."
+    );
+
+    loadChapters();
+
+  }catch(e){
+
+    setStatus(
+      "chapterStatus",
+      e.message,
+      true
+    );
+
+  }
+
+}
+
+
+async function deleteChapter(id){
+
+  if(!confirm("Delete this chapter?")) return;
+
+  try{
+
+    await adminRPC(
+      "delete",
+      "chapters",
+      id,
+      {}
+    );
+
+    loadAll();
+
+  }catch(e){
+
+    alert(e.message);
+  }
+
+}
+
+
+async function loadChapters(){
+
+  const {data,error} =
+    await db
+      .from("chapters")
+      .select("*,subjects(name)")
+      .order("display_order");
+
+  if(error){
+
+    console.error(error);
+    return;
+  }
+
+  document.getElementById("chapterCount")
+    .textContent = data.length;
+
+  document.getElementById("chapterList")
+    .innerHTML = data.map(item=>`
+
+      <div class="item">
+
+        <div>
+
+          <div class="item-title">
+            ${escapeHTML(item.name)}
+          </div>
+
+          <div class="item-meta">
+            ${escapeHTML(item.subjects?.name || "")}
+          </div>
+
+        </div>
+
+        <button
+          class="danger"
+          onclick="deleteChapter('${item.id}')">
+          Delete
+        </button>
+
+      </div>
+
+    `).join("");
+
+  const select =
+    document.getElementById("lessonChapter");
+
+  select.innerHTML =
+    `<option value="">Select Chapter</option>` +
+    data.map(item=>`
+
+      <option value="${item.id}">
+        ${escapeHTML(item.name)}
+      </option>
+
+    `).join("");
+
+}
+
+
+/* =========================
+   LESSONS
+========================= */
+
+async function addLesson(){
+
+  const chapterId =
+    document.getElementById("lessonChapter").value;
+
+  const title =
+    document.getElementById("lessonTitle").value.trim();
+
+  if(!chapterId || !title){
+
+    setStatus(
+      "lessonStatus",
+      "Select a chapter and enter lesson title.",
+      true
+    );
+
+    return;
+  }
+
+  try{
+
+    await adminRPC(
+      "create",
+      "lessons",
+      null,
+      {
+        chapter_id:chapterId,
+        title:title,
+        description:
+          document.getElementById("lessonDescription").value,
+        content:
+          document.getElementById("lessonContent").value,
+        video_url:
+          document.getElementById("lessonVideo").value,
+        audio_url:
+          document.getElementById("lessonAudio").value
+      }
+    );
+
+    clearInputs([
+      "lessonTitle",
+      "lessonDescription",
+      "lessonContent",
+      "lessonVideo",
+      "lessonAudio"
+    ]);
+
+    setStatus(
+      "lessonStatus",
+      "Lesson added successfully."
+    );
+
+    loadLessons();
+
+  }catch(e){
+
+    setStatus(
+      "lessonStatus",
+      e.message,
+      true
+    );
+
+  }
+
+}
+
+
+async function deleteLesson(id){
+
+  if(!confirm("Delete this lesson?")) return;
+
+  try{
+
+    await adminRPC(
+      "delete",
+      "lessons",
+      id,
+      {}
+    );
+
+    loadAll();
+
+  }catch(e){
+
+    alert(e.message);
+  }
+
+}
+
+
+async function loadLessons(){
+
+  const {data,error} =
+    await db
+      .from("lessons")
+      .select("*,chapters(name)")
+      .order("display_order");
+
+  if(error){
+
+    console.error(error);
+    return;
+  }
+
+  document.getElementById("lessonCount")
+    .textContent = data.length;
+
+  document.getElementById("lessonList")
+    .innerHTML = data.map(item=>`
+
+      <div class="item">
+
+        <div>
+
+          <div class="item-title">
+            ${escapeHTML(item.title)}
+          </div>
+
+          <div class="item-meta">
+            ${escapeHTML(item.chapters?.name || "")}
+          </div>
+
+        </div>
+
+        <button
+          class="danger"
+          onclick="deleteLesson('${item.id}')">
+          Delete
+        </button>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+/* =========================
+   UTILITIES
+========================= */
+
+function setStatus(id,text,error=false){
+
+  const el =
+    document.getElementById(id);
+
+  el.textContent = text;
+
+  el.className =
+    "status " +
+    (error ? "error" : "success");
+
+}
+
+
+function clearInputs(ids){
+
+  ids.forEach(id=>{
+
+    const el =
+      document.getElementById(id);
+
+    if(el) el.value = "";
+
+  });
+
+}
+
+
+function escapeHTML(value){
+
+  if(value === null || value === undefined)
+    return "";
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+async function loadAll(){
+
+  await loadClasses();
+  await loadSubjects();
+  await loadChapters();
+  await loadLessons();
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+window.addEventListener(
+  "DOMContentLoaded",
+  ()=>{
+
+    if(!init()) return;
+
+    if(
+      sessionStorage.getItem(
+        "tsf_super_admin"
+      ) === "true"
+    ){
+
+      openDashboard();
 
     }
 
   }
-
-
-  /* =========================================
-     INITIAL STARTUP
-  ========================================= */
-
-  const supabaseReady =
-    initializeSupabase();
-
-
-  /*
-    Only restore the admin screen if
-    a previous session exists AND
-    Supabase initialized correctly.
-  */
-
-  if (
-    supabaseReady &&
-    sessionStorage.getItem(
-      "tsf_super_admin"
-    ) === "true"
-  ) {
-
-    showApp();
-
-  }
-
-
-  /* =========================================
-     BUTTON EVENTS
-  ========================================= */
-
-  loginBtn.addEventListener(
-    "click",
-    login
-  );
-
-  logoutBtn.addEventListener(
-    "click",
-    logout
-  );
-
-  adminPin.addEventListener(
-    "keydown",
-    function(event) {
-
-      if (event.key === "Enter") {
-        login();
-      }
-
-    }
-  );
+);
 
 </script>
 
