@@ -15,7 +15,7 @@
 
   // এখানে তোমার Supabase Publishable/Anon Key বসাও
   // Gmail password বা Supabase service_role key এখানে কখনো দেবে না।
-  const SUPABASE_KEY = "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE";
+  const SUPABASE_KEY = sb_publishable_uVJ41MtBIJbKAQvABmBCdQ_uWtrBzWP_HERE";
 
   const SUPER_ADMIN_EMAIL = "maksudtahsin0@gmail.com";
 
