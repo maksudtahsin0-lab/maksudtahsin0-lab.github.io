@@ -2,1556 +2,249 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="theme-color" content="#07111f">
-  <meta name="description"
-        content="Teachers Students Friendship — Learn, Connect and Grow Together.">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
 
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
+  <meta
+    name="description"
+    content="Teachers Students Friendship — Learn, Connect & Grow Together."
+  >
+
+  <meta name="theme-color" content="#08111f">
 
   <title>TSF — Teachers Students Friendship</title>
 
-  <style>
-    /* =========================================================
-       TSF — NEW INTERNATIONAL EDTECH DESIGN
-       ========================================================= */
+  <link rel="manifest" href="./manifest.json">
 
-    :root {
-      --bg: #f7f9fc;
-      --surface: #ffffff;
-      --surface-soft: #f1f5fb;
-      --text: #101828;
-      --muted: #667085;
-      --line: #e5eaf2;
-
-      --navy: #07111f;
-      --blue: #365cff;
-      --violet: #7048ff;
-      --cyan: #08b6b0;
-      --green: #12b76a;
-
-      --shadow-sm: 0 8px 30px rgba(16,24,40,.06);
-      --shadow-lg: 0 25px 80px rgba(16,24,40,.12);
-
-      --radius: 24px;
-    }
-
-    body.dark {
-      --bg: #070b12;
-      --surface: #0e1623;
-      --surface-soft: #121d2c;
-      --text: #f8fafc;
-      --muted: #a8b3c4;
-      --line: rgba(255,255,255,.09);
-
-      --shadow-sm: 0 10px 35px rgba(0,0,0,.22);
-      --shadow-lg: 0 30px 90px rgba(0,0,0,.4);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family:
-        Inter,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-      line-height: 1.5;
-      overflow-x: hidden;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    .container {
-      width: min(1160px, calc(100% - 36px));
-      margin: auto;
-    }
-
-    /* =========================================================
-       BACKGROUND
-       ========================================================= */
-
-    .background-grid {
-      position: fixed;
-      inset: 0;
-      z-index: -5;
-      pointer-events: none;
-      opacity: .55;
-
-      background-image:
-        linear-gradient(
-          rgba(54,92,255,.035) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(54,92,255,.035) 1px,
-          transparent 1px
-        );
-
-      background-size: 42px 42px;
-
-      mask-image:
-        linear-gradient(
-          to bottom,
-          black,
-          transparent 80%
-        );
-    }
-
-    .glow {
-      position: fixed;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: .16;
-      pointer-events: none;
-      z-index: -4;
-    }
-
-    .glow-one {
-      top: 80px;
-      left: -130px;
-      background: #365cff;
-    }
-
-    .glow-two {
-      top: 500px;
-      right: -130px;
-      background: #08b6b0;
-    }
-
-    /* =========================================================
-       HEADER
-       ========================================================= */
-
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-
-      background: rgba(247,249,252,.82);
-      border-bottom: 1px solid var(--line);
-
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    body.dark .header {
-      background: rgba(7,11,18,.84);
-    }
-
-    .nav {
-      min-height: 74px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 20px;
-    }
-
-    /* =========================================================
-       M-A-S LOGO
-       ========================================================= */
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .mas-logo {
-      position: relative;
-
-      width: 48px;
-      height: 48px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 15px;
-
-      color: #fff;
-
-      font-weight: 950;
-      font-size: 13px;
-      letter-spacing: -1px;
-
-      background:
-        linear-gradient(
-          145deg,
-          #07111f 0%,
-          #365cff 48%,
-          #7048ff 75%,
-          #08b6b0 100%
-        );
-
-      box-shadow:
-        0 12px 30px rgba(54,92,255,.28);
-
-      overflow: hidden;
-    }
-
-    .mas-logo::before {
-      content: "";
-      position: absolute;
-
-      width: 22px;
-      height: 22px;
-
-      border: 2px solid rgba(255,255,255,.5);
-      border-radius: 7px;
-
-      transform: rotate(45deg);
-    }
-
-    .mas-logo span {
-      position: relative;
-      z-index: 2;
-    }
-
-    .brand-text strong {
-      display: block;
-      font-size: 14px;
-      letter-spacing: -.2px;
-    }
-
-    .brand-text small {
-      display: block;
-      margin-top: 3px;
-
-      color: var(--muted);
-      font-size: 10px;
-      letter-spacing: .7px;
-    }
-
-    /* =========================================================
-       NAVIGATION
-       ========================================================= */
-
-    .desktop-nav {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .desktop-nav a {
-      padding: 10px 12px;
-
-      border-radius: 10px;
-
-      color: var(--muted);
-
-      font-size: 13px;
-      font-weight: 700;
-
-      transition: .2s ease;
-    }
-
-    .desktop-nav a:hover {
-      color: var(--text);
-      background: var(--surface-soft);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .nav-actions button {
-      min-width: 40px;
-      height: 40px;
-
-      border: 1px solid var(--line);
-      border-radius: 12px;
-
-      background: var(--surface);
-      color: var(--text);
-
-      cursor: pointer;
-
-      transition: .2s ease;
-    }
-
-    .nav-actions button:hover {
-      transform: translateY(-2px);
-      border-color: rgba(54,92,255,.35);
-    }
-
-    #menuButton {
-      display: none;
-    }
-
-    .mobile-menu {
-      display: none;
-      padding: 0 0 12px;
-    }
-
-    .mobile-menu.open {
-      display: grid;
-      gap: 6px;
-    }
-
-    .mobile-menu a {
-      padding: 13px 15px;
-
-      border: 1px solid var(--line);
-      border-radius: 13px;
-
-      background: var(--surface);
-
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    /* =========================================================
-       HERO
-       ========================================================= */
-
-    .hero {
-      padding: 90px 0 75px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 70px;
-      align-items: center;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-
-      padding: 8px 12px;
-
-      border: 1px solid rgba(54,92,255,.16);
-      border-radius: 999px;
-
-      background: rgba(54,92,255,.07);
-
-      color: var(--blue);
-
-      font-size: 11px;
-      font-weight: 850;
-      letter-spacing: .3px;
-    }
-
-    .hero h1 {
-      max-width: 720px;
-
-      margin: 18px 0 20px;
-
-      font-size: clamp(44px, 6vw, 72px);
-      line-height: 1.02;
-
-      letter-spacing: -3.5px;
-      font-weight: 950;
-    }
-
-    .hero h1 .gradient {
-      background:
-        linear-gradient(
-          100deg,
-          #365cff,
-          #7048ff 55%,
-          #08a99f
-        );
-
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-description {
-      max-width: 630px;
-
-      color: var(--muted);
-
-      font-size: 17px;
-      line-height: 1.75;
-    }
-
-    .hero-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 11px;
-
-      margin-top: 28px;
-    }
-
-    .btn {
-      min-height: 46px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 0 18px;
-
-      border-radius: 13px;
-
-      border: 1px solid transparent;
-
-      cursor: pointer;
-
-      font-size: 13px;
-      font-weight: 850;
-
-      transition: .2s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-primary {
-      color: #fff;
-
-      background:
-        linear-gradient(
-          135deg,
-          #365cff,
-          #7048ff
-        );
-
-      box-shadow:
-        0 13px 28px rgba(54,92,255,.22);
-    }
-
-    .btn-secondary {
-      color: var(--text);
-      background: var(--surface);
-      border-color: var(--line);
-    }
-
-    /* =========================================================
-       HERO DASHBOARD
-       ========================================================= */
-
-    .hero-visual {
-      position: relative;
-      min-height: 430px;
-
-      display: grid;
-      place-items: center;
-    }
-
-    .dashboard {
-      width: min(100%, 450px);
-
-      padding: 24px;
-
-      border: 1px solid var(--line);
-      border-radius: 28px;
-
-      background:
-        linear-gradient(
-          145deg,
-          var(--surface),
-          var(--surface-soft)
-        );
-
-      box-shadow: var(--shadow-lg);
-
-      transform: rotate(1deg);
-    }
-
-    .dashboard-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      margin-bottom: 24px;
-    }
-
-    .dashboard-header strong {
-      font-size: 16px;
-    }
-
-    .status {
-      padding: 6px 9px;
-
-      border-radius: 999px;
-
-      background: rgba(18,183,106,.1);
-      color: var(--green);
-
-      font-size: 10px;
-      font-weight: 900;
-    }
-
-    .learning-progress {
-      padding: 18px;
-
-      border-radius: 20px;
-
-      background: var(--surface);
-      border: 1px solid var(--line);
-    }
-
-    .progress-label {
-      display: flex;
-      justify-content: space-between;
-
-      margin-bottom: 10px;
-
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 750;
-    }
-
-    .progress-track {
-      height: 9px;
-
-      overflow: hidden;
-
-      border-radius: 999px;
-
-      background: #e8edf5;
-    }
-
-    body.dark .progress-track {
-      background: #1c2737;
-    }
-
-    .progress-value {
-      width: 76%;
-      height: 100%;
-
-      border-radius: inherit;
-
-      background:
-        linear-gradient(
-          90deg,
-          #365cff,
-          #7048ff,
-          #08b6b0
-        );
-    }
-
-    .dashboard-cards {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 10px;
-
-      margin-top: 12px;
-    }
-
-    .mini-stat {
-      padding: 15px 10px;
-
-      border: 1px solid var(--line);
-      border-radius: 17px;
-
-      background: var(--surface);
-
-      text-align: center;
-    }
-
-    .mini-stat strong {
-      display: block;
-      font-size: 20px;
-    }
-
-    .mini-stat span {
-      display: block;
-      margin-top: 3px;
-
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    .floating {
-      position: absolute;
-
-      padding: 12px 15px;
-
-      border: 1px solid var(--line);
-      border-radius: 14px;
-
-      background: rgba(255,255,255,.86);
-
-      box-shadow: var(--shadow-sm);
-
-      backdrop-filter: blur(12px);
-
-      font-size: 11px;
-      font-weight: 850;
-    }
-
-    body.dark .floating {
-      background: rgba(14,22,35,.9);
-    }
-
-    .floating-a {
-      top: 45px;
-      left: 0;
-    }
-
-    .floating-b {
-      right: 0;
-      bottom: 45px;
-    }
-
-    /* =========================================================
-       TRUST BAR
-       ========================================================= */
-
-    .trust-bar {
-      padding: 20px 0;
-
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-
-      background: var(--surface);
-    }
-
-    .trust-inner {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
-    }
-
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-
-      color: var(--muted);
-
-      font-size: 11px;
-      font-weight: 800;
-    }
-
-    /* =========================================================
-       SECTIONS
-       ========================================================= */
-
-    .section {
-      padding: 90px 0;
-    }
-
-    .section-heading {
-      max-width: 700px;
-      margin-bottom: 38px;
-    }
-
-    .section-label {
-      color: var(--blue);
-
-      font-size: 11px;
-      font-weight: 900;
-
-      letter-spacing: 1.6px;
-      text-transform: uppercase;
-    }
-
-    .section-heading h2 {
-      margin: 8px 0 12px;
-
-      font-size: clamp(30px, 4vw, 48px);
-      line-height: 1.08;
-
-      letter-spacing: -2px;
-    }
-
-    .section-heading p {
-      margin: 0;
-
-      color: var(--muted);
-
-      line-height: 1.75;
-    }
-
-    /* =========================================================
-       LEARNING CARDS
-       ========================================================= */
-
-    .learning-grid {
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 15px;
-    }
-
-    .learning-card {
-      position: relative;
-
-      min-height: 220px;
-
-      padding: 23px;
-
-      border: 1px solid var(--line);
-      border-radius: 23px;
-
-      background: var(--surface);
-
-      box-shadow: var(--shadow-sm);
-
-      overflow: hidden;
-
-      transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        border-color .25s ease;
-    }
-
-    .learning-card:hover {
-      transform: translateY(-7px);
-      box-shadow: var(--shadow-lg);
-      border-color: rgba(54,92,255,.22);
-    }
-
-    .learning-number {
-      position: absolute;
-      right: 17px;
-      top: 13px;
-
-      color: var(--line);
-
-      font-size: 35px;
-      font-weight: 950;
-    }
-
-    .learning-icon {
-      width: 50px;
-      height: 50px;
-
-      display: grid;
-      place-items: center;
-
-      margin-bottom: 23px;
-
-      border-radius: 15px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(54,92,255,.1),
-          rgba(112,72,255,.08)
-        );
-
-      font-size: 23px;
-    }
-
-    .learning-card h3 {
-      margin: 0 0 8px;
-
-      font-size: 17px;
-    }
-
-    .learning-card p {
-      margin: 0;
-
-      color: var(--muted);
-
-      font-size: 12px;
-      line-height: 1.65;
-    }
-
-    .card-arrow {
-      display: inline-block;
-
-      margin-top: 17px;
-
-      color: var(--blue);
-
-      font-size: 12px;
-      font-weight: 850;
-    }
-
-    /* =========================================================
-       PLATFORM
-       ========================================================= */
-
-    .platform {
-      background: var(--navy);
-      color: #fff;
-      overflow: hidden;
-    }
-
-    .platform .section-label {
-      color: #7dd3fc;
-    }
-
-    .platform .section-heading p {
-      color: #aab5c6;
-    }
-
-    .platform-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 14px;
-    }
-
-    .platform-card {
-      padding: 25px;
-
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 23px;
-
-      background: rgba(255,255,255,.045);
-    }
-
-    .platform-card-icon {
-      font-size: 25px;
-      margin-bottom: 20px;
-    }
-
-    .platform-card h3 {
-      margin: 0 0 9px;
-
-      font-size: 17px;
-    }
-
-    .platform-card p {
-      margin: 0;
-
-      color: #aab5c6;
-
-      font-size: 12px;
-      line-height: 1.7;
-    }
-
-    /* =========================================================
-       TEACHERS
-       ========================================================= */
-
-    .teacher-section {
-      padding: 90px 0;
-    }
-
-    .teacher-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .teacher-panel {
-      padding: 32px;
-
-      border: 1px solid var(--line);
-      border-radius: 28px;
-
-      background: var(--surface);
-
-      box-shadow: var(--shadow-sm);
-    }
-
-    .teacher-panel h2 {
-      margin: 9px 0 14px;
-
-      font-size: 36px;
-      line-height: 1.08;
-      letter-spacing: -1.5px;
-    }
-
-    .teacher-panel p {
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    .teacher-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-
-      margin-top: 22px;
-    }
-
-    .secure-panel {
-      position: relative;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      overflow: hidden;
-
-      background:
-        linear-gradient(
-          145deg,
-          #365cff,
-          #7048ff
-        );
-
-      color: #fff;
-    }
-
-    .secure-panel::after {
-      content: "";
-
-      position: absolute;
-
-      width: 220px;
-      height: 220px;
-
-      right: -80px;
-      bottom: -100px;
-
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 50%;
-    }
-
-    .secure-icon {
-      font-size: 50px;
-    }
-
-    .secure-panel p {
-      color: rgba(255,255,255,.75);
-    }
-
-    /* =========================================================
-       ASK TEACHER
-       ========================================================= */
-
-    .ask-section {
-      padding: 85px 0;
-    }
-
-    .ask-box {
-      position: relative;
-
-      padding: 55px 30px;
-
-      text-align: center;
-
-      border: 1px solid var(--line);
-      border-radius: 30px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(54,92,255,.08),
-          rgba(8,182,176,.08)
-        );
-
-      overflow: hidden;
-    }
-
-    .ask-box h2 {
-      margin: 9px 0 12px;
-
-      font-size: clamp(30px,4vw,45px);
-      letter-spacing: -1.5px;
-    }
-
-    .ask-box p {
-      max-width: 650px;
-      margin: 0 auto 23px;
-
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* =========================================================
-       CONTACT
-       ========================================================= */
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(2,1fr);
-      gap: 14px;
-    }
-
-    .contact-card {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-
-      padding: 20px;
-
-      border: 1px solid var(--line);
-      border-radius: 19px;
-
-      background: var(--surface);
-
-      transition: .2s ease;
-    }
-
-    .contact-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .contact-icon {
-      width: 47px;
-      height: 47px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 14px;
-
-      background: var(--surface-soft);
-
-      font-size: 22px;
-    }
-
-    .contact-card strong {
-      display: block;
-      font-size: 14px;
-    }
-
-    .contact-card span {
-      display: block;
-      margin-top: 3px;
-
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    /* =========================================================
-       FOOTER
-       ========================================================= */
-
-    .footer {
-      padding: 30px 0;
-
-      border-top: 1px solid var(--line);
-      background: var(--surface);
-    }
-
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .footer p {
-      margin: 0;
-
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    /* =========================================================
-       LOGIN MODAL
-       ========================================================= */
-
-    .modal {
-      position: fixed;
-      inset: 0;
-
-      z-index: 5000;
-
-      display: none;
-      place-items: center;
-
-      padding: 20px;
-
-      background: rgba(0,0,0,.62);
-
-      backdrop-filter: blur(9px);
-    }
-
-    .modal.show {
-      display: grid;
-    }
-
-    .modal-card {
-      position: relative;
-
-      width: min(100%, 420px);
-
-      padding: 32px;
-
-      border-radius: 27px;
-
-      background: var(--surface);
-      color: var(--text);
-
-      border: 1px solid var(--line);
-
-      box-shadow: 0 30px 100px rgba(0,0,0,.3);
-
-      text-align: center;
-    }
-
-    .modal-card .mas-logo {
-      margin: 0 auto 17px;
-    }
-
-    .modal-card h2 {
-      margin: 0 0 7px;
-    }
-
-    .modal-card p {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .modal-close {
-      position: absolute;
-
-      top: 12px;
-      right: 12px;
-
-      width: 37px;
-      height: 37px;
-
-      border: 1px solid var(--line);
-      border-radius: 50%;
-
-      background: var(--surface-soft);
-      color: var(--text);
-
-      cursor: pointer;
-
-      font-size: 20px;
-    }
-
-    .modal-login-btn {
-      width: 100%;
-      margin-top: 10px;
-    }
-
-    /* =========================================================
-       RESPONSIVE
-       ========================================================= */
-
-    @media (max-width: 950px) {
-
-      .desktop-nav {
-        display: none;
-      }
-
-      #menuButton {
-        display: block;
-      }
-
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 35px;
-      }
-
-      .hero-visual {
-        min-height: 390px;
-      }
-
-      .learning-grid {
-        grid-template-columns: repeat(2,1fr);
-      }
-
-      .platform-grid {
-        grid-template-columns: repeat(2,1fr);
-      }
-
-      .teacher-layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 620px) {
-
-      .container {
-        width: min(100% - 28px, 1160px);
-      }
-
-      .header {
-        padding: 0;
-      }
-
-      .nav {
-        min-height: 66px;
-      }
-
-      .brand-text strong {
-        font-size: 12px;
-      }
-
-      .brand-text small {
-        display: none;
-      }
-
-      .mas-logo {
-        width: 43px;
-        height: 43px;
-      }
-
-      .nav-actions button {
-        min-width: 36px;
-        height: 36px;
-      }
-
-      .hero {
-        padding: 58px 0 50px;
-      }
-
-      .hero h1 {
-        font-size: 45px;
-        letter-spacing: -2.5px;
-      }
-
-      .hero-description {
-        font-size: 15px;
-      }
-
-      .hero-visual {
-        min-height: 315px;
-      }
-
-      .dashboard {
-        padding: 18px;
-      }
-
-      .floating {
-        font-size: 10px;
-        padding: 9px 11px;
-      }
-
-      .floating-a {
-        left: -4px;
-        top: 18px;
-      }
-
-      .floating-b {
-        right: -4px;
-        bottom: 18px;
-      }
-
-      .trust-inner {
-        gap: 14px 22px;
-      }
-
-      .trust-item {
-        font-size: 10px;
-      }
-
-      .section {
-        padding: 65px 0;
-      }
-
-      .learning-grid,
-      .platform-grid,
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .learning-card {
-        min-height: auto;
-      }
-
-      .teacher-panel {
-        padding: 25px;
-      }
-
-      .teacher-panel h2 {
-        font-size: 31px;
-      }
-
-      .ask-box {
-        padding: 40px 20px;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="./style.css">
 </head>
-
 
 <body>
 
-  <div class="background-grid"></div>
-  <div class="glow glow-one"></div>
-  <div class="glow glow-two"></div>
+  <!-- =========================================================
+       TSF APP
+       Teachers Students Friendship
+       M-A-S
+       ========================================================= -->
+
+  <!-- ===================== HEADER ===================== -->
+
+  <header class="tsf-header">
+
+    <a href="./" class="tsf-brand" aria-label="TSF Home">
+
+      <div class="mas-logo">
+        <span>M</span>
+        <i>•</i>
+        <span>A</span>
+        <i>•</i>
+        <span>S</span>
+      </div>
+
+      <div class="brand-text">
+        <strong>Teachers Students</strong>
+        <small>Friendship</small>
+      </div>
+
+    </a>
 
 
-  <!-- =======================================================
-       HEADER
-       ======================================================= -->
+    <div class="header-actions">
 
-  <header class="header">
+      <!-- PWA Install -->
+      <button
+        id="installAppButton"
+        class="header-button install-button"
+        type="button"
+        hidden
+        aria-label="Install TSF"
+      >
+        ⇩
+      </button>
 
-    <div class="container">
 
-      <nav class="nav">
+      <!-- Three Dot Menu -->
+      <button
+        id="menuButton"
+        class="header-button"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        ⋮
+      </button>
 
-        <a href="#home" class="brand">
 
-          <div class="mas-logo">
-            <span>MAS</span>
-          </div>
+      <nav
+        id="topMenu"
+        class="top-menu"
+        aria-label="TSF menu"
+      >
 
-          <div class="brand-text">
-            <strong>Teachers Students Friendship</strong>
-            <small>LEARN • CONNECT • GROW TOGETHER</small>
-          </div>
-
+        <a href="#home">
+          🏠 Home
         </a>
 
+        <a href="#apps">
+          🚀 Applications
+        </a>
 
-        <div class="desktop-nav">
+        <a href="#books">
+          📚 Books
+        </a>
 
-          <a href="#home"
-             data-en="Home"
-             data-bn="হোম">
-            Home
-          </a>
+        <a href="#announcements">
+          📢 Announcements
+        </a>
 
-          <a href="#learning"
-             data-en="Learning"
-             data-bn="শিক্ষা">
-            Learning
-          </a>
+        <a href="#about">
+          ℹ️ About TSF
+        </a>
 
-          <a href="#teachers"
-             data-en="Teachers"
-             data-bn="শিক্ষক">
-            Teachers
-          </a>
+        <a href="#contact">
+          ✉️ Contact
+        </a>
 
-          <a href="#community"
-             data-en="Community"
-             data-bn="কমিউনিটি">
-            Community
-          </a>
-
-          <a href="#contact"
-             data-en="Contact"
-             data-bn="যোগাযোগ">
-            Contact
-          </a>
-
-        </div>
-
-
-        <div class="nav-actions">
-
-          <button id="languageBtn"
-                  type="button"
-                  aria-label="Change language">
-            বাংলা
-          </button>
-
-          <button id="themeBtn"
-                  type="button"
-                  aria-label="Change theme">
-            🌙
-          </button>
-
-          <button id="menuButton"
-                  type="button"
-                  aria-label="Open menu">
-            ☰
-          </button>
-
-        </div>
+        <a
+          href="./admin.html"
+          class="super-admin-link"
+        >
+          👑 Super Admin
+        </a>
 
       </nav>
-
-
-      <div id="mobileMenu" class="mobile-menu">
-
-        <a href="#home"
-           data-en="Home"
-           data-bn="হোম">
-          Home
-        </a>
-
-        <a href="#learning"
-           data-en="Learning"
-           data-bn="শিক্ষা">
-          Learning
-        </a>
-
-        <a href="#teachers"
-           data-en="Teachers"
-           data-bn="শিক্ষক">
-          Teachers
-        </a>
-
-        <a href="#community"
-           data-en="Community"
-           data-bn="কমিউনিটি">
-          Community
-        </a>
-
-        <a href="#contact"
-           data-en="Contact"
-           data-bn="যোগাযোগ">
-          Contact
-        </a>
-
-      </div>
 
     </div>
 
   </header>
 
 
-  <!-- =======================================================
-       HERO
-       ======================================================= -->
+  <!-- ===================== MAIN ===================== -->
 
-  <main>
+  <main id="home">
 
-    <section id="home" class="hero">
 
-      <div class="container">
+    <!-- ===================== HERO ===================== -->
 
-        <div class="hero-grid">
+    <section class="hero-section">
+
+      <div class="hero-content">
+
+        <div class="hero-badge">
+          <span></span>
+          LEARN • CONNECT • GROW TOGETHER
+        </div>
+
+
+        <h1>
+          One place for
+          <span>learning,</span>
+          books & people.
+        </h1>
+
+
+        <p class="hero-description">
+          Discover books, educational resources, practice tools,
+          videos and teacher support — all in one simple learning
+          platform.
+        </p>
+
+
+        <div class="hero-buttons">
+
+          <a
+            href="#apps"
+            class="primary-button"
+          >
+            Explore TSF
+            <span>→</span>
+          </a>
+
+
+          <a
+            href="#books"
+            class="secondary-button"
+          >
+            Browse Books
+          </a>
+
+        </div>
+
+
+        <div class="hero-mini-stats">
 
           <div>
-
-            <div class="hero-badge"
-                 data-en="✦ THE NEXT GENERATION LEARNING COMMUNITY"
-                 data-bn="✦ নতুন প্রজন্মের শিক্ষার কমিউনিটি">
-              ✦ THE NEXT GENERATION LEARNING COMMUNITY
-            </div>
-
-
-            <h1>
-              Learn with purpose.
-              <span class="gradient">Grow together.</span>
-            </h1>
-
-
-            <p class="hero-description"
-               data-en="Teachers Students Friendship brings students and teachers together in one simple, friendly and powerful digital learning space."
-               data-bn="Teachers Students Friendship শিক্ষার্থী ও শিক্ষকদের একটি সহজ, বন্ধুত্বপূর্ণ এবং শক্তিশালী ডিজিটাল শিক্ষার প্ল্যাটফর্মে একত্রিত করে।">
-              Teachers Students Friendship brings students and teachers
-              together in one simple, friendly and powerful digital
-              learning space.
-            </p>
-
-
-            <div class="hero-buttons">
-
-              <a href="#learning"
-                 class="btn btn-primary"
-                 data-en="Explore Learning →"
-                 data-bn="শেখা শুরু করুন →">
-                Explore Learning →
-              </a>
-
-
-              <button id="teacherLoginBtn"
-                      class="btn btn-secondary"
-                      type="button"
-                      data-en="Teacher Login"
-                      data-bn="শিক্ষক লগইন">
-                Teacher Login
-              </button>
-
-            </div>
-
+            <strong>📚</strong>
+            <span>Learning</span>
           </div>
 
-
-          <!-- HERO VISUAL -->
-
-          <div class="hero-visual">
-
-            <div class="floating floating-a">
-              📚 Learn smarter
-            </div>
-
-            <div class="dashboard">
-
-              <div class="dashboard-header">
-
-                <strong
-                  data-en="Learning Dashboard"
-                  data-bn="লার্নিং ড্যাশবোর্ড">
-                  Learning Dashboard
-                </strong>
-
-                <span class="status">
-                  ● ACTIVE
-                </span>
-
-              </div>
-
-
-              <div class="learning-progress">
-
-                <div class="progress-label">
-
-                  <span
-                    data-en="Overall Progress"
-                    data-bn="সামগ্রিক অগ্রগতি">
-                    Overall Progress
-                  </span>
-
-                  <strong>76%</strong>
-
-                </div>
-
-                <div class="progress-track">
-                  <div class="progress-value"></div>
-                </div>
-
-              </div>
-
-
-              <div class="dashboard-cards">
-
-                <div class="mini-stat">
-                  <strong>24</strong>
-                  <span
-                    data-en="Lessons"
-                    data-bn="পাঠ">
-                    Lessons
-                  </span>
-                </div>
-
-                <div class="mini-stat">
-                  <strong>12</strong>
-                  <span
-                    data-en="Quizzes"
-                    data-bn="কুইজ">
-                    Quizzes
-                  </span>
-                </div>
-
-                <div class="mini-stat">
-                  <strong>08</strong>
-                  <span
-                    data-en="Badges"
-                    data-bn="ব্যাজ">
-                    Badges
-                  </span>
-                </div>
-
-              </div>
-
-            </div>
-
-            <div class="floating floating-b">
-              🌱 Keep growing
-            </div>
-
+          <div>
+            <strong>👨‍🏫</strong>
+            <span>Teachers</span>
           </div>
+
+          <div>
+            <strong>🧠</strong>
+            <span>Practice</span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ===================== HERO VISUAL ===================== -->
+
+      <div class="hero-visual">
+
+        <div class="visual-orbit orbit-one"></div>
+        <div class="visual-orbit orbit-two"></div>
+
+
+        <div class="floating-card floating-card-one">
+
+          <span class="floating-icon">📚</span>
+
+          <div>
+            <strong>Books</strong>
+            <small>Read & discover</small>
+          </div>
+
+        </div>
+
+
+        <div class="floating-card floating-card-two">
+
+          <span class="floating-icon">🧠</span>
+
+          <div>
+            <strong>Practice</strong>
+            <small>Learn by doing</small>
+          </div>
+
+        </div>
+
+
+        <div class="floating-card floating-card-three">
+
+          <span class="floating-icon">👨‍🏫</span>
+
+          <div>
+            <strong>Teachers</strong>
+            <small>Ask & connect</small>
+          </div>
+
+        </div>
+
+
+        <div class="mas-center">
+
+          <strong>M-A-S</strong>
+
+          <span>TSF</span>
 
         </div>
 
@@ -1560,177 +253,70 @@
     </section>
 
 
-    <!-- =======================================================
-         TRUST
-         ======================================================= -->
 
-    <div class="trust-bar">
+    <!-- ===================== APPLICATIONS ===================== -->
 
-      <div class="container">
+    <section
+      id="apps"
+      class="section-section applications-section"
+    >
 
-        <div class="trust-inner">
+      <div class="section-heading">
 
-          <div class="trust-item">
-            ✓ Student Friendly
-          </div>
+        <div>
 
-          <div class="trust-item">
-            ✓ Teacher Connected
-          </div>
+          <span class="section-label">
+            TSF DASHBOARD
+          </span>
 
-          <div class="trust-item">
-            ✓ Mobile Ready
-          </div>
-
-          <div class="trust-item">
-            ✓ Built for Learning
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- =======================================================
-         LEARNING
-         ======================================================= -->
-
-    <section id="learning" class="section">
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <div class="section-label"
-               data-en="Learning Hub"
-               data-bn="লার্নিং হাব">
-            Learning Hub
-          </div>
-
-          <h2
-            data-en="Your learning journey, all in one place."
-            data-bn="আপনার শেখার যাত্রা, সব এক জায়গায়।">
-            Your learning journey, all in one place.
+          <h2>
+            Everything starts here.
           </h2>
 
-          <p
-            data-en="Discover organized learning tools designed to make studying easier, clearer and more engaging."
-            data-bn="পড়াশোনাকে সহজ, পরিষ্কার এবং আরও আকর্ষণীয় করার জন্য তৈরি গুছানো লার্নিং টুল আবিষ্কার করুন।">
-            Discover organized learning tools designed to make studying
-            easier, clearer and more engaging.
+          <p>
+            Tap any application to open its dedicated area.
           </p>
 
         </div>
 
 
-        <div class="learning-grid">
+        <div class="live-status">
+          <span></span>
+          LIVE PLATFORM
+        </div>
+
+      </div>
 
 
-          <a href="#learning-library"
-             class="learning-card">
+      <!--
+        IMPORTANT:
+        script.js will generate the application cards here.
 
-            <span class="learning-number">01</span>
+        If database content exists:
+        → it will appear here.
 
-            <div class="learning-icon">
-              📚
-            </div>
+        If no content exists:
+        → a proper empty state will appear.
 
-            <h3
-              data-en="Learning Library"
-              data-bn="লার্নিং লাইব্রেরি">
-              Learning Library
-            </h3>
+        No dead/blank button.
+      -->
 
-            <p
-              data-en="Notes, lessons, PDFs and useful educational resources."
-              data-bn="নোট, পাঠ, PDF এবং দরকারি শিক্ষামূলক রিসোর্স।">
-              Notes, lessons, PDFs and useful educational resources.
-            </p>
+      <div
+        id="applicationGrid"
+        class="application-grid"
+      >
 
-            <span class="card-arrow">Explore →</span>
+        <div class="loading-state">
 
-          </a>
+          <div class="loading-spinner"></div>
 
+          <strong>
+            Loading TSF applications...
+          </strong>
 
-          <a href="#practice"
-             class="learning-card">
-
-            <span class="learning-number">02</span>
-
-            <div class="learning-icon">
-              🧠
-            </div>
-
-            <h3
-              data-en="Quiz & Practice"
-              data-bn="কুইজ ও অনুশীলন">
-              Quiz & Practice
-            </h3>
-
-            <p
-              data-en="Practice questions and activities to strengthen your knowledge."
-              data-bn="জ্ঞান আরও শক্ত করার জন্য প্রশ্ন ও অনুশীলন।">
-              Practice questions and activities to strengthen your knowledge.
-            </p>
-
-            <span class="card-arrow">Practice →</span>
-
-          </a>
-
-
-          <a href="#progress"
-             class="learning-card">
-
-            <span class="learning-number">03</span>
-
-            <div class="learning-icon">
-              📈
-            </div>
-
-            <h3
-              data-en="My Progress"
-              data-bn="আমার অগ্রগতি">
-              My Progress
-            </h3>
-
-            <p
-              data-en="Follow your learning journey and understand your improvement."
-              data-bn="আপনার শেখার যাত্রা ও উন্নতি অনুসরণ করুন।">
-              Follow your learning journey and understand your improvement.
-            </p>
-
-            <span class="card-arrow">View Progress →</span>
-
-          </a>
-
-
-          <a href="#smart-learning"
-             class="learning-card">
-
-            <span class="learning-number">04</span>
-
-            <div class="learning-icon">
-              ✨
-            </div>
-
-            <h3
-              data-en="Smart Learning"
-              data-bn="স্মার্ট লার্নিং">
-              Smart Learning
-            </h3>
-
-            <p
-              data-en="A future-ready space for smarter and more personalized learning."
-              data-bn="স্মার্ট ও ব্যক্তিগতকৃত শেখার জন্য ভবিষ্যৎমুখী একটি স্পেস।">
-              A future-ready space for smarter and more personalized learning.
-            </p>
-
-            <span class="card-arrow">Discover →</span>
-
-          </a>
-
+          <span>
+            Please wait a moment.
+          </span>
 
         </div>
 
@@ -1739,518 +325,307 @@
     </section>
 
 
-    <!-- =======================================================
-         PLATFORM
-         ======================================================= -->
 
-    <section id="community" class="section platform">
+    <!-- ===================== BOOKS ===================== -->
 
-      <div class="container">
+    <section
+      id="books"
+      class="section-section books-section"
+    >
 
-        <div class="section-heading">
+      <div class="section-heading">
 
-          <div class="section-label">
-            TSF Experience
-          </div>
+        <div>
 
-          <h2
-            data-en="Designed around people, not just technology."
-            data-bn="শুধু প্রযুক্তি নয়, মানুষকে কেন্দ্র করে তৈরি।">
-            Designed around people, not just technology.
+          <span class="section-label">
+            READ • LEARN • DISCOVER
+          </span>
+
+          <h2>
+            Book & Resource Library
           </h2>
 
-          <p
-            data-en="TSF aims to create a comfortable digital environment where learning and communication feel natural."
-            data-bn="TSF এমন একটি আরামদায়ক ডিজিটাল পরিবেশ তৈরি করতে চায় যেখানে শেখা ও যোগাযোগ স্বাভাবিক মনে হয়।">
-            TSF aims to create a comfortable digital environment where
-            learning and communication feel natural.
-          </p>
-
-        </div>
-
-
-        <div class="platform-grid">
-
-
-          <div class="platform-card">
-
-            <div class="platform-card-icon">
-              🤝
-            </div>
-
-            <h3
-              data-en="Connect"
-              data-bn="সংযুক্ত হন">
-              Connect
-            </h3>
-
-            <p
-              data-en="Create meaningful educational connections between students and teachers."
-              data-bn="শিক্ষার্থী ও শিক্ষকদের মধ্যে সুন্দর শিক্ষামূলক যোগাযোগ তৈরি করুন।">
-              Create meaningful educational connections between
-              students and teachers.
-            </p>
-
-          </div>
-
-
-          <div class="platform-card">
-
-            <div class="platform-card-icon">
-              💡
-            </div>
-
-            <h3
-              data-en="Share"
-              data-bn="শেয়ার করুন">
-              Share
-            </h3>
-
-            <p
-              data-en="Share knowledge, ideas and useful resources with the learning community."
-              data-bn="কমিউনিটির সাথে জ্ঞান, আইডিয়া ও দরকারি রিসোর্স শেয়ার করুন।">
-              Share knowledge, ideas and useful resources with
-              the learning community.
-            </p>
-
-          </div>
-
-
-          <div class="platform-card">
-
-            <div class="platform-card-icon">
-              🌱
-            </div>
-
-            <h3
-              data-en="Grow"
-              data-bn="এগিয়ে যান">
-              Grow
-            </h3>
-
-            <p
-              data-en="Keep learning, practicing and improving one step at a time."
-              data-bn="ধাপে ধাপে শিখুন, অনুশীলন করুন এবং নিজেকে উন্নত করুন।">
-              Keep learning, practicing and improving one step at a time.
-            </p>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
-         TEACHERS
-         ======================================================= -->
-
-    <section id="teachers" class="teacher-section">
-
-      <div class="container">
-
-        <div class="teacher-layout">
-
-
-          <div class="teacher-panel">
-
-            <div class="section-label"
-                 data-en="For Teachers"
-                 data-bn="শিক্ষকদের জন্য">
-              For Teachers
-            </div>
-
-            <h2
-              data-en="Teach. Guide. Inspire."
-              data-bn="শেখান। পথ দেখান। অনুপ্রেরণা দিন।">
-              Teach. Guide. Inspire.
-            </h2>
-
-            <p
-              data-en="A dedicated space for teachers to connect with students and contribute to a better learning experience."
-              data-bn="শিক্ষকদের জন্য একটি আলাদা স্পেস, যেখানে তারা শিক্ষার্থীদের সাথে যোগাযোগ করে আরও ভালো শেখার পরিবেশ তৈরি করতে পারবেন।">
-              A dedicated space for teachers to connect with students
-              and contribute to a better learning experience.
-            </p>
-
-
-            <div class="teacher-actions">
-
-              <button id="teacherLoginBtn2"
-                      class="btn btn-primary"
-                      type="button"
-                      data-en="Teacher Login"
-                      data-bn="শিক্ষক লগইন">
-                Teacher Login
-              </button>
-
-              <a href="#ask-teacher"
-                 class="btn btn-secondary"
-                 data-en="Ask a Teacher"
-                 data-bn="শিক্ষককে প্রশ্ন করুন">
-                Ask a Teacher
-              </a>
-
-            </div>
-
-          </div>
-
-
-          <div class="teacher-panel secure-panel">
-
-            <div>
-
-              <div class="secure-icon">
-                🔐
-              </div>
-
-              <h2
-                data-en="Protected spaces."
-                data-bn="সুরক্ষিত স্পেস।">
-                Protected spaces.
-              </h2>
-
-              <p
-                data-en="Teacher and administration areas are designed to use secure authentication and role-based access."
-                data-bn="শিক্ষক ও অ্যাডমিন এলাকার জন্য নিরাপদ authentication এবং role-based access ব্যবহারের ব্যবস্থা রাখা হয়েছে।">
-                Teacher and administration areas are designed to use
-                secure authentication and role-based access.
-              </p>
-
-            </div>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
-         ASK TEACHER
-         ======================================================= -->
-
-    <section id="ask-teacher" class="ask-section">
-
-      <div class="container">
-
-        <div class="ask-box">
-
-          <div class="section-label"
-               data-en="Teacher Connect"
-               data-bn="শিক্ষক সংযোগ">
-            Teacher Connect
-          </div>
-
-          <h2
-            data-en="Questions are part of learning."
-            data-bn="প্রশ্ন করাও শেখার অংশ।">
-            Questions are part of learning.
-          </h2>
-
-          <p
-            data-en="Ask questions, seek guidance and make your learning journey clearer."
-            data-bn="প্রশ্ন করুন, দিকনির্দেশনা নিন এবং আপনার শেখার যাত্রাকে আরও পরিষ্কার করুন।">
-            Ask questions, seek guidance and make your learning journey clearer.
-          </p>
-
-          <button id="askTeacherBtn"
-                  class="btn btn-primary"
-                  type="button"
-                  data-en="Ask a Teacher →"
-                  data-bn="শিক্ষককে প্রশ্ন করুন →">
-            Ask a Teacher →
-
-          </button>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
-         CONTACT
-         ======================================================= -->
-
-    <section id="contact" class="section">
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <div class="section-label"
-               data-en="Contact"
-               data-bn="যোগাযোগ">
-            Contact
-          </div>
-
-          <h2
-            data-en="Stay connected with TSF."
-            data-bn="TSF-এর সাথে যোগাযোগ রাখুন।">
-            Stay connected with TSF.
-          </h2>
-
-          <p
-            data-en="Need help or want to contact us directly? Choose a channel below."
-            data-bn="সাহায্য দরকার বা সরাসরি যোগাযোগ করতে চান? নিচের একটি মাধ্যম বেছে নিন।">
-            Need help or want to contact us directly?
-            Choose a channel below.
-          </p>
-
-        </div>
-
-
-        <div class="contact-grid">
-
-
-          <a class="contact-card"
-             href="https://wa.me/8801979840081"
-             target="_blank"
-             rel="noopener">
-
-            <div class="contact-icon">
-              💬
-            </div>
-
-            <div>
-
-              <strong>WhatsApp</strong>
-
-              <span
-                data-en="Chat with us directly"
-                data-bn="সরাসরি আমাদের সাথে চ্যাট করুন">
-                Chat with us directly
-              </span>
-
-            </div>
-
-          </a>
-
-
-          <a class="contact-card"
-             href="mailto:tsf@example.com">
-
-            <div class="contact-icon">
-              ✉️
-            </div>
-
-            <div>
-
-              <strong>Email</strong>
-
-              <span
-                data-en="Send us a message"
-                data-bn="আমাদের মেসেজ পাঠান">
-                Send us a message
-              </span>
-
-            </div>
-
-          </a>
-
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
-         ABOUT
-         ======================================================= -->
-
-    <section class="section">
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <div class="section-label"
-               data-en="About TSF"
-               data-bn="TSF সম্পর্কে">
-            About TSF
-          </div>
-
-          <h2
-            data-en="Built to learn. Built to connect."
-            data-bn="শেখার জন্য। সংযোগের জন্য।">
-            Built to learn. Built to connect.
-          </h2>
-
-          <p
-            data-en="Teachers Students Friendship is being developed as a modern education community where students and teachers can learn, communicate, practice and grow together."
-            data-bn="Teachers Students Friendship একটি আধুনিক শিক্ষা কমিউনিটি হিসেবে তৈরি হচ্ছে, যেখানে শিক্ষার্থী ও শিক্ষক একসাথে শিখতে, যোগাযোগ করতে, অনুশীলন করতে এবং এগিয়ে যেতে পারবে।">
-            Teachers Students Friendship is being developed as a modern
-            education community where students and teachers can learn,
-            communicate, practice and grow together.
+          <p>
+            Explore stories, Islamic books, academic resources,
+            notes and more.
           </p>
 
         </div>
 
       </div>
+
+
+      <div
+        id="resourceGrid"
+        class="application-grid resource-grid"
+      >
+
+        <div class="loading-state">
+
+          <div class="loading-spinner"></div>
+
+          <strong>
+            Loading resources...
+          </strong>
+
+          <span>
+            Your library is being prepared.
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================== FEATURE STRIP ===================== -->
+
+    <section class="feature-section">
+
+      <div class="feature-card">
+
+        <div class="feature-icon">
+          ✨
+        </div>
+
+        <div>
+
+          <strong>
+            Built to grow
+          </strong>
+
+          <p>
+            New apps, books, videos and resources can be
+            added from the Super Admin panel.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="feature-card">
+
+        <div class="feature-icon">
+          🔐
+        </div>
+
+        <div>
+
+          <strong>
+            Protected control
+          </strong>
+
+          <p>
+            Management features are restricted to the
+            authorized Super Admin.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="feature-card">
+
+        <div class="feature-icon">
+          📱
+        </div>
+
+        <div>
+
+          <strong>
+            Phone friendly
+          </strong>
+
+          <p>
+            Designed to work beautifully on smartphones,
+            tablets and computers.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================== ANNOUNCEMENTS ===================== -->
+
+    <section
+      id="announcements"
+      class="section-section announcement-section"
+    >
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-label">
+            LATEST UPDATES
+          </span>
+
+          <h2>
+            Announcements
+          </h2>
+
+          <p>
+            Important news and updates from TSF.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="announcementList"
+        class="announcement-list"
+      >
+
+        <div class="loading-state">
+
+          <div class="loading-spinner"></div>
+
+          <strong>
+            Loading announcements...
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================== ABOUT ===================== -->
+
+    <section
+      id="about"
+      class="about-section"
+    >
+
+      <div class="about-content">
+
+        <span class="section-label">
+          ABOUT TSF
+        </span>
+
+        <h2>
+          Education should feel
+          simple, useful and connected.
+        </h2>
+
+        <p>
+          Teachers Students Friendship is designed as a
+          growing educational platform where students can
+          discover resources, practice skills, connect with
+          teachers and access useful learning content in
+          one place.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================== CONTACT ===================== -->
+
+    <section
+      id="contact"
+      class="contact-section"
+    >
+
+      <div>
+
+        <span class="section-label">
+          GET IN TOUCH
+        </span>
+
+        <h2>
+          Have an idea for TSF?
+        </h2>
+
+        <p>
+          Share useful educational ideas and help us
+          make TSF better.
+        </p>
+
+      </div>
+
+
+      <a
+        href="mailto:maksudtahsin0@gmail.com"
+        class="primary-button"
+      >
+        Contact TSF
+        <span>→</span>
+      </a>
 
     </section>
 
   </main>
 
 
-  <!-- =======================================================
-       FOOTER
-       ======================================================= -->
 
-  <footer class="footer">
+  <!-- ===================== FOOTER ===================== -->
 
-    <div class="container">
+  <footer class="tsf-footer">
 
-      <div class="footer-inner">
+    <div class="footer-brand">
 
-        <a href="#home" class="brand">
-
-          <div class="mas-logo">
-            <span>MAS</span>
-          </div>
-
-          <div class="brand-text">
-            <strong>TSF</strong>
-            <small>LEARN • CONNECT • GROW TOGETHER</small>
-          </div>
-
-        </a>
-
-        <p>
-          © <span id="year"></span>
-          Teachers Students Friendship.
-        </p>
-
+      <div class="footer-mas">
+        M-A-S
       </div>
 
+      <div>
+        <strong>
+          Teachers Students Friendship
+        </strong>
+
+        <small>
+          Learn • Connect • Grow Together
+        </small>
+      </div>
+
+    </div>
+
+
+    <div class="footer-copy">
+      © <span id="currentYear"></span>
+      Teachers Students Friendship
     </div>
 
   </footer>
 
 
-  <!-- =======================================================
-       LOGIN MODAL
-       ======================================================= -->
 
-  <div id="loginModal"
-       class="modal"
-       aria-hidden="true">
+  <!-- ===================== TOAST ===================== -->
 
-    <div class="modal-card">
-
-      <button id="closeModal"
-              class="modal-close"
-              type="button"
-              aria-label="Close">
-        ×
-      </button>
+  <div
+    id="tsfToast"
+    class="tsf-toast"
+    role="status"
+    aria-live="polite"
+  ></div>
 
 
-      <div class="mas-logo">
-        <span>MAS</span>
-      </div>
+
+  <!-- ===================== SUPABASE ===================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
 
 
-      <h2
-        data-en="Teacher Login"
-        data-bn="শিক্ষক লগইন">
-        Teacher Login
-      </h2>
+  <!-- ===================== TSF JAVASCRIPT ===================== -->
 
-
-      <p
-        data-en="Sign in to access the protected teacher area."
-        data-bn="সুরক্ষিত শিক্ষক এলাকায় প্রবেশ করতে লগইন করুন।">
-        Sign in to access the protected teacher area.
-      </p>
-
-
-      <button class="btn btn-primary modal-login-btn"
-              type="button"
-              data-en="Sign In"
-              data-bn="লগইন করুন">
-        Sign In
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- =======================================================
-       SCRIPTS
-       ======================================================= -->
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <script src="script.js"></script>
-
-  <script>
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      function () {
-
-        /* ---------------------------------------------
-           Second Teacher Login button
-           --------------------------------------------- */
-
-        const mainTeacherLogin =
-          document.getElementById("teacherLoginBtn");
-
-        const secondTeacherLogin =
-          document.getElementById("teacherLoginBtn2");
-
-        if (
-          mainTeacherLogin &&
-          secondTeacherLogin
-        ) {
-
-          secondTeacherLogin.addEventListener(
-            "click",
-            function () {
-
-              mainTeacherLogin.click();
-
-            }
-          );
-
-        }
-
-
-        /* ---------------------------------------------
-           PWA Service Worker
-           --------------------------------------------- */
-
-        if ("serviceWorker" in navigator) {
-
-          window.addEventListener(
-            "load",
-            function () {
-
-              navigator.serviceWorker
-                .register("./sw.js")
-                .catch(function () {});
-
-            }
-          );
-
-        }
-
-      }
-    );
-
-  </script>
+  <script src="./script.js"></script>
 
 </body>
 </html>
