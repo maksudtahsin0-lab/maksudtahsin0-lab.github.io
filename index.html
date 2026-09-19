@@ -3,921 +3,773 @@
 <head>
   <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <meta
-    name="theme-color"
-    content="#0b1220"
-  >
+  <meta name="theme-color" content="#0b1020">
 
-  <meta
-    name="description"
-    content="Teachers Students Friendship — Learn, Connect and Grow Together."
-  >
+  <meta name="description"
+        content="Teachers Students Friendship — Learn, Connect and Grow Together.">
 
-  <title>
-    Teachers Students Friendship | TSF
-  </title>
-
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
+
+  <title>Teachers Students Friendship | TSF</title>
 </head>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0b1220">
 
 <body>
 
-  <!-- =========================
-       HEADER
-  ========================== -->
+  <!-- ================= HEADER ================= -->
 
   <header class="header">
 
-    <a href="#" class="brand">
+    <div class="container nav">
 
-      <div class="brand-logo">
-        M
+      <a href="#home" class="brand">
+
+        <div class="mas-logo">
+          <span>M</span>
+          <span>A</span>
+          <span>S</span>
+        </div>
+
+        <div class="brand-text">
+          <strong>Teachers Students</strong>
+          <small>Friendship</small>
+        </div>
+
+      </a>
+
+      <nav class="desktop-nav">
+
+        <a href="#home" data-en="Home" data-bn="হোম">Home</a>
+
+        <a href="#learning"
+           data-en="Learning"
+           data-bn="শিক্ষা">Learning</a>
+
+        <a href="#teachers"
+           data-en="Teachers"
+           data-bn="শিক্ষক">Teachers</a>
+
+        <a href="#community"
+           data-en="Community"
+           data-bn="কমিউনিটি">Community</a>
+
+        <a href="#about"
+           data-en="About"
+           data-bn="আমাদের সম্পর্কে">About</a>
+
+      </nav>
+
+      <div class="nav-actions">
+
+        <button id="languageBtn"
+                class="language-btn"
+                type="button">
+          বাংলা
+        </button>
+
+        <button id="themeBtn"
+                class="icon-btn"
+                type="button"
+                aria-label="Toggle theme">
+          ◐
+        </button>
+
+        <button id="menuButton"
+                class="menu-btn"
+                type="button">
+          ☰
+        </button>
+
       </div>
 
-      <div class="brand-text">
+    </div>
 
-        <strong>
-          Teachers Students Friendship
-        </strong>
+    <!-- Mobile Navigation -->
 
-        <span>
-          Learn • Connect • Grow Together
-        </span>
+    <div id="mobileMenu" class="mobile-menu">
 
-      </div>
+      <a href="#home"
+         data-en="Home"
+         data-bn="হোম">Home</a>
 
-    </a>
+      <a href="#learning"
+         data-en="Learning"
+         data-bn="শিক্ষা">Learning</a>
 
+      <a href="#teachers"
+         data-en="Teachers"
+         data-bn="শিক্ষক">Teachers</a>
 
-    <nav class="desktop-nav">
+      <a href="#community"
+         data-en="Community"
+         data-bn="কমিউনিটি">Community</a>
 
-      <a href="#home">
-        Home
-      </a>
+      <a href="#about"
+         data-en="About"
+         data-bn="আমাদের সম্পর্কে">About</a>
 
-      <a href="#about">
-        About
-      </a>
+      <a href="#contact"
+         data-en="Contact"
+         data-bn="যোগাযোগ">Contact</a>
 
-      <a href="#features">
-        Features
-      </a>
-
-      <a href="#community">
-        Community
-      </a>
-
-      <button
-        class="nav-button"
-        onclick="openLogin()"
-      >
-        Sign In
-      </button>
-
-    </nav>
-
-
-    <button
-      class="menu-button"
-      id="menuButton"
-      aria-label="Open menu"
-    >
-      ☰
-    </button>
+    </div>
 
   </header>
 
 
-  <!-- =========================
-       MOBILE MENU
-  ========================== -->
-
-  <div
-    class="mobile-menu"
-    id="mobileMenu"
-  >
-
-    <a href="#home">
-      Home
-    </a>
-
-    <a href="#about">
-      About
-    </a>
-
-    <a href="#features">
-      Features
-    </a>
-
-    <a href="#community">
-      Community
-    </a>
-
-    <button onclick="openLogin()">
-      Sign In
-    </button>
-
-  </div>
-
-
-  <!-- =========================
-       MAIN
-  ========================== -->
+  <!-- ================= HERO ================= -->
 
   <main>
 
+    <section id="home" class="hero">
 
-    <!-- HERO -->
+      <div class="hero-glow glow-one"></div>
+      <div class="hero-glow glow-two"></div>
 
-    <section
-      class="hero"
-      id="home"
-    >
+      <div class="container hero-grid">
 
-      <div class="hero-content">
+        <div class="hero-content">
 
-        <div class="eyebrow">
-          🌍 A NEW WAY TO LEARN TOGETHER
+          <div class="eyebrow">
+            <span class="live-dot"></span>
+
+            <span data-en="A better way to learn together"
+                  data-bn="একসাথে শেখার আরও সুন্দর উপায়">
+              A better way to learn together
+            </span>
+          </div>
+
+          <h1>
+            <span data-en="Learn."
+                  data-bn="শিখুন।">Learn.</span>
+
+            <span class="gradient-text"
+                  data-en="Connect."
+                  data-bn="সংযুক্ত হন।">
+              Connect.
+            </span>
+
+            <span data-en="Grow Together."
+                  data-bn="একসাথে এগিয়ে যান।">
+              Grow Together.
+            </span>
+          </h1>
+
+          <p class="hero-description"
+             data-en="Teachers Students Friendship is a modern learning community where students and teachers can learn, communicate and grow together."
+             data-bn="Teachers Students Friendship হলো একটি আধুনিক শিক্ষামূলক কমিউনিটি, যেখানে শিক্ষার্থী ও শিক্ষক একসাথে শিখতে, যোগাযোগ করতে এবং এগিয়ে যেতে পারে।">
+            Teachers Students Friendship is a modern learning community
+            where students and teachers can learn, communicate and grow together.
+          </p>
+
+
+          <div class="hero-buttons">
+
+            <a href="#learning"
+               class="btn btn-primary">
+
+              <span data-en="Start Learning"
+                    data-bn="শেখা শুরু করুন">
+                Start Learning
+              </span>
+
+              <span>→</span>
+
+            </a>
+
+            <a href="#teachers"
+               class="btn btn-secondary">
+
+              <span>👨‍🏫</span>
+
+              <span data-en="Teacher Space"
+                    data-bn="শিক্ষক স্পেস">
+                Teacher Space
+              </span>
+
+            </a>
+
+          </div>
+
+
+          <div class="trust-row">
+
+            <div class="trust-item">
+              <strong>2</strong>
+              <span data-en="Languages"
+                    data-bn="ভাষা">
+                Languages
+              </span>
+            </div>
+
+            <div class="trust-line"></div>
+
+            <div class="trust-item">
+              <strong>24/7</strong>
+              <span data-en="Learning"
+                    data-bn="শেখা">
+                Learning
+              </span>
+            </div>
+
+            <div class="trust-line"></div>
+
+            <div class="trust-item">
+              <strong>∞</strong>
+              <span data-en="Possibilities"
+                    data-bn="সম্ভাবনা">
+                Possibilities
+              </span>
+            </div>
+
+          </div>
+
         </div>
 
 
-        <h1>
+        <!-- HERO VISUAL -->
 
-          Where
-          <span>
-            Teachers
+        <div class="hero-visual">
+
+          <div class="dashboard-card">
+
+            <div class="dashboard-top">
+
+              <div>
+                <span class="mini-label"
+                      data-en="TSF Learning Space"
+                      data-bn="TSF লার্নিং স্পেস">
+                  TSF Learning Space
+                </span>
+
+                <h3 data-en="Your learning journey"
+                    data-bn="আপনার শেখার যাত্রা">
+                  Your learning journey
+                </h3>
+              </div>
+
+              <div class="profile-circle">
+                TSF
+              </div>
+
+            </div>
+
+
+            <div class="progress-box">
+
+              <div class="progress-info">
+
+                <span data-en="Today's progress"
+                      data-bn="আজকের অগ্রগতি">
+                  Today's progress
+                </span>
+
+                <strong>72%</strong>
+
+              </div>
+
+              <div class="progress-bar">
+                <span></span>
+              </div>
+
+            </div>
+
+
+            <div class="learning-cards">
+
+              <div class="learning-card">
+
+                <div class="learning-icon purple">📚</div>
+
+                <div>
+                  <strong data-en="Learning Library"
+                          data-bn="লার্নিং লাইব্রেরি">
+                    Learning Library
+                  </strong>
+
+                  <small data-en="Notes & Resources"
+                         data-bn="নোট ও রিসোর্স">
+                    Notes & Resources
+                  </small>
+                </div>
+
+                <span>→</span>
+
+              </div>
+
+
+              <div class="learning-card">
+
+                <div class="learning-icon blue">📝</div>
+
+                <div>
+                  <strong data-en="Practice & Quiz"
+                          data-bn="প্র্যাকটিস ও কুইজ">
+                    Practice & Quiz
+                  </strong>
+
+                  <small data-en="Test your knowledge"
+                         data-bn="নিজেকে যাচাই করুন">
+                    Test your knowledge
+                  </small>
+                </div>
+
+                <span>→</span>
+
+              </div>
+
+
+              <div class="learning-card">
+
+                <div class="learning-icon green">📊</div>
+
+                <div>
+                  <strong data-en="Your Progress"
+                          data-bn="আপনার অগ্রগতি">
+                    Your Progress
+                  </strong>
+
+                  <small data-en="Track your growth"
+                         data-bn="অগ্রগতি দেখুন">
+                    Track your growth
+                  </small>
+                </div>
+
+                <span>→</span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="floating-card teacher-float">
+
+            <div class="float-icon">👨‍🏫</div>
+
+            <div>
+              <strong data-en="Ask a Teacher"
+                      data-bn="শিক্ষককে জিজ্ঞাসা করুন">
+                Ask a Teacher
+              </strong>
+
+              <small data-en="Get guidance"
+                     data-bn="সহায়তা নিন">
+                Get guidance
+              </small>
+            </div>
+
+          </div>
+
+
+          <div class="floating-card language-float">
+
+            <span>বাংলা</span>
+            <span>English</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= QUICK ACTIONS ================= -->
+
+    <section class="quick-section">
+
+      <div class="container">
+
+        <div class="quick-grid">
+
+          <a href="#learning" class="quick-card">
+
+            <div class="quick-icon">🎓</div>
+
+            <div>
+              <strong data-en="Student"
+                      data-bn="শিক্ষার্থী">
+                Student
+              </strong>
+
+              <span data-en="Learn & practice"
+                    data-bn="শিখুন ও অনুশীলন করুন">
+                Learn & practice
+              </span>
+            </div>
+
+            <b>→</b>
+
+          </a>
+
+
+          <a href="#teachers" class="quick-card">
+
+            <div class="quick-icon">👨‍🏫</div>
+
+            <div>
+              <strong data-en="Teacher"
+                      data-bn="শিক্ষক">
+                Teacher
+              </strong>
+
+              <span data-en="Teacher space"
+                    data-bn="শিক্ষক স্পেস">
+                Teacher space
+              </span>
+            </div>
+
+            <b>→</b>
+
+          </a>
+
+
+          <a href="#ask-teacher" class="quick-card">
+
+            <div class="quick-icon">💬</div>
+
+            <div>
+              <strong data-en="Ask Teacher"
+                      data-bn="শিক্ষককে জিজ্ঞাসা করুন">
+                Ask Teacher
+              </strong>
+
+              <span data-en="Ask your question"
+                    data-bn="আপনার প্রশ্ন করুন">
+                Ask your question
+              </span>
+            </div>
+
+            <b>→</b>
+
+          </a>
+
+
+          <a href="#contact" class="quick-card">
+
+            <div class="quick-icon">💚</div>
+
+            <div>
+              <strong data-en="Contact"
+                      data-bn="যোগাযোগ">
+                Contact
+              </strong>
+
+              <span data-en="Talk directly"
+                    data-bn="সরাসরি কথা বলুন">
+                Talk directly
+              </span>
+            </div>
+
+            <b>→</b>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= LEARNING ================= -->
+
+    <section id="learning" class="section">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="section-tag"
+                data-en="LEARNING"
+                data-bn="শিক্ষা">
+            LEARNING
           </span>
 
-          and
+          <h2 data-en="Everything you need to learn better."
+              data-bn="আরও ভালোভাবে শেখার জন্য যা কিছু দরকার।">
+            Everything you need to learn better.
+          </h2>
 
-          <span>
-            Students
+          <p data-en="A simple, organized and modern learning experience for students."
+             data-bn="শিক্ষার্থীদের জন্য সহজ, গোছানো ও আধুনিক শিক্ষার অভিজ্ঞতা।">
+            A simple, organized and modern learning experience for students.
+          </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+          <article class="feature-card large-card">
+
+            <div class="feature-number">01</div>
+
+            <div class="feature-icon">📚</div>
+
+            <h3 data-en="Learning Library"
+                data-bn="লার্নিং লাইব্রেরি">
+              Learning Library
+            </h3>
+
+            <p data-en="Find notes, lessons, resources and study materials in one organized space."
+               data-bn="নোট, লেসন, রিসোর্স ও পড়াশোনার উপকরণ একটি গোছানো জায়গায় খুঁজে নিন।">
+              Find notes, lessons, resources and study materials
+              in one organized space.
+            </p>
+
+          </article>
+
+
+          <article class="feature-card">
+
+            <div class="feature-number">02</div>
+
+            <div class="feature-icon">🧠</div>
+
+            <h3 data-en="Practice & Quiz"
+                data-bn="প্র্যাকটিস ও কুইজ">
+              Practice & Quiz
+            </h3>
+
+            <p data-en="Practice what you learn and check your understanding."
+               data-bn="যা শিখেছেন তা অনুশীলন করুন এবং নিজের জ্ঞান যাচাই করুন।">
+              Practice what you learn and check your understanding.
+            </p>
+
+          </article>
+
+
+          <article class="feature-card">
+
+            <div class="feature-number">03</div>
+
+            <div class="feature-icon">📈</div>
+
+            <h3 data-en="Progress"
+                data-bn="অগ্রগতি">
+              Progress
+            </h3>
+
+            <p data-en="Keep track of your learning journey and achievements."
+               data-bn="আপনার শেখার যাত্রা ও অর্জনের অগ্রগতি দেখুন।">
+              Keep track of your learning journey and achievements.
+            </p>
+
+          </article>
+
+
+          <article class="feature-card">
+
+            <div class="feature-number">04</div>
+
+            <div class="feature-icon">🤖</div>
+
+            <h3 data-en="Smart Learning"
+                data-bn="স্মার্ট লার্নিং">
+              Smart Learning
+            </h3>
+
+            <p data-en="Future-ready tools designed to make learning more interactive."
+               data-bn="শেখাকে আরও ইন্টার‍্যাক্টিভ করার জন্য ভবিষ্যৎ-প্রস্তুত টুল।">
+              Future-ready tools designed to make learning more interactive.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= TEACHER ================= -->
+
+    <section id="teachers" class="teacher-section">
+
+      <div class="container teacher-grid">
+
+        <div>
+
+          <span class="section-tag light"
+                data-en="TEACHER SPACE"
+                data-bn="শিক্ষক স্পেস">
+            TEACHER SPACE
           </span>
 
-          grow together.
+          <h2 data-en="A dedicated space for teachers."
+              data-bn="শিক্ষকদের জন্য আলাদা একটি স্পেস।">
+            A dedicated space for teachers.
+          </h2>
 
-        </h1>
-
-
-        <p>
-
-          Teachers Students Friendship is a modern
-          learning platform designed to connect
-          teachers and students through knowledge,
-          collaboration and meaningful learning.
-
-        </p>
+          <p data-en="Teachers will have a dedicated area to manage learning resources, communicate with students and contribute to the TSF community."
+             data-bn="শিক্ষকদের জন্য থাকবে আলাদা একটি এলাকা, যেখানে তারা শিক্ষার উপকরণ পরিচালনা, শিক্ষার্থীদের সাথে যোগাযোগ এবং TSF কমিউনিটিতে অবদান রাখতে পারবেন।">
+            Teachers will have a dedicated area to manage learning resources,
+            communicate with students and contribute to the TSF community.
+          </p>
 
 
-        <div class="hero-actions">
+          <div class="teacher-buttons">
 
-          <button
-            class="primary-button"
-            onclick="startLearning()"
-          >
+            <button id="teacherLoginBtn"
+                    class="btn btn-white">
 
-            🎓 Start Learning
+              🔐
+
+              <span data-en="Teacher Login"
+                    data-bn="Teacher Login">
+                Teacher Login
+              </span>
+
+            </button>
+
+            <a href="#ask-teacher"
+               class="btn btn-outline-white">
+
+              💬
+
+              <span data-en="Ask Teacher"
+                    data-bn="শিক্ষককে জিজ্ঞাসা করুন">
+                Ask Teacher
+              </span>
+
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="security-card">
+
+          <div class="security-top">
+            <span>🔒</span>
+            <strong data-en="Protected Access"
+                    data-bn="নিরাপদ Access">
+              Protected Access
+            </strong>
+          </div>
+
+          <p data-en="Teacher and administrator areas will use secure authentication. Only approved accounts will receive access."
+             data-bn="Teacher এবং administrator area নিরাপদ authentication ব্যবহার করবে। শুধুমাত্র অনুমোদিত account-ই access পাবে।">
+            Teacher and administrator areas will use secure authentication.
+            Only approved accounts will receive access.
+          </p>
+
+          <div class="security-line">
+            <span>✓</span>
+            <span data-en="Approved accounts only"
+                  data-bn="শুধু অনুমোদিত account">
+              Approved accounts only
+            </span>
+          </div>
+
+          <div class="security-line">
+            <span>✓</span>
+            <span data-en="Protected admin area"
+                  data-bn="সুরক্ষিত admin area">
+              Protected admin area
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= ASK TEACHER ================= -->
+
+    <section id="ask-teacher" class="section ask-section">
+
+      <div class="container">
+
+        <div class="ask-box">
+
+          <div class="ask-content">
+
+            <span class="section-tag"
+                  data-en="ASK TEACHER"
+                  data-bn="শিক্ষককে জিজ্ঞাসা করুন">
+              ASK TEACHER
+            </span>
+
+            <h2 data-en="Have a question? Ask a teacher."
+                data-bn="কোনো প্রশ্ন আছে? একজন শিক্ষককে জিজ্ঞাসা করুন।">
+              Have a question? Ask a teacher.
+            </h2>
+
+            <p data-en="Connect with teachers and get guidance when you need it."
+               data-bn="প্রয়োজনের সময় শিক্ষকদের সাথে যোগাযোগ করুন এবং পরামর্শ নিন।">
+              Connect with teachers and get guidance when you need it.
+            </p>
+
+          </div>
+
+
+          <button class="btn btn-primary"
+                  id="askTeacherBtn">
+
+            <span>💬</span>
+
+            <span data-en="Ask a Question"
+                  data-bn="প্রশ্ন করুন">
+              Ask a Question
+            </span>
 
           </button>
 
-
-          <button
-            class="secondary-button"
-            onclick="joinAsTeacher()"
-          >
-
-            👨‍🏫 Join as Teacher
-
-          </button>
-
-        </div>
-
-
-        <div class="hero-trust">
-
-          <span>✓ Student-focused</span>
-
-          <span>✓ Teacher-friendly</span>
-
-          <span>✓ Built for the future</span>
-
         </div>
 
       </div>
 
-
-      <!-- HERO VISUAL -->
-
-      <div class="hero-visual">
-
-        <div class="visual-card main-card">
-
-          <div class="card-top">
-
-            <div class="mini-logo">
-              M
-            </div>
-
-            <span>
-              TSF Learning
-            </span>
-
-          </div>
+    </section>
 
 
-          <div class="learning-title">
+    <!-- ================= CONTACT ================= -->
 
-            Your learning journey
+    <section id="contact" class="section contact-section">
 
-          </div>
+      <div class="container">
 
+        <div class="section-heading">
 
-          <div class="progress-area">
+          <span class="section-tag"
+                data-en="CONTACT"
+                data-bn="যোগাযোগ">
+            CONTACT
+          </span>
 
-            <div class="progress-label">
+          <h2 data-en="Let's stay connected."
+              data-bn="চলুন যোগাযোগ রাখি।">
+            Let's stay connected.
+          </h2>
 
-              <span>
-                Today's progress
-              </span>
+          <p data-en="Need help or want to talk directly? Choose a way to contact us."
+             data-bn="সাহায্য দরকার বা সরাসরি কথা বলতে চান? যোগাযোগের একটি মাধ্যম বেছে নিন।">
+            Need help or want to talk directly?
+            Choose a way to contact us.
+          </p>
 
-              <strong>
-                72%
-              </strong>
-
-            </div>
-
-
-            <div class="progress-bar">
-
-              <div
-                class="progress"
-                style="width:72%"
-              ></div>
-
-            </div>
-
-          </div>
+        </div>
 
 
-          <div class="mini-grid">
+        <div class="contact-grid">
+
+          <a class="contact-card whatsapp"
+             href="https://wa.me/8801979840081"
+             target="_blank"
+             rel="noopener">
+
+            <div class="contact-icon">💚</div>
 
             <div>
-              📚
-              <strong>
-                Lessons
-              </strong>
-              <span>
-                Learn
-              </span>
-            </div>
-
-            <div>
-              📝
-              <strong>
-                Practice
-              </strong>
-              <span>
-                Improve
-              </span>
-            </div>
-
-            <div>
-              🏆
-              <strong>
-                Progress
-              </strong>
-              <span>
-                Grow
-              </span>
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="floating-card floating-one">
-
-          👨‍🏫
-
-          <div>
-
-            <strong>
-              Teachers
-            </strong>
-
-            <span>
-              Inspire
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <div class="floating-card floating-two">
-
-          🎓
-
-          <div>
-
-            <strong>
-              Students
-            </strong>
-
-            <span>
-              Achieve
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         STATS
-    ========================== -->
-
-    <section class="stats">
-
-      <div class="stat">
-
-        <strong>
-          01
-        </strong>
-
-        <span>
-          Learn
-        </span>
-
-      </div>
-
-
-      <div class="stat">
-
-        <strong>
-          02
-        </strong>
-
-        <span>
-          Connect
-        </span>
-
-      </div>
-
-
-      <div class="stat">
-
-        <strong>
-          03
-        </strong>
-
-        <span>
-          Create
-        </span>
-
-      </div>
-
-
-      <div class="stat">
-
-        <strong>
-          04
-        </strong>
-
-        <span>
-          Grow
-        </span>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         ABOUT
-    ========================== -->
-
-    <section
-      class="content-section"
-      id="about"
-    >
-
-      <div class="section-heading">
-
-        <span>
-          ABOUT TSF
-        </span>
-
-        <h2>
-          Learning should feel connected.
-        </h2>
-
-        <p>
-
-          TSF is being designed as a digital
-          environment where students can learn,
-          teachers can teach, and both can build
-          a stronger learning community.
-
-        </p>
-
-      </div>
-
-
-      <div class="about-grid">
-
-        <div class="about-card">
-
-          <div class="feature-icon">
-            🎓
-          </div>
-
-          <h3>
-            For Students
-          </h3>
-
-          <p>
-
-            Access learning resources, practice,
-            track progress and discover new ways
-            to improve.
-
-          </p>
-
-        </div>
-
-
-        <div class="about-card">
-
-          <div class="feature-icon">
-            👨‍🏫
-          </div>
-
-          <h3>
-            For Teachers
-          </h3>
-
-          <p>
-
-            Create useful learning content,
-            organize lessons and support
-            students more effectively.
-
-          </p>
-
-        </div>
-
-
-        <div class="about-card">
-
-          <div class="feature-icon">
-            🤝
-          </div>
-
-          <h3>
-            For Everyone
-          </h3>
-
-          <p>
-
-            Build meaningful connections around
-            education, knowledge and growth.
-
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         FEATURES
-    ========================== -->
-
-    <section
-      class="content-section"
-      id="features"
-    >
-
-      <div class="section-heading">
-
-        <span>
-          PLATFORM
-        </span>
-
-        <h2>
-          Everything in one learning space.
-        </h2>
-
-        <p>
-
-          TSF is designed to grow into a complete
-          education platform.
-
-        </p>
-
-      </div>
-
-
-      <div class="feature-grid">
-
-        <article class="feature-card">
-
-          <div class="feature-icon">
-            📚
-          </div>
-
-          <h3>
-            Learning Library
-          </h3>
-
-          <p>
-            Organize notes, lessons and useful
-            educational resources.
-          </p>
-
-        </article>
-
-
-        <article class="feature-card">
-
-          <div class="feature-icon">
-            📝
-          </div>
-
-          <h3>
-            Practice & Quiz
-          </h3>
-
-          <p>
-            Practice knowledge through questions,
-            quizzes and assessments.
-          </p>
-
-        </article>
-
-
-        <article class="feature-card">
-
-          <div class="feature-icon">
-            📊
-          </div>
-
-          <h3>
-            Progress
-          </h3>
-
-          <p>
-            Understand learning progress and
-            celebrate achievements.
-          </p>
-
-        </article>
-
-
-        <article class="feature-card">
-
-          <div class="feature-icon">
-            🤖
-          </div>
-
-          <h3>
-            Smart Learning
-          </h3>
-
-          <p>
-            Prepare the platform for future
-            intelligent learning tools.
-          </p>
-
-        </article>
-
-
-        <article class="feature-card">
-
-          <div class="feature-icon">
-            👥
-          </div>
-
-          <h3>
-            Community
-          </h3>
-
-          <p>
-            Create a friendly environment for
-            students and teachers.
-          </p>
-
-        </article>
-
-
-        <article class="feature-card">
-
-          <div class="feature-icon">
-            🔐
-          </div>
-
-          <h3>
-            Secure Accounts
-          </h3>
-
-          <p>
-            Build toward secure student, teacher
-            and administrator accounts.
-          </p>
-
-        </article>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         COMMUNITY
-    ========================== -->
-
-    <section
-      class="community"
-      id="community"
-    >
-
-      <div>
-
-        <span>
-          THE FUTURE OF TSF
-        </span>
-
-        <h2>
-          Learn together.
-          Grow together.
-        </h2>
-
-        <p>
-
-          We are building TSF step by step,
-          with students and teachers at the
-          center of the experience.
-
-        </p>
-
-      </div>
-
-
-      <button
-        class="primary-button"
-        onclick="startLearning()"
-      >
-        Explore TSF
-      </button>
-
-    </section>
-
-
-  </main>
-
-
-  <!-- =========================
-       LOGIN MODAL
-  ========================== -->
-
-  <div
-    class="modal"
-    id="loginModal"
-  >
-
-    <div class="modal-box">
-
-      <button
-        class="close-button"
-        onclick="closeLogin()"
-      >
-        ×
-      </button>
-
-
-      <div class="modal-logo">
-        M
-      </div>
-
-
-      <h2>
-        Welcome to TSF
-      </h2>
-
-      <p>
-        Account features will be connected
-        in the next development phase.
-      </p>
-
-
-      <button
-        class="primary-button full"
-        onclick="closeLogin()"
-      >
-        Continue
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       FOOTER
-  ========================== -->
-
-  <footer>
-
-    <div class="footer-brand">
-
-      <div class="brand-logo">
-        M
-      </div>
-
-      <div>
-
-        <strong>
-          Teachers Students Friendship
-        </strong>
-
-        <p>
-          Learn • Connect • Grow Together
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="footer-links">
-
-      <a href="#home">
-        Home
-      </a>
-
-      <a href="#about">
-        About
-      </a>
-
-      <a href="#features">
-        Features
-      </a>
-
-      <a href="#community">
-        Community
-      </a>
-
-    </div>
-
-
-    <div class="copyright">
-
-      © <span id="year"></span>
-      Teachers Students Friendship
-
-    </div>
-
-  </footer>
-
-
-  <script>
-
-    // =========================
-    // YEAR
-    // =========================
-
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-
-
-    // =========================
-    // MOBILE MENU
-    // =========================
-
-    const menuButton =
-      document.getElementById("menuButton");
-
-    const mobileMenu =
-      document.getElementById("mobileMenu");
-
-
-    menuButton.addEventListener(
-      "click",
-      function () {
-
-        mobileMenu.classList.toggle("show");
-
-      }
-    );
-
-
-    document
-      .querySelectorAll(".mobile-menu a")
-      .forEach(function (link) {
-
-        link.addEventListener(
-          "click",
-          function () {
-
-            mobileMenu.classList.remove("show");
-
-          }
-        );
-
-      });
-
-
-    // =========================
-    // LOGIN
-    // =========================
-
-    function openLogin() {
-
-      document
-        .getElementById("loginModal")
-        .classList.add("show");
-
-      mobileMenu.classList.remove("show");
-
-    }
-
-
-    function closeLogin() {
-
-      document
-        .getElementById("loginModal")
-        .classList.remove("show");
-
-    }
-
-
-    // =========================
-    // ACTIONS
-    // =========================
-
-    function startLearning() {
-
-      alert(
-        "🎓 TSF Learning Space is coming next."
-      );
-
-    }
-
-
-    function joinAsTeacher() {
-
-      alert(
-        "👨‍🏫 Teacher Space is coming next."
-      );
-
-    }
-
-
-    // =========================
-    // CLOSE MODAL OUTSIDE
-    // =========================
-
-    document
-      .getElementById("loginModal")
-      .addEventListener(
-        "click",
-        function (event) {
-
-          if (
-            event.target === this
-          ) {
-
-            closeLogin();
-
-          }
-
-        }
-      );
-
-  </script>
-<script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./sw.js")
-        .then(() => console.log("TSF Service Worker registered"))
-        .catch(error => console.error("TSF Service Worker error:", error));
-    });
-  }
-</script>
-</body>
-</html>
+              <strong
