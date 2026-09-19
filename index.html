@@ -910,6 +910,14 @@
       );
 
   </script>
-
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw.js")
+        .then(() => console.log("TSF Service Worker registered"))
+        .catch(error => console.error("TSF Service Worker error:", error));
+    });
+  }
+</script>
 </body>
 </html>
