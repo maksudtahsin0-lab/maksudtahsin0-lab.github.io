@@ -1,0 +1,11 @@
+{
+  "name": "Teachers Students Friendship",
+  "short_name": "TSF",
+  "description": "Teachers Students Friendship — Learn, Connect and Grow Together.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f9fc",
+  "theme_color": "#0b1220",
+  "orientation": "portrait-primary"
+}
