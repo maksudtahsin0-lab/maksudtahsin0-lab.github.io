@@ -1,16 +1,45 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  /* ================================
+     TSF — Teachers Students Friendship
+     Main Website Script
+     ================================ */
+
   const SUPABASE_URL =
     "https://bdsyjobzvwulaifpehvq.supabase.co";
 
   const SUPABASE_KEY =
-    "তোমার_PUBLISHABLE_KEY";sb_publishable_uVJ41MtBIJbKAQvABmBCdQ_uWtrBzWP
+    "তোমার_PUBLISHABLE_KEY";
 
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+
+  /* ================================
+     Supabase
+     ================================ */
+
+  let supabaseClient = null;
+
+  if (
+    window.supabase &&
+    SUPABASE_KEY !== "তোমার_PUBLISHABLE_KEY"
+  ) {
+    try {
+      supabaseClient =
+        window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_KEY
+        );
+    } catch (error) {
+      console.error(
+        "Supabase initialization error:",
+        error
+      );
+    }
+  }
+
+
+  /* ================================
+     Elements
+     ================================ */
 
   const teacherLoginBtn =
     document.getElementById("teacherLoginBtn");
@@ -33,65 +62,105 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileMenu =
     document.getElementById("mobileMenu");
 
+  const askTeacherBtn =
+    document.getElementById("askTeacherBtn");
+
   const year =
     document.getElementById("year");
+
+
+  /* ================================
+     Year
+     ================================ */
 
   if (year) {
     year.textContent =
       new Date().getFullYear();
   }
 
-  /* =========================
-     MOBILE MENU
-  ========================= */
+
+  /* ================================
+     Mobile Menu
+     ================================ */
 
   if (menuButton && mobileMenu) {
 
-    menuButton.addEventListener("click", () => {
-      mobileMenu.classList.toggle("show");
-    });
+    menuButton.addEventListener(
+      "click",
+      () => {
+
+        mobileMenu.classList.toggle(
+          "show"
+        );
+
+      }
+    );
+
 
     mobileMenu
       .querySelectorAll("a")
       .forEach(link => {
 
-        link.addEventListener("click", () => {
-          mobileMenu.classList.remove("show");
-        });
+        link.addEventListener(
+          "click",
+          () => {
+
+            mobileMenu.classList.remove(
+              "show"
+            );
+
+          }
+        );
 
       });
 
   }
 
-  /* =========================
-     LANGUAGE
-  ========================= */
+
+  /* ================================
+     Language System
+     ================================ */
 
   let currentLanguage =
-    localStorage.getItem("tsf-language") || "en";
+    localStorage.getItem(
+      "tsf-language"
+    ) || "en";
+
 
   function applyLanguage(language) {
 
-    currentLanguage = language;
+    currentLanguage =
+      language;
 
     document.documentElement.lang =
-      language === "bn" ? "bn" : "en";
+      language === "bn"
+        ? "bn"
+        : "en";
+
 
     document.body.classList.toggle(
       "bn",
       language === "bn"
     );
 
+
     document
-      .querySelectorAll("[data-en][data-bn]")
+      .querySelectorAll(
+        "[data-en][data-bn]"
+      )
       .forEach(element => {
 
         element.textContent =
           language === "bn"
-            ? element.getAttribute("data-bn")
-            : element.getAttribute("data-en");
+            ? element.getAttribute(
+                "data-bn"
+              )
+            : element.getAttribute(
+                "data-en"
+              );
 
       });
+
 
     if (languageBtn) {
 
@@ -102,6 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+
     localStorage.setItem(
       "tsf-language",
       language
@@ -109,28 +179,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
-  applyLanguage(currentLanguage);
+
+  applyLanguage(
+    currentLanguage
+  );
+
 
   if (languageBtn) {
 
-    languageBtn.addEventListener("click", () => {
+    languageBtn.addEventListener(
+      "click",
+      () => {
 
-      applyLanguage(
-        currentLanguage === "en"
-          ? "bn"
-          : "en"
-      );
+        applyLanguage(
+          currentLanguage === "en"
+            ? "bn"
+            : "en"
+        );
 
-    });
+      }
+    );
 
   }
 
-  /* =========================
-     THEME
-  ========================= */
+
+  /* ================================
+     Theme
+     ================================ */
 
   let darkMode =
-    localStorage.getItem("tsf-theme") === "dark";
+    localStorage.getItem(
+      "tsf-theme"
+    ) === "dark";
+
 
   function applyTheme() {
 
@@ -139,59 +220,81 @@ document.addEventListener("DOMContentLoaded", () => {
       darkMode
     );
 
+
     if (themeBtn) {
 
       themeBtn.textContent =
-        darkMode ? "☀" : "◐";
+        darkMode
+          ? "☀"
+          : "◐";
 
     }
 
   }
 
+
   applyTheme();
+
 
   if (themeBtn) {
 
-    themeBtn.addEventListener("click", () => {
+    themeBtn.addEventListener(
+      "click",
+      () => {
 
-      darkMode = !darkMode;
+        darkMode =
+          !darkMode;
 
-      localStorage.setItem(
-        "tsf-theme",
-        darkMode ? "dark" : "light"
-      );
+        localStorage.setItem(
+          "tsf-theme",
+          darkMode
+            ? "dark"
+            : "light"
+        );
 
-      applyTheme();
+        applyTheme();
 
-    });
+      }
+    );
 
   }
 
-  /* =========================
-     LOGIN MODAL
-  ========================= */
+
+  /* ================================
+     Login Modal
+     ================================ */
 
   function openLogin() {
 
-    if (!loginModal) return;
+    if (!loginModal) {
+      return;
+    }
 
-    loginModal.classList.add("show");
+    loginModal.classList.add(
+      "show"
+    );
 
     document.body.style.overflow =
       "hidden";
 
   }
 
+
   function closeLogin() {
 
-    if (!loginModal) return;
+    if (!loginModal) {
+      return;
+    }
 
-    loginModal.classList.remove("show");
+    loginModal.classList.remove(
+      "show"
+    );
 
     document.body.style.overflow =
       "";
 
   }
+
 
   if (teacherLoginBtn) {
 
@@ -202,6 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
+
   if (closeModal) {
 
     closeModal.addEventListener(
@@ -211,30 +315,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
+
   if (loginModal) {
 
     loginModal.addEventListener(
       "click",
       event => {
 
-        if (event.target === loginModal) {
+        if (
+          event.target ===
+          loginModal
+        ) {
+
           closeLogin();
+
         }
 
       }
-
     );
 
   }
 
-  /* =========================
-     GOOGLE / LOGIN BUTTON
-  ========================= */
+
+  /* ================================
+     Ask Teacher
+     ================================ */
+
+  if (askTeacherBtn) {
+
+    askTeacherBtn.addEventListener(
+      "click",
+      () => {
+
+        const target =
+          document.getElementById(
+            "ask-teacher"
+          );
+
+        if (target) {
+
+          target.scrollIntoView({
+            behavior: "smooth"
+          });
+
+        }
+
+      }
+    );
+
+  }
+
+
+  /* ================================
+     Login Button
+     ================================ */
 
   const loginButton =
     document.querySelector(
       ".modal-login-btn"
     );
+
 
   if (loginButton) {
 
@@ -242,47 +382,84 @@ document.addEventListener("DOMContentLoaded", () => {
       "click",
       async () => {
 
+        if (!supabaseClient) {
+
+          showMessage(
+            currentLanguage === "bn"
+              ? "⚠️ Supabase এখনো সংযুক্ত হয়নি।"
+              : "⚠️ Supabase is not connected yet."
+          );
+
+          return;
+
+        }
+
+
+        const email =
+          prompt(
+            currentLanguage === "bn"
+              ? "আপনার Super Admin email দিন:"
+              : "Enter your Super Admin email:"
+          );
+
+
+        if (!email) {
+          return;
+        }
+
+
+        const password =
+          prompt(
+            currentLanguage === "bn"
+              ? "আপনার password দিন:"
+              : "Enter your password:"
+          );
+
+
+        if (!password) {
+          return;
+        }
+
+
         try {
 
           const {
             data,
             error
           } =
-            await supabaseClient.auth.signInWithPassword({
+            await supabaseClient.auth
+              .signInWithPassword({
+                email:
+                  email.trim(),
+                password:
+                  password
+              });
 
-              email:
-                prompt(
-                  currentLanguage === "bn"
-                    ? "আপনার Super Admin email দিন:"
-                    : "Enter your Super Admin email:"
-                ),
-
-              password:
-                prompt(
-                  currentLanguage === "bn"
-                    ? "আপনার password দিন:"
-                    : "Enter your password:"
-                )
-
-            });
 
           if (error) {
             throw error;
           }
 
+
           await checkUserRole(
             data.user
           );
 
-        } catch (error) {
+        }
+
+        catch (error) {
+
+          console.error(
+            "Login error:",
+            error
+          );
+
 
           showMessage(
             currentLanguage === "bn"
-              ? "❌ Login সফল হয়নি।"
-              : "❌ Login failed."
+              ? "❌ Login সফল হয়নি। Email অথবা password পরীক্ষা করুন।"
+              : "❌ Login failed. Check your email or password."
           );
-
-          console.error(error);
 
         }
 
@@ -291,73 +468,119 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
-  /* =========================
-     CHECK ADMIN ROLE
-  ========================= */
 
-  async function checkUserRole(user) {
+  /* ================================
+     Check Super Admin Role
+     ================================ */
 
-    if (!user) return;
+  async function checkUserRole(
+    user
+  ) {
 
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", user.id)
-        .maybeSingle();
-
-    if (error) {
-
-      console.error(error);
-
-      showMessage(
-        "❌ Permission check failed."
-      );
-
+    if (!user) {
       return;
+    }
+
+
+    try {
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from("user_roles")
+          .select("role")
+          .eq(
+            "user_id",
+            user.id
+          )
+          .maybeSingle();
+
+
+      if (error) {
+
+        console.error(
+          "Role check error:",
+          error
+        );
+
+        showMessage(
+          currentLanguage === "bn"
+            ? "❌ Permission check করা যায়নি।"
+            : "❌ Permission check failed."
+        );
+
+        return;
+
+      }
+
+
+      if (
+        data &&
+        data.role ===
+          "super_admin"
+      ) {
+
+        showMessage(
+          currentLanguage === "bn"
+            ? "✅ Super Admin access অনুমোদিত!"
+            : "✅ Super Admin access approved!"
+        );
+
+
+        closeLogin();
+
+
+        setTimeout(
+          () => {
+
+            window.location.href =
+              "./admin.html";
+
+          },
+          800
+        );
+
+
+      }
+
+      else {
+
+        await supabaseClient.auth
+          .signOut();
+
+
+        showMessage(
+          currentLanguage === "bn"
+            ? "⛔ আপনার Super Admin permission নেই।"
+            : "⛔ You do not have Super Admin permission."
+        );
+
+      }
 
     }
 
-    if (
-      data &&
-      data.role === "super_admin"
-    ) {
+    catch (error) {
 
-      showMessage(
-        currentLanguage === "bn"
-          ? "✅ Super Admin হিসেবে অনুমোদিত।"
-          : "✅ Super Admin access approved."
+      console.error(
+        error
       );
 
-      closeLogin();
-
-      setTimeout(() => {
-
-        window.location.href =
-          "admin.html";
-
-      }, 1000);
-
-    } else {
-
-      await supabaseClient.auth.signOut();
-
       showMessage(
         currentLanguage === "bn"
-          ? "⛔ আপনার Super Admin permission নেই।"
-          : "⛔ You do not have Super Admin permission."
+          ? "❌ Security verification failed."
+          : "❌ Security verification failed."
       );
 
     }
 
   }
 
-  /* =========================
-     MESSAGE
-  ========================= */
+
+  /* ================================
+     Message System
+     ================================ */
 
   window.showMessage =
     function(message) {
@@ -367,13 +590,18 @@ document.addEventListener("DOMContentLoaded", () => {
           "tsfMessage"
         );
 
+
       if (!box) {
 
         box =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         box.id =
           "tsfMessage";
+
 
         box.style.position =
           "fixed";
@@ -397,7 +625,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "#111827";
 
         box.style.color =
-          "#fff";
+          "#ffffff";
 
         box.style.fontWeight =
           "700";
@@ -408,29 +636,45 @@ document.addEventListener("DOMContentLoaded", () => {
         box.style.transition =
           ".3s ease";
 
+        box.style.maxWidth =
+          "90%";
+
+        box.style.textAlign =
+          "center";
+
+
         document.body.appendChild(
           box
         );
 
       }
 
+
       box.textContent =
         message;
 
-      requestAnimationFrame(() => {
 
-        box.style.transform =
-          "translate(-50%, 0)";
+      requestAnimationFrame(
+        () => {
 
-      });
+          box.style.transform =
+            "translate(-50%, 0)";
 
-      setTimeout(() => {
+        }
+      );
 
-        box.style.transform =
-          "translate(-50%, 100px)";
 
-      }, 2800);
+      setTimeout(
+        () => {
+
+          box.style.transform =
+            "translate(-50%, 100px)";
+
+        },
+        2800
+      );
 
     };
+
 
 });
