@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0b1220"
+  >
+
+  <meta
+    name="description"
+    content="Teachers Students Friendship — Learn, Connect and Grow Together."
+  >
+
+  <title>
+    Teachers Students Friendship | TSF
+  </title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header class="header">
+
+    <a href="#" class="brand">
+
+      <div class="brand-logo">
+        M
+      </div>
+
+      <div class="brand-text">
+
+        <strong>
+          Teachers Students Friendship
+        </strong>
+
+        <span>
+          Learn • Connect • Grow Together
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <nav class="desktop-nav">
+
+      <a href="#home">
+        Home
+      </a>
+
+      <a href="#about">
+        About
+      </a>
+
+      <a href="#features">
+        Features
+      </a>
+
+      <a href="#community">
+        Community
+      </a>
+
+      <button
+        class="nav-button"
+        onclick="openLogin()"
+      >
+        Sign In
+      </button>
+
+    </nav>
+
+
+    <button
+      class="menu-button"
+      id="menuButton"
+      aria-label="Open menu"
+    >
+      ☰
+    </button>
+
+  </header>
+
+
+  <!-- =========================
+       MOBILE MENU
+  ========================== -->
+
+  <div
+    class="mobile-menu"
+    id="mobileMenu"
+  >
+
+    <a href="#home">
+      Home
+    </a>
+
+    <a href="#about">
+      About
+    </a>
+
+    <a href="#features">
+      Features
+    </a>
+
+    <a href="#community">
+      Community
+    </a>
+
+    <button onclick="openLogin()">
+      Sign In
+    </button>
+
+  </div>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main>
+
+
+    <!-- HERO -->
+
+    <section
+      class="hero"
+      id="home"
+    >
+
+      <div class="hero-content">
+
+        <div class="eyebrow">
+          🌍 A NEW WAY TO LEARN TOGETHER
+        </div>
+
+
+        <h1>
+
+          Where
+          <span>
+            Teachers
+          </span>
+
+          and
+
+          <span>
+            Students
+          </span>
+
+          grow together.
+
+        </h1>
+
+
+        <p>
+
+          Teachers Students Friendship is a modern
+          learning platform designed to connect
+          teachers and students through knowledge,
+          collaboration and meaningful learning.
+
+        </p>
+
+
+        <div class="hero-actions">
+
+          <button
+            class="primary-button"
+            onclick="startLearning()"
+          >
+
+            🎓 Start Learning
+
+          </button>
+
+
+          <button
+            class="secondary-button"
+            onclick="joinAsTeacher()"
+          >
+
+            👨‍🏫 Join as Teacher
+
+          </button>
+
+        </div>
+
+
+        <div class="hero-trust">
+
+          <span>✓ Student-focused</span>
+
+          <span>✓ Teacher-friendly</span>
+
+          <span>✓ Built for the future</span>
+
+        </div>
+
+      </div>
+
+
+      <!-- HERO VISUAL -->
+
+      <div class="hero-visual">
+
+        <div class="visual-card main-card">
+
+          <div class="card-top">
+
+            <div class="mini-logo">
+              M
+            </div>
+
+            <span>
+              TSF Learning
+            </span>
+
+          </div>
+
+
+          <div class="learning-title">
+
+            Your learning journey
+
+          </div>
+
+
+          <div class="progress-area">
+
+            <div class="progress-label">
+
+              <span>
+                Today's progress
+              </span>
+
+              <strong>
+                72%
+              </strong>
+
+            </div>
+
+
+            <div class="progress-bar">
+
+              <div
+                class="progress"
+                style="width:72%"
+              ></div>
+
+            </div>
+
+          </div>
+
+
+          <div class="mini-grid">
+
+            <div>
+              📚
+              <strong>
+                Lessons
+              </strong>
+              <span>
+                Learn
+              </span>
+            </div>
+
+            <div>
+              📝
+              <strong>
+                Practice
+              </strong>
+              <span>
+                Improve
+              </span>
+            </div>
+
+            <div>
+              🏆
+              <strong>
+                Progress
+              </strong>
+              <span>
+                Grow
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="floating-card floating-one">
+
+          👨‍🏫
+
+          <div>
+
+            <strong>
+              Teachers
+            </strong>
+
+            <span>
+              Inspire
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="floating-card floating-two">
+
+          🎓
+
+          <div>
+
+            <strong>
+              Students
+            </strong>
+
+            <span>
+              Achieve
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         STATS
+    ========================== -->
+
+    <section class="stats">
+
+      <div class="stat">
+
+        <strong>
+          01
+        </strong>
+
+        <span>
+          Learn
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <strong>
+          02
+        </strong>
+
+        <span>
+          Connect
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <strong>
+          03
+        </strong>
+
+        <span>
+          Create
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <strong>
+          04
+        </strong>
+
+        <span>
+          Grow
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section
+      class="content-section"
+      id="about"
+    >
+
+      <div class="section-heading">
+
+        <span>
+          ABOUT TSF
+        </span>
+
+        <h2>
+          Learning should feel connected.
+        </h2>
+
+        <p>
+
+          TSF is being designed as a digital
+          environment where students can learn,
+          teachers can teach, and both can build
+          a stronger learning community.
+
+        </p>
+
+      </div>
+
+
+      <div class="about-grid">
+
+        <div class="about-card">
+
+          <div class="feature-icon">
+            🎓
+          </div>
+
+          <h3>
+            For Students
+          </h3>
+
+          <p>
+
+            Access learning resources, practice,
+            track progress and discover new ways
+            to improve.
+
+          </p>
+
+        </div>
+
+
+        <div class="about-card">
+
+          <div class="feature-icon">
+            👨‍🏫
+          </div>
+
+          <h3>
+            For Teachers
+          </h3>
+
+          <p>
+
+            Create useful learning content,
+            organize lessons and support
+            students more effectively.
+
+          </p>
+
+        </div>
+
+
+        <div class="about-card">
+
+          <div class="feature-icon">
+            🤝
+          </div>
+
+          <h3>
+            For Everyone
+          </h3>
+
+          <p>
+
+            Build meaningful connections around
+            education, knowledge and growth.
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         FEATURES
+    ========================== -->
+
+    <section
+      class="content-section"
+      id="features"
+    >
+
+      <div class="section-heading">
+
+        <span>
+          PLATFORM
+        </span>
+
+        <h2>
+          Everything in one learning space.
+        </h2>
+
+        <p>
+
+          TSF is designed to grow into a complete
+          education platform.
+
+        </p>
+
+      </div>
+
+
+      <div class="feature-grid">
+
+        <article class="feature-card">
+
+          <div class="feature-icon">
+            📚
+          </div>
+
+          <h3>
+            Learning Library
+          </h3>
+
+          <p>
+            Organize notes, lessons and useful
+            educational resources.
+          </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+          <div class="feature-icon">
+            📝
+          </div>
+
+          <h3>
+            Practice & Quiz
+          </h3>
+
+          <p>
+            Practice knowledge through questions,
+            quizzes and assessments.
+          </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+          <div class="feature-icon">
+            📊
+          </div>
+
+          <h3>
+            Progress
+          </h3>
+
+          <p>
+            Understand learning progress and
+            celebrate achievements.
+          </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+          <div class="feature-icon">
+            🤖
+          </div>
+
+          <h3>
+            Smart Learning
+          </h3>
+
+          <p>
+            Prepare the platform for future
+            intelligent learning tools.
+          </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+          <div class="feature-icon">
+            👥
+          </div>
+
+          <h3>
+            Community
+          </h3>
+
+          <p>
+            Create a friendly environment for
+            students and teachers.
+          </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+          <div class="feature-icon">
+            🔐
+          </div>
+
+          <h3>
+            Secure Accounts
+          </h3>
+
+          <p>
+            Build toward secure student, teacher
+            and administrator accounts.
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         COMMUNITY
+    ========================== -->
+
+    <section
+      class="community"
+      id="community"
+    >
+
+      <div>
+
+        <span>
+          THE FUTURE OF TSF
+        </span>
+
+        <h2>
+          Learn together.
+          Grow together.
+        </h2>
+
+        <p>
+
+          We are building TSF step by step,
+          with students and teachers at the
+          center of the experience.
+
+        </p>
+
+      </div>
+
+
+      <button
+        class="primary-button"
+        onclick="startLearning()"
+      >
+        Explore TSF
+      </button>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================
+       LOGIN MODAL
+  ========================== -->
+
+  <div
+    class="modal"
+    id="loginModal"
+  >
+
+    <div class="modal-box">
+
+      <button
+        class="close-button"
+        onclick="closeLogin()"
+      >
+        ×
+      </button>
+
+
+      <div class="modal-logo">
+        M
+      </div>
+
+
+      <h2>
+        Welcome to TSF
+      </h2>
+
+      <p>
+        Account features will be connected
+        in the next development phase.
+      </p>
+
+
+      <button
+        class="primary-button full"
+        onclick="closeLogin()"
+      >
+        Continue
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="footer-brand">
+
+      <div class="brand-logo">
+        M
+      </div>
+
+      <div>
+
+        <strong>
+          Teachers Students Friendship
+        </strong>
+
+        <p>
+          Learn • Connect • Grow Together
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-links">
+
+      <a href="#home">
+        Home
+      </a>
+
+      <a href="#about">
+        About
+      </a>
+
+      <a href="#features">
+        Features
+      </a>
+
+      <a href="#community">
+        Community
+      </a>
+
+    </div>
+
+
+    <div class="copyright">
+
+      © <span id="year"></span>
+      Teachers Students Friendship
+
+    </div>
+
+  </footer>
+
+
+  <script>
+
+    // =========================
+    // YEAR
+    // =========================
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+
+    // =========================
+    // MOBILE MENU
+    // =========================
+
+    const menuButton =
+      document.getElementById("menuButton");
+
+    const mobileMenu =
+      document.getElementById("mobileMenu");
+
+
+    menuButton.addEventListener(
+      "click",
+      function () {
+
+        mobileMenu.classList.toggle("show");
+
+      }
+    );
+
+
+    document
+      .querySelectorAll(".mobile-menu a")
+      .forEach(function (link) {
+
+        link.addEventListener(
+          "click",
+          function () {
+
+            mobileMenu.classList.remove("show");
+
+          }
+        );
+
+      });
+
+
+    // =========================
+    // LOGIN
+    // =========================
+
+    function openLogin() {
+
+      document
+        .getElementById("loginModal")
+        .classList.add("show");
+
+      mobileMenu.classList.remove("show");
+
+    }
+
+
+    function closeLogin() {
+
+      document
+        .getElementById("loginModal")
+        .classList.remove("show");
+
+    }
+
+
+    // =========================
+    // ACTIONS
+    // =========================
+
+    function startLearning() {
+
+      alert(
+        "🎓 TSF Learning Space is coming next."
+      );
+
+    }
+
+
+    function joinAsTeacher() {
+
+      alert(
+        "👨‍🏫 Teacher Space is coming next."
+      );
+
+    }
+
+
+    // =========================
+    // CLOSE MODAL OUTSIDE
+    // =========================
+
+    document
+      .getElementById("loginModal")
+      .addEventListener(
+        "click",
+        function (event) {
+
+          if (
+            event.target === this
+          ) {
+
+            closeLogin();
+
+          }
+
+        }
+      );
+
+  </script>
+
+</body>
+</html>
