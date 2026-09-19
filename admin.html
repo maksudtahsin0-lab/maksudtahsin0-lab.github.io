@@ -837,10 +837,13 @@
       </form>
 
       <div class="auth-links">
-        <button id="forgotPasswordButton" type="button">
-          Forgot Password?
-        </button>
-      </div>
+        <button
+  id="forgotPasswordButton"
+  type="button"
+  onclick="window.TSF_ADMIN && window.TSF_ADMIN.forgotPassword()"
+>
+  Forgot Password?
+</button>
 
     </div>
   </section>
