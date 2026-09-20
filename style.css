@@ -1871,4 +1871,198 @@ select:focus-visible {
 
     transition-duration: 0.01ms !important;
   }
+}/* =========================================
+   TSF — Language & Dark Mode
+   Keeps the existing design intact
+   ========================================= */
+
+:root {
+  --tsf-bg: #ffffff;
+  --tsf-text: #122033;
+  --tsf-muted: #68778a;
+  --tsf-card: #ffffff;
+  --tsf-border: #e5ebf2;
+}
+
+body.tsf-dark {
+  --tsf-bg: #07111f;
+  --tsf-text: #edf5ff;
+  --tsf-muted: #a8b7c9;
+  --tsf-card: #0e1a2b;
+  --tsf-border: #26384d;
+
+  background: var(--tsf-bg);
+  color: var(--tsf-text);
+}
+
+body.tsf-dark .tsf-header {
+  background: rgba(7, 17, 31, 0.92);
+  border-color: var(--tsf-border);
+}
+
+body.tsf-dark .top-menu,
+body.tsf-dark .header-button,
+body.tsf-dark .secondary-button,
+body.tsf-dark .application-card,
+body.tsf-dark .feature-card,
+body.tsf-dark .announcement-card {
+  background: var(--tsf-card);
+  color: var(--tsf-text);
+  border-color: var(--tsf-border);
+}
+
+body.tsf-dark .hero-description,
+body.tsf-dark .brand-text small {
+  color: var(--tsf-muted);
+}
+
+body.tsf-dark .tsf-footer {
+  background: #050c16;
+}
+
+/* Language button */
+
+.tsf-language-button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--tsf-border);
+  border-radius: 13px;
+  background: var(--tsf-card);
+  color: var(--tsf-text);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* Settings panel */
+
+.tsf-settings-panel {
+  position: fixed;
+  z-index: 9999;
+  right: 18px;
+  top: 80px;
+
+  width: min(350px, calc(100vw - 36px));
+
+  background: var(--tsf-card);
+  color: var(--tsf-text);
+
+  border: 1px solid var(--tsf-border);
+  border-radius: 22px;
+
+  padding: 18px;
+
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.22);
+
+  display: none;
+}
+
+.tsf-settings-panel.open {
+  display: block;
+  animation: tsfSettingsIn 0.2s ease;
+}
+
+@keyframes tsfSettingsIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.tsf-settings-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.tsf-settings-head strong {
+  font-size: 16px;
+}
+
+.tsf-close {
+  border: none;
+  background: transparent;
+  color: var(--tsf-text);
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.tsf-setting-row {
+  padding: 13px 0;
+  border-top: 1px solid var(--tsf-border);
+}
+
+.tsf-setting-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 850;
+  margin-bottom: 9px;
+}
+
+.tsf-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+}
+
+.tsf-choice {
+  border: 1px solid var(--tsf-border);
+  background: transparent;
+  color: var(--tsf-text);
+
+  border-radius: 12px;
+  padding: 9px 6px;
+
+  font-size: 12px;
+  font-weight: 750;
+
+  cursor: pointer;
+}
+
+.tsf-choice.active {
+  background: #dff8f2;
+  border-color: #15977f;
+  color: #127b68;
+}
+
+body.tsf-dark .tsf-choice.active {
+  background: #123d36;
+  color: #62e0c7;
+}
+
+.tsf-theme-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.tsf-settings-note {
+  color: var(--tsf-muted);
+  font-size: 11px;
+  margin-top: 12px;
+}
+
+/* Arabic support */
+
+html[dir="rtl"] .tsf-settings-panel {
+  right: auto;
+  left: 18px;
+}
+
+@media (max-width: 600px) {
+
+  .tsf-settings-panel {
+    right: 10px;
+    top: 72px;
+    width: calc(100vw - 20px);
+  }
+
+  html[dir="rtl"] .tsf-settings-panel {
+    right: auto;
+    left: 10px;
+  }
+
 }
