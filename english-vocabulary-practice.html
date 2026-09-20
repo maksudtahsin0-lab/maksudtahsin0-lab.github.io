@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Vocabulary Practice • TSF</title>
+
+  <style>
+    :root{
+      --bg:#f6f9fc;
+      --card:#ffffff;
+      --text:#122033;
+      --muted:#68778a;
+      --primary:#15977f;
+      --border:#e3eaf1;
+      --soft:#e4f8f3;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    .page{
+      max-width:1000px;
+      margin:auto;
+      padding:24px;
+    }
+
+    .hero{
+      padding:45px 30px;
+      border-radius:30px;
+      background:linear-gradient(135deg,#e8faf5,#ffffff,#eef4ff);
+      border:1px solid var(--border);
+      box-shadow:0 20px 60px rgba(20,40,70,.08);
+    }
+
+    .brand{
+      color:var(--primary);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.18em;
+    }
+
+    h1{
+      margin:12px 0 10px;
+      font-size:clamp(35px,7vw,58px);
+      line-height:1;
+      letter-spacing:-.05em;
+    }
+
+    .hero p{
+      max-width:680px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .back{
+      display:inline-block;
+      margin-top:18px;
+      padding:12px 17px;
+      border-radius:12px;
+      background:#122033;
+      color:#fff;
+      text-decoration:none;
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .practice{
+      margin-top:35px;
+    }
+
+    .question{
+      margin-bottom:16px;
+      padding:22px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:20px;
+      box-shadow:0 7px 25px rgba(20,40,70,.05);
+    }
+
+    .number{
+      display:inline-grid;
+      place-items:center;
+      width:34px;
+      height:34px;
+      margin-bottom:12px;
+      border-radius:10px;
+      background:var(--soft);
+      color:#127b68;
+      font-size:12px;
+      font-weight:900;
+    }
+
+    .question-text{
+      font-size:15px;
+      font-weight:800;
+      line-height:1.7;
+      margin-bottom:15px;
+    }
+
+    .options{
+      display:grid;
+      gap:8px;
+    }
+
+    .option{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:11px 13px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      cursor:pointer;
+      font-size:13px;
+      transition:.15s;
+    }
+
+    .option:hover{
+      border-color:var(--primary);
+      background:#f7fbfa;
+    }
+
+    .option input{
+      accent-color:var(--primary);
+    }
+
+    .submit{
+      width:100%;
+      margin-top:5px;
+      padding:15px;
+      border:0;
+      border-radius:15px;
+      background:var(--primary);
+      color:#fff;
+      font-size:14px;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .result{
+      display:none;
+      margin-top:22px;
+      padding:25px;
+      text-align:center;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:22px;
+    }
+
+    .score{
+      font-size:40px;
+      font-weight:900;
+      color:var(--primary);
+    }
+
+    .result p{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .retry{
+      margin-top:10px;
+      padding:11px 16px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      color:var(--text);
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      padding:45px 10px 20px;
+      font-size:12px;
+    }
+
+    @media(max-width:600px){
+      .page{
+        padding:15px;
+      }
+
+      .hero{
+        padding:32px 21px;
+        border-radius:24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <section class="hero">
+
+    <div class="brand">
+      TSF • M-A-S • ENGLISH
+    </div>
+
+    <h1>Vocabulary Practice</h1>
+
+    <p>
+      Test your vocabulary knowledge. Choose the correct meaning
+      of each English word and check your score instantly.
+    </p>
+
+    <a class="back" href="./english.html">
+      ← English Learning Hub
+    </a>
+
+  </section>
+
+
+  <form id="quiz" class="practice">
+
+    <div class="question">
+
+      <div class="number">01</div>
+
+      <div class="question-text">
+        What does <strong>“Brave”</strong> mean?
+      </div>
+
+      <div class="options">
+
+        <label class="option">
+          <input type="radio" name="q1" value="a">
+          Lazy
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q1" value="b">
+          সাহসী
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q1" value="c">
+          দুঃখী
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q1" value="d">
+          দুর্বল
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <div class="question">
+
+      <div class="number">02</div>
+
+      <div class="question-text">
+        What does <strong>“Improve”</strong> mean?
+      </div>
+
+      <div class="options">
+
+        <label class="option">
+          <input type="radio" name="q2" value="a">
+          ভুল করা
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q2" value="b">
+          উন্নতি করা
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q2" value="c">
+          থামা
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q2" value="d">
+          হারানো
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <div class="question">
+
+      <div class="number">03</div>
+
+      <div class="question-text">
+        What does <strong>“Knowledge”</strong> mean?
+      </div>
+
+      <div class="options">
+
+        <label class="option">
+          <input type="radio" name="q3" value="a">
+          জ্ঞান
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q3" value="b">
+          শক্তি
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q3" value="c">
+          গতি
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q3" value="d">
+          শব্দ
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <div class="question">
+
+      <div class="number">04</div>
+
+      <div class="question-text">
+        What does <strong>“Opportunity”</strong> mean?
+      </div>
+
+      <div class="options">
+
+        <label class="option">
+          <input type="radio" name="q4" value="a">
+          সমস্যা
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q4" value="b">
+          প্রশ্ন
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q4" value="c">
+          সুযোগ
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q4" value="d">
+          উত্তর
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <div class="question">
+
+      <div class="number">05</div>
+
+      <div class="question-text">
+        What does <strong>“Discover”</strong> mean?
+      </div>
+
+      <div class="options">
+
+        <label class="option">
+          <input type="radio" name="q5" value="a">
+          লুকানো
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q5" value="b">
+          আবিষ্কার করা
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q5" value="c">
+          ভুলে যাওয়া
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q5" value="d">
+          বন্ধ করা
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <button class="submit" type="submit">
+      Check My Score →
+    </button>
+
+  </form>
+
+
+  <div id="result" class="result">
+
+    <div id="score" class="score">
+      0 / 5
+    </div>
+
+    <p id="message">
+      Your result will appear here.
+    </p>
+
+    <button id="retry" class="retry" type="button">
+      Try Again
+    </button>
+
+  </div>
+
+
+  <footer>
+    M-A-S • Teachers Students Friendship<br>
+    Learn • Connect • Grow Together
+  </footer>
+
+</div>
+
+
+<script>
+
+  const answers = {
+    q1:"b",
+    q2:"b",
+    q3:"a",
+    q4:"c",
+    q5:"b"
+  };
+
+  const quiz = document.getElementById("quiz");
+  const result = document.getElementById("result");
+  const scoreElement = document.getElementById("score");
+  const messageElement = document.getElementById("message");
+  const retryButton = document.getElementById("retry");
+
+  quiz.addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+    let score = 0;
+
+    Object.keys(answers).forEach(function(question){
+
+      const selected = document.querySelector(
+        'input[name="' + question + '"]:checked'
+      );
+
+      if(selected && selected.value === answers[question]){
+        score++;
+      }
+
+    });
+
+    scoreElement.textContent = score + " / 5";
+
+    if(score === 5){
+      messageElement.textContent =
+        "Excellent! You got every answer correct. 🎉";
+    }else if(score >= 3){
+      messageElement.textContent =
+        "Good work! Keep practising your vocabulary. 💪";
+    }else{
+      messageElement.textContent =
+        "Keep learning and try again. Every practice makes you better. 📚";
+    }
+
+    result.style.display = "block";
+
+    result.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+  });
+
+
+  retryButton.addEventListener("click", function(){
+
+    quiz.reset();
+
+    result.style.display = "none";
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
+  });
+
+</script>
+
+</body>
+</html>
