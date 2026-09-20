@@ -1523,4 +1523,328 @@
     initTSF();
   }
 
+})();/* =========================================
+   TSF — Language + Dark Mode Controller
+   ========================================= */
+
+(function () {
+  "use strict";
+
+  const LANGUAGES = {
+    bn: {
+      name: "বাংলা",
+      code: "বাং"
+    },
+
+    en: {
+      name: "English",
+      code: "EN"
+    },
+
+    ar: {
+      name: "العربية",
+      code: "ع"
+    }
+  };
+
+  function getLanguage() {
+    return localStorage.getItem("tsf-language") || "en";
+  }
+
+  function getTheme() {
+    return localStorage.getItem("tsf-theme") || "light";
+  }
+
+  function applyTheme() {
+    document.body.classList.toggle(
+      "tsf-dark",
+      getTheme() === "dark"
+    );
+  }
+
+  function applyLanguage() {
+    const language = getLanguage();
+
+    document.documentElement.lang = language;
+
+    if (language === "ar") {
+      document.documentElement.dir = "rtl";
+    } else {
+      document.documentElement.dir = "ltr";
+    }
+
+    const button = document.getElementById(
+      "tsfLanguageButton"
+    );
+
+    if (button) {
+      button.textContent =
+        LANGUAGES[language].code;
+    }
+
+    document
+      .querySelectorAll("[data-tsf-lang]")
+      .forEach(function (item) {
+        item.classList.toggle(
+          "active",
+          item.dataset.tsfLang === language
+        );
+      });
+  }
+
+  function createSettings() {
+
+    if (
+      document.getElementById(
+        "tsfSettingsPanel"
+      )
+    ) {
+      return;
+    }
+
+    const headerActions =
+      document.querySelector(
+        ".header-actions"
+      );
+
+    if (!headerActions) {
+      return;
+    }
+
+    /* Language button */
+
+    const languageButton =
+      document.createElement("button");
+
+    languageButton.id =
+      "tsfLanguageButton";
+
+    languageButton.className =
+      "tsf-language-button";
+
+    languageButton.type = "button";
+
+    languageButton.title =
+      "Language / اللغة / ভাষা";
+
+    headerActions.prepend(
+      languageButton
+    );
+
+    /* Settings panel */
+
+    const panel =
+      document.createElement("div");
+
+    panel.id =
+      "tsfSettingsPanel";
+
+    panel.className =
+      "tsf-settings-panel";
+
+    panel.innerHTML = `
+      <div class="tsf-settings-head">
+        <strong>TSF Settings</strong>
+
+        <button
+          class="tsf-close"
+          id="tsfSettingsClose"
+          type="button"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="tsf-setting-row">
+
+        <span class="tsf-setting-label">
+          Language / ভাষা / اللغة
+        </span>
+
+        <div class="tsf-choice-grid">
+
+          <button
+            class="tsf-choice"
+            data-tsf-lang="bn"
+            type="button"
+          >
+            বাংলা
+          </button>
+
+          <button
+            class="tsf-choice"
+            data-tsf-lang="en"
+            type="button"
+          >
+            English
+          </button>
+
+          <button
+            class="tsf-choice"
+            data-tsf-lang="ar"
+            type="button"
+          >
+            العربية
+          </button>
+
+        </div>
+      </div>
+
+      <div class="tsf-setting-row">
+
+        <span class="tsf-setting-label">
+          Theme / মোড
+        </span>
+
+        <div class="tsf-choice-grid tsf-theme-grid">
+
+          <button
+            class="tsf-choice"
+            data-tsf-theme="light"
+            type="button"
+          >
+            ☀️ Light
+          </button>
+
+          <button
+            class="tsf-choice"
+            data-tsf-theme="dark"
+            type="button"
+          >
+            🌙 Dark
+          </button>
+
+        </div>
+      </div>
+
+      <p class="tsf-settings-note">
+        Your preferences are saved on this device.
+      </p>
+    `;
+
+    document.body.appendChild(panel);
+
+    /* Open settings */
+
+    languageButton.addEventListener(
+      "click",
+      function () {
+        panel.classList.toggle(
+          "open"
+        );
+      }
+    );
+
+    /* Close settings */
+
+    document
+      .getElementById(
+        "tsfSettingsClose"
+      )
+      .addEventListener(
+        "click",
+        function () {
+          panel.classList.remove(
+            "open"
+          );
+        }
+      );
+
+    /* Language */
+
+    panel
+      .querySelectorAll(
+        "[data-tsf-lang]"
+      )
+      .forEach(function (button) {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            localStorage.setItem(
+              "tsf-language",
+              button.dataset.tsfLang
+            );
+
+            applyLanguage();
+          }
+        );
+
+      });
+
+    /* Theme */
+
+    panel
+      .querySelectorAll(
+        "[data-tsf-theme]"
+      )
+      .forEach(function (button) {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            localStorage.setItem(
+              "tsf-theme",
+              button.dataset.tsfTheme
+            );
+
+            applyTheme();
+
+            updateThemeButtons();
+          }
+        );
+
+      });
+
+    updateThemeButtons();
+  }
+
+  function updateThemeButtons() {
+
+    const theme =
+      getTheme();
+
+    document
+      .querySelectorAll(
+        "[data-tsf-theme]"
+      )
+      .forEach(function (button) {
+
+        button.classList.toggle(
+          "active",
+          button.dataset.tsfTheme === theme
+        );
+
+      });
+  }
+
+  function startTSFSettings() {
+
+    applyTheme();
+
+    createSettings();
+
+    applyLanguage();
+
+    updateThemeButtons();
+  }
+
+  if (
+    document.readyState ===
+    "loading"
+  ) {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      startTSFSettings
+    );
+
+  } else {
+
+    startTSFSettings();
+
+  }
+
 })();
