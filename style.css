@@ -2065,4 +2065,220 @@ html[dir="rtl"] .tsf-settings-panel {
     left: 10px;
   }
 
+}/* =========================================
+   TSF — Premium English Learning Hub
+   ========================================= */
+
+.tsf-english-hub {
+  max-width: 1180px;
+  margin: 70px auto;
+  padding: 0 24px;
+}
+
+.tsf-english-shell {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(24px, 5vw, 46px);
+  border: 1px solid var(--tsf-border, #e5ebf2);
+  border-radius: 30px;
+  background: linear-gradient(135deg, #effcf8, #ffffff 55%, #f4f8ff);
+  box-shadow: 0 24px 70px rgba(20, 40, 70, .08);
+}
+
+.tsf-english-shell::after {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  right: -80px;
+  top: -90px;
+  border-radius: 50%;
+  background: rgba(21, 151, 127, .10);
+  pointer-events: none;
+}
+
+body.tsf-dark .tsf-english-shell {
+  background: linear-gradient(135deg, #0d2926, #0e1a2b 60%, #111d31);
+}
+
+.tsf-english-kicker {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  color: #15977f;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .18em;
+}
+
+.tsf-english-title {
+  position: relative;
+  z-index: 1;
+  margin: 10px 0 8px;
+  color: var(--tsf-text, #122033);
+  font-size: clamp(30px, 5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -.045em;
+}
+
+.tsf-english-desc {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0;
+  color: var(--tsf-muted, #68778a);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.tsf-english-tools {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+  margin-top: 28px;
+}
+
+.tsf-english-tool {
+  min-height: 115px;
+  padding: 18px;
+  border: 1px solid var(--tsf-border, #e5ebf2);
+  border-radius: 20px;
+  background: var(--tsf-card, #fff);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.tsf-english-tool:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(20, 40, 70, .10);
+}
+
+.tsf-english-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+  border-radius: 13px;
+  background: #e4f8f3;
+  font-size: 20px;
+}
+
+body.tsf-dark .tsf-english-icon {
+  background: #123d36;
+}
+
+.tsf-english-tool strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--tsf-text, #122033);
+  font-size: 14px;
+}
+
+.tsf-english-tool span {
+  color: var(--tsf-muted, #68778a);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.tsf-english-app-title {
+  position: relative;
+  z-index: 1;
+  margin: 32px 0 13px;
+  color: var(--tsf-text, #122033);
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.tsf-english-apps {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
+}
+
+.tsf-english-app {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 17px;
+  border: 1px solid var(--tsf-border, #e5ebf2);
+  border-radius: 20px;
+  background: var(--tsf-card, #fff);
+}
+
+.tsf-english-app-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.tsf-english-app-icon {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: #e4f8f3;
+  font-size: 23px;
+}
+
+.tsf-english-app strong {
+  display: block;
+  color: var(--tsf-text, #122033);
+  font-size: 14px;
+}
+
+.tsf-english-app small {
+  display: block;
+  margin-top: 4px;
+  color: var(--tsf-muted, #68778a);
+  font-size: 11px;
+}
+
+.tsf-english-open {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #122033;
+  color: #fff;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 850;
+}
+
+body.tsf-dark .tsf-english-open {
+  background: #15977f;
+}
+
+@media (max-width: 850px) {
+  .tsf-english-tools {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .tsf-english-hub {
+    margin: 45px auto;
+    padding: 0 16px;
+  }
+
+  .tsf-english-shell {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .tsf-english-tools,
+  .tsf-english-apps {
+    grid-template-columns: 1fr;
+  }
+
+  .tsf-english-app {
+    align-items: flex-start;
+  }
 }
