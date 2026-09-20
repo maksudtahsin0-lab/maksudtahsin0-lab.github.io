@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pronunciation & Listening | TSF</title>
+
+  <style>
+    :root{
+      --bg:#f6f9fc;
+      --card:#ffffff;
+      --text:#122033;
+      --muted:#68778a;
+      --border:#e4ebf2;
+      --primary:#15977f;
+      --primary-dark:#0e7564;
+      --soft:#e6f8f3;
+      --shadow:0 20px 60px rgba(20,40,70,.09);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body{
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    .page{
+      width:min(1120px,calc(100% - 32px));
+      margin:auto;
+      padding:28px 0 70px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      margin-bottom:25px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      color:var(--text);
+      font-weight:900;
+    }
+
+    .logo{
+      width:48px;
+      height:48px;
+      border-radius:15px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,#15977f,#0e7564);
+      color:white;
+      font-weight:950;
+      font-size:13px;
+      box-shadow:0 10px 25px rgba(21,151,127,.22);
+    }
+
+    .brand small{
+      display:block;
+      color:var(--muted);
+      font-size:10px;
+      margin-top:2px;
+    }
+
+    .back{
+      padding:10px 15px;
+      border:1px solid var(--border);
+      border-radius:13px;
+      background:var(--card);
+      color:var(--text);
+      text-decoration:none;
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:clamp(30px,6vw,55px);
+      border-radius:32px;
+      background:linear-gradient(135deg,#e8faf5,#ffffff 55%,#eef5ff);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+    }
+
+    .hero:after{
+      content:"";
+      position:absolute;
+      width:260px;
+      height:260px;
+      right:-100px;
+      top:-120px;
+      border-radius:50%;
+      background:rgba(21,151,127,.10);
+    }
+
+    .kicker{
+      position:relative;
+      z-index:1;
+      color:var(--primary);
+      font-size:11px;
+      font-weight:950;
+      letter-spacing:.16em;
+    }
+
+    h1{
+      position:relative;
+      z-index:1;
+      margin:10px 0;
+      font-size:clamp(32px,6vw,58px);
+      line-height:1.04;
+      letter-spacing:-.045em;
+    }
+
+    .hero p{
+      position:relative;
+      z-index:1;
+      max-width:690px;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .section{
+      margin-top:28px;
+      padding:25px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:25px;
+      box-shadow:0 12px 40px rgba(20,40,70,.05);
+    }
+
+    .section-title{
+      margin-bottom:17px;
+    }
+
+    .section-title h2{
+      font-size:21px;
+      margin-bottom:4px;
+    }
+
+    .section-title p{
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .pronunciation-box{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+    }
+
+    input{
+      width:100%;
+      padding:15px 16px;
+      border:1px solid var(--border);
+      border-radius:15px;
+      outline:none;
+      font-size:15px;
+      background:#fbfdff;
+      color:var(--text);
+    }
+
+    input:focus{
+      border-color:var(--primary);
+      box-shadow:0 0 0 4px rgba(21,151,127,.10);
+    }
+
+    button{
+      border:0;
+      cursor:pointer;
+      font-family:inherit;
+    }
+
+    .primary{
+      padding:14px 18px;
+      border-radius:15px;
+      background:var(--primary);
+      color:white;
+      font-weight:900;
+    }
+
+    .primary:hover{
+      background:var(--primary-dark);
+    }
+
+    .result{
+      margin-top:18px;
+      padding:22px;
+      border-radius:20px;
+      background:var(--soft);
+      display:none;
+    }
+
+    .result.show{
+      display:block;
+    }
+
+    .word{
+      font-size:30px;
+      font-weight:950;
+      margin-bottom:4px;
+    }
+
+    .meaning{
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:17px;
+    }
+
+    .audio-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:9px;
+    }
+
+    .audio-btn{
+      padding:11px 14px;
+      border-radius:12px;
+      background:white;
+      border:1px solid var(--border);
+      color:var(--text);
+      font-size:12px;
+      font-weight:850;
+    }
+
+    .audio-btn:hover{
+      border-color:var(--primary);
+    }
+
+    .example{
+      margin-top:16px;
+      padding:14px;
+      border-left:4px solid var(--primary);
+      background:white;
+      border-radius:12px;
+      font-size:13px;
+    }
+
+    .listening-card{
+      padding:22px;
+      border-radius:20px;
+      background:linear-gradient(135deg,#122033,#1b3048);
+      color:white;
+    }
+
+    .listening-label{
+      color:#8de5d1;
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:.15em;
+    }
+
+    .listening-text{
+      margin:12px 0 20px;
+      font-size:20px;
+      font-weight:800;
+    }
+
+    .listen-button{
+      padding:12px 17px;
+      border-radius:13px;
+      background:white;
+      color:#122033;
+      font-weight:900;
+    }
+
+    .question{
+      margin-top:22px;
+      display:none;
+    }
+
+    .question.show{
+      display:block;
+    }
+
+    .question p{
+      font-weight:850;
+      margin-bottom:12px;
+    }
+
+    .options{
+      display:grid;
+      gap:9px;
+    }
+
+    .option{
+      padding:12px 14px;
+      text-align:left;
+      border:1px solid var(--border);
+      background:white;
+      border-radius:13px;
+      font-size:13px;
+    }
+
+    .option:hover{
+      border-color:var(--primary);
+    }
+
+    .score{
+      margin-top:17px;
+      padding:15px;
+      border-radius:15px;
+      background:var(--soft);
+      font-weight:900;
+      display:none;
+    }
+
+    .score.show{
+      display:block;
+    }
+
+    .features{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+
+    .feature{
+      padding:17px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:#fff;
+    }
+
+    .feature-icon{
+      font-size:22px;
+      margin-bottom:10px;
+    }
+
+    .feature strong{
+      display:block;
+      font-size:13px;
+      margin-bottom:4px;
+    }
+
+    .feature span{
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .ai-box{
+      padding:22px;
+      border-radius:20px;
+      background:linear-gradient(135deg,#f2efff,#eef8ff);
+      border:1px solid #e4e0ff;
+    }
+
+    .ai-box h3{
+      margin-bottom:6px;
+    }
+
+    .ai-box p{
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:15px;
+    }
+
+    .footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:11px;
+      margin-top:35px;
+    }
+
+    @media(max-width:800px){
+      .features{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media(max-width:600px){
+      .page{
+        width:min(100% - 20px,1120px);
+        padding-top:15px;
+      }
+
+      .topbar{
+        align-items:flex-start;
+      }
+
+      .brand small{
+        display:none;
+      }
+
+      .hero{
+        padding:27px 21px;
+        border-radius:25px;
+      }
+
+      .section{
+        padding:19px;
+        border-radius:21px;
+      }
+
+      .pronunciation-box{
+        grid-template-columns:1fr;
+      }
+
+      .features{
+        grid-template-columns:1fr;
+      }
+
+      .listening-text{
+        font-size:17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <div class="topbar">
+    <a href="./index.html" class="brand">
+      <div class="logo">M-A-S</div>
+      <div>
+        TSF
+        <small>Learn • Connect • Grow Together</small>
+      </div>
+    </a>
+
+    <a href="./english.html" class="back">← English Hub</a>
+  </div>
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="kicker">
+      ENGLISH • SPEAK • LISTEN • IMPROVE
+    </div>
+
+    <h1>
+      Pronunciation &<br>
+      Listening
+    </h1>
+
+    <p>
+      Improve your English pronunciation, listening ability and speaking confidence
+      through interactive practice.
+    </p>
+
+  </section>
+
+
+  <!-- PRONUNCIATION -->
+
+  <section class="section">
+
+    <div class="section-title">
+      <h2>🔊 Pronunciation Practice</h2>
+      <p>Type an English word or sentence and listen to it.</p>
+    </div>
+
+    <div class="pronunciation-box">
+
+      <input
+        id="pronunciationInput"
+        type="text"
+        placeholder="Type a word or sentence..."
+      >
+
+      <button
+        class="primary"
+        onclick="pronounceText(false)"
+      >
+        🔊 Listen
+      </button>
+
+    </div>
+
+
+    <div class="result" id="pronunciationResult">
+
+      <div class="word" id="spokenWord"></div>
+
+      <div class="meaning">
+        Listen carefully and repeat the sentence aloud.
+      </div>
+
+      <div class="audio-actions">
+
+        <button
+          class="audio-btn"
+          onclick="pronounceText(false)"
+        >
+          🔊 Normal Speed
+        </button>
+
+        <button
+          class="audio-btn"
+          onclick="pronounceText(true)"
+        >
+          🐢 Slow Speed
+        </button>
+
+      </div>
+
+      <div class="example">
+        💡 <strong>Practice tip:</strong>
+        Listen once, then repeat the sentence aloud two or three times.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- LISTENING -->
+
+  <section class="section">
+
+    <div class="section-title">
+      <h2>🎧 Listening Practice</h2>
+      <p>Listen carefully and answer the question.</p>
+    </div>
+
+
+    <div class="listening-card">
+
+      <div class="listening-label">
+        LISTENING CHALLENGE
+      </div>
+
+      <div class="listening-text">
+        Listen to the sentence and understand its meaning.
+      </div>
+
+      <button
+        class="listen-button"
+        onclick="playListening()"
+      >
+        ▶️ Play Audio
+      </button>
+
+
+      <div class="question" id="listeningQuestion">
+
+        <p>
+          What does the sentence mainly talk about?
+        </p>
+
+        <div class="options">
+
+          <button
+            class="option"
+            onclick="checkAnswer(false)"
+          >
+            A. A school activity
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(true)"
+          >
+            B. Learning English
+          </button>
+
+          <button
+            class="option"
+            onclick="checkAnswer(false)"
+          >
+            C. A football match
+          </button>
+
+        </div>
+
+        <div class="score" id="scoreBox"></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FEATURES -->
+
+  <section class="section">
+
+    <div class="section-title">
+      <h2>🚀 Learning Tools</h2>
+      <p>More tools will be connected as the TSF system grows.</p>
+    </div>
+
+    <div class="features">
+
+      <div class="feature">
+        <div class="feature-icon">🔊</div>
+        <strong>Pronunciation</strong>
+        <span>Listen to words and sentences.</span>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🐢</div>
+        <strong>Slow Practice</strong>
+        <span>Hear difficult sentences slowly.</span>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🎧</div>
+        <strong>Listening</strong>
+        <span>Improve listening comprehension.</span>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🗣️</div>
+        <strong>Speaking</strong>
+        <span>Repeat what you hear and practise.</span>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- AI -->
+
+  <section class="section">
+
+    <div class="ai-box">
+
+      <h3>🤖 AI English Coach</h3>
+
+      <p>
+        The future version of TSF will provide personalised pronunciation,
+        listening and speaking practice using AI.
+      </p>
+
+      <button
+        class="primary"
+        onclick="alert('AI English Coach will be connected in the next development stage.')"
+      >
+        Open AI English Help
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <div class="footer">
+    TSF — Learn • Connect • Grow Together
+  </div>
+
+</div>
+
+
+<script>
+
+  function getSpeechText(){
+
+    const input =
+      document.getElementById("pronunciationInput");
+
+    return input.value.trim();
+
+  }
+
+
+  function pronounceText(slow){
+
+    const text = getSpeechText();
+
+    if(!text){
+
+      alert("Please type a word or sentence first.");
+
+      return;
+
+    }
+
+
+    if(!("speechSynthesis" in window)){
+
+      alert("Speech playback is not supported on this browser.");
+
+      return;
+
+    }
+
+
+    speechSynthesis.cancel();
+
+
+    const speech =
+      new SpeechSynthesisUtterance(text);
+
+    speech.lang = "en-US";
+
+    speech.rate = slow ? 0.55 : 0.95;
+
+    speech.pitch = 1;
+
+    speech.volume = 1;
+
+
+    speechSynthesis.speak(speech);
+
+
+    document.getElementById("spokenWord").textContent =
+      text;
+
+    document
+      .getElementById("pronunciationResult")
+      .classList.add("show");
+
+  }
+
+
+  function playListening(){
+
+    const sentence =
+      "Learning English every day can help you communicate with people around the world.";
+
+    speechSynthesis.cancel();
+
+
+    const speech =
+      new SpeechSynthesisUtterance(sentence);
+
+    speech.lang = "en-US";
+
+    speech.rate = 0.85;
+
+    speech.pitch = 1;
+
+    speech.volume = 1;
+
+
+    speechSynthesis.speak(speech);
+
+
+    document
+      .getElementById("listeningQuestion")
+      .classList.add("show");
+
+  }
+
+
+  function checkAnswer(correct){
+
+    const score =
+      document.getElementById("scoreBox");
+
+
+    if(correct){
+
+      score.textContent =
+        "✅ Correct! Excellent listening.";
+
+    }else{
+
+      score.textContent =
+        "❌ Not quite. Listen again and try once more.";
+
+    }
+
+
+    score.classList.add("show");
+
+  }
+
+</script>
+
+</body>
+</html>
