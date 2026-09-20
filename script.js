@@ -1847,4 +1847,231 @@
 
   }
 
+})();/* =========================================
+   TSF — English Learning Hub
+   ========================================= */
+
+(function () {
+  "use strict";
+
+  function createEnglishHub() {
+
+    if (document.getElementById("tsfEnglishHub")) {
+      return;
+    }
+
+    const main = document.querySelector("main");
+
+    if (!main) {
+      return;
+    }
+
+    const appsSection =
+      main.querySelector("#apps");
+
+    if (!appsSection) {
+      return;
+    }
+
+    const section =
+      document.createElement("section");
+
+    section.id = "tsfEnglishHub";
+    section.className = "tsf-english-hub";
+
+    section.innerHTML = `
+      <div class="tsf-english-shell">
+
+        <span class="tsf-english-kicker">
+          ENGLISH • LEARN • PRACTISE
+        </span>
+
+        <h2 class="tsf-english-title">
+          English Learning Hub
+        </h2>
+
+        <p class="tsf-english-desc">
+          Build vocabulary, master grammar,
+          practise English and improve every day.
+        </p>
+
+        <div class="tsf-english-tools">
+
+          <div class="tsf-english-tool">
+            <div class="tsf-english-icon">📖</div>
+            <strong>Vocabulary</strong>
+            <span>
+              Learn useful words, meanings
+              and examples.
+            </span>
+          </div>
+
+          <div class="tsf-english-tool">
+            <div class="tsf-english-icon">✍️</div>
+            <strong>English Grammar</strong>
+            <span>
+              Learn grammar rules,
+              structures and examples.
+            </span>
+          </div>
+
+          <div class="tsf-english-tool">
+            <div class="tsf-english-icon">🧠</div>
+            <strong>Grammar Practice</strong>
+            <span>
+              Practise grammar and
+              improve your accuracy.
+            </span>
+          </div>
+
+          <div class="tsf-english-tool">
+            <div class="tsf-english-icon">🎯</div>
+            <strong>Vocabulary Practice</strong>
+            <span>
+              Test your memory and
+              strengthen new words.
+            </span>
+          </div>
+
+          <div class="tsf-english-tool">
+            <div class="tsf-english-icon">📝</div>
+            <strong>English Quiz</strong>
+            <span>
+              Challenge yourself with
+              quick English quizzes.
+            </span>
+          </div>
+
+          <div class="tsf-english-tool">
+            <div class="tsf-english-icon">🗣️</div>
+            <strong>Pronunciation</strong>
+            <span>
+              Improve pronunciation,
+              listening and speaking.
+            </span>
+          </div>
+
+          <div class="tsf-english-tool">
+            <div class="tsf-english-icon">📚</div>
+            <strong>English Resources</strong>
+            <span>
+              Notes, sheets and useful
+              learning materials.
+            </span>
+          </div>
+
+          <div class="tsf-english-tool">
+            <div class="tsf-english-icon">🤖</div>
+            <strong>AI English Help</strong>
+            <span>
+              Get personalised help while
+              learning English.
+            </span>
+          </div>
+
+        </div>
+
+        <h3 class="tsf-english-app-title">
+          Recommended English Apps
+        </h3>
+
+        <div class="tsf-english-apps">
+
+          <div class="tsf-english-app">
+
+            <div class="tsf-english-app-info">
+
+              <div class="tsf-english-app-icon">
+                🟢
+              </div>
+
+              <div>
+                <strong>Duolingo</strong>
+
+                <small>
+                  Learn languages through
+                  interactive practice.
+                </small>
+              </div>
+
+            </div>
+
+            <a
+              class="tsf-english-open"
+              href="https://en.duolingo.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open →
+            </a>
+
+          </div>
+
+
+          <div class="tsf-english-app">
+
+            <div class="tsf-english-app-info">
+
+              <div class="tsf-english-app-icon">
+                📚
+              </div>
+
+              <div>
+                <strong>
+                  Vocab: Learn English Words
+                </strong>
+
+                <small>
+                  Vocabulary, quizzes,
+                  flashcards and word games.
+                </small>
+              </div>
+
+            </div>
+
+            <a
+              class="tsf-english-open"
+              href="https://play.google.com/store/apps/details?id=com.word.vocabulary.vocab"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open →
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+    `;
+
+    main.insertBefore(
+      section,
+      appsSection
+    );
+  }
+
+
+  function startEnglishHub() {
+
+    createEnglishHub();
+
+  }
+
+
+  if (
+    document.readyState === "loading"
+  ) {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      startEnglishHub
+    );
+
+  } else {
+
+    startEnglishHub();
+
+  }
+
 })();
