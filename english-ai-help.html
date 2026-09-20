@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AI English Help | TSF</title>
+
+  <style>
+    :root{
+      --bg:#f5f8fc;
+      --card:#ffffff;
+      --text:#122033;
+      --muted:#68778a;
+      --border:#e3eaf2;
+      --primary:#15977f;
+      --primary-dark:#0d7563;
+      --soft:#e8faf5;
+      --ai:#eef3ff;
+      --shadow:0 22px 65px rgba(20,40,70,.09);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body{
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    .page{
+      width:min(1120px,calc(100% - 28px));
+      margin:auto;
+      padding:22px 0 65px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:22px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      text-decoration:none;
+      color:var(--text);
+      font-weight:900;
+    }
+
+    .logo{
+      width:47px;
+      height:47px;
+      border-radius:15px;
+      display:grid;
+      place-items:center;
+      color:#fff;
+      background:linear-gradient(135deg,#15977f,#0d7563);
+      font-size:12px;
+      font-weight:950;
+      box-shadow:0 10px 25px rgba(21,151,127,.22);
+    }
+
+    .brand small{
+      display:block;
+      color:var(--muted);
+      font-size:10px;
+      margin-top:1px;
+    }
+
+    .back{
+      text-decoration:none;
+      color:var(--text);
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:13px;
+      padding:10px 14px;
+      font-size:12px;
+      font-weight:850;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:clamp(30px,6vw,55px);
+      border-radius:31px;
+      border:1px solid var(--border);
+      background:linear-gradient(135deg,#e8faf5,#fff 55%,#eef3ff);
+      box-shadow:var(--shadow);
+    }
+
+    .hero:after{
+      content:"";
+      position:absolute;
+      width:260px;
+      height:260px;
+      right:-100px;
+      top:-120px;
+      border-radius:50%;
+      background:rgba(21,151,127,.10);
+    }
+
+    .kicker{
+      position:relative;
+      z-index:1;
+      color:var(--primary);
+      font-size:11px;
+      font-weight:950;
+      letter-spacing:.16em;
+    }
+
+    h1{
+      position:relative;
+      z-index:1;
+      margin:10px 0 9px;
+      font-size:clamp(34px,6vw,58px);
+      line-height:1.03;
+      letter-spacing:-.05em;
+    }
+
+    .hero p{
+      position:relative;
+      z-index:1;
+      max-width:700px;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .ai-card{
+      margin-top:25px;
+      padding:24px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:25px;
+      box-shadow:0 15px 45px rgba(20,40,70,.06);
+    }
+
+    .ai-header{
+      display:flex;
+      align-items:center;
+      gap:13px;
+      margin-bottom:18px;
+    }
+
+    .ai-icon{
+      width:50px;
+      height:50px;
+      display:grid;
+      place-items:center;
+      border-radius:16px;
+      background:var(--soft);
+      font-size:25px;
+    }
+
+    .ai-header h2{
+      font-size:20px;
+    }
+
+    .ai-header p{
+      color:var(--muted);
+      font-size:11px;
+      margin-top:2px;
+    }
+
+    .quick-actions{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:9px;
+      margin-bottom:15px;
+    }
+
+    .quick{
+      padding:11px 8px;
+      border:1px solid var(--border);
+      border-radius:13px;
+      background:#fbfdff;
+      color:var(--text);
+      font-size:11px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .quick:hover{
+      border-color:var(--primary);
+      background:var(--soft);
+    }
+
+    textarea{
+      width:100%;
+      min-height:145px;
+      resize:vertical;
+      padding:16px;
+      border:1px solid var(--border);
+      border-radius:17px;
+      outline:none;
+      background:#fbfdff;
+      color:var(--text);
+      font-family:inherit;
+      font-size:14px;
+    }
+
+    textarea:focus{
+      border-color:var(--primary);
+      box-shadow:0 0 0 4px rgba(21,151,127,.09);
+    }
+
+    .controls{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .hint{
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .ask{
+      padding:13px 19px;
+      border:0;
+      border-radius:14px;
+      background:var(--primary);
+      color:white;
+      font-size:12px;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .ask:hover{
+      background:var(--primary-dark);
+    }
+
+    .answer{
+      display:none;
+      margin-top:20px;
+      padding:20px;
+      border-radius:19px;
+      background:var(--ai);
+      border:1px solid #dce5ff;
+    }
+
+    .answer.show{
+      display:block;
+    }
+
+    .answer-title{
+      font-weight:900;
+      margin-bottom:9px;
+      font-size:13px;
+    }
+
+    .answer-text{
+      color:#40516a;
+      font-size:13px;
+      white-space:pre-wrap;
+    }
+
+    .tools{
+      margin-top:25px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+
+    .tool{
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius:19px;
+      background:var(--card);
+    }
+
+    .tool-icon{
+      font-size:23px;
+      margin-bottom:9px;
+    }
+
+    .tool strong{
+      display:block;
+      font-size:13px;
+      margin-bottom:4px;
+    }
+
+    .tool span{
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .future{
+      margin-top:25px;
+      padding:23px;
+      border-radius:22px;
+      background:linear-gradient(135deg,#122033,#1b3048);
+      color:white;
+    }
+
+    .future h3{
+      font-size:18px;
+      margin-bottom:7px;
+    }
+
+    .future p{
+      color:#b9c9dc;
+      font-size:12px;
+      max-width:700px;
+    }
+
+    .future-list{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:9px;
+      margin-top:16px;
+    }
+
+    .future-item{
+      padding:11px 13px;
+      border-radius:13px;
+      background:rgba(255,255,255,.07);
+      font-size:11px;
+    }
+
+    .footer{
+      text-align:center;
+      margin-top:32px;
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    @media(max-width:800px){
+      .tools{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .quick-actions{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media(max-width:600px){
+      .page{
+        width:min(100% - 18px,1120px);
+        padding-top:13px;
+      }
+
+      .brand small{
+        display:none;
+      }
+
+      .hero{
+        padding:28px 20px;
+        border-radius:24px;
+      }
+
+      .ai-card{
+        padding:18px;
+        border-radius:21px;
+      }
+
+      .tools{
+        grid-template-columns:1fr;
+      }
+
+      .future-list{
+        grid-template-columns:1fr;
+      }
+
+      .controls{
+        align-items:stretch;
+        flex-direction:column;
+      }
+
+      .ask{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <div class="topbar">
+
+    <a href="./index.html" class="brand">
+      <div class="logo">M-A-S</div>
+
+      <div>
+        TSF
+        <small>Learn • Connect • Grow Together</small>
+      </div>
+    </a>
+
+    <a href="./english.html" class="back">
+      ← English Hub
+    </a>
+
+  </div>
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="kicker">
+      AI • ENGLISH • PERSONAL LEARNING
+    </div>
+
+    <h1>
+      AI English<br>
+      Help
+    </h1>
+
+    <p>
+      Ask questions about English grammar, vocabulary, writing,
+      pronunciation, listening and more.
+    </p>
+
+  </section>
+
+
+  <!-- AI CHAT -->
+
+  <section class="ai-card">
+
+    <div class="ai-header">
+
+      <div class="ai-icon">
+        🤖
+      </div>
+
+      <div>
+        <h2>Ask TSF AI</h2>
+
+        <p>
+          Your personal English learning assistant
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="quick-actions">
+
+      <button
+        class="quick"
+        onclick="setQuestion('Explain the Present Simple tense with easy examples.')"
+      >
+        📘 Grammar
+      </button>
+
+      <button
+        class="quick"
+        onclick="setQuestion('Give me 10 useful English vocabulary words with Bangla meanings and examples.')"
+      >
+        📚 Vocabulary
+      </button>
+
+      <button
+        class="quick"
+        onclick="setQuestion('Help me improve my English writing.')"
+      >
+        ✍️ Writing
+      </button>
+
+      <button
+        class="quick"
+        onclick="setQuestion('Help me practise English conversation.')"
+      >
+        🗣️ Speaking
+      </button>
+
+    </div>
+
+
+    <textarea
+      id="question"
+      placeholder="Ask anything about English..."
+    ></textarea>
+
+
+    <div class="controls">
+
+      <div class="hint">
+        Example: Explain “I have been studying” in simple Bangla.
+      </div>
+
+      <button
+        class="ask"
+        onclick="askAI()"
+      >
+        🤖 Ask AI
+      </button>
+
+    </div>
+
+
+    <div
+      class="answer"
+      id="answer"
+    >
+
+      <div class="answer-title">
+        🤖 TSF AI Response
+      </div>
+
+      <div
+        class="answer-text"
+        id="answerText"
+      ></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- TOOLS -->
+
+  <section class="tools">
+
+    <div class="tool">
+      <div class="tool-icon">📖</div>
+      <strong>Grammar Help</strong>
+      <span>
+        Learn grammar rules with simple explanations.
+      </span>
+    </div>
+
+    <div class="tool">
+      <div class="tool-icon">📚</div>
+      <strong>Vocabulary</strong>
+      <span>
+        Learn meanings, examples and useful words.
+      </span>
+    </div>
+
+    <div class="tool">
+      <div class="tool-icon">🔊</div>
+      <strong>Pronunciation</strong>
+      <span>
+        Understand how English words are pronounced.
+      </span>
+    </div>
+
+    <div class="tool">
+      <div class="tool-icon">✍️</div>
+      <strong>Writing Help</strong>
+      <span>
+        Improve sentences, paragraphs and writing.
+      </span>
+    </div>
+
+  </section>
+
+
+  <!-- FUTURE AI -->
+
+  <section class="future">
+
+    <h3>
+      🚀 What TSF AI will do
+    </h3>
+
+    <p>
+      The full AI system will become a personalised English
+      learning assistant that adapts practice to each student.
+    </p>
+
+
+    <div class="future-list">
+
+      <div class="future-item">
+        🧠 Explain difficult topics
+      </div>
+
+      <div class="future-item">
+        📝 Generate practice questions
+      </div>
+
+      <div class="future-item">
+        🔍 Find and explain mistakes
+      </div>
+
+      <div class="future-item">
+        🎯 Create personalised practice
+      </div>
+
+      <div class="future-item">
+        🗣️ Speaking & pronunciation support
+      </div>
+
+      <div class="future-item">
+        📊 Analyse learning progress
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <div class="footer">
+    TSF — Learn • Connect • Grow Together
+  </div>
+
+</div>
+
+
+<script>
+
+  function setQuestion(text){
+
+    document.getElementById("question").value = text;
+
+    document.getElementById("question").focus();
+
+  }
+
+
+  function askAI(){
+
+    const question =
+      document.getElementById("question").value.trim();
+
+    const answer =
+      document.getElementById("answer");
+
+    const answerText =
+      document.getElementById("answerText");
+
+
+    if(!question){
+
+      alert("Please write your English question first.");
+
+      return;
+
+    }
+
+
+    /*
+      Temporary demo response.
+
+      Real AI will be connected through a secure backend
+      in the next development stage.
+    */
+
+    answerText.textContent =
+      "Your question has been received.\n\n" +
+      "The TSF AI engine will be connected through a secure " +
+      "backend in the next stage. Then this area will provide " +
+      "a personalised answer, explanation and practice based " +
+      "on your question.";
+
+    answer.classList.add("show");
+
+  }
+
+</script>
+
+</body>
+</html>
