@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>English Learning Hub • TSF</title>
+
+  <style>
+    :root{
+      --bg:#f6f9fc;
+      --card:#ffffff;
+      --text:#122033;
+      --muted:#68778a;
+      --primary:#15977f;
+      --border:#e3eaf1;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    .page{
+      max-width:1200px;
+      margin:auto;
+      padding:24px;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:55px 35px;
+      border-radius:30px;
+      background:linear-gradient(135deg,#e8faf5,#ffffff,#eef4ff);
+      border:1px solid var(--border);
+      box-shadow:0 20px 60px rgba(20,40,70,.08);
+    }
+
+    .brand{
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.18em;
+      color:var(--primary);
+    }
+
+    h1{
+      margin:12px 0;
+      font-size:clamp(36px,7vw,64px);
+      line-height:1;
+      letter-spacing:-.05em;
+    }
+
+    .hero p{
+      max-width:680px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:16px;
+    }
+
+    .back{
+      display:inline-block;
+      margin-top:20px;
+      padding:12px 18px;
+      border-radius:13px;
+      background:#122033;
+      color:#fff;
+      text-decoration:none;
+      font-weight:800;
+      font-size:13px;
+    }
+
+    .section-title{
+      margin:45px 0 18px;
+      font-size:25px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:15px;
+    }
+
+    .card{
+      padding:22px;
+      min-height:160px;
+      border-radius:22px;
+      background:var(--card);
+      border:1px solid var(--border);
+      box-shadow:0 8px 30px rgba(20,40,70,.05);
+      transition:.2s;
+    }
+
+    .card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 18px 40px rgba(20,40,70,.10);
+    }
+
+    .icon{
+      width:46px;
+      height:46px;
+      display:grid;
+      place-items:center;
+      border-radius:14px;
+      background:#e4f8f3;
+      font-size:22px;
+      margin-bottom:15px;
+    }
+
+    .card strong{
+      display:block;
+      font-size:15px;
+      margin-bottom:7px;
+    }
+
+    .card span{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.6;
+    }
+
+    .apps{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:15px;
+    }
+
+    .app{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      padding:20px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:22px;
+    }
+
+    .app-info{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .app-icon{
+      width:50px;
+      height:50px;
+      display:grid;
+      place-items:center;
+      border-radius:15px;
+      background:#e4f8f3;
+      font-size:24px;
+    }
+
+    .app-info strong{
+      display:block;
+      font-size:14px;
+    }
+
+    .app-info small{
+      display:block;
+      margin-top:5px;
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .open{
+      padding:10px 15px;
+      border-radius:12px;
+      background:var(--primary);
+      color:white;
+      text-decoration:none;
+      font-size:12px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      padding:50px 10px 25px;
+      font-size:12px;
+    }
+
+    @media(max-width:850px){
+      .grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media(max-width:600px){
+      .page{
+        padding:15px;
+      }
+
+      .hero{
+        padding:35px 22px;
+        border-radius:24px;
+      }
+
+      .grid,
+      .apps{
+        grid-template-columns:1fr;
+      }
+
+      .app{
+        align-items:flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <section class="hero">
+
+    <div class="brand">
+      TSF • M-A-S
+    </div>
+
+    <h1>
+      English<br>
+      Learning Hub
+    </h1>
+
+    <p>
+      Learn vocabulary, understand grammar, practise English,
+      improve pronunciation and build your confidence step by step.
+    </p>
+
+    <a class="back" href="./index.html">
+      ← Back to TSF
+    </a>
+
+  </section>
+
+
+  <h2 class="section-title">
+    Learn English
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon">📖</div>
+      <strong>Vocabulary</strong>
+      <span>
+        Learn useful English words, meanings, examples and everyday vocabulary.
+      </span>
+    </div>
+
+    <div class="card">
+      <div class="icon">✍️</div>
+      <strong>English Grammar</strong>
+      <span>
+        Learn grammar rules, structures, examples and common mistakes.
+      </span>
+    </div>
+
+    <div class="card">
+      <div class="icon">🧠</div>
+      <strong>Grammar Practice</strong>
+      <span>
+        Practise grammar through questions and improve your accuracy.
+      </span>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎯</div>
+      <strong>Vocabulary Practice</strong>
+      <span>
+        Test your vocabulary and strengthen the words you have learned.
+      </span>
+    </div>
+
+    <div class="card">
+      <div class="icon">📝</div>
+      <strong>English Quiz</strong>
+      <span>
+        Take short quizzes and check your English knowledge.
+      </span>
+    </div>
+
+    <div class="card">
+      <div class="icon">🗣️</div>
+      <strong>Pronunciation & Listening</strong>
+      <span>
+        Practise pronunciation, listening and everyday English communication.
+      </span>
+    </div>
+
+    <div class="card">
+      <div class="icon">🤖</div>
+      <strong>AI English Help</strong>
+      <span>
+        Get personalised explanations, corrections and learning support.
+      </span>
+    </div>
+
+    <div class="card">
+      <div class="icon">📚</div>
+      <strong>English Resources</strong>
+      <span>
+        Notes, sheets, PDFs and other useful English learning materials.
+      </span>
+    </div>
+
+  </div>
+
+
+  <h2 class="section-title">
+    Recommended English Apps
+  </h2>
+
+  <div class="apps">
+
+    <div class="app">
+
+      <div class="app-info">
+
+        <div class="app-icon">
+          🟢
+        </div>
+
+        <div>
+          <strong>Duolingo</strong>
+
+          <small>
+            Interactive language learning and daily practice.
+          </small>
+        </div>
+
+      </div>
+
+      <a
+        class="open"
+        href="https://en.duolingo.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open →
+      </a>
+
+    </div>
+
+
+    <div class="app">
+
+      <div class="app-info">
+
+        <div class="app-icon">
+          📚
+        </div>
+
+        <div>
+          <strong>Vocab: Learn English Words</strong>
+
+          <small>
+            Vocabulary, quizzes, flashcards and word games.
+          </small>
+        </div>
+
+      </div>
+
+      <a
+        class="open"
+        href="https://play.google.com/store/apps/details?id=com.word.vocabulary.vocab"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open →
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <footer>
+    M-A-S • Teachers Students Friendship<br>
+    Learn • Connect • Grow Together
+  </footer>
+
+</div>
+
+</body>
+</html>
